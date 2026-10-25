@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25 12:35:12",
-  "timestamp_epoch": 1792931712.2482352,
+  "generated_at": "2026-10-25 17:35:18",
+  "timestamp_epoch": 1792949718.8919668,
   "overall_health": "ACTION_REQUIRED",
   "instagram": {
     "username": "guzelaicom",
@@ -37,7 +37,7 @@
     "recent_reels": [],
     "cooldown_status": {
       "last_upload_epoch": 1792690434.3551798,
-      "minutes_since_last_upload": 4021,
+      "minutes_since_last_upload": 4321,
       "cooldown_4h_remaining_min": 0,
       "ready_for_next_post": true
     }
@@ -46,7 +46,7 @@
     "guzelai_web": {
       "status": "HEALTHY",
       "http_code": 200,
-      "latency_ms": 445,
+      "latency_ms": 269,
       "showcase_section_active": false,
       "active_go_redirect_links": 0
     },
