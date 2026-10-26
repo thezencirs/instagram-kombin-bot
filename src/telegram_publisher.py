@@ -640,25 +640,30 @@ def send_outfit_to_chat(
     outfit: Dict[str, Any],
     video_path: Optional[Path] = None,
     collage_path: Optional[Path] = None,
+    pinterest_collage_path: Optional[Path] = None,
+    caption_txt_path: Optional[Path] = None,
+    comment_links_path: Optional[Path] = None,
     reel_url: str = "",
     threads_url: str = "",
     token: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Sends the Kombin collage photo and/or 2K Reel video with HTML caption and shopping buttons to a chat_id."""
+    """Sends the full Stock Package (Hook Cover, Pinterest Collage, 2K Reel Video, and 1-Tap Copy-Paste Captions) to a chat_id."""
     tok = token or get_bot_token()
     html_caption = build_telegram_html(outfit, reel_url=reel_url, threads_url=threads_url)
     reply_markup_json = json.dumps(build_inline_keyboard(outfit, reel_url=reel_url, threads_url=threads_url))
+    title_str = html.escape(outfit.get("archetype_title") or outfit.get("hook_title") or "Günün 2K Kombini")
+    arch_id = html.escape(outfit.get("archetype_id") or "")
 
     results: Dict[str, Any] = {}
 
-    # 1. Send Collage Photo if available
+    # 1. Send 2K Hook Cover / Product Collage Photo
     if collage_path and collage_path.exists():
         with open(collage_path, "rb") as pf:
             res_photo = tg_api(
                 "sendPhoto",
                 data={
                     "chat_id": chat_id,
-                    "caption": f"🖼️ <b>{html.escape(outfit.get('archetype_title', 'Günün Kombini'))} — Ürün Kolajı</b>",
+                    "caption": f"🖼️ <b>[STOK KAPAK 1/3] {title_str}</b>\n🆔 <code>{arch_id}</code> — 2K Reels Kapak &amp; 6'lı Ürün Kolajı",
                     "parse_mode": "HTML",
                 },
                 files={"photo": pf},
@@ -666,7 +671,22 @@ def send_outfit_to_chat(
             )
             results["photo"] = res_photo.get("ok", False)
 
-    # 2. Send 2K Reel Video with full HTML caption + Inline Shopping Buttons
+    # 2. Send LİA 1080x1920 Pinterest Lookbook & Moodboard Collage if available
+    if pinterest_collage_path and pinterest_collage_path.exists():
+        with open(pinterest_collage_path, "rb") as ppf:
+            res_pin = tg_api(
+                "sendPhoto",
+                data={
+                    "chat_id": chat_id,
+                    "caption": f"📌 <b>[STOK PINTEREST KOLAJI 2/3] {title_str}</b>\n🎨 LİA 9:16 Lookbook &amp; Moodboard Kolajı (Pinterest / Story için hazır)",
+                    "parse_mode": "HTML",
+                },
+                files={"photo": ppf},
+                token=tok,
+            )
+            results["pinterest_collage"] = res_pin.get("ok", False)
+
+    # 3. Send 2K Reel Video with full HTML caption + Inline Shopping Buttons
     if video_path and video_path.exists():
         with open(video_path, "rb") as vf:
             res_vid = tg_api(
@@ -699,6 +719,37 @@ def send_outfit_to_chat(
         )
         results["message"] = res_msg.get("ok", False)
 
+    # 4. Send 1-Tap Copy-Paste Ready Caption & Store Links for Manual Channel Upload
+    if caption_txt_path and caption_txt_path.exists():
+        try:
+            raw_cap = caption_txt_path.read_text(encoding="utf-8").strip()
+            raw_com = ""
+            if comment_links_path and comment_links_path.exists():
+                raw_com = comment_links_path.read_text(encoding="utf-8").strip()
+            copy_msg = (
+                f"📋 <b>[KOPYALA-YAPIŞTIR AÇIKLAMA &amp; LİNKLER 3/3]</b>\n"
+                f"👇 <i>Instagram Reels / TikTok / YouTube Shorts / Pinterest için aşağıdaki kutuya dokunarak açıklamayı tek tıkla kopyalayabilirsiniz:</i>\n\n"
+                f"<pre>{html.escape(raw_cap[:2400])}</pre>"
+            )
+            if raw_com:
+                copy_msg += (
+                    f"\n💬 <b>Sabit Yorum / Mağaza Linkleri (Tek Tıkla Kopyala):</b>\n"
+                    f"<pre>{html.escape(raw_com[:1200])}</pre>"
+                )
+            res_copy = tg_api(
+                "sendMessage",
+                data={
+                    "chat_id": chat_id,
+                    "text": copy_msg,
+                    "parse_mode": "HTML",
+                    "disable_web_page_preview": True,
+                },
+                token=tok,
+            )
+            results["copy_caption"] = res_copy.get("ok", False)
+        except Exception as ce:
+            results["copy_caption_error"] = str(ce)
+
     return results
 
 
@@ -708,21 +759,29 @@ def publish_to_telegram(
     reel_url: str = "",
     threads_url: str = "",
     token: Optional[str] = None,
+    video_override: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Saves Telegram outputs and broadcasts to all registered subscribers / TELEGRAM_CHAT_ID."""
+    """Saves Telegram outputs and broadcasts full stock package to all registered subscribers / TELEGRAM_CHAT_ID."""
     tok = token or get_bot_token()
     save_telegram_outputs(outfit, out_dir=out_dir, reel_url=reel_url, threads_url=threads_url)
 
     chat_ids = sync_subscribers_from_updates(token=tok, handle_commands=True, out_dir=out_dir)
-    if not chat_ids:
-        print(
-            "[Telegram Bilgilendirmesi] Henüz kayıtlı chat_id bulunamadı. "
-            "Telegram'dan @guzelaibot'a /start yazarak veya botu kanalınıza ekleyerek otomatik yayını başlatabilirsiniz."
-        )
-        return {"status": "waiting_for_subscriber", "bot": "@guzelaibot"}
+    default_admin_chat = os.environ.get("TELEGRAM_CHAT_ID", "995164733").strip()
+    if default_admin_chat and default_admin_chat not in chat_ids:
+        chat_ids.append(default_admin_chat)
 
-    video_path = Path(out_dir) / "daily_kombin_reel.mp4"
-    collage_path = Path(out_dir) / "kombin_collage.png"
+    out_path = Path(out_dir)
+    if video_override and Path(video_override).exists():
+        video_path = Path(video_override)
+    elif (out_path / "reel_final.mp4").exists():
+        video_path = out_path / "reel_final.mp4"
+    else:
+        video_path = out_path / "daily_kombin_reel.mp4"
+
+    collage_path = (out_path / "hook_cover.jpg") if (out_path / "hook_cover.jpg").exists() else (out_path / "kombin_collage.png")
+    pinterest_collage_path = out_path / "pinterest_fashion_collage.jpg"
+    caption_txt_path = out_path / "caption.txt"
+    comment_links_path = out_path / "comment_links.txt"
 
     sent_results = {}
     for cid in chat_ids:
@@ -731,11 +790,14 @@ def publish_to_telegram(
             outfit=outfit,
             video_path=video_path,
             collage_path=collage_path,
+            pinterest_collage_path=pinterest_collage_path,
+            caption_txt_path=caption_txt_path,
+            comment_links_path=comment_links_path,
             reel_url=reel_url,
             threads_url=threads_url,
             token=tok,
         )
-        print(f"[BAŞARILI - Telegram] @guzelaibot üzerinden {cid} adresine kombin gönderildi: {sent_results[cid]}")
+        print(f"[BAŞARILI - Telegram Stok Paketi] @guzelaibot üzerinden {cid} adresine tam stok paketi gönderildi: {sent_results[cid]}")
 
     return {"status": "published", "results": sent_results}
 

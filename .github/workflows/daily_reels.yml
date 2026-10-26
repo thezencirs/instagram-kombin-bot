@@ -66,21 +66,19 @@ jobs:
       - name: 🤖 2. Adım — 12 Uzman Ajan Swarm Denetimi (KOR + ADA + ALP + ALİ + EFE + CAN + ELA + EGE)
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
-          IG_SESSION_JSON: ${{ secrets.IG_SESSION_JSON }}
+          TELEGRAM_ONLY_MODE: '1'
         run: |
           python src/kombin_agent_swarm.py --role all
 
-      - name: 📱 3. Adım — Şifresiz Mobil Bearer IGT ile @guzelaicom Instagram + GuzelAI.com + Telegram Yayını
+      - name: 📱 3. Adım — Telegram (@guzelaibot) Stok Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
         env:
-          IG_ENABLE_UPLOAD: '1'
-          IG_USERNAME: ${{ secrets.IG_USERNAME || 'guzelaicom' }}
-          IG_SESSION_JSON: ${{ secrets.IG_SESSION_JSON }}
+          IG_ENABLE_UPLOAD: '0'
+          TELEGRAM_ONLY_MODE: '1'
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '995164733' }}
         run: |
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
-          python src/social_health_agent.py --force || true
 
       - name: 📤 4. Adım — 2K Reels, Hook Kapak ve 11/11 Sertifikasını Artifacts Olarak Kaydet
         if: ${{ always() }}

@@ -1451,9 +1451,9 @@ OUTFIT_ARCHETYPES = [
             "shoes": "assets/items/men2_06_shoes.png",
         },
         "model_frames": [
-            "assets/hw27_men_step1.jpg",
-            "assets/hw27_men_step2.jpg",
-            "assets/hw27_men_step3.jpg",
+            "assets/men2_model_step1.jpg",
+            "assets/men2_model_step2.jpg",
+            "assets/men2_model_step3.jpg",
         ],
     },
     {

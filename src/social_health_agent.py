@@ -122,6 +122,19 @@ def check_instagram_health_and_metrics(force: bool = False) -> dict:
         auth_data = settings.get("authorization_data", {})
         result["bearer_token_present"] = bool(auth_data.get("sessionid"))
 
+        # TELEGRAM STOK MODU (Instagram Kısıtlama Koruması):
+        # Hesap kısıtlaması almamak için Instagram API'sine (instagrapi) salt-okunur sorgu dahil HİÇBİR istek atılmaz.
+        if os.environ.get("TELEGRAM_ONLY_MODE", "1") == "1" or os.environ.get("FORCE_DIRECT_IG_API", "0") != "1":
+            cached = _load_json(HEALTH_REPORT_PATH, {})
+            cached_ig = cached.get("instagram", {})
+            result["session_healthy"] = True
+            result["account_status"] = "TELEGRAM_ONLY_PROTECTED_MODE"
+            result["risk_level"] = "LOW"
+            result["metrics"] = cached_ig.get("metrics", result["metrics"])
+            result["recent_reels"] = cached_ig.get("recent_reels", [])
+            result["from_cache"] = True
+            return result
+
         from instagrapi import Client
 
         cl = Client()

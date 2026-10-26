@@ -8,6 +8,8 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from outfit_generator import select_daily_outfit
 from render_reels import render_kombin_reel
 from threads_publisher import (

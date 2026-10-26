@@ -14,6 +14,8 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 
 def upload_via_graph_api(video_path: str, caption: str, access_token: str, ig_user_id: str) -> bool:
     print("[Instagram Graph API] Video geçici bulut bağlantısına yükleniyor...")
@@ -140,6 +142,16 @@ def upload_via_instagrapi(
     session_str: str = "",
     comment_text: str = "",
 ) -> str:
+    # 0. TELEGRAM STOK MODU (Instagram Kısıtlama Koruması):
+    # Kullanıcı talimatı gereği doğrudan Instagram API'sine (instagrapi) hiçbir istek gönderilmez;
+    # tüm kombin videoları, kolajları ve linkleri yalnızca Telegram botuna (@guzelaibot) stok olarak iletilir.
+    if os.environ.get("TELEGRAM_ONLY_MODE", "1") == "1" or os.environ.get("FORCE_DIRECT_IG_UPLOAD", "0") != "1":
+        print(
+            "[TELEGRAM STOK MODU AKTİF] Instagram kısıtlama koruması gereği doğrudan Instagram API yüklemesi "
+            "%100 devre dışı bırakıldı. İçerik yalnızca Telegram (@guzelaibot) üzerinden size iletiliyor."
+        )
+        return ""
+
     # 1. Kısıt / Güvenlik Kilidi: IG_ENABLE_UPLOAD=1 olmadan Instagram'a istek gönderilmez
     if os.environ.get("IG_ENABLE_UPLOAD", "0") != "1":
         print(
@@ -335,12 +347,13 @@ def upload_via_instagrapi(
 
 
 def dispatch_all_channels(video_path: str, reel_url: str = ""):
-    """Dispatches and publishes across connected channels (TikTok is paused unless ENABLE_TIKTOK_UPLOAD=1)."""
+    """Dispatches and publishes to GuzelAI.com showcase and Telegram Bot (@guzelaibot) in Telegram Stock Mode."""
     out_dir = str(Path(video_path).parent)
     meta_path = os.path.join(out_dir, "outfit_links.json")
     hook_cover_candidate = Path(video_path).parent / "hook_cover.jpg"
     collage_candidate = hook_cover_candidate if hook_cover_candidate.exists() else (Path(video_path).parent / "kombin_collage.png")
     outfit_data = {}
+    telegram_only = os.environ.get("TELEGRAM_ONLY_MODE", "1") == "1"
 
     if os.path.exists(meta_path):
         with open(meta_path, "r", encoding="utf-8") as mf:
@@ -350,7 +363,8 @@ def dispatch_all_channels(video_path: str, reel_url: str = ""):
             with open(meta_path, "w", encoding="utf-8") as mf:
                 json.dump(outfit_data, mf, ensure_ascii=False, indent=2)
 
-    # 1. GuzelAI.com (#kombinler) e-ticaret link doğrulama ve görselli vitrin yayını
+    # 1. GuzelAI.com (#kombinler & /go/{sku}) e-ticaret link doğrulama ve görselli vitrin yayını
+    # (Telegram'dan indirip kanallara yüklediğinizde ürün linklerinin çalışması için vitrin güncellenir)
     try:
         from website_publisher import publish_to_guzelai_website
         web_res = publish_to_guzelai_website(
@@ -363,84 +377,54 @@ def dispatch_all_channels(video_path: str, reel_url: str = ""):
     except Exception as webe:
         print(f"[GuzelAI.com Vitrin Bilgilendirmesi] {webe}")
 
-    # 2. Threads metin çıktısını hazırla
-    try:
-        from threads_publisher import save_threads_outputs
-        save_threads_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
-    except Exception as te:
-        print(f"[Threads Güncelleme Bilgilendirmesi] {te}")
-
-    # 3. TikTok (@guzelaicom) paylaşımı — 0 izlenme sorunu çözülüp ENABLE_TIKTOK_UPLOAD=1 açılana kadar yatırım durduruldu
-    if os.environ.get("ENABLE_TIKTOK_UPLOAD", "0") == "1":
-        try:
-            from tiktok_uploader import build_tiktok_caption, publish_to_tiktok_cdp, save_tiktok_outputs
-            save_tiktok_outputs(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
-            tt_caption = build_tiktok_caption(outfit_data, ig_reel_url=reel_url)
-            tt_res = publish_to_tiktok_cdp(Path(video_path), tt_caption)
-            print(f"[TikTok Otomatik Paylaşım] Durum: {tt_res}")
-        except Exception as tke:
-            print(f"[TikTok Paylaşım Bilgilendirmesi] {tke}")
-    else:
-        print("[TikTok Yatırımı Durduruldu] 0-izlenme / algoritma koruması aktif: Onayınız olmadan TikTok'a otomatik yükleme yapılmaz.")
-
-    # 4. Telegram botunda (@guzelaibot) otomatik paylaşım
-    try:
-        from telegram_publisher import publish_to_telegram
-        tg_res = publish_to_telegram(outfit_data, out_dir=out_dir, reel_url=reel_url)
-        print(f"[Telegram Otomatik Paylaşım] Durum: {tg_res}")
-    except Exception as tge:
-        print(f"[Telegram Paylaşım Bilgilendirmesi] {tge}")
-
-    # 5. Pinterest hesabında (archzencir@gmail.com) Ajan 15 (LİA) Moda Tasarım Kolajı ile otomatik Pin paylaşımı
+    # 2. Ajan 15 (LİA) 1080x1920 Pinterest Moda Tasarım Kolajını üret (Telegram stok paketine eklemek için)
     try:
         from kombin_agent_swarm import run_pinterest_collage_fashion_designer
-        from pinterest_publisher import save_pinterest_outputs, publish_to_pinterest_cdp
+        from pinterest_publisher import save_pinterest_outputs
         lia_rep = run_pinterest_collage_fashion_designer()
         lia_collage = Path(lia_rep.get("collage_path", str(Path(out_dir) / "pinterest_fashion_collage.jpg")))
         save_pinterest_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
-        pin_media = lia_collage if lia_collage.exists() else (collage_candidate if collage_candidate.exists() else Path(video_path))
-        pin_res = publish_to_pinterest_cdp(outfit_data, pin_media, reel_url=reel_url)
-        print(f"[Pinterest LİA Moda Kolajı Otomatik Paylaşım] Durum: {pin_res}")
+        print(f"[LİA Pinterest Kolajı Hazır] {lia_collage}")
     except Exception as pne:
-        print(f"[Pinterest Paylaşım Bilgilendirmesi] {pne}")
+        print(f"[Pinterest Kolaj Hazırlık Bilgilendirmesi] {pne}")
 
-    # 6. YouTube Shorts kanalında (https://www.youtube.com/@guzelaicom) otomatik paylaşım
+    # 3. Diğer platform metin şablonlarını yerel dosyaya kaydet (otomatik yükleme yapmadan)
     try:
-        from youtube_publisher import save_youtube_outputs, publish_to_youtube_cdp
+        from threads_publisher import save_threads_outputs
+        from youtube_publisher import save_youtube_outputs
+        from x_publisher import save_x_outputs
+        from facebook_publisher import save_facebook_outputs
+        from whatsapp_publisher import save_whatsapp_outputs
+        from tiktok_uploader import save_tiktok_outputs
+        save_threads_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
         save_youtube_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
-        yt_res = publish_to_youtube_cdp(outfit_data, Path(video_path), reel_url=reel_url)
-        print(f"[YouTube Shorts Otomatik Paylaşım] Durum: {yt_res}")
-    except Exception as yte:
-        print(f"[YouTube Shorts Paylaşım Bilgilendirmesi] {yte}")
-
-    # 7. X / Twitter hesabında (https://x.com/guzelaicom) otomatik paylaşım
-    try:
-        from x_publisher import save_x_outputs, publish_to_x_cdp
         save_x_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
-        x_media = Path(video_path) if Path(video_path).exists() else collage_candidate
-        x_res = publish_to_x_cdp(outfit_data, media_path=x_media, reel_url=reel_url)
-        print(f"[X (Twitter) Otomatik Paylaşım] Durum: {x_res}")
-    except Exception as xe:
-        print(f"[X (Twitter) Paylaşım Bilgilendirmesi] {xe}")
-
-    # 8. Facebook hesabında (archzencir@gmail.com) otomatik paylaşım
-    try:
-        from facebook_publisher import save_facebook_outputs, publish_to_facebook_cdp
         save_facebook_outputs(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
-        fb_media = collage_candidate if collage_candidate.exists() else Path(video_path)
-        fb_res = publish_to_facebook_cdp(outfit_data, media_path=fb_media, ig_reel_url=reel_url)
-        print(f"[Facebook Otomatik Paylaşım] Durum: {fb_res}")
-    except Exception as fbe:
-        print(f"[Facebook Paylaşım Bilgilendirmesi] {fbe}")
+        save_whatsapp_outputs(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
+        save_tiktok_outputs(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
+    except Exception as txe:
+        print(f"[Metin Şablon Hazırlık Bilgilendirmesi] {txe}")
 
-    # 9. WhatsApp Kanalı (https://whatsapp.com/channel/0029VbDetYc3mFYDwZSry016 - guzelai.com) canlı yayın
+    # 4. Telegram botunda (@guzelaibot) TAM STOK PAKETİ (2K Video + Kapak + LİA Pinterest Kolajı + Kopyala-Yapıştır Açıklama & Linkler) paylaşımı
     try:
-        from whatsapp_publisher import save_whatsapp_outputs, publish_to_whatsapp_cdp
-        wa_res = save_whatsapp_outputs(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
-        wa_pub = publish_to_whatsapp_cdp(outfit_data, ig_reel_url=reel_url)
-        print(f"[WhatsApp Kanalı Otomatik Paylaşım] Durum: {wa_pub}")
-    except Exception as wae:
-        print(f"[WhatsApp Kanalı Bilgilendirmesi] {wae}")
+        from telegram_publisher import publish_to_telegram
+        tg_res = publish_to_telegram(
+            outfit_data,
+            out_dir=out_dir,
+            reel_url=reel_url,
+            video_override=video_path,
+        )
+        print(f"[Telegram (@guzelaibot) Stok Paketi Gönderimi] Durum: {tg_res}")
+    except Exception as tge:
+        print(f"[Telegram Paylaşım Bilgilendirmesi] {tge}")
+
+    if telegram_only:
+        print(
+            "[TELEGRAM STOK MODU AKTİF] Tüm içerikler (2K Reels Video, Hook Kapak, LİA Pinterest Kolajı, "
+            "Kopyala-Yapıştır Açıklama ve guzelai.com/go mağaza linkleri) yalnızca @guzelaibot üzerinden "
+            "Telegram'a iletildi. Doğrudan sosyal medya yüklemeleri devre dışıdır."
+        )
+        return
 
 
 def main():
@@ -450,55 +434,30 @@ def main():
     parser.add_argument(
         "--all-channels",
         action="store_true",
-        help="Yalnızca kullanıcı onayladıktan sonra diğer tüm sosyal medya kanallarına dağıt",
+        help="Telegram stok paketini ve vitrin linklerini hazırla",
     )
     args = parser.parse_args()
 
-    with open(args.caption_file, "r", encoding="utf-8") as f:
-        caption = f.read().strip()
-
-    comment_file = os.path.join(os.path.dirname(args.caption_file) or ".", "comment_links.txt")
-    comment_text = ""
-    if os.path.exists(comment_file):
-        with open(comment_file, "r", encoding="utf-8") as f:
-            comment_text = f.read().strip()
-
-    access_token = os.environ.get("IG_ACCESS_TOKEN", "").strip()
-    ig_user_id = os.environ.get("IG_USER_ID", "").strip()
-    username = os.environ.get("IG_USERNAME", "guzelaicom").strip()
-    password = os.environ.get("IG_PASSWORD", "").strip()
-    session_json = os.environ.get("IG_SESSION_JSON", "").strip()
-
-    local_trusted_session = Path(r"C:\Users\zenci\.gemini\antigravity\scratch\ig_session.json")
-    if not session_json and local_trusted_session.exists():
-        session_json = local_trusted_session.read_text(encoding="utf-8").strip()
-
     reel_url = ""
-    if access_token and ig_user_id:
-        upload_via_graph_api(args.video, caption, access_token, ig_user_id)
-    elif username or session_json:
+    if os.environ.get("TELEGRAM_ONLY_MODE", "1") != "1" and os.environ.get("FORCE_DIRECT_IG_UPLOAD", "0") == "1":
+        with open(args.caption_file, "r", encoding="utf-8") as f:
+            caption = f.read().strip()
+        comment_file = os.path.join(os.path.dirname(args.caption_file) or ".", "comment_links.txt")
+        comment_text = ""
+        if os.path.exists(comment_file):
+            with open(comment_file, "r", encoding="utf-8") as f:
+                comment_text = f.read().strip()
+        username = os.environ.get("IG_USERNAME", "guzelaicom").strip()
+        password = os.environ.get("IG_PASSWORD", "").strip()
+        session_json = os.environ.get("IG_SESSION_JSON", "").strip()
         reel_url = upload_via_instagrapi(args.video, caption, username, password, session_json, comment_text=comment_text) or ""
     else:
-        print("[BİLGİ] Instagram giriş bilgileri tanımlanmadığı için video yalnızca Artifacts olarak kaydedildi.")
+        print(
+            "[TELEGRAM STOK MODU AKTİF] Instagram kısıtlama koruması devrede: "
+            "Instagram API'sine hiçbir istek gönderilmiyor, yalnızca Telegram (@guzelaibot) stok paketi iletiliyor."
+        )
 
-    if args.all_channels:
-        dispatch_all_channels(args.video, reel_url=reel_url)
-    else:
-        if reel_url:
-            try:
-                out_dir = str(Path(args.video).parent)
-                meta_path = os.path.join(out_dir, "outfit_links.json")
-                if os.path.exists(meta_path):
-                    with open(meta_path, "r", encoding="utf-8") as mf:
-                        outfit_data = json.load(mf)
-                    outfit_data["reel_url"] = reel_url
-                    with open(meta_path, "w", encoding="utf-8") as mf:
-                        json.dump(outfit_data, mf, ensure_ascii=False, indent=2)
-                    from website_publisher import publish_to_guzelai_website
-                    publish_to_guzelai_website(outfit_data, out_dir=out_dir, ig_reel_url=reel_url)
-            except Exception as wbe:
-                print(f"[GuzelAI.com Reel URL Senkron Uyarısı] {wbe}")
-        print("[KALİTE KONTROL MODU] Yalnızca Instagram ve GuzelAI.com vitrinine yayın yapıldı. Onayınız olmadan diğer sosyal medya platformları pas geçildi.")
+    dispatch_all_channels(args.video, reel_url=reel_url)
 
 
 if __name__ == "__main__":
