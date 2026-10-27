@@ -1,0 +1,431 @@
+{
+  "agent": "visual-1to1-match-inspector",
+  "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
+  "generated_at": "2026-10-27 13:26:37",
+  "live_scrape_random_override_blocked": true,
+  "total_archetypes_inspected": 20,
+  "passed_1to1_archetypes": 17,
+  "inspected_archetypes": [
+    {
+      "archetype_id": "halloween_party_couple_vampiric_noir",
+      "title": "Cadılar Bayramı Parti Çift Kombini: Siyah Deri & Bordo Gece Şıklığı (%100 AI Çift) 🎃🥂🖤",
+      "gender_segment": "cift",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Siyah Dik Yaka Gold Toka Detaylı Kuşaklı Parti Elbisesi",
+        "color": "Siyah / Gold Toka",
+        "cutout_asset": "assets/items/mon2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Oversize Siyah Kemer Detaylı Deri Parti Ceketi",
+        "color": "Gece Siyahı",
+        "cutout_asset": "assets/items/mon2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "halloween_party_couple_gothic_oldmoney",
+      "title": "Cadılar Bayramı Rooftop Parti Çift Kombini: Gothic Old Money & Dark Glamour (%100 AI Çift Model) 🎃🍷✨",
+      "gender_segment": "cift",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Gece Yarısı Bordo Fitilli Dik Yaka Parti Triko Kazak",
+        "color": "Gece Yarısı Bordo",
+        "cutout_asset": "assets/items/veor_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Peluş Deri Mont & Erkek Siyah Kaşe Parti Bomber",
+        "color": "Koyu Kahve & Siyah",
+        "cutout_asset": "assets/items/veor_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "guzelai_gomlek_kase_mont_palazzo",
+      "title": "Mavi Çizgili Gömlek, Siyah Kaşe Mont ve Pileli Palazzo ile Ofisten Sokağa Old Money Stil 👔✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Mavi Çizgili Uzun Kollu Gömlek HL150",
+        "color": "Mavi / Beyaz Çizgili",
+        "cutout_asset": "assets/items/mon1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Siyah Kaşe Kumaş Bomber Mont & Ceket",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/mon1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "guzelai_elbise_deri_ceket_kombin",
+      "title": "Tek Parça Siyah Tokalı Elbise & Oversize Deri Ceketle Zahmetsiz Gece/Gündüz Şıklığı 🖤✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Siyah Kadın Dik Yaka Toka Detaylı Kuşaklı Elbise",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/mon2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Oversize Siyah Deri Ceket – Kemer Detaylı",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/mon2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "sunday_slot1_espresso_cream_oldmoney",
+      "title": "Pazar Brunch & Boğaz Yürüyüşü Old Money Zarafeti: Zara Trençkot, İpekyol Monogram Çanta & Ray-Ban 🤍☕🍂",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Vizon Yumuşak Dokulu Bisiklet Yaka Oversize Triko Kazak",
+        "color": "Vizon / Taupe",
+        "cutout_asset": "assets/items/sun1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "ZW Collection Kadın Uzun Kruvaze Kuşaklı Bej Trençkot",
+        "color": "Bej / Sıcak Vizon",
+        "cutout_asset": "assets/items/sun1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "sunday_slot2_olive_butter_taupe",
+      "title": "Nişantaşı Galeri & Akşamüstü Kahve Quiet Luxury: Stradivarius Süet, Calvin Klein & Casio Saat 🫒🤍✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Beyaz Uzun Kollu Klasik Basic Poplin Gömlek",
+        "color": "Beyaz",
+        "cutout_asset": "assets/items/sun2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Haki Oversize Dik Yaka Suni Süet Ceket",
+        "color": "Haki / Zeytin Yeşili",
+        "cutout_asset": "assets/items/sun2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "sunday_slot3_navy_camel_ivory",
+      "title": "Yeni Haftaya Hazırlık Prestij Old Money: H&M Triko, Stradivarius & Tommy Hilfiger 🖤🤍✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Krem & Siyah Çizgili Yumuşak Dokulu Triko Kazak",
+        "color": "Krem / Siyah Çizgili",
+        "cutout_asset": "assets/items/sun3_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Bej Asimetrik Dik Yaka Kuşaklı Kısa Kaşe Kaban",
+        "color": "Bej / Yulaf",
+        "cutout_asset": "assets/items/sun3_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "pinterest_oldmoney_camel_iceblue_ecru",
+      "title": "Pinterest'te En Çok Kaydedilen Old Money Sonbahar Renk Kurgusu: Camel, Buz Mavisi & Ekru Zarafeti 🤍🍂✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın %100 Pamuk Oversize Buz Mavisi Çizgili Gömlek",
+        "color": "Buz Mavisi / Beyaz Çizgili",
+        "cutout_asset": "assets/items/om_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Bej / Camel Kuşaklı Kruvaze Kısa Trençkot",
+        "color": "Camel / Bej",
+        "cutout_asset": "assets/items/om_01_trench.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_slot1_oldmoney_kase_triko_chino",
+      "title": "2027 Sonbahar/Kış Erkek Old Money Zarafeti: Camel Kaşe Kaban, Ekru Triko & Antrasit Chino (%100 AI Model) 🧥⌚✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Ekru Yarım Balıkçı Yaka Dokulu Triko Kazak",
+        "color": "Ekru / Krem",
+        "cutout_asset": "assets/items/men1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Camel Kruvaze Yaka Yün Karışımlı Kaşe Kaban",
+        "color": "Camel / Devetüyü",
+        "cutout_asset": "assets/items/men1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_slot2_smart_street_deri_bomber_jean",
+      "title": "2027 Sonbahar/Kış Erkek Smart Streetwear Kombini: Siyah Süet Bomber, Beyaz Heavyweight Tişört & Antrasit Jean (%100 AI Model) 🖤🔥✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Beyaz Heavyweight Pamuklu Bisiklet Yaka Tişört",
+        "color": "Beyaz",
+        "cutout_asset": "assets/items/men2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Siyah Süet / Deri Fermuarlı Bomber Ceket",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/men2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_slot1_sonbahar_kolej_kombin",
+      "title": "2027 Sonbahar/Kış Kız Çocuk Kolej (Varsity) Kombini: Peluş Kolej Bomber Ceket, Krem Bere, Krem Sweatshirt & Rahat Jean (%100 AI Kız Çocuk Model) 👧🧸🍂",
+      "gender_segment": "kiz_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Çocuk Krem %100 Pamuklu Kolej Kabartma Yazılı Sweatshirt",
+        "color": "Krem",
+        "cutout_asset": "assets/items/kid1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Çocuk Bej / Lacivert Peluş Dokulu Kolej Bomber Ceket",
+        "color": "Bej / Lacivert",
+        "cutout_asset": "assets/items/kid1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_erkek_slot1_sonbahar_kolej_street",
+      "title": "2027 Sonbahar/Kış Erkek Çocuk Kolej & Smart-Casual Kombini: Lacivert/Camel Bomber Ceket, Çizgili Triko & Camel Chino (%100 AI Erkek Çocuk Model) 👦🧢🍂",
+      "gender_segment": "erkek_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Çocuk Krem / Lacivert Yatay Çizgili Pamuklu Triko Kazak",
+        "color": "Krem / Lacivert Çizgili",
+        "cutout_asset": "assets/items/kid_boy1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Çocuk Lacivert Gövde / Camel Kol Kolej Bomber Ceket",
+        "color": "Lacivert / Camel",
+        "cutout_asset": "assets/items/kid_boy1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "veor_uranis_bordo_kapsul_2k",
+      "title": "2027 Sonbahar/Kış & Cadılar Bayramı Dark Glamour: Gece Yarısı Bordo Triko, İçi Peluş Deri Mont & Antrasit Palazzo (%100 AI Model) 🎃🍷✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Gece Yarısı Bordo Dik Yaka Fitilli Triko Kazak",
+        "color": "Gece Yarısı Bordo",
+        "cutout_asset": "assets/items/veor_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "İçi Peluş Detaylı Kemerli Koyu Kahve Deri Mont & Ceket",
+        "color": "Kahve / Krem Peluş",
+        "cutout_asset": "assets/items/veor_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "tesla_halloween_ramp_curly",
+      "title": "Tesla'nın dik pistinden bile düşmeden indiren o Cadılar Bayramı kombini 🎃🔥✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": false,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Bordo Bisiklet Yaka Fitilli Oversize Triko Kazak",
+        "color": "Bordo",
+        "cutout_asset": "assets/items/th_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Oversize Deri Ceket – Kemer Detaylı Siyah Ceket",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/th_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "BLOCKED_MISMATCH"
+    },
+    {
+      "archetype_id": "inner_voice_black_bomber_stone_palazzo",
+      "title": "İç sesim bir dakika bile susmadığı için gün boyu böyleyim 😭✨ (Ama kombinimden asla ödün vermem)",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Oversize Bisiklet Yaka Triko/Sweatshirt (Benzer Muadil)",
+        "color": "Açık Gri / Ekru",
+        "cutout_asset": "assets/items/iv_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Kaşe Bomber Siyah Ceket (Benzer Muadil)",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/iv_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "telegram_curly_champagne_palazzo",
+      "title": "5.000₺ Bütçeyle 50.000₺'lik 'Old Money' Görünmenin Sırrı! (4. Parçaya Dikkat) 🔥",
+      "gender_segment": "kadin",
+      "model_frames_verified": false,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Saten Kumaş Gizli Düğmeli Gömlek (Benzer Muadil)",
+        "color": "Şampanya / Ekru",
+        "cutout_asset": "assets/items/tg_03_shirt.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Gold Çelik Kordon Kol Saati (Benzer Muadil)",
+        "color": "Altın / Gold",
+        "cutout_asset": "assets/items/tg_01_watch.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "BLOCKED_MISMATCH"
+    },
+    {
+      "archetype_id": "curly_khaki_suede_palazzo",
+      "title": "Haki Süet Bomber & Antrasit Palazzo Sonbahar Kadın Stili",
+      "gender_segment": "kadin",
+      "model_frames_verified": false,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Bisiklet Yaka Yumuşak Dokulu Oversize Triko Kazak",
+        "color": "Ekru",
+        "cutout_asset": "assets/items/curly_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Oversize Kadın Bomber Haki Süet Deri Ceket",
+        "color": "Haki",
+        "cutout_asset": "assets/items/curly_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "BLOCKED_MISMATCH"
+    },
+    {
+      "archetype_id": "pajama_morning_vibe",
+      "title": "Pastel Mavi Pijama & Sabah Ev Stili",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/outfit3_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/outfit3_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "chic_black_biker_denim",
+      "title": "Siyah Ceket & Palazzo Jean Sokak Stili",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/outfit2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/outfit2_01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "casual_denim_sherpa_grey",
+      "title": "Denim Ceket & Gri Athleisure Kombin",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/03_sweatshirt.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "",
+        "color": "",
+        "cutout_asset": "assets/items/01_jacket.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    }
+  ],
+  "status": "ZERO_MISMATCH_ENFORCED"
+}

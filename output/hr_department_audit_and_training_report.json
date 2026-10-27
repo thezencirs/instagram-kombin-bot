@@ -1,0 +1,78 @@
+{
+  "agent": "hr-agent-trainer-director",
+  "agent_code_name": "İREM (Ajan 17 - İnsan Kaynakları, Ajan Eğitim & Departman Uyum Direktörü)",
+  "generated_at": "2026-10-27 13:26:37",
+  "hr_operation_status": "ALL_FAULTY_AGENTS_RETRAINED_AND_18_AGENTS_SYNCHRONIZED",
+  "faulty_agents_identified_and_retrained": [
+    {
+      "fault_rank": 1,
+      "faulty_agent": "ALP (Ajan 1A - store-link-researcher) & ALİ (Ajan 1B - store-deep-matcher-agent)",
+      "severity": "KRİTİK (ANA SUÇLU)",
+      "what_went_wrong": "`src/outfit_generator.py` içindeki `select_daily_outfit()` fonksiyonunda `force_live_scrape = archetype['id'] in used_archetypes` bayrağı `True` olduğunda, ALP ve ALİ ajanları arketipin doğrulanmış `verified_exact_items` ürünlerini ve `local_asset` (1:1 dekupe görsel) bağlantısını `None` yaparak siliyordu! Ardından `live_trendyol_catalog.json` içinden rastgele ürünler (örneğin siyah deri ceketli ve siyah elbiseli modelin yanına 'STF MODA Ekru Kayık Yaka Triko Kazak' ve 'Stradivarius Bej Trençkot') çekip `[Canlı Dekupe]` ile videoya basıyordu.",
+      "hr_training_and_code_fix": "ALP ve ALİ ajanlarına '1:1 Model-Kıyafet Dokunulmazlığı Eğitimi' verildi. `force_live_scrape = False` kalıcı olarak kilitlendi, `chosen['local_asset'] = None` satırı tamamen kaldırıldı ve `load_cutout_image()` fonksiyonunda yerel 1:1 stüdyo dekupe görseli varken dışarıdan alakasız mağaza fotoğrafı indirilmesi kesin olarak yasaklandı.",
+      "retraining_status": "EĞİTİM TAMAMLANDI & KOD KİLİTLENDİ"
+    },
+    {
+      "fault_rank": 2,
+      "faulty_agent": "KOR (Ajan 12 - fashion-concept-architect) & MİA (Ajan 13 - fashion-design-specialist)",
+      "severity": "YÜKSEK (ÜST GİYİM YAKA / KESİM / BAŞLIK UYUMSUZLUĞU)",
+      "what_went_wrong": "1) `veor_uranis_bordo_kapsul_2k` (`hw27_women_step1.jpg`) kombininde yürüyen modelin üzerinde dar kesim DİK YAKA (mock-neck) bordo fitilli triko kazak bulunmasına rağmen, 3 numaralı dekupe görselde (`veor_03_top.png`) geniş BİSİKLET YAKA balon kol kazak kullanılmış ve çanta görselinde (`veor_05_bag.png`) mavi plastik 'BAG mori' etiketi unutulmuştu.\n2) `guzelai_elbise_deri_ceket_kombin` (`mon2_model_step1.jpg`) kombininde model klasik kemerli düz siyah dik yaka midi elbise giyerken, `mon2_03_top.png` görselinde yandan gümüş halkalı asimetrik mini elbise yer alıyordu.\n3) `erkek_slot2_smart_street_deri_bomber_jean` (`men2_model_step1.jpg`) kombininde model beyaz bisiklet yaka tişört giyerken, başlıkta 'Bordo/Beyaz Katman' yazıyordu.\n4) `halloween_party_couple_vampiric_noir` kombininde kadın deri ceket giyerken 1. slotta kaşe bomber (`iv_01_jacket.png`) kalmıştı.",
+      "hr_training_and_code_fix": "KOR ve MİA ajanlarına 'Yaka Tipi (Dik Yaka vs Bisiklet Yaka), Kol Kesimi ve Başlık-Görsel Birebir Tutarlılık Eğitimi' verildi. `veor_03_top.png` (dik yaka dar kesim bordo fitilli triko), `mon2_03_top.png` (kemerli düz siyah dik yaka midi elbise), `veor_05_bag.png` ve `om_05_bag.png` (etiketsiz temiz deri çantalar) modelle %100 1:1 aynı olacak şekilde yeniden üretildi.",
+      "retraining_status": "EĞİTİM TAMAMLANDI & GÖRSELLER 1:1 YENİLENDİ"
+    },
+    {
+      "fault_rank": 3,
+      "faulty_agent": "EGE (Ajan 8 - visual-qa-runway-inspector)",
+      "severity": "ORTA-YÜKSEK (DENETİM EKSİKLİĞİ)",
+      "what_went_wrong": "EGE yalnızca video çözünürlüğünü (1080x1920) ve dosya varlığını kontrol ediyor, modelin üzerindeki üst giyim ile dekupe ürün kartındaki üst giyimin yaka/renk/doku uyumunu denetlemeden onay veriyordu.",
+      "hr_training_and_code_fix": "İnsan Kaynakları tarafından **Ajan 18 SARP (`visual-1to1-match-inspector`)** işe alındı ve EGE ile entegre edildi. Artık SARP onayı olmadan hiçbir kombin render edilemez ve Telegram'a gönderilemez.",
+      "retraining_status": "YENİ BAŞDENETÇİ (SARP) İLE GÜÇLENDİRİLDİ"
+    }
+  ],
+  "new_department_hires": [
+    {
+      "agent_id": "Ajan 17 - İREM (`hr-agent-trainer-director`)",
+      "title": "İnsan Kaynakları (İK), Ajan Eğitim & Departman Uyum Direktörü",
+      "responsibilities": [
+        "18 ajanın tamamının performansını, çıktı kalitesini ve departmanlar arası senkronizasyonunu denetlemek",
+        "Hatalı çıktı üreten ajanları tespit edip kod/kural düzeyinde yeniden eğitmek ('İşi Öğretme Protokolü')",
+        "Modelin giydiği kıyafet ile vitrin/kolaj parçaları arasında %0 hata toleransı uygulamak"
+      ]
+    },
+    {
+      "agent_id": "Ajan 18 - SARP (`visual-1to1-match-inspector`)",
+      "title": "1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi",
+      "responsibilities": [
+        "Yürüyen AI mankenin (`model_frames`) üzerindeki üst giyim (`top`), dış giyim (`outerwear`) ve diğer parçaların 6 dekupe görselle (`cutout_assets`) birebir (1:1) aynı olduğunu denetlemek",
+        "Yaka tipi (dik yaka / bisiklet yaka / gömlek yaka), renk tonu, kemer/toka detayı ve mağaza etiketi temizliğini kontrol etmek",
+        "`force_live_scrape` veya `local_asset=None` gibi rastgele ürün ikamelerini engellemek"
+      ]
+    }
+  ],
+  "full_18_agent_synchronized_roster": [
+    "1. ALP (`store-link-researcher`) — Mağaza Link & Stok Ajanı [İK Eğitimi Tamamlandı: Rastgele Canlı Ürün İkamesi Kapatıldı]",
+    "2. ALİ (`store-deep-matcher-agent`) — İkiz-Model & Renk Eşleştirme Ajanı [İK Eğitimi Tamamlandı: 1:1 Görsel Kilidi Aktif]",
+    "3. ADA (`pinterest-trend-scout`) — Pinterest Trend Reçete Ajanı [Uyumlu]",
+    "4. HAN (`kombin-dispatcher-reporter`) — Koordinasyon & Telegram Stok Paket Dağıtım Ajanı [Uyumlu]",
+    "5. ECE (`social-health-analyst`) — Hesap Sağlığı & Telegram-Only Kalkan Ajanı [Uyumlu]",
+    "6. EFE (`tiktok-viral-music-scout`) — Viral Müzik & Ritim Eşleştirme Ajanı [Uyumlu]",
+    "7. ELA (`prepublish-compliance-auditor`) — Yayın Öncesi %100 İhlal Doğurmaz Denetim Ajanı [Uyumlu]",
+    "8. CEM (`viral-hook-music-director`) — İlk 1.8sn Hook & Ses Senkron Yönetmeni [Uyumlu]",
+    "9. EGE (`visual-qa-runway-inspector`) — 2K OLED & Yürüyüş Kalite Denetçisi [SARP ile Eşleşti]",
+    "10. TAN (`price-stock-conversion-guard`) — GuzelAI.com /go/{sku} Fiyat & Vitrin Kalkanı [Uyumlu]",
+    "11. CAN (`algorithm-reach-diagnostician`) — Algoritma & Keşfet Teşhis Ajanı [Uyumlu]",
+    "12. KOR (`fashion-concept-architect`) — 2027 AW Konsept Mimar Ajanı [İK Eğitimi Tamamlandı: Başlık-Görsel 1:1 Tutarlılık]",
+    "13. MİA (`fashion-design-specialist`) — Baş Moda Tasarımı Uzmanı [İK Eğitimi Tamamlandı: Yaka & Kesim 1:1 Kontrolü]",
+    "14. LEO (`party-couture-designer`) — Parti & Gece Kombinleri Tasarımcısı [Uyumlu]",
+    "15. LİA (`pinterest-collage-fashion-designer`) — 9:16 Pinterest Lookbook Kolaj Tasarımcısı [SARP 1:1 Dekupe Kilidiyle Entegre]",
+    "16. NİL (`kids-fashion-stylist`) — Çocuk Kombinleri & Kolej Modası Uzmanı [1:1 Doğrulandı]",
+    "17. İREM (`hr-agent-trainer-director`) — YENİ İŞE ALIM: İnsan Kaynakları, Ajan Eğitim & Departman Uyum Direktörü",
+    "18. SARP (`visual-1to1-match-inspector`) — YENİ İŞE ALIM: 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi"
+  ],
+  "visual_1to1_inspection_summary": {
+    "inspector": "SARP (Ajan 18)",
+    "live_scrape_random_override_blocked": true,
+    "passed_archetypes": 17,
+    "total_archetypes": 20
+  }
+}
