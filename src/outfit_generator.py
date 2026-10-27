@@ -198,7 +198,7 @@ OUTFIT_ARCHETYPES = [
             "shoes": ["bordo", "siyah", "adidas", "spezial", "samba"],
         },
         "cutout_assets": {
-            "outerwear": "assets/items/iv_01_jacket.png",
+            "outerwear": "assets/items/mon2_01_outer.png",
             "cap": "assets/items/men2_01_outer.png",
             "top": "assets/items/mon2_03_top.png",
             "bottom": "assets/items/veor_03_top.png",
@@ -206,7 +206,7 @@ OUTFIT_ARCHETYPES = [
             "shoes": "assets/items/veor_06_shoes.png",
         },
         "fallback_cutout_assets": {
-            "outerwear": "assets/items/iv_01_jacket.png",
+            "outerwear": "assets/items/mon2_01_outer.png",
             "cap": "assets/items/men2_01_outer.png",
             "top": "assets/items/mon2_03_top.png",
             "bottom": "assets/items/veor_03_top.png",
@@ -1322,9 +1322,9 @@ OUTFIT_ARCHETYPES = [
         "gender_segment": "erkek",
         "ai_model_verified": True,
         "preferred_music_id": "sunset_electric_guitar_chillwave_pov",
-        "title": "2027 Sonbahar/Kış & Cadılar Bayramı Noir Erkek Kombini: Siyah Süet Bomber, Bordo/Beyaz Katman & Antrasit Jean (%100 AI Model) 🎃🖤🔥",
-        "spoken_hook_text": "Cadılar Bayramı gecesi ve 2027 sonbahar kış sezonunda en karizmatik erkek sokak stili!",
-        "viral_hook": "🛑 2027 Sonbahar/Kış & Cadılar Bayramı Konsept Ajanımız KOR tarafından %100 Yapay Zeka (AI) Erkek Manken üzerinde doğrulanan 6 parçalık Noir Streetwear erkek kombini! Siyah süet/deri bomber ceket, katmanlı üst, antrasit straight jean ve Adidas Samba! 💬 Bu Cadılar Bayramı & 2027 Kış kombininde favoriniz Siyah Bomber Ceket (1) mi yoksa Adidas Samba (6) mı? Yorumlara yazın! 👇🎃🖤✨",
+        "title": "2027 Sonbahar/Kış Erkek Smart Streetwear Kombini: Siyah Süet Bomber, Beyaz Heavyweight Tişört & Antrasit Jean (%100 AI Model) 🖤🔥✨",
+        "spoken_hook_text": "2027 sonbahar kış sezonunda şehirde en karizmatik erkek smart streetwear sokak stili!",
+        "viral_hook": "🛑 2027 Sonbahar/Kış Konsept Ajanımız KOR ve 1:1 Görsel Denetçimiz SARP tarafından %100 Yapay Zeka (AI) Erkek Manken üzerinde birebir doğrulanan 6 parçalık Smart Streetwear erkek kombini! Siyah süet/deri bomber ceket, beyaz heavyweight tişört, antrasit straight jean ve Adidas Samba! 💬 Bu erkek kombininde favoriniz Siyah Bomber Ceket (1) mi yoksa Adidas Samba (6) mı? Yorumlara yazın! 👇🖤✨",
         "video_badge_collage": "» 2027 AW & CADILAR BAYRAMI ERKEK (%100 AI) «",
         "video_badge_walk": "» NOIR SİYAH BOMBER & ANTRASİT STİL «",
         "seo_note": "📌 Not: Videodaki manken %100 Yapay Zeka (AI) üretimi sanal modeldir. 2027 Sonbahar/Kış & Cadılar Bayramı erkek kombin parçaları önce guzelai.com vitrininde doğrulanmış olup aşağıdaki guzelai.com/go linklerinden mağazaya yönlenir:",
@@ -1458,15 +1458,15 @@ OUTFIT_ARCHETYPES = [
     },
     {
         "id": "cocuk_slot1_sonbahar_kolej_kombin",
-        "gender_segment": "cocuk",
+        "gender_segment": "kiz_cocuk",
         "ai_model_verified": True,
         "preferred_music_id": "english_hit_feel_good_syn_cole",
-        "title": "2027 Sonbahar/Kış & Cadılar Bayramı Çocuk Kolej (Varsity) Kombini: Peluş Kolej Bomber Ceket, Krem Sweatshirt & Rahat Jean (%100 AI Çocuk Model) 🎃🧸🍂",
-        "spoken_hook_text": "2027 sonbahar kış sezonunda ve Cadılar Bayramı haftasında minikler için en tarz kolej stili!",
-        "viral_hook": "🛑 Çocuk Kombinleri Uzman Tasarımcımız NİL & Baş Moda Tasarımcımız MİA tarafından %100 Yapay Zeka (AI) Çocuk Modeli ile birebir 1:1 uyumlu hazırlanan 6 parçalık Sonbahar Kolej (Varsity) çocuk kombini! Bej/lacivert peluş kolej bomber ceket, fitilli krem triko bere, %100 pamuk krem sweatshirt, paçası katlamalı rahat jean, bej/lacivert mini sırt çantası ve cırt cırtlı beyaz/lacivert sneaker! 💬 Çocuk kombinlerinde sizce peluş kolej ceket (1) mi yoksa rahat sweatshirt (3) mü daha kullanışlı? Yorumlara yazın! 👇🎃🧸✨",
-        "video_badge_collage": "» 2027 AW ÇOCUK KOLEJ STİLİ (%100 AI) «",
+        "title": "2027 Sonbahar/Kış Kız Çocuk Kolej (Varsity) Kombini: Peluş Kolej Bomber Ceket, Krem Bere, Krem Sweatshirt & Rahat Jean (%100 AI Kız Çocuk Model) 👧🧸🍂",
+        "spoken_hook_text": "2027 sonbahar kış sezonunda kız çocukları için en tatlı ve rahat kolej stili!",
+        "viral_hook": "🛑 Çocuk Kombinleri Uzman Tasarımcımız NİL & 1:1 Görsel Başdenetçimiz SARP tarafından %100 Yapay Zeka (AI) Kız Çocuk Modeli ile birebir 1:1 uyumlu hazırlanan 6 parçalık Sonbahar Kolej (Varsity) kız çocuk kombini! Bej/lacivert peluş kolej bomber ceket, fitilli krem triko bere, %100 pamuk krem sweatshirt, paçası katlamalı rahat jean, bej/lacivert mini sırt çantası ve cırt cırtlı beyaz/lacivert sneaker! 💬 Kız çocuk kombinlerinde sizce peluş kolej ceket (1) mi yoksa rahat sweatshirt (3) mü daha kullanışlı? Yorumlara yazın! 👇👧🧸✨",
+        "video_badge_collage": "» 2027 AW KIZ ÇOCUK KOLEJ STİLİ (%100 AI) «",
         "video_badge_walk": "» PELUŞ KOLEJ CEKET & RAHAT JEAN «",
-        "seo_note": "📌 Not: Videodaki çocuk model %100 Yapay Zeka (AI) üretimi sanal karakterdir (gerçek çocuk fotoğrafı kullanılmamıştır). Çocuk kombin parçaları modelin üzerindeki kıyafetlerle %100 birebir uyumlu olarak guzelai.com vitrininde doğrulanmış olup aşağıdaki guzelai.com/go linklerinden mağazaya yönlenir:",
+        "seo_note": "📌 Not: Videodaki kız çocuk model %100 Yapay Zeka (AI) üretimi sanal karakterdir (gerçek çocuk fotoğrafı kullanılmamıştır). Kız çocuk kombin parçaları modelin üzerindeki kıyafetlerle %100 birebir uyumlu olarak guzelai.com vitrininde doğrulanmış olup aşağıdaki guzelai.com/go linklerinden mağazaya yönlenir:",
         "verified_exact_items": {
             "outerwear": {
                 "id": "ty_791023411",
@@ -1596,6 +1596,145 @@ OUTFIT_ARCHETYPES = [
         ],
     },
     {
+        "id": "cocuk_erkek_slot1_sonbahar_kolej_street",
+        "gender_segment": "erkek_cocuk",
+        "ai_model_verified": True,
+        "preferred_music_id": "english_hit_feel_good_syn_cole",
+        "title": "2027 Sonbahar/Kış Erkek Çocuk Kolej & Smart-Casual Kombini: Lacivert/Camel Bomber Ceket, Çizgili Triko & Camel Chino (%100 AI Erkek Çocuk Model) 👦🧢🍂",
+        "spoken_hook_text": "2027 sonbahar kış sezonunda erkek çocukları için hem okulda hem hafta sonunda en karizmatik kolej stili!",
+        "viral_hook": "🛑 Çocuk Kombinleri Uzman Tasarımcımız NİL & 1:1 Görsel Başdenetçimiz SARP tarafından %100 Yapay Zeka (AI) Erkek Çocuk Modeli ile birebir 1:1 uyumlu hazırlanan 6 parçalık Erkek Çocuk Sonbahar Kolej Kombini! Lacivert/camel kolej bomber ceket, lacivert pamuklu kep şapka, krem/lacivert çizgili triko kazak, rahat camel chino pantolon, lacivert/taba sırt çantası ve beyaz/lacivert sneaker! 💬 Erkek çocuk kombininde favori parçanız Kolej Bomber Ceket (1) mi yoksa Çizgili Triko Kazak (3) mü? Yorumlara yazın! 👇👦🧢✨",
+        "video_badge_collage": "» 2027 AW ERKEK ÇOCUK KOLEJ STİLİ (%100 AI) «",
+        "video_badge_walk": "» LACİVERT/CAMEL BOMBER & CHINO «",
+        "seo_note": "📌 Not: Videodaki erkek çocuk model %100 Yapay Zeka (AI) üretimi sanal karakterdir (gerçek çocuk fotoğrafı kullanılmamıştır). Erkek çocuk kombin parçaları modelin üzerindeki kıyafetlerle %100 birebir uyumlu olarak guzelai.com vitrininde doğrulanmış olup aşağıdaki guzelai.com/go linklerinden mağazaya yönlenir:",
+        "verified_exact_items": {
+            "outerwear": {
+                "id": "ty_792011001",
+                "category_label": "Erkek Çocuk Kolej Ceket",
+                "brand": "DEFACTO KIDS",
+                "price": "749,99₺",
+                "price_val": 749.99,
+                "name": "Erkek Çocuk Lacivert Gövde / Camel Kol Kolej Bomber Ceket",
+                "full_name": "DeFacto Kids Erkek Çocuk Lacivert / Camel Çizgili Ribanalı Kolej Bomber Ceket",
+                "sku": "792011001",
+                "color": "Lacivert / Camel",
+                "store_url": "https://www.trendyol.com/cocuk-ceket-x-g3-c1030",
+                "product_url": "https://guzelai.com/go/792011001",
+                "guzelai_url": "https://guzelai.com/go/792011001",
+                "image_url": "/kombin-cutouts/kid_boy1_01_outer.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_01_outer.png"],
+            },
+            "cap": {
+                "id": "ty_792011002",
+                "category_label": "Erkek Çocuk Kep Şapka",
+                "brand": "LC WAIKIKI KIDS",
+                "price": "189,99₺",
+                "price_val": 189.99,
+                "name": "Erkek Çocuk Lacivert %100 Pamuklu Klasik Kep Şapka",
+                "full_name": "LC Waikiki Kids Erkek Çocuk Lacivert Pamuklu Siperlikli Kep Şapka",
+                "sku": "792011002",
+                "color": "Lacivert",
+                "store_url": "https://www.trendyol.com/cocuk-sapka-x-g3-c1041",
+                "product_url": "https://guzelai.com/go/792011002",
+                "guzelai_url": "https://guzelai.com/go/792011002",
+                "image_url": "/kombin-cutouts/kid_boy1_02_cap.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_02_cap.png"],
+            },
+            "top": {
+                "id": "ty_792011003",
+                "category_label": "Erkek Çocuk Triko Kazak",
+                "brand": "MANGO KIDS",
+                "price": "459,99₺",
+                "price_val": 459.99,
+                "name": "Erkek Çocuk Krem / Lacivert Yatay Çizgili Pamuklu Triko Kazak",
+                "full_name": "Mango Kids Erkek Çocuk Krem Üzeri Lacivert Çizgili Bisiklet Yaka Triko Kazak",
+                "sku": "792011003",
+                "color": "Krem / Lacivert Çizgili",
+                "store_url": "https://www.trendyol.com/cocuk-kazak-x-g3-c1092",
+                "product_url": "https://guzelai.com/go/792011003",
+                "guzelai_url": "https://guzelai.com/go/792011003",
+                "image_url": "/kombin-cutouts/kid_boy1_03_top.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_03_top.png"],
+            },
+            "bottom": {
+                "id": "ty_792011004",
+                "category_label": "Erkek Çocuk Chino Pantolon",
+                "brand": "KOTON KIDS",
+                "price": "529,99₺",
+                "price_val": 529.99,
+                "name": "Erkek Çocuk Camel / Bej Rahat Kesim Pamuklu Chino Pantolon",
+                "full_name": "Koton Kids Erkek Çocuk Camel / Sıcak Bej Rahat Kalıp Pamuklu Chino Pantolon",
+                "sku": "792011004",
+                "color": "Camel / Bej",
+                "store_url": "https://www.trendyol.com/cocuk-pantolon-x-g3-c70",
+                "product_url": "https://guzelai.com/go/792011004",
+                "guzelai_url": "https://guzelai.com/go/792011004",
+                "image_url": "/kombin-cutouts/kid_boy1_04_bottom.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_04_bottom.png"],
+            },
+            "bag": {
+                "id": "ty_792011005",
+                "category_label": "Erkek Çocuk Sırt Çantası",
+                "brand": "U.S. POLO ASSN. KIDS",
+                "price": "649,90₺",
+                "price_val": 649.90,
+                "name": "Erkek Çocuk Lacivert / Taba Cep Detaylı Okul & Gezi Sırt Çantası",
+                "full_name": "U.S. Polo Assn. Kids Lacivert Gövde / Taba Ön Cep Detaylı Çocuk Sırt Çantası",
+                "sku": "792011005",
+                "color": "Lacivert / Taba",
+                "store_url": "https://www.trendyol.com/cocuk-sirt-cantasi-x-g3-c115",
+                "product_url": "https://guzelai.com/go/792011005",
+                "guzelai_url": "https://guzelai.com/go/792011005",
+                "image_url": "/kombin-cutouts/kid_boy1_05_bag.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_05_bag.png"],
+            },
+            "shoes": {
+                "id": "ty_792011006",
+                "category_label": "Erkek Çocuk Sneaker",
+                "brand": "ADIDAS KIDS",
+                "price": "1.749₺",
+                "price_val": 1749.0,
+                "name": "Adidas Grand Court Erkek Çocuk Beyaz / Lacivert Çizgili Sneaker",
+                "full_name": "adidas Grand Court Erkek Çocuk Beyaz Üzeri Lacivert 3 Çizgili Rahat Sneaker",
+                "sku": "792011006",
+                "color": "Beyaz / Lacivert",
+                "store_url": "https://www.trendyol.com/cocuk-spor-ayakkabi-x-g3-c109",
+                "product_url": "https://guzelai.com/go/792011006",
+                "guzelai_url": "https://guzelai.com/go/792011006",
+                "image_url": "/kombin-cutouts/kid_boy1_06_shoes.png",
+                "image_urls": ["/kombin-cutouts/kid_boy1_06_shoes.png"],
+            },
+        },
+        "keywords": {
+            "outerwear": ["kolej", "bomber", "erkek çocuk", "ceket"],
+            "cap": ["lacivert", "şapka", "kep", "erkek çocuk"],
+            "top": ["çizgili", "triko", "kazak", "erkek çocuk"],
+            "bottom": ["camel", "bej", "chino", "erkek çocuk", "pantolon"],
+            "bag": ["lacivert", "sırt", "erkek çocuk", "çanta"],
+            "shoes": ["beyaz", "lacivert", "adidas", "erkek çocuk", "sneaker"],
+        },
+        "cutout_assets": {
+            "outerwear": "assets/items/kid_boy1_01_outer.png",
+            "cap": "assets/items/kid_boy1_02_cap.png",
+            "top": "assets/items/kid_boy1_03_top.png",
+            "bottom": "assets/items/kid_boy1_04_bottom.png",
+            "bag": "assets/items/kid_boy1_05_bag.png",
+            "shoes": "assets/items/kid_boy1_06_shoes.png",
+        },
+        "fallback_cutout_assets": {
+            "outerwear": "assets/items/kid_boy1_01_outer.png",
+            "cap": "assets/items/kid_boy1_02_cap.png",
+            "top": "assets/items/kid_boy1_03_top.png",
+            "bottom": "assets/items/kid_boy1_04_bottom.png",
+            "bag": "assets/items/kid_boy1_05_bag.png",
+            "shoes": "assets/items/kid_boy1_06_shoes.png",
+        },
+        "model_frames": [
+            "assets/kid_boy1_model_step1.jpg",
+            "assets/kid_boy1_model_step2.jpg",
+            "assets/kid_boy1_model_step3.jpg",
+        ],
+    },
+    {
         "id": "veor_uranis_bordo_kapsul_2k",
         "preferred_music_id": "october_celesta_strings_beat_pov",
         "title": "2027 Sonbahar/Kış & Cadılar Bayramı Dark Glamour: Gece Yarısı Bordo Triko, İçi Peluş Deri Mont & Antrasit Palazzo (%100 AI Model) 🎃🍷✨",
@@ -1643,15 +1782,15 @@ OUTFIT_ARCHETYPES = [
                 "brand": "MODASPARK",
                 "price": "309,05₺",
                 "price_val": 309.05,
-                "name": "Kadın Bordo Bisiklet Yaka Fitilli Oversize Triko Kazak",
-                "full_name": "MODASPARK Bordo Bisiklet Yaka Fitilli Oversize Kadın Triko Kazak",
+                "name": "Kadın Gece Yarısı Bordo Dik Yaka Fitilli Triko Kazak",
+                "full_name": "MODASPARK Kadın Gece Yarısı Bordo Dik Yaka Fitilli Triko Kazak",
                 "sku": "903567167",
-                "color": "Bordo",
+                "color": "Gece Yarısı Bordo",
                 "store_url": "https://www.trendyol.com/modaspark/bordo-bisiklet-yaka-oversize-kadin-triko-kazak-p-903567167",
                 "product_url": "https://guzelai.com/go/903567167",
                 "guzelai_url": "https://guzelai.com/go/903567167",
-                "image_url": "https://cdn.dsmcdn.com/ty1632/prod/QC/20250202/15/9830164e-8f57-3365-952e-d77fd145269c/1_org_zoom.jpg",
-                "image_urls": ["https://cdn.dsmcdn.com/ty1632/prod/QC/20250202/15/9830164e-8f57-3365-952e-d77fd145269c/1_org_zoom.jpg"],
+                "image_url": "/pinterest-models/hw27_women_step1.jpg",
+                "image_urls": ["/pinterest-models/hw27_women_step1.jpg"],
             },
             "bottom": {
                 "id": "ty_866458994",
@@ -2512,11 +2651,13 @@ def load_cutout_image(item: dict, use_local_first: bool = True) -> Image.Image:
     local_path = _resolve_asset(item.get("local_asset"))
     fallback_path = _resolve_asset(item.get("fallback_asset"))
 
-    if use_local_first and local_path and os.path.exists(local_path):
-        im = Image.open(local_path).convert("RGBA")
-        alpha = im.split()[3]
-        bbox = alpha.point(lambda v: 255 if v > 20 else 0).getbbox()
-        return im.crop(bbox) if bbox else im
+    # [İK & 1:1 Görsel Eşleşme Kilidi - İREM & SARP]: Her zaman yerel 1:1 stüdyo dekupe görseli önceliklidir!
+    for p in (local_path, fallback_path):
+        if p and os.path.exists(p):
+            im = Image.open(p).convert("RGBA")
+            alpha = im.split()[3]
+            bbox = alpha.point(lambda v: 255 if v > 20 else 0).getbbox()
+            return im.crop(bbox) if bbox else im
 
     candidate_urls = item.get("image_urls") or ([item["image_url"]] if item.get("image_url") else [])
     for url in candidate_urls[:3]:
@@ -2773,33 +2914,71 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
             except Exception:
                 pass
 
+    ARCHETYPE_ALIASES = {
+        "guzelai_ofisten_sokaga_oldmoney": "guzelai_gomlek_kase_mont_palazzo",
+        "monday_slot1_ofisten_sokaga": "guzelai_gomlek_kase_mont_palazzo",
+        "monday_slot2_elbise_deri_ceket": "guzelai_elbise_deri_ceket_kombin",
+    }
     forced_id = (
         os.environ.get("FORCE_ARCHETYPE_ID", "").strip()
         or os.environ.get("FORCE_ARCHETYPE", "").strip()
         or slot_name
     )
+    forced_id = ARCHETYPE_ALIASES.get(forced_id, forced_id)
     forced_matches = [a for a in OUTFIT_ARCHETYPES if a["id"] == forced_id and os.path.exists(a["model_frames"][0])]
     if forced_matches:
         archetype = forced_matches[0]
         force_live_scrape = False
     else:
-        # Öncelikle daha önce Instagram'da paylaşılmamış ve model kareleri mevcut olan özgün arketipi sırayla seç
+        if os.environ.get("FORCE_ARCHETYPE_ID", "").strip():
+            raise ValueError(
+                f"[İK & 1:1 Görsel Uyum Kilidi] İstenen kombin arketipi bulunamadı: '{forced_id}'. "
+                f"Model-kıyafet uyumsuzluğunu önlemek için rastgele arketipe düşülmesi engellendi!"
+            )
+        # Öncelikle segment filtresi varsa (kadin / erkek / kiz_cocuk / erkek_cocuk / cift) veya dengeli 4-segment rotasyonu uygula
+        forced_segment = os.environ.get("FORCE_SEGMENT", "").strip().lower()
+        all_valid_archetypes = [a for a in OUTFIT_ARCHETYPES if os.path.exists(a["model_frames"][0])]
         available_archetypes = [
-            a for a in OUTFIT_ARCHETYPES
-            if a["id"] not in used_archetypes and os.path.exists(a["model_frames"][0])
+            a for a in all_valid_archetypes
+            if a["id"] not in used_archetypes
         ]
         if not available_archetypes:
             available_archetypes = [
-                a for a in OUTFIT_ARCHETYPES
-                if a["id"] not in used_archetypes[-3:] and os.path.exists(a["model_frames"][0])
-            ]
-        if not available_archetypes:
-            available_archetypes = [a for a in OUTFIT_ARCHETYPES if os.path.exists(a["model_frames"][0])] or [OUTFIT_ARCHETYPES[0]]
+                a for a in all_valid_archetypes
+                if a["id"] not in used_archetypes[-3:]
+            ] or all_valid_archetypes
+
+        if forced_segment and forced_segment not in ("otomatik", "all", "tumu"):
+            seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") == forced_segment]
+            if not seg_matches:
+                seg_matches = [a for a in all_valid_archetypes if a.get("gender_segment", "kadin") == forced_segment]
+            if seg_matches:
+                available_archetypes = seg_matches
+        else:
+            # Dengeli 4 Ana Segment Rotasyonu: Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk -> Çift
+            rotation_order = ["kadin", "erkek", "kiz_cocuk", "erkek_cocuk", "cift"]
+            last_id = used_archetypes[-1] if used_archetypes else ""
+            last_seg = "cift"
+            for a in OUTFIT_ARCHETYPES:
+                if a["id"] == last_id:
+                    last_seg = a.get("gender_segment", "kadin")
+                    break
+            start_idx = (rotation_order.index(last_seg) + 1) % len(rotation_order) if last_seg in rotation_order else 0
+            for offset in range(len(rotation_order)):
+                target_seg = rotation_order[(start_idx + offset) % len(rotation_order)]
+                seg_candidates = [a for a in available_archetypes if a.get("gender_segment", "kadin") == target_seg]
+                if seg_candidates:
+                    available_archetypes = seg_candidates
+                    break
 
         archetype = available_archetypes[0]
-        force_live_scrape = archetype["id"] in used_archetypes
+        # [İK & 1:1 Görsel Eşleşme Kilidi - İREM & SARP]:
+        # force_live_scrape = True olduğunda ALP/ALİ ajanı modelin üzerindeki kıyafetle alakasız
+        # canlı Trendyol ürünlerini (örn. siyah deri ceketli modele ekru kayık yaka kazak / bej trençkot)
+        # çekip local_asset'i siliyordu. Bu davranış İK kararıyla KALICI OLARAK YASAKLANDI (False).
+        force_live_scrape = False
 
-    print(f"[Özgün Kombin Motoru] '{archetype['title']}' ({archetype['id']}) için canlı mağaza ürünleri taranıyor...")
+    print(f"[Özgün Kombin Motoru] '{archetype['title']}' ({archetype['id']}) için 1:1 doğrulanmış model-ürün eşleşmesi yükleniyor...")
 
     cached_catalog = {}
     if os.path.exists("assets/live_trendyol_catalog.json"):
@@ -2816,7 +2995,7 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
     cat_map = archetype.get("category_map", {})
     for cat_key in ["outerwear", "cap", "top", "bottom", "bag", "shoes"]:
         chosen = None
-        if not force_live_scrape and exact_map.get(cat_key):
+        if exact_map.get(cat_key):
             chosen = dict(exact_map[cat_key])
 
         if not chosen:
@@ -2873,10 +3052,8 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
             chosen["guzelai_url"] = f"https://guzelai.com/go/{sku_str}"
             chosen["product_url"] = f"https://guzelai.com/go/{sku_str}"
 
-        if not force_live_scrape:
-            chosen["local_asset"] = archetype["cutout_assets"].get(cat_key)
-        else:
-            chosen["local_asset"] = None
+        # [İK & 1:1 Görsel Eşleşme Kilidi]: local_asset ASLA None yapılamaz; her zaman modelin giydiği 1:1 dekupe görsel kullanılır!
+        chosen["local_asset"] = archetype["cutout_assets"].get(cat_key)
         chosen["fallback_asset"] = archetype["fallback_cutout_assets"].get(cat_key)
         items[cat_key] = chosen
         if chosen.get("sku"):

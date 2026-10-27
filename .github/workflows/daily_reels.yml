@@ -1,20 +1,25 @@
-name: GuzelAI.com 7/24 Tam Otonom 12-Ajan Kombin Reels & Vitrin Otomasyonu (Bilgisayar Kapalıyken Bulut Yayını)
+name: GuzelAI.com 7/24 Tam Otonom 18-Ajan Kombin, 1:1 Manken & Vitrin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
 
 on:
   schedule:
-    # Türkiye Saati (TSİ / UTC+3) ile her gün Prime-Time kuşakları:
-    # 07:15 UTC = 10:15 TSİ (Sabah Kuşağı)
-    # 12:15 UTC = 15:15 TSİ (Öğleden Sonra Kuşağı)
+    # Türkiye Saati (TSİ / UTC+3) ile her gün 4 Kuşak (Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk Rotasyonu):
+    # 06:15 UTC = 09:15 TSİ (Sabah Kuşağı)
+    # 10:15 UTC = 13:15 TSİ (Öğle Kuşağı)
+    # 14:15 UTC = 17:15 TSİ (İkindi Kuşağı)
     # 17:15 UTC = 20:15 TSİ (Akşam Prime-Time Kuşağı)
-    - cron: '15 7,12,17 * * *'
+    - cron: '15 6,10,14,17 * * *'
   workflow_dispatch:
     inputs:
       slot_name:
-        description: 'Paylaşım Kuşağı (sabah / oglen / aksam / otomatik)'
+        description: 'Paylaşım Kuşağı (sabah / oglen / ikindi / aksam / otomatik)'
+        required: false
+        default: 'otomatik'
+      force_segment:
+        description: 'Manken Segmenti (otomatik / kadin / erkek / kiz_cocuk / erkek_cocuk / cift)'
         required: false
         default: 'otomatik'
       force_archetype_id:
-        description: 'Zorunlu Kombin ID (boş bırakılırsa sıradaki yayınlanmamış kombin seçilir)'
+        description: 'Zorunlu Kombin ID (boş bırakılırsa sıradaki segment kombini seçilir)'
         required: false
         default: ''
 
@@ -52,25 +57,29 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 👗 1. Adım — 2K QHD+ Graph-Motion Reels + Dinamik Viral Müzik + GuzelAI.com Vitrin Üretimi
+      - name: 👗 1. Adım — 1:1 Manken-Kombin Eşleşmesi + 2K QHD+ Reels + GuzelAI.com Vitrin Üretimi (Kadın / Erkek / Kız Çocuk / Erkek Çocuk)
         env:
           IG_WATERMARK: ${{ vars.IG_WATERMARK || '@guzelaicom' }}
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           SLOT_NAME: ${{ github.event.inputs.slot_name || 'otomatik' }}
+          FORCE_SEGMENT: ${{ github.event.inputs.force_segment || 'otomatik' }}
           FORCE_ARCHETYPE_ID: ${{ github.event.inputs.force_archetype_id || '' }}
+          IG_ENABLE_UPLOAD: '0'
+          TELEGRAM_ONLY_MODE: '1'
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '995164733' }}
         run: |
           python src/main.py --output output/reel_final.mp4
 
-      - name: 🤖 2. Adım — 12 Uzman Ajan Swarm Denetimi (KOR + ADA + ALP + ALİ + EFE + CAN + ELA + EGE)
+      - name: 🤖 2. Adım — 18 Uzman Ajan Swarm + İK (İREM) & 1:1 Görsel Eşleşme Müfettişi (SARP) Denetimi
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
+          IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
         run: |
           python src/kombin_agent_swarm.py --role all
 
-      - name: 📱 3. Adım — Telegram (@guzelaibot) Stok Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
+      - name: 📱 3. Adım — Telegram (@guzelaibot) 4'lü Stok Paketi & GuzelAI.com Telegram-Tarzı Vitrin Yayını (Instagram API Devre Dışı)
         env:
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
@@ -80,7 +89,7 @@ jobs:
         run: |
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
 
-      - name: 📤 4. Adım — 2K Reels, Hook Kapak ve 11/11 Sertifikasını Artifacts Olarak Kaydet
+      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak ve 1:1 Denetim Raporlarını Artifacts Olarak Kaydet
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
@@ -88,8 +97,11 @@ jobs:
           path: |
             output/reel_final.mp4
             output/hook_cover.jpg
+            output/pinterest_fashion_collage.jpg
             output/caption.txt
             output/quality_check_report.json
+            output/visual_1to1_match_inspection_report.json
+            output/hr_department_audit_and_training_report.json
             output/prepublish_compliance_certificate.json
             output/viral_music_selection_report.json
             output/social_health_report.json
@@ -99,10 +111,10 @@ jobs:
       - name: 💾 5. Adım — Yayınlanan Kombin ve Müzik Geçmişini Depoya Kaydet (Tekrar Paylaşım & Müzik Tekrarı Koruması)
         if: ${{ always() }}
         run: |
-          git config user.name "GuzelAI 12-Agent Bot"
+          git config user.name "GuzelAI 18-Agent Bot"
           git config user.email "bot@guzelai.com"
-          git add output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json 2>/dev/null || true
-          git diff --staged --quiet || (git commit -m "chore(history): sync 7/24 autonomous outfit, model & viral music history [skip ci]" && git push)
+          git add output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json 2>/dev/null || true
+          git diff --staged --quiet || (git commit -m "chore(history): sync 7/24 autonomous 4-segment outfit, model & viral music history [skip ci]" && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

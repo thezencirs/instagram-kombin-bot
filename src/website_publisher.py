@@ -212,11 +212,12 @@ def build_verified_kombin_entry(
     threads_url: str = "https://www.threads.net/@guzelaicom",
 ) -> Dict[str, Any]:
     """Verifies all 6 outfit product links and builds a structured showcase entry for guzelai.com."""
-    items_dict = outfit.get("items", {})
+    items_dict = outfit.get("items") or outfit.get("verified_exact_items") or {}
+    cutout_map = outfit.get("cutout_assets") or {}
     verified_items: List[Dict[str, Any]] = []
     verified_count = 0
 
-    for key, default_cat_label, emoji in CATEGORY_META:
+    for idx_num, (key, default_cat_label, emoji) in enumerate(CATEGORY_META, start=1):
         item = items_dict.get(key)
         if not isinstance(item, dict):
             continue
@@ -230,8 +231,15 @@ def build_verified_kombin_entry(
         if check["verified"]:
             verified_count += 1
 
+        local_cut = item.get("local_asset") or cutout_map.get(key) or ""
+        cutout_web_url = f"/kombin-cutouts/{os.path.basename(local_cut)}" if local_cut else ""
+        raw_img_url = item.get("image_url") or (item.get("image_urls") or [f"/data/item_card_{key}.jpg"])[0]
+        # 1:1 Görsel Eşleşme Kilidi (SARP): Vitrinde her zaman modelin giydiği 1:1 dekupe görsel önceliklidir
+        display_img_url = cutout_web_url or raw_img_url
+
         cat_label = item.get("category_label") or default_cat_label
         verified_items.append({
+            "slot_number": idx_num,
             "key": key,
             "category": cat_label,
             "emoji": emoji,
@@ -245,8 +253,9 @@ def build_verified_kombin_entry(
             "store_url": store_url,
             "guzelai_url": guzelai_url,
             "product_url": store_url,  # On guzelai.com itself, clicking opens the store directly
-            "image_url": item.get("image_url") or (item.get("image_urls") or [f"/data/item_card_{key}.jpg"])[0],
-            "visual_card_url": f"/data/item_card_{key}.jpg",
+            "image_url": display_img_url,
+            "cutout_url": cutout_web_url,
+            "visual_card_url": cutout_web_url or f"/data/item_card_{key}.jpg",
             "verified": check["verified"],
             "http_status": check["http_status"],
             "store_name": check["store_name"],
@@ -255,7 +264,7 @@ def build_verified_kombin_entry(
             "checked_at": check["checked_at"],
         })
 
-    reel_link = ig_reel_url.strip() or outfit.get("reel_url", "") or "https://www.instagram.com/guzelaicom/"
+    reel_link = ig_reel_url.strip() or outfit.get("reel_url", "") or "https://t.me/guzelaibot"
     now_str = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
     title = (
         outfit.get("hook_title")
@@ -266,18 +275,59 @@ def build_verified_kombin_entry(
     total_val = sum(float(i.get("price_val", 0)) for i in verified_items)
     total_str = outfit.get("total_price_str") or f"{total_val:,.2f}₺".replace(",", "X").replace(".", ",").replace("X", ".")
 
+    gender_raw = (outfit.get("gender_segment") or outfit.get("gender_group") or "kadin").lower()
+    if gender_raw == "cocuk":
+        gender_raw = "kiz_cocuk"
+    segment_labels = {
+        "kadin": "👩 Kadın Kombini (%100 AI Manken)",
+        "erkek": "👨 Erkek Kombini (%100 AI Manken)",
+        "kiz_cocuk": "👧 Kız Çocuk Kombini (%100 AI Manken)",
+        "erkek_cocuk": "👦 Erkek Çocuk Kombini (%100 AI Manken)",
+        "cift": "👩‍❤️‍👨 Kadın & Erkek Çift Kombini (%100 AI Manken)",
+    }
+    segment_label = segment_labels.get(gender_raw, "👩 Kadın Kombini (%100 AI Manken)")
+
+    m_frames = outfit.get("model_frames") or []
+    model_photo_url = f"/pinterest-models/{os.path.basename(m_frames[0])}" if m_frames else "/data/latest_kombin_collage.jpg"
+
+    # Build Telegram-identical 1-click copy-paste text block
+    tg_lines = [
+        f"✨ {title}",
+        "",
+        outfit.get("viral_hook", "🛑 %100 AI Manken ile 1:1 birebir uyumlu 6 parçalık kombin ve mağaza linkleri:"),
+        "",
+    ]
+    for it in verified_items:
+        tg_lines.append(
+            f"{it['slot_number']}️⃣ {it['emoji']} {it['category']}: {it['brand']} – {it['name']} ({it['price']} | Kod: {it['sku']}) 👉 {it['guzelai_url']}"
+        )
+    tg_lines.extend([
+        "",
+        f"💰 Toplam 6 Parça Kombin Bütçesi: {total_str}",
+        "🌐 Görselli Kombin Vitrini: https://guzelai.com/#kombinler",
+        "⚖️ Yasal Uyarı: Reklam veya sponsorlu iş birliği içermez; tamamen kombin önerisi ve bilgilendirme amaçlıdır (#reklam #işbirliğideğil).",
+        "#kombin #oldmoney #sokakstili #kesfet #guzelai #aiinfluencer",
+    ])
+    telegram_copy_text = "\n".join(tg_lines)
+
     return {
-        "id": outfit.get("id") or f"kombin_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}",
+        "id": outfit.get("id") or outfit.get("archetype_id") or f"kombin_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}",
         "archetype_id": outfit.get("archetype_id") or outfit.get("id", "daily_kombin"),
-        "collection_badge": outfit.get("collection_badge", "Doğrulanmış Örnek Kombin"),
+        "gender_group": gender_raw,
+        "segment_label": segment_label,
+        "collection_badge": outfit.get("collection_badge") or segment_label,
         "categories_included": outfit.get("categories_included", []),
         "title": title,
         "viral_hook": outfit.get("viral_hook", ""),
         "published_at": now_str,
         "total_price_str": total_str,
         "total_price_val": total_val,
+        "model_photo_url": model_photo_url,
         "collage_url": "/data/latest_kombin_collage.jpg",
+        "pinterest_collage_url": "/data/latest_pinterest_collage.jpg",
         "video_url": "/data/latest_kombin_video.mp4",
+        "telegram_bot_url": "https://t.me/guzelaibot",
+        "telegram_copy_text": telegram_copy_text,
         "website_showcase_url": GUZELAI_SHOWCASE_URL,
         "verification_summary": {
             "total_items": len(verified_items),
@@ -393,9 +443,18 @@ def publish_to_guzelai_website(
     os.makedirs(out_dir, exist_ok=True)
     entry = build_verified_kombin_entry(outfit, ig_reel_url=ig_reel_url)
 
-    # Also build all pre-verified sample outfits ("Örnek Kombinler") so guzelai.com always has the full catalog
+    # Build all 1:1 verified sample outfits (Kadın, Erkek, Kız Çocuk, Erkek Çocuk & Çift) from OUTFIT_ARCHETYPES
     sample_entries: List[Dict[str, Any]] = [entry]
     seen_ids = {entry["archetype_id"]}
+    try:
+        from outfit_generator import OUTFIT_ARCHETYPES
+        for arch in OUTFIT_ARCHETYPES:
+            aid = arch.get("id", "")
+            if aid and aid not in seen_ids and arch.get("verified_exact_items"):
+                sample_entries.append(build_verified_kombin_entry(arch, ig_reel_url=ig_reel_url))
+                seen_ids.add(aid)
+    except Exception:
+        pass
     for sample_outfit in PREVERIFIED_GUZELAI_OUTFITS:
         sid = sample_outfit.get("id", "")
         if sid not in seen_ids:
@@ -465,6 +524,18 @@ def publish_to_guzelai_website(
             )
         except Exception as e:
             print(f"[UYARI] Kolaj optimize/yükleme hatası: {e}")
+
+    # Upload LİA Pinterest Collage if present
+    pin_collage_path = Path(out_dir) / "pinterest_fashion_collage.jpg"
+    if pin_collage_path.exists():
+        try:
+            _gh_put_file(
+                "public/data/latest_pinterest_collage.jpg",
+                pin_collage_path.read_bytes(),
+                f"chore(kombin): update LIA 9:16 Pinterest collage ({entry['title']})",
+            )
+        except Exception as pe:
+            print(f"[UYARI] Pinterest kolaj yükleme hatası: {pe}")
 
     # Upload Short Graph-Motion Video
     gm_video_path = Path(out_dir) / "graphmotion_short.mp4"
