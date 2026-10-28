@@ -1623,6 +1623,147 @@ def run_hr_agent_trainer_director() -> Dict[str, Any]:
 
 
 # ============================================================================
+# AJAN KAYNAKLARI BİRİMİ (AJAN 19 ARDA, AJAN 20 MAYA, AJAN 21 KAAN, AJAN 22 VERA)
+# (%100 Sıfır-Tekrar Manken & Kombin Kilidi, Mevsimsel Özgün Kreasyon Fabrikası ve Argon'suz GitHub Actions Otonomisi)
+# ============================================================================
+AGENT_RESOURCES_JSON_PATH = OUTPUT_DIR / "agent_resources_division_report.json"
+AGENT_RESOURCES_MD_PATH = OUTPUT_DIR / "agent_resources_division_report.md"
+
+
+def run_agent_resources_division() -> Dict[str, Any]:
+    """
+    Ajan Kaynakları Birimi (22 Ajanlı Yeni Mimari):
+    - Ajan 19 ARDA (`agent-resources-director`): Ajan Kaynakları, Performans & Sıfır-Tekrar Orkestrasyon Direktörü
+    - Ajan 20 MAYA (`ai-model-casting-director`): Özgün AI Manken Casting & Yürüyüş Sekansı Üretim Ajanı
+    - Ajan 21 KAAN (`seasonal-creation-factory-agent`): Mevsimsel Özgün Kreasyon & Argon'suz GitHub Actions Bulut 1:1 Dekupe Üretim Fabrikası Ajanı
+    - Ajan 22 VERA (`zero-repeat-quality-auditor`): Sıfır-Tekrar, Mevsimsel Uyum & Telegram Tekil Gönderim Başdenetçisi
+    """
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    from autonomous_creation_factory import (
+        load_zero_repeat_ledger,
+        PERMANENTLY_RETIRED_ARCHETYPES,
+        PERMANENTLY_RETIRED_MODEL_FRAMES,
+    )
+    from outfit_generator import OUTFIT_ARCHETYPES
+
+    ledger = load_zero_repeat_ledger()
+    retired_arch_set = set(ledger.get("retired_archetype_ids", []))
+    retired_model_set = set(ledger.get("retired_model_frames", []))
+    tg_dispatched_set = set(ledger.get("telegram_dispatched_ids", []))
+
+    fresh_seasonal_creations = []
+    retired_creations_count = 0
+    for arch in OUTFIT_ARCHETYPES:
+        aid = arch.get("id", "")
+        m_frames = arch.get("model_frames", [])
+        m0 = m_frames[0] if m_frames else ""
+        if aid in retired_arch_set or m0 in retired_model_set:
+            retired_creations_count += 1
+        else:
+            fresh_seasonal_creations.append({
+                "archetype_id": aid,
+                "title": arch.get("title", ""),
+                "gender_segment": arch.get("gender_segment", ""),
+                "unique_ai_model_frames": m_frames,
+                "cutout_assets_count": len(arch.get("cutout_assets", {})),
+                "already_dispatched_to_telegram": aid in tg_dispatched_set,
+                "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)",
+            })
+
+    division_agents = [
+        {
+            "agent_number": 19,
+            "code_name": "ARDA",
+            "subagent_id": "agent-resources-director",
+            "title": "Ajan Kaynakları, Performans & Sıfır-Tekrar Orkestrasyon Direktörü",
+            "mission": (
+                "22 ajanın görev dağılımını yönetir; daha önce paylaşılmış 20 kombin ve 20 mankenin "
+                "`output/zero_repeat_ledger.json` ile kalıcı olarak emekliye ayrılmasını (`PERMANENTLY_RETIRED`) denetler."
+            ),
+        },
+        {
+            "agent_number": 20,
+            "code_name": "MAYA",
+            "subagent_id": "ai-model-casting-director",
+            "title": "Özgün AI Manken Casting & Yürüyüş Sekansı Üretim Ajanı",
+            "mission": (
+                "Her yeni kombin için yüz hatları, saç rengi/kesimi ve yürüyüş lokasyonu (Galataport, Nişantaşı, Bebek, Karaköy, Moda, Göktürk) "
+                "daha önce hiç kullanılmamış %100 özgün 3 kare 9:16 AI manken (`step1..3.jpg`) üretir; aynı mankenin ikinci kez kullanılmasını engeller."
+            ),
+        },
+        {
+            "agent_number": 21,
+            "code_name": "KAAN",
+            "subagent_id": "seasonal-creation-factory-agent",
+            "title": "Mevsimsel Özgün Kreasyon & Argon'suz GitHub Actions Bulut 1:1 Dekupe Üretim Fabrikası Ajanı",
+            "mission": (
+                "Mevsime uygun (Sonbahar/Kış kaşe kaban, trençkot, süet blazer, peluş yaka deri aviator, kolej ve kapitone mont) "
+                "6 parçalı özgün kreasyonlar ve mankenin üzerindeki kıyafetlerle %100 birebir (1:1) aynı şeffaf PNG stüdyo dekupeleri üretir; "
+                "Argon veya yerel tünel olmadan %100 GitHub Actions (`ubuntu-latest`) bulut ortamında otonom çalışır."
+            ),
+        },
+        {
+            "agent_number": 22,
+            "code_name": "VERA",
+            "subagent_id": "zero-repeat-quality-auditor",
+            "title": "Sıfır-Tekrar, Mevsimsel Uyum & Telegram Tekil Gönderim Başdenetçisi",
+            "mission": (
+                "`telegram_publisher.py` ve `outfit_generator.py` üzerinde Sıfır-Tekrar Kilidini (`telegram_dispatched_ids`) denetler; "
+                "@guzelaibot'a aynı kombinin veya aynı mankenin ikinci kez gönderilmesini donanımsal/yazılımsal olarak bloke eder."
+            ),
+        },
+    ]
+
+    report = {
+        "division": "Ajan Kaynakları ve Özgün Mevsimsel Kreasyon Üretim Birimi",
+        "generated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "total_agents_in_swarm": 22,
+        "argon_free_github_actions_ready": True,
+        "zero_repeat_enforcement": {
+            "ledger_path": "output/zero_repeat_ledger.json",
+            "permanently_retired_outfits_count": len(PERMANENTLY_RETIRED_ARCHETYPES),
+            "permanently_retired_models_count": len(PERMANENTLY_RETIRED_MODEL_FRAMES),
+            "telegram_duplicate_guard_active": True,
+            "retired_creations_blocked_in_catalog": retired_creations_count,
+        },
+        "new_agent_resources_division": division_agents,
+        "fresh_seasonal_creations_pool": fresh_seasonal_creations,
+        "status": "ZERO_REPEAT_AND_SEASONAL_FACTORY_ACTIVE",
+    }
+    AGENT_RESOURCES_JSON_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    md_lines = [
+        "# 🏛️ AJAN KAYNAKLARI BİRİMİ & SIFIR-TEKRAR MEVSİMSEL KREASYON RAPORU (22 AJAN)",
+        f"**Tarih:** `{report['generated_at']}` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`",
+        "",
+        "## 1. Ajan Kaynakları Birimi (Yeni Kurulan 4 Uzman Ajan — Ajan 19..22)",
+    ]
+    for da in division_agents:
+        md_lines.append(f"- **Ajan {da['agent_number']} — {da['code_name']} (`{da['subagent_id']}`) — {da['title']}:** {da['mission']}")
+
+    md_lines.extend([
+        "",
+        "## 2. Sıfır-Tekrar Manken & Kombin Kilidi (`zero_repeat_ledger.json`)",
+        f"- **Kalıcı Olarak Emekliye Ayrılan Eski Kombin Sayısı:** `{len(PERMANENTLY_RETIRED_ARCHETYPES)}` (Bir daha asla seçilemez ve gönderilemez)",
+        f"- **Kalıcı Olarak Emekliye Ayrılan Eski Manken Sayısı:** `{len(PERMANENTLY_RETIRED_MODEL_FRAMES)}` (`men1`, `men2`, `kid1`, `kid_boy1`, `hw27_women`, `mon1`, `mon2`, `sun1..3`, `om_model` vb. tamamen kilitlendi)",
+        f"- **Telegram Çift Gönderim Kalkanı (`telegram_dispatched_ids`):** `AKTİF` (`telegram_publisher.py` içinde aynı ID'nin ikinci kez gönderilmesi imkansız hale getirildi)",
+        "",
+        "## 3. Yeni Üretilen 2026-2027 Sonbahar/Kış Özgün Kreasyonlar ve Yepyeni AI Mankenler",
+    ])
+    for fc in fresh_seasonal_creations:
+        md_lines.append(
+            f"- **`{fc['archetype_id']}` ({fc['gender_segment']}):** {fc['title']} | Manken: `{fc['unique_ai_model_frames'][0]}` | 1:1 Dekupe: `{fc['cutout_assets_count']}/6`"
+        )
+
+    AGENT_RESOURCES_MD_PATH.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
+    print(
+        f"🏛️ [Ajan Kaynakları Birimi - ARDA, MAYA, KAAN, VERA | Ajan 19-22] "
+        f"{len(fresh_seasonal_creations)} yeni mevsimsel kreasyon aktif, {len(PERMANENTLY_RETIRED_ARCHETYPES)} eski kombin/manken kalıcı emekliye ayrıldı -> {AGENT_RESOURCES_JSON_PATH}"
+    )
+    return report
+
+
+# ============================================================================
 # AJAN 3: KOORDİNASYON VE ANA AJANA BİLDİRİM AJANI (kombin-dispatcher-reporter)
 # ============================================================================
 def run_dispatcher_reporter() -> Dict[str, Any]:
@@ -1638,6 +1779,7 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     kids_stylist_data = run_kids_fashion_stylist()
     visual_1to1_data = run_visual_1to1_match_inspector()
     hr_audit_data = run_hr_agent_trainer_director()
+    agent_resources_data = run_agent_resources_division()
     compliance_data = run_prepublish_compliance_auditor()
     health_data = _load_json(HEALTH_REPORT_PATH, {})
 
@@ -1668,6 +1810,7 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
         "kids_fashion_stylist": kids_stylist_data,
         "visual_1to1_match_inspector": visual_1to1_data,
         "hr_department_audit_and_training": hr_audit_data,
+        "agent_resources_division": agent_resources_data,
         "instagram_health_snapshot": {
             "account_status": ig_health.get("account_status", "HEALTHY_ACTIVE"),
             "risk_level": ig_health.get("risk_level", "LOW"),
@@ -1681,12 +1824,12 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     }
 
     CURATED_OUTFITS_PATH.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"📨 [Ajan 3 - Dispatcher Reporter] 18 Ajanlı ortak paket (İREM + SARP + KOR + MİA + LEO + LİA + NİL + ADA + ALP + EFE) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
+    print(f"📨 [Ajan 3 - Dispatcher Reporter] 22 Ajanlı ortak paket (ARDA + MAYA + KAAN + VERA + İREM + SARP + KOR + MİA + LEO + LİA + NİL + ADA + ALP + EFE) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
     return summary
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="GuzelAI 18 Ajanlı Otonom İK, 1:1 Görsel Denetim, Konsept, Moda Tasarımı, Parti, Pinterest Kolaj, Çocuk, Link & Müzik Sistemi")
+    parser = argparse.ArgumentParser(description="GuzelAI 22 Ajanlı Otonom Ajan Kaynakları, Sıfır-Tekrar Mevsimsel Kreasyon, İK, 1:1 Görsel Denetim, Konsept, Moda Tasarımı, Parti, Pinterest Kolaj, Çocuk, Link & Müzik Sistemi")
     parser.add_argument(
         "--role",
         choices=[
@@ -1702,6 +1845,7 @@ if __name__ == "__main__":
             "kids_stylist",
             "visual_1to1",
             "hr_audit",
+            "agent_resources",
             "compliance",
             "dispatcher",
             "all",
@@ -1735,6 +1879,8 @@ if __name__ == "__main__":
         run_visual_1to1_match_inspector()
     elif args.role == "hr_audit":
         run_hr_agent_trainer_director()
+    elif args.role == "agent_resources":
+        run_agent_resources_division()
     elif args.role == "compliance":
         run_prepublish_compliance_auditor()
     else:

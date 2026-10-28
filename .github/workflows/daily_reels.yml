@@ -1,4 +1,4 @@
-name: GuzelAI.com 7/24 Tam Otonom 18-Ajan Kombin, 1:1 Manken & Vitrin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
+name: GuzelAI.com 7/24 Argon'suz Bulut 22-Ajan Sıfır-Tekrar Kombin, Özgün AI Manken & Vitrin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
 
 on:
   schedule:
@@ -71,7 +71,7 @@ jobs:
         run: |
           python src/main.py --output output/reel_final.mp4
 
-      - name: 🤖 2. Adım — 18 Uzman Ajan Swarm + İK (İREM) & 1:1 Görsel Eşleşme Müfettişi (SARP) Denetimi
+      - name: 🤖 2. Adım — 22 Uzman Ajan Swarm + Ajan Kaynakları Birimi (ARDA, MAYA, KAAN, VERA) + İK (İREM) & 1:1 Görsel Denetim (SARP)
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           IG_ENABLE_UPLOAD: '0'
@@ -89,7 +89,7 @@ jobs:
         run: |
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
 
-      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak ve 1:1 Denetim Raporlarını Artifacts Olarak Kaydet
+      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak, Sıfır-Tekrar Defteri ve 22-Ajan Denetim Raporlarını Artifacts Olarak Kaydet
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
@@ -99,6 +99,9 @@ jobs:
             output/hook_cover.jpg
             output/pinterest_fashion_collage.jpg
             output/caption.txt
+            output/zero_repeat_ledger.json
+            output/agent_resources_division_report.json
+            output/agent_resources_division_report.md
             output/quality_check_report.json
             output/visual_1to1_match_inspection_report.json
             output/hr_department_audit_and_training_report.json
@@ -108,13 +111,13 @@ jobs:
             output/outfit_links.json
           retention-days: 7
 
-      - name: 💾 5. Adım — Yayınlanan Kombin ve Müzik Geçmişini Depoya Kaydet (Tekrar Paylaşım & Müzik Tekrarı Koruması)
+      - name: 💾 5. Adım — Sıfır-Tekrar Manken/Kombin Defterini (`zero_repeat_ledger.json`) ve Yayın Geçmişini Depoya Kaydet
         if: ${{ always() }}
         run: |
-          git config user.name "GuzelAI 18-Agent Bot"
+          git config user.name "GuzelAI 22-Agent Bot"
           git config user.email "bot@guzelai.com"
-          git add output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json 2>/dev/null || true
-          git diff --staged --quiet || (git commit -m "chore(history): sync 7/24 autonomous 4-segment outfit, model & viral music history [skip ci]" && git push)
+          git add output/zero_repeat_ledger.json output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json 2>/dev/null || true
+          git diff --staged --quiet || (git commit -m "chore(zero-repeat): sync 7/24 Argon-free 22-agent zero-repeat model & outfit ledger [skip ci]" && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

@@ -762,6 +762,18 @@ def publish_to_telegram(
     video_override: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Saves Telegram outputs and broadcasts full stock package to all registered subscribers / TELEGRAM_CHAT_ID."""
+    from autonomous_creation_factory import load_zero_repeat_ledger, mark_creation_and_model_used
+
+    arch_id = str(outfit.get("archetype_id") or "").strip()
+    model_frame = (outfit.get("model_frames") or [""])[0]
+    ledger = load_zero_repeat_ledger()
+    if arch_id and arch_id in ledger.get("telegram_dispatched_ids", []):
+        print(
+            f"🛑 [SIFIR-TEKRAR KİLİDİ - VERA & ARDA] '{arch_id}' daha önce Telegram (@guzelaibot) "
+            f"üzerinden gönderildiği için tekrar gönderimi KESİN OLARAK ENGELLENDİ!"
+        )
+        return {"status": "blocked_duplicate", "archetype_id": arch_id}
+
     tok = token or get_bot_token()
     save_telegram_outputs(outfit, out_dir=out_dir, reel_url=reel_url, threads_url=threads_url)
 
@@ -798,6 +810,9 @@ def publish_to_telegram(
             token=tok,
         )
         print(f"[BAŞARILI - Telegram Stok Paketi] @guzelaibot üzerinden {cid} adresine tam stok paketi gönderildi: {sent_results[cid]}")
+
+    if arch_id:
+        mark_creation_and_model_used(arch_id, model_frame, telegram_sent=True)
 
     return {"status": "published", "results": sent_results}
 

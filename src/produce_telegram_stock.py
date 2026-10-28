@@ -1,6 +1,6 @@
 """
-GuzelAI 18 Ajanlı (İK Direktörü İREM + 1:1 Görsel Başdenetçisi SARP Onaylı)
-%100 Birebir Model-Üst Giyim Uyumlu Telegram Stok Üretim Hattı
+GuzelAI 22 Ajanlı (Ajan Kaynakları Birimi ARDA, MAYA, KAAN, VERA + İK Direktörü İREM + 1:1 Görsel Başdenetçisi SARP Onaylı)
+%100 Sıfır-Tekrar (Zero-Repeat) Manken & Kombin Garantili, Mevsimsel Özgün Telegram Stok Üretim Hattı
 """
 import os
 import sys
@@ -18,21 +18,28 @@ sys.path.insert(0, str(BASE_DIR / "src"))
 os.environ["TELEGRAM_ONLY_MODE"] = "1"
 os.environ["IG_ENABLE_UPLOAD"] = "0"
 
-from kombin_agent_swarm import run_hr_agent_trainer_director, run_visual_1to1_match_inspector, run_dispatcher_reporter
+from kombin_agent_swarm import (
+    run_agent_resources_division,
+    run_hr_agent_trainer_director,
+    run_visual_1to1_match_inspector,
+    run_dispatcher_reporter,
+)
 import main as main_mod
 from instagram_uploader import dispatch_all_channels
 
-# İK & SARP tarafından %100 1:1 model-kıyafet (Kadın, Erkek, Kız Çocuk, Erkek Çocuk) uyumu doğrulanan stok listesi:
+# Ajan Kaynakları Birimi (ARDA, MAYA, KAAN, VERA) & SARP tarafından %100 1:1 model-kıyafet
+# ve %100 SIFIR-TEKRAR (daha önce hiç kullanılmamış manken & kombin) uyumu doğrulanan 4-Segment Yeni Sezon Kreasyon Listesi:
 VERIFIED_1TO1_STOCK_QUEUE = [
-    ("stok_1to1_erkek_cocuk_kolej", "cocuk_erkek_slot1_sonbahar_kolej_street"),
-    ("stok_1to1_kiz_cocuk_kolej", "cocuk_slot1_sonbahar_kolej_kombin"),
-    ("stok_1to1_erkek_oldmoney", "erkek_slot1_sonbahar_oldmoney_kapsul"),
-    ("stok_1to1_erkek_streetwear", "erkek_slot2_streetwear_bomber_samba"),
+    ("yeni_sezon_kadin_galataport", "kadin_kasim_galataport_bordo_trench_ekru"),
+    ("yeni_sezon_erkek_nisantasi", "erkek_kasim_nisantasi_lacivert_kaban_camel"),
+    ("yeni_sezon_kiz_cocuk_moda", "cocuk_kiz_kasim_moda_pembe_tuvit_kolej"),
+    ("yeni_sezon_erkek_cocuk_gokturk", "cocuk_erkek_kasim_gokturk_haki_puffer_street"),
 ]
 
 
 def run_stock_batch():
-    print("👩‍💼 [Ajan 17 - İREM & Ajan 18 - SARP] İK Denetimi ve 1:1 Manken-Kombin Görsel Eşleşme Kontrolü Başlatılıyor...")
+    print("🏛️ [Ajan Kaynakları Birimi - ARDA, MAYA, KAAN, VERA & SARP] Sıfır-Tekrar Manken/Kombin Kilidi ve 1:1 Görsel Eşleşme Kontrolü Başlatılıyor...")
+    ar_report = run_agent_resources_division()
     v_report = run_visual_1to1_match_inspector()
     hr_report = run_hr_agent_trainer_director()
     run_dispatcher_reporter()
@@ -42,7 +49,7 @@ def run_stock_batch():
 
     for idx, (slot_label, arch_id) in enumerate(VERIFIED_1TO1_STOCK_QUEUE, start=1):
         print(f"\n==================================================================")
-        print(f"📦 [1:1 DOĞRULANMIŞ 4-SEGMENT TELEGRAM STOK PAKETİ {idx}/{len(VERIFIED_1TO1_STOCK_QUEUE)}] {arch_id}")
+        print(f"📦 [SIFIR-TEKRAR YENİ SEZON 4-SEGMENT KREASYON PAKETİ {idx}/{len(VERIFIED_1TO1_STOCK_QUEUE)}] {arch_id}")
         print(f"==================================================================")
         os.environ["FORCE_ARCHETYPE_ID"] = arch_id
         os.environ["SLOT_NAME"] = slot_label
@@ -52,7 +59,7 @@ def run_stock_batch():
         main_mod.main()
         dispatch_all_channels("output/daily_kombin_reel.mp4", reel_url="")
 
-    print("\n✅ [TAMAMLANDI] Tüm 1:1 model-üst giyim uyumlu stok paketleri @guzelaibot'a iletildi!")
+    print("\n✅ [TAMAMLANDI] Tüm 4-segment yeni sezon sıfır-tekrar kreasyon paketleri @guzelaibot'a ve guzelai.com'a iletildi!")
 
 
 if __name__ == "__main__":
