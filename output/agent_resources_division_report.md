@@ -1,5 +1,5 @@
 # 🏛️ AJAN KAYNAKLARI BİRİMİ & SIFIR-TEKRAR MEVSİMSEL KREASYON RAPORU (22 AJAN)
-**Tarih:** `2026-10-28 07:31:57` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
+**Tarih:** `2026-10-28 12:32:22` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
 
 ## 1. Ajan Kaynakları Birimi (Yeni Kurulan 4 Uzman Ajan — Ajan 19..22)
 - **Ajan 19 — ARDA (`agent-resources-director`) — Ajan Kaynakları, Performans & Sıfır-Tekrar Orkestrasyon Direktörü:** 22 ajanın görev dağılımını yönetir; daha önce paylaşılmış 20 kombin ve 20 mankenin `output/zero_repeat_ledger.json` ile kalıcı olarak emekliye ayrılmasını (`PERMANENTLY_RETIRED`) denetler.
@@ -13,4 +13,3 @@
 - **Telegram Çift Gönderim Kalkanı (`telegram_dispatched_ids`):** `AKTİF` (`telegram_publisher.py` içinde aynı ID'nin ikinci kez gönderilmesi imkansız hale getirildi)
 
 ## 3. Yeni Üretilen 2026-2027 Sonbahar/Kış Özgün Kreasyonlar ve Yepyeni AI Mankenler
-- **`erkek_kasim_karakoy_espresso_aviator_antrasit` (erkek):** Karaköy Sonbahar/Kış Erkek Kreasyonu: Espresso Peluş Yaka Aviator Deri Mont, Antrasit Boğazlı Triko & Vizon Kışlık Pantolon (%100 Özgün AI Erkek Manken) 🦅🧥✨ | Manken: `assets/erkek_karakoy1_step1.jpg` | 1:1 Dekupe: `6/6`

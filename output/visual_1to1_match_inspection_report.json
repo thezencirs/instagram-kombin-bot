@@ -1,7 +1,7 @@
 {
   "agent": "visual-1to1-match-inspector",
   "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
-  "generated_at": "2026-10-28 07:31:57",
+  "generated_at": "2026-10-28 12:32:22",
   "live_scrape_random_override_blocked": true,
   "total_archetypes_inspected": 26,
   "passed_1to1_archetypes": 23,

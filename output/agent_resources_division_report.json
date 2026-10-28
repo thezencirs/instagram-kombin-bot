@@ -1,6 +1,6 @@
 {
   "division": "Ajan Kaynakları ve Özgün Mevsimsel Kreasyon Üretim Birimi",
-  "generated_at": "2026-10-28 07:31:57",
+  "generated_at": "2026-10-28 12:32:22",
   "total_agents_in_swarm": 22,
   "argon_free_github_actions_ready": true,
   "zero_repeat_enforcement": {
@@ -8,7 +8,7 @@
     "permanently_retired_outfits_count": 20,
     "permanently_retired_models_count": 20,
     "telegram_duplicate_guard_active": true,
-    "retired_creations_blocked_in_catalog": 25
+    "retired_creations_blocked_in_catalog": 26
   },
   "new_agent_resources_division": [
     {
@@ -40,20 +40,6 @@
       "mission": "`telegram_publisher.py` ve `outfit_generator.py` üzerinde Sıfır-Tekrar Kilidini (`telegram_dispatched_ids`) denetler; @guzelaibot'a aynı kombinin veya aynı mankenin ikinci kez gönderilmesini donanımsal/yazılımsal olarak bloke eder."
     }
   ],
-  "fresh_seasonal_creations_pool": [
-    {
-      "archetype_id": "erkek_kasim_karakoy_espresso_aviator_antrasit",
-      "title": "Karaköy Sonbahar/Kış Erkek Kreasyonu: Espresso Peluş Yaka Aviator Deri Mont, Antrasit Boğazlı Triko & Vizon Kışlık Pantolon (%100 Özgün AI Erkek Manken) 🦅🧥✨",
-      "gender_segment": "erkek",
-      "unique_ai_model_frames": [
-        "assets/erkek_karakoy1_step1.jpg",
-        "assets/erkek_karakoy1_step2.jpg",
-        "assets/erkek_karakoy1_step3.jpg"
-      ],
-      "cutout_assets_count": 6,
-      "already_dispatched_to_telegram": false,
-      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
-    }
-  ],
+  "fresh_seasonal_creations_pool": [],
   "status": "ZERO_REPEAT_AND_SEASONAL_FACTORY_ACTIVE"
 }

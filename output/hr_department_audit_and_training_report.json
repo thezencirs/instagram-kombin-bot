@@ -1,7 +1,7 @@
 {
   "agent": "hr-agent-trainer-director",
   "agent_code_name": "İREM (Ajan 17 - İnsan Kaynakları, Ajan Eğitim & Departman Uyum Direktörü)",
-  "generated_at": "2026-10-28 07:31:57",
+  "generated_at": "2026-10-28 12:32:22",
   "hr_operation_status": "ALL_FAULTY_AGENTS_RETRAINED_AND_18_AGENTS_SYNCHRONIZED",
   "faulty_agents_identified_and_retrained": [
     {
