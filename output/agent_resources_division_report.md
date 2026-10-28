@@ -1,5 +1,5 @@
 # 🏛️ AJAN KAYNAKLARI BİRİMİ & SIFIR-TEKRAR MEVSİMSEL KREASYON RAPORU (22 AJAN)
-**Tarih:** `2026-10-28 09:24:14` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
+**Tarih:** `2026-10-28 07:31:57` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
 
 ## 1. Ajan Kaynakları Birimi (Yeni Kurulan 4 Uzman Ajan — Ajan 19..22)
 - **Ajan 19 — ARDA (`agent-resources-director`) — Ajan Kaynakları, Performans & Sıfır-Tekrar Orkestrasyon Direktörü:** 22 ajanın görev dağılımını yönetir; daha önce paylaşılmış 20 kombin ve 20 mankenin `output/zero_repeat_ledger.json` ile kalıcı olarak emekliye ayrılmasını (`PERMANENTLY_RETIRED`) denetler.
@@ -13,9 +13,4 @@
 - **Telegram Çift Gönderim Kalkanı (`telegram_dispatched_ids`):** `AKTİF` (`telegram_publisher.py` içinde aynı ID'nin ikinci kez gönderilmesi imkansız hale getirildi)
 
 ## 3. Yeni Üretilen 2026-2027 Sonbahar/Kış Özgün Kreasyonlar ve Yepyeni AI Mankenler
-- **`kadin_kasim_galataport_bordo_trench_ekru` (kadin):** Galataport Sonbahar/Kış Kadın Kreasyonu: Koyu Bordo Uzun Trençkot, Ekru V-Yaka Kaşmir Triko & Raw Indigo Palazzo (%100 Özgün AI Manken) 🍷🧥✨ | Manken: `assets/kadin_galata1_step1.jpg` | 1:1 Dekupe: `6/6`
-- **`erkek_kasim_nisantasi_lacivert_kaban_camel` (erkek):** Nişantaşı Sonbahar/Kış Erkek Kreasyonu: Koyu Lacivert Kruvaze Kaşe Kaban, Karamel Saç Örgü Triko & Ekru Chino (%100 Özgün AI Erkek Manken) 🧥⌚✨ | Manken: `assets/erkek_nisantasi1_step1.jpg` | 1:1 Dekupe: `6/6`
-- **`cocuk_kiz_kasim_moda_pembe_tuvit_kolej` (kiz_cocuk):** Moda Sahil Sonbahar/Kış Kız Çocuk Kreasyonu: Gül Kurusu Peluş Yaka Kolej Ceket, Ekru Örgü Triko & Lacivert Pantolon (%100 Özgün AI Kız Çocuk Manken) 👧🌸🍂 | Manken: `assets/kid_girl2_model_step1.jpg` | 1:1 Dekupe: `6/6`
-- **`cocuk_erkek_kasim_gokturk_haki_puffer_street` (erkek_cocuk):** Göktürk Sonbahar/Kış Erkek Çocuk Kreasyonu: Haki Kapitone Bomber Mont, Kiremit Sweatshirt & Antrasit Kargo Pantolon (%100 Özgün AI Erkek Çocuk Manken) 👦🌲🍂 | Manken: `assets/kid_boy2_model_step1.jpg` | 1:1 Dekupe: `6/6`
-- **`kadin_kasim_bebek_zeytinyagi_suet_kapsul` (kadin):** Bebek Sahil Sonbahar/Kış Kadın Kreasyonu: Zeytin Yeşili Süet Kemerli Ceket, Çikolata Kahve Dik Yaka Triko & Taş Beji Palazzo (%100 Özgün AI Manken) 🫒🤎✨ | Manken: `assets/kadin_bebek1_step1.jpg` | 1:1 Dekupe: `6/6`
 - **`erkek_kasim_karakoy_espresso_aviator_antrasit` (erkek):** Karaköy Sonbahar/Kış Erkek Kreasyonu: Espresso Peluş Yaka Aviator Deri Mont, Antrasit Boğazlı Triko & Vizon Kışlık Pantolon (%100 Özgün AI Erkek Manken) 🦅🧥✨ | Manken: `assets/erkek_karakoy1_step1.jpg` | 1:1 Dekupe: `6/6`

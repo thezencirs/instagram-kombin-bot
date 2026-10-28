@@ -1,11 +1,137 @@
 {
   "agent": "visual-1to1-match-inspector",
   "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
-  "generated_at": "2026-10-27 19:32:45",
+  "generated_at": "2026-10-28 07:31:57",
   "live_scrape_random_override_blocked": true,
-  "total_archetypes_inspected": 20,
-  "passed_1to1_archetypes": 17,
+  "total_archetypes_inspected": 26,
+  "passed_1to1_archetypes": 23,
   "inspected_archetypes": [
+    {
+      "archetype_id": "kadin_kasim_galataport_bordo_trench_ekru",
+      "title": "Galataport Sonbahar/Kış Kadın Kreasyonu: Koyu Bordo Uzun Trençkot, Ekru V-Yaka Kaşmir Triko & Raw Indigo Palazzo (%100 Özgün AI Manken) 🍷🧥✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Ekru / Krem V-Yaka Yumuşak Dokulu Triko Kazak",
+        "color": "Ekru / Krem",
+        "cutout_asset": "assets/items/kadin_galata1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Koyu Bordo Kruvaze Kuşaklı Uzun Trençkot",
+        "color": "Koyu Bordo / Oxblood",
+        "cutout_asset": "assets/items/kadin_galata1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_kasim_nisantasi_lacivert_kaban_camel",
+      "title": "Nişantaşı Sonbahar/Kış Erkek Kreasyonu: Koyu Lacivert Kruvaze Kaşe Kaban, Karamel Saç Örgü Triko & Ekru Chino (%100 Özgün AI Erkek Manken) 🧥⌚✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Karamel / Taba Saç Örgü Dokulu Bisiklet Yaka Triko Kazak",
+        "color": "Karamel / Taba",
+        "cutout_asset": "assets/items/erkek_nisantasi1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Koyu Lacivert Kruvaze Yaka Yün Karışımlı Kaşe Kaban",
+        "color": "Koyu Lacivert",
+        "cutout_asset": "assets/items/erkek_nisantasi1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_kiz_kasim_moda_pembe_tuvit_kolej",
+      "title": "Moda Sahil Sonbahar/Kış Kız Çocuk Kreasyonu: Gül Kurusu Peluş Yaka Kolej Ceket, Ekru Örgü Triko & Lacivert Pantolon (%100 Özgün AI Kız Çocuk Manken) 👧🌸🍂",
+      "gender_segment": "kiz_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kız Çocuk Ekru / Krem Saç Örgü Dokulu Pamuklu Triko Kazak",
+        "color": "Ekru / Krem",
+        "cutout_asset": "assets/items/kid_girl2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kız Çocuk Gül Kurusu Pembe & Krem Peluş Yaka Kolej Ceket",
+        "color": "Gül Kurusu / Krem",
+        "cutout_asset": "assets/items/kid_girl2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_erkek_kasim_gokturk_haki_puffer_street",
+      "title": "Göktürk Sonbahar/Kış Erkek Çocuk Kreasyonu: Haki Kapitone Bomber Mont, Kiremit Sweatshirt & Antrasit Kargo Pantolon (%100 Özgün AI Erkek Çocuk Manken) 👦🌲🍂",
+      "gender_segment": "erkek_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Çocuk Kiremit Turuncu %100 Pamuklu Bisiklet Yaka Sweatshirt",
+        "color": "Kiremit Turuncu",
+        "cutout_asset": "assets/items/kid_boy2_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Çocuk Haki Yeşili Baklava Kapitone Kolej Bomber Mont",
+        "color": "Haki Yeşili / Siyah",
+        "cutout_asset": "assets/items/kid_boy2_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
+      "title": "Bebek Sahil Sonbahar/Kış Kadın Kreasyonu: Zeytin Yeşili Süet Kemerli Ceket, Çikolata Kahve Dik Yaka Triko & Taş Beji Palazzo (%100 Özgün AI Manken) 🫒🤎✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Çikolata Kahve Dik Yaka (Mock-Neck) Fitilli Triko Kazak",
+        "color": "Çikolata Kahve",
+        "cutout_asset": "assets/items/kadin_bebek1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Zeytin Yeşili / Haki Kemerli Süet Dokulu Blazer Ceket",
+        "color": "Zeytin Yeşili / Haki",
+        "cutout_asset": "assets/items/kadin_bebek1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_kasim_karakoy_espresso_aviator_antrasit",
+      "title": "Karaköy Sonbahar/Kış Erkek Kreasyonu: Espresso Peluş Yaka Aviator Deri Mont, Antrasit Boğazlı Triko & Vizon Kışlık Pantolon (%100 Özgün AI Erkek Manken) 🦅🧥✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Antrasit / Füme Fitilli Tam Balıkçı Yaka Triko Kazak",
+        "color": "Antrasit / Füme",
+        "cutout_asset": "assets/items/erkek_karakoy1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Koyu Kahve (Espresso) Krem Peluş Yaka Aviator Deri Mont",
+        "color": "Koyu Kahve / Krem Peluş",
+        "cutout_asset": "assets/items/erkek_karakoy1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
     {
       "archetype_id": "halloween_party_couple_vampiric_noir",
       "title": "Cadılar Bayramı Parti Çift Kombini: Siyah Deri & Bordo Gece Şıklığı (%100 AI Çift) 🎃🥂🖤",

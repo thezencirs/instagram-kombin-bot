@@ -23,7 +23,8 @@
     "kadin_kasim_galataport_bordo_trench_ekru",
     "erkek_kasim_nisantasi_lacivert_kaban_camel",
     "cocuk_kiz_kasim_moda_pembe_tuvit_kolej",
-    "cocuk_erkek_kasim_gokturk_haki_puffer_street"
+    "cocuk_erkek_kasim_gokturk_haki_puffer_street",
+    "kadin_kasim_bebek_zeytinyagi_suet_kapsul"
   ],
   "retired_model_frames": [
     "assets/hw_couple1_step1.jpg",
@@ -49,7 +50,8 @@
     "assets/kadin_galata1_step1.jpg",
     "assets/erkek_nisantasi1_step1.jpg",
     "assets/kid_girl2_model_step1.jpg",
-    "assets/kid_boy2_model_step1.jpg"
+    "assets/kid_boy2_model_step1.jpg",
+    "assets/kadin_bebek1_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -75,7 +77,8 @@
     "kadin_kasim_galataport_bordo_trench_ekru",
     "erkek_kasim_nisantasi_lacivert_kaban_camel",
     "cocuk_kiz_kasim_moda_pembe_tuvit_kolej",
-    "cocuk_erkek_kasim_gokturk_haki_puffer_street"
+    "cocuk_erkek_kasim_gokturk_haki_puffer_street",
+    "kadin_kasim_bebek_zeytinyagi_suet_kapsul"
   ],
-  "updated_at": "2026-10-28T06:37:26.241476Z"
+  "updated_at": "2026-10-28T07:32:13.405385Z"
 }
