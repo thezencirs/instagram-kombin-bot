@@ -1,6 +1,6 @@
 {
   "atelier_name": "GuzelAI 2026-2027 Kış Moda Tasarım Atölyesi (26 Ajan)",
-  "generated_at": "2026-10-31 23:51:10",
+  "generated_at": "2026-11-01 01:32:16",
   "total_agents_in_swarm": 26,
   "stall_root_cause_and_permanent_fix": {
     "what_happened_oct28_to_oct31": "28 Ekim'de 4 yeni kreasyon anında gönderilmiş, kalan 2 yedek kreasyon (`kadin_kasim_bebek` ve `erkek_kasim_karakoy`) ise GitHub Actions (`#40650257242` ve `#40688027131`) tarafından başarıyla yayınlanmıştı. Ancak 26 kombinin tamamı `zero_repeat_ledger.json` defterine işlenip havuz boşalınca, Sıfır-Tekrar Kilidi eski kombinleri tekrar göndermemek için `RuntimeError: Havuzdaki tüm özgün kreasyonlar kullanıldı!` fırlatarak 18 ardışık çalışmayı durdurdu.",

@@ -1,11 +1,32 @@
 {
   "agent": "visual-1to1-match-inspector",
   "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
-  "generated_at": "2026-10-31 23:40:59",
+  "generated_at": "2026-11-01 01:32:16",
   "live_scrape_random_override_blocked": true,
-  "total_archetypes_inspected": 34,
-  "passed_1to1_archetypes": 34,
+  "total_archetypes_inspected": 35,
+  "passed_1to1_archetypes": 35,
   "inspected_archetypes": [
+    {
+      "archetype_id": "kadin_kasim_flight01_zorlu_yakut_kase_noir",
+      "title": "Zorlu Center 'CEO Sessizliği' Kış Viral Uçuş Kreasyonu: Yakut Kırmızısı Kruvaze Kaşe Kaban & Obsidyen Siyah Kaşmir (Senaryo: BARIŞ • Evrim: EVREN • Tasarım: DEFNE) 🚀❤️‍🔥✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Obsidyen Siyah Fitilli Boğazlı Kaşmir Triko Kazak",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/kadin_zorlu_flight1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Yakut Kırmızısı Kruvaze Uzun Yün Kaşe Kaban",
+        "color": "Yakut Kırmızısı",
+        "cutout_asset": "assets/items/kadin_zorlu_flight1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
     {
       "archetype_id": "kadin_kasim_etiler_antrasit_kase_murdum",
       "title": "Etiler Kış Kadın Tasarım Kreasyonu: Antrasit Kruvaze Kaşe Kaban, Mürdüm Balıkçı Triko & Ekru Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) ❄️🧥✨",

@@ -212,19 +212,56 @@ def save_dynamic_creations_catalog(items: List[Dict[str, Any]]) -> None:
 
 def remove_white_studio_background(img: Image.Image) -> Image.Image:
     """
-    Saf beyaz (#FFFFFF) stüdyo packshot görselini hızlı vektörel NumPy eşikleme ile
-    temiz şeffaf RGBA PNG dekupe görsele dönüştürür.
+    Saf beyaz (#FFFFFF) ve kenar vinyetli stüdyo packshot görselini kenar bağlantılı
+    (border-connected) NumPy maskeleme ile pürüzsüz şeffaf RGBA PNG dekupe görsele dönüştürür.
     """
+    from collections import deque
+
     rgba = img.convert("RGBA")
     arr = np.array(rgba, dtype=np.int16)
+    h, w, _ = arr.shape
     r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
     lum = (r + g + b) // 3
     spread = np.maximum(np.maximum(r, g), b) - np.minimum(np.minimum(r, g), b)
-    bg_mask = (lum > 241) & (spread < 18)
-    soft_mask = (lum > 228) & (spread < 15) & (~bg_mask)
+
+    # Pure white background + border-connected light studio grey vignette
+    bg_mask = (lum > 242) & (spread < 18)
+    candidate_bg = (lum > 204) & (spread < 16)
+
+    # Fast 4-px block flood-fill from outer borders so white shoe soles inside aren't eaten
+    step = 2
+    gh, gw = (h + step - 1) // step, (w + step - 1) // step
+    cand_small = candidate_bg[::step, ::step]
+    visited = np.zeros((gh, gw), dtype=bool)
+    q = deque()
+    for x in range(gw):
+        if cand_small[0, x]:
+            visited[0, x] = True
+            q.append((0, x))
+        if cand_small[gh - 1, x] and not visited[gh - 1, x]:
+            visited[gh - 1, x] = True
+            q.append((gh - 1, x))
+    for y in range(gh):
+        if cand_small[y, 0] and not visited[y, 0]:
+            visited[y, 0] = True
+            q.append((y, 0))
+        if cand_small[y, gw - 1] and not visited[y, gw - 1]:
+            visited[y, gw - 1] = True
+            q.append((y, gw - 1))
+    while q:
+        cy, cx = q.popleft()
+        for ny, nx in ((cy - 1, cx), (cy + 1, cx), (cy, cx - 1), (cy, cx + 1)):
+            if 0 <= ny < gh and 0 <= nx < gw and not visited[ny, nx] and cand_small[ny, nx]:
+                visited[ny, nx] = True
+                q.append((ny, nx))
+
+    flood_full = np.repeat(np.repeat(visited, step, axis=0), step, axis=1)[:h, :w]
+    bg_mask = bg_mask | (flood_full & candidate_bg)
+    soft_mask = (lum > 196) & (spread < 15) & (~bg_mask) & flood_full
+
     alpha = arr[:, :, 3].copy()
     alpha[bg_mask] = 0
-    alpha[soft_mask] = np.clip((242 - lum[soft_mask]) * 16, 0, 255)
+    alpha[soft_mask] = np.clip((215 - lum[soft_mask]) * 12, 0, 255)
     out = arr.astype(np.uint8)
     out[:, :, 3] = alpha.astype(np.uint8)
     res = Image.fromarray(out, mode="RGBA")
@@ -429,8 +466,14 @@ def synthesize_autonomous_winter_creation(
     dynamic_catalog = load_dynamic_creations_catalog()
     existing_dyn_ids = {d.get("id", "") for d in dynamic_catalog}
 
-    seg = target_segment if target_segment in PROCEDURAL_ATELIER_MATRIX else "kadin"
-    candidates = PROCEDURAL_ATELIER_MATRIX[seg]
+    try:
+        from viral_screenwriter_evolution import get_evolved_procedural_matrix
+        active_matrix = get_evolved_procedural_matrix(PROCEDURAL_ATELIER_MATRIX)
+    except Exception:
+        active_matrix = PROCEDURAL_ATELIER_MATRIX
+
+    seg = target_segment if target_segment in active_matrix else "kadin"
+    candidates = active_matrix[seg]
 
     chosen_bp = None
     variant_round = 1

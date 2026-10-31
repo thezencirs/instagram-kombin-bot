@@ -188,9 +188,10 @@ def _wrap_hook_lines(text: str, max_chars: int = 24) -> list:
         else:
             if cur:
                 lines.append(" ".join(cur))
-            cur = [w]
-            if len(lines) == 2:
+            if len(lines) == 3:
+                cur = []
                 break
+            cur = [w]
     if cur and len(lines) < 3:
         lines.append(" ".join(cur))
     return lines[:3] or ["SONBAHAR KAPSÜL", "KOMBİN ÖNERİSİ"]
@@ -231,25 +232,28 @@ def generate_hook_cover_photo(
     font_mini_price = get_font(20, bold=True)
 
     # 1) Üst Merkez Tarih & Konsept Rozeti (Profil ızgarası üst sınırının içinde: Y = S(235))
+    sp = outfit.get("viral_screenplay") or {}
+    is_flight = bool(sp.get("is_viral_flight"))
     cal_concept = outfit.get("calendar_concept", {})
     top_tag = (
-        outfit.get("video_badge_collage")
+        sp.get("cover_kicker")
+        or outfit.get("video_badge_collage")
         or cal_concept.get("palette_name")
         or "» PINTEREST OLD MONEY SONBAHAR KOMBİNİ «"
-    ).replace("🔥", "").replace("✨", "").replace("★", "").strip()
+    ).replace("🔥", "").replace("✨", "").replace("🚀", "★ ").replace("★", "").strip()
     _draw_auto_pill_badge(
         draw=draw,
         center_x=W // 2,
         center_y=S(235),
-        text=top_tag[:44],
+        text=top_tag[:46],
         font=font_kicker,
-        fill_rgba=(14, 14, 18, 235),
-        text_rgba=(242, 218, 178, 255),
+        fill_rgba=(22, 10, 16, 242) if is_flight else (14, 14, 18, 235),
+        text_rgba=(255, 214, 138, 255) if is_flight else (242, 218, 178, 255),
         pad_x=S(32),
         pad_y=S(16),
         radius=S(28),
-        outline_rgba=(242, 218, 178, 210),
-        outline_width=S(2),
+        outline_rgba=(230, 90, 127, 245) if is_flight else (242, 218, 178, 210),
+        outline_width=S(3) if is_flight else S(2),
     )
 
     # 2) Sağ Dikey Sütunda 4 Yüzen Mini Kombin Parça Kartı (Görsel + Fiyat Rozeti)
@@ -294,8 +298,14 @@ def generate_hook_cover_photo(
         )
 
     # 3) Alt-Merkez (3:4 ve 1:1 Profil Izgarası Güvenli Alanı: Y = S(1300)..S(1685)) Viral Hook Başlık Kutusu
+    cover_hook_source = (
+        sp.get("cover_headline")
+        or outfit.get("hook_title")
+        or outfit.get("archetype_title")
+        or "OLD MONEY SONBAHAR KOMBİNİ"
+    )
     hook_lines = _wrap_hook_lines(
-        outfit.get("hook_title") or outfit.get("archetype_title") or "OLD MONEY SONBAHAR KOMBİNİ",
+        cover_hook_source,
         max_chars=22,
     )
     box_top = S(1300)
@@ -303,20 +313,25 @@ def generate_hook_cover_photo(
     draw.rounded_rectangle(
         (S(46), box_top, W - S(46), box_bot),
         radius=S(38),
-        fill=(12, 12, 16, 222),
-        outline=(242, 218, 178, 225),
+        fill=(14, 10, 16, 232) if is_flight else (12, 12, 16, 222),
+        outline=(255, 200, 110, 245) if is_flight else (242, 218, 178, 225),
         width=S(3),
     )
 
     # Üst Altın Kicker Etiketi
     total_price_str = outfit.get("total_price_str", "5.519,09₺")
+    kicker_label = (
+        f"» VİRAL UÇUŞ SENARYOSU • 6 PARÇA {total_price_str} «"
+        if is_flight
+        else f"» 6 PARÇA DOĞRULANMIŞ KOMBİN • {total_price_str} «"
+    )
     _draw_auto_pill_badge(
         draw=draw,
         center_x=W // 2,
         center_y=box_top + S(46),
-        text=f"» 6 PARÇA DOĞRULANMIŞ KOMBİN • {total_price_str} «",
+        text=kicker_label,
         font=font_kicker,
-        fill_rgba=(188, 142, 78, 255),
+        fill_rgba=(212, 162, 76, 255) if is_flight else (188, 142, 78, 255),
         text_rgba=(12, 12, 16, 255),
         pad_x=S(28),
         pad_y=S(12),
@@ -600,6 +615,28 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 else:
                     draw.text((lx, ly_anim + S(12)), price, fill=(14, 14, 18, 255), font=font_brand, anchor="mm")
 
+            # Ajan 27 (BARIŞ) 1. Perde Sinematik Hikaye Alt Yazı Bandı (Y = S(1445) — Kıyafetlerle Çakışmasız)
+            sp_scene1 = outfit.get("viral_screenplay") or {}
+            beat1_txt = sp_scene1.get("act1_collage_beat1", "")
+            beat2_txt = sp_scene1.get("act1_collage_beat2", "")
+            active_s1_line = beat1_txt if t < 2.65 else beat2_txt
+            if active_s1_line:
+                clean_s1 = "".join(ch for ch in active_s1_line if ord(ch) < 0x2000 or ch in "’‘“”–—•₺")
+                _draw_auto_pill_badge(
+                    draw=draw,
+                    center_x=W // 2,
+                    center_y=S(1445),
+                    text=clean_s1[:78],
+                    font=font_sub,
+                    fill_rgba=(16, 12, 20, 240),
+                    text_rgba=(248, 224, 174, 255),
+                    pad_x=S(28),
+                    pad_y=S(14),
+                    radius=S(24),
+                    outline_rgba=(230, 90, 127, 225) if sp_scene1.get("is_viral_flight") else (212, 175, 112, 200),
+                    outline_width=S(2),
+                )
+
             # Alt Toplam Kombin & Link Bilgisi Bandı (True OLED Black)
             if t > 3.55:
                 b_prog = ease_out_back(min(1.0, (t - 3.55) / 0.48))
@@ -710,6 +747,49 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 outline_rgba=(255, 110, 30, 210),
                 outline_width=S(2),
             )
+
+            # Ajan 27 (BARIŞ) & Ajan 28 (EVREN) 2. ve 3. Perde Sinematik Yürüyüş & Plot-Twist Alt Yazısı
+            sp_walk = outfit.get("viral_screenplay") or {}
+            if sp_walk:
+                if sp_walk.get("is_viral_flight"):
+                    gen_tag = f"» VİRAL UÇUŞ BÖLÜMÜ • SENARYO: BARIŞ • GEN #{sp_walk.get('generation', 1)} «"
+                    _draw_auto_pill_badge(
+                        draw=mini_draw,
+                        center_x=W // 2,
+                        center_y=S(190),
+                        text=gen_tag,
+                        font=font_legal,
+                        fill_rgba=(230, 90, 127, 232),
+                        text_rgba=(255, 255, 255, 255),
+                        pad_x=S(22),
+                        pad_y=S(8),
+                        radius=S(18),
+                    )
+                if walk_t < 1.9:
+                    walk_story_line = sp_walk.get("act2_walk_beat1", "")
+                    is_final_beat = False
+                elif walk_t < 3.8:
+                    walk_story_line = sp_walk.get("act2_walk_beat2", "")
+                    is_final_beat = False
+                else:
+                    walk_story_line = sp_walk.get("act3_plot_twist", "")
+                    is_final_beat = True
+                if walk_story_line:
+                    clean_ws = "".join(ch for ch in walk_story_line if ord(ch) < 0x2000 or ch in "’‘“”–—•₺")
+                    _draw_auto_pill_badge(
+                        draw=mini_draw,
+                        center_x=W // 2,
+                        center_y=S(1522),
+                        text=clean_ws[:78],
+                        font=font_sub,
+                        fill_rgba=(22, 10, 16, 242) if is_final_beat else (12, 12, 18, 236),
+                        text_rgba=(255, 220, 145, 255) if is_final_beat else (255, 255, 255, 255),
+                        pad_x=S(28),
+                        pad_y=S(14),
+                        radius=S(24),
+                        outline_rgba=(230, 90, 127, 245) if is_final_beat else (242, 218, 178, 215),
+                        outline_width=S(3) if is_final_beat else S(2),
+                    )
 
             mini_draw.rounded_rectangle(
                 (S(48), S(1595), W - S(48), S(1755)),

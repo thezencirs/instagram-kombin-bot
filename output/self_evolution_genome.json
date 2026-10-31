@@ -1,0 +1,101 @@
+{
+  "generation": 1,
+  "runs_since_last_viral_flight": 0,
+  "viral_flight_cadence": 2,
+  "total_viral_flights_launched": 1,
+  "recent_scenario_ids": [
+    "kadin_flight_ceo_silence"
+  ],
+  "scenario_weights": {
+    "kadin_flight_ceo_silence": 1.3995,
+    "kadin_flight_oldmoney_illusion": 1.32,
+    "kadin_pov_ex_encounter": 1.18,
+    "erkek_flight_italian_architect": 1.34,
+    "erkek_pov_friday_executive": 1.2,
+    "kiz_cocuk_flight_winter_princess": 1.28,
+    "erkek_cocuk_flight_mini_captain": 1.28
+  },
+  "mutated_hook_genes": [
+    "5 Saniyede Karakter Değiştiren Kış Matematiği",
+    "Logoya Değil Kesime Para Verenlerin Gizli Formülü",
+    "Sokakta Yürürken Podyum Işığı Yaratan 6 Parça",
+    "Podyum Etkisini Sokağa Taşıyan Sinematik Kurgu: Yüksek Kontrastlı Kış Katman Matematiği"
+  ],
+  "evolved_atelier_blueprints": {
+    "kadin": [
+      {
+        "district": "Zorlu Center Raffles Bulvarı",
+        "slug": "zorlu_crimson_noir",
+        "hair_face": "sleek high dark-espresso ponytail, sharp cheekbones, and confident editorial gaze",
+        "palette_tr": "Yakut Kırmızısı Kruvaze Kaşe & Obsidyen Siyah Kaşmir",
+        "outer": [
+          "İPEKYOL",
+          "Kadın Yakut Kırmızısı Kruvaze Uzun Yün Kaşe Kaban",
+          "4.190₺",
+          4190.0,
+          "Yakut Kırmızısı",
+          "deep crimson-red tailored double-breasted knee-length wool overcoat with black buttons"
+        ],
+        "cap": [
+          "PRADA EYEWEAR",
+          "Kadın Siyah Gold Detaylı Keskin Cat-Eye Güneş Gözlüğü",
+          "4.590₺",
+          4590.0,
+          "Siyah / Gold",
+          "sleek jet-black acetate angular cat-eye sunglasses with subtle gold temple detail"
+        ],
+        "top": [
+          "MASSIMO DUTTI",
+          "Kadın Obsidyen Siyah Fitilli Boğazlı Kaşmir Triko Kazak",
+          "1.690₺",
+          1690.0,
+          "Siyah",
+          "fitted jet-black vertical ribbed-knit turtleneck cashmere long-sleeve sweater"
+        ],
+        "bottom": [
+          "YARGICI",
+          "Kadın Siyah Yüksek Bel Pileli Kışlık Yün Palazzo Pantolon",
+          "1.590₺",
+          1590.0,
+          "Siyah",
+          "tailored jet-black high-waisted pleated wide-leg winter wool palazzo trousers"
+        ],
+        "bag": [
+          "BAGMORI",
+          "Kadın Yakut Kırmızısı Kapitone Gold Tokalı Deri Çanta",
+          "899₺",
+          899.0,
+          "Yakut Kırmızısı",
+          "structured deep crimson-red quilted leather shoulder handbag with gold clasp hardware"
+        ],
+        "shoes": [
+          "ADIDAS",
+          "Kadın Siyah / Beyaz Kırmızı Topuk Detaylı Deri Court Sneaker",
+          "3.790₺",
+          3790.0,
+          "Siyah / Kırmızı",
+          "clean black leather low-top court sneakers with white sole and deep crimson-red heel tab"
+        ]
+      }
+    ],
+    "erkek": [],
+    "kiz_cocuk": [],
+    "erkek_cocuk": []
+  },
+  "evolution_history": [
+    {
+      "generation": 1,
+      "timestamp": "2026-11-01 01:25:10",
+      "archetype_id": "kadin_kasim_flight01_zorlu_yakut_kase_noir",
+      "segment": "kadin",
+      "scenario_id": "kadin_flight_ceo_silence",
+      "is_viral_flight": true,
+      "predicted_viral_score": 98.7,
+      "mutated_hook_gene": "Podyum Etkisini Sokağa Taşıyan Sinematik Kurgu: Yüksek Kontrastlı Kış Katman Matematiği",
+      "unlocked_fashion_genes": [
+        "kadin:zorlu_crimson_noir (Yakut Kırmızısı Kruvaze Kaşe & Obsidyen Siyah Kaşmir)"
+      ]
+    }
+  ],
+  "updated_at": "2026-10-31T22:25:10.085431Z"
+}

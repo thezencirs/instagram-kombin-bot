@@ -153,6 +153,26 @@ def _make_atelier_archetype(
 # Görsel Stil Arketipleri (Her arketip için temiz dekupe kıyafet yedekleri + sokakta yürüyen model kareleri)
 OUTFIT_ARCHETYPES = [
     _make_atelier_archetype(
+        arch_id="kadin_kasim_flight01_zorlu_yakut_kase_noir",
+        gender_segment="kadin",
+        designer_name="DEFNE x BARIŞ",
+        music_id="velvet_cello_deep_house_editorial",
+        title="Zorlu Center 'CEO Sessizliği' Kış Viral Uçuş Kreasyonu: Yakut Kırmızısı Kruvaze Kaşe Kaban & Obsidyen Siyah Kaşmir (Senaryo: BARIŞ • Evrim: EVREN • Tasarım: DEFNE) 🚀❤️‍🔥✨",
+        spoken_hook="Odaya girdiğin ilk dört saniyede tek kelime etmeden tüm bakışları toplayan kış senaryosu!",
+        viral_hook="🚀 GUZEL AI VİRAL UÇUŞ BÖLÜMÜ #1 (Senarist: BARIŞ • Tasarım: DEFNE)! Yakut kırmızısı kruvaze uzun yün kaşe kaban, obsidyen siyah fitilli boğazlı kaşmir triko, yüksek bel siyah yün palazzo pantolon ve yakut kırmızısı gold tokalı kapitone çanta! 💬 Bu sinematik kış senaryosunda başrol parçanız 1 (Yakut Kırmızısı Kaşe Kaban) mı yoksa 5 (Gold Tokalı Yakut Çanta) mı? 👇❤️‍🔥✨",
+        badge_walk="» ZORLU YAKUT KIRMIZISI KAŞE & SİYAH KAŞMİR «",
+        asset_prefix="kadin_zorlu_flight1",
+        sku_prefix="93190100",
+        specs={
+            "outerwear": ("Yakut Kaşe Kaban", "İPEKYOL", "Kadın Yakut Kırmızısı Kruvaze Uzun Yün Kaşe Kaban", "4.190₺", 4190.0, "Yakut Kırmızısı", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["kırmızı", "bordo", "kruvaze", "kaban"]),
+            "cap": ("Cat-Eye Gözlük", "PRADA EYEWEAR", "Kadın Siyah Gold Detaylı Keskin Cat-Eye Güneş Gözlüğü", "4.590₺", 4590.0, "Siyah / Gold", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c101", ["siyah", "gold", "cat eye", "gözlük"]),
+            "top": ("Siyah Kaşmir Triko", "MASSIMO DUTTI", "Kadın Obsidyen Siyah Fitilli Boğazlı Kaşmir Triko Kazak", "1.690₺", 1690.0, "Siyah", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["siyah", "boğazlı", "kaşmir", "triko"]),
+            "bottom": ("Siyah Yün Palazzo", "YARGICI", "Kadın Siyah Yüksek Bel Pileli Kışlık Yün Palazzo Pantolon", "1.590₺", 1590.0, "Siyah", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["siyah", "pileli", "palazzo", "pantolon"]),
+            "bag": ("Yakut Kapitone Çanta", "BAGMORI", "Kadın Yakut Kırmızısı Kapitone Gold Tokalı Deri Çanta", "899₺", 899.0, "Yakut Kırmızısı", "https://www.bagmori.com", ["kırmızı", "kapitone", "gold", "çanta"]),
+            "shoes": ("Siyah/Kırmızı Sneaker", "ADIDAS", "Kadın Siyah Deri Kırmızı Topuk Detaylı Beyaz Tabanlı Sneaker", "3.790₺", 3790.0, "Siyah / Kırmızı", "https://www.trendyol.com/kadin-spor-ayakkabi-x-g1-c109", ["siyah", "kırmızı", "beyaz", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
         arch_id="kadin_kasim_etiler_antrasit_kase_murdum",
         gender_segment="kadin",
         designer_name="DEFNE",

@@ -1,12 +1,12 @@
-name: GuzelAI.com 7/24 Argon'suz Bulut 26-Ajan Moda Tasarım Atölyesi & Sıfır-Tekrar Kombin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
+name: GuzelAI.com 7/24 Argon'suz Bulut 28-Ajan Kendini Geliştiren Evrim, Viral Senarist (BARIŞ & EVREN) & Moda Atölyesi Otomasyonu
 
 on:
   schedule:
-    # Türkiye Saati (TSİ / UTC+3) ile her gün 4 Kuşak (Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk Rotasyonu):
-    # 06:15 UTC = 09:15 TSİ (Sabah Kuşağı - DEFNE Kadın Kış Tasarım)
-    # 10:15 UTC = 13:15 TSİ (Öğle Kuşağı - KEREM Erkek Kış Tasarım)
-    # 14:15 UTC = 17:15 TSİ (İkindi Kuşağı - LEYLA Kız Çocuk Kış Tasarım)
-    # 17:15 UTC = 20:15 TSİ (Akşam Prime-Time Kuşağı - MERT Erkek Çocuk Kış Tasarım)
+    # Türkiye Saati (TSİ / UTC+3) ile her gün 4 Kuşak (Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk Rotasyonu + Otomatik Viral Uçuş Bölümleri):
+    # 06:15 UTC = 09:15 TSİ (Sabah Kuşağı - DEFNE Kadın Kış Tasarım + BARIŞ Senaryo)
+    # 10:15 UTC = 13:15 TSİ (Öğle Kuşağı - KEREM Erkek Kış Tasarım + BARIŞ Senaryo)
+    # 14:15 UTC = 17:15 TSİ (İkindi Kuşağı - LEYLA Kız Çocuk Kış Tasarım + BARIŞ Senaryo)
+    # 17:15 UTC = 20:15 TSİ (Akşam Prime-Time Kuşağı - MERT Erkek Çocuk Kış Tasarım + BARIŞ Senaryo)
     - cron: '15 6,10,14,17 * * *'
   workflow_dispatch:
     inputs:
@@ -22,6 +22,10 @@ on:
         description: 'Zorunlu Kombin ID (boş bırakılırsa sıradaki segment kombini seçilir)'
         required: false
         default: ''
+      force_viral_flight:
+        description: 'GuzelAI Viral Uçuş Bölümü Zorla (0: Otomatik Evrimsel Ritim / 1: Hemen Viral Uçuş Modu)'
+        required: false
+        default: '0'
       bypass_cooldown:
         description: '2 Saatlik Çift-Tetikleme Korumasını Atla (0 / 1)'
         required: false
@@ -61,13 +65,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 👗 1. Adım — Moda Tasarım Atölyesi (DEFNE, KEREM, LEYLA, MERT) 1:1 Kış Kreasyonu + 2K QHD+ Reels + Sonsuz Bulut FLUX Sentezi
+      - name: 🚀 1. Adım — Öz-Evrim (EVREN) + Viral Senarist (BARIŞ) + Moda Atölyesi (DEFNE/KEREM/LEYLA/MERT) Sinematik 2K Reels Üretimi
         env:
           IG_WATERMARK: ${{ vars.IG_WATERMARK || '@guzelaicom' }}
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           SLOT_NAME: ${{ github.event.inputs.slot_name || 'otomatik' }}
           FORCE_SEGMENT: ${{ github.event.inputs.force_segment || 'otomatik' }}
           FORCE_ARCHETYPE_ID: ${{ github.event.inputs.force_archetype_id || '' }}
+          FORCE_VIRAL_FLIGHT: ${{ github.event.inputs.force_viral_flight || '0' }}
           BYPASS_CLOUD_COOLDOWN: ${{ github.event.inputs.bypass_cooldown || '0' }}
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
@@ -76,7 +81,7 @@ jobs:
         run: |
           python src/main.py --output output/reel_final.mp4
 
-      - name: 🤖 2. Adım — 26 Uzman Ajan Swarm + Moda Tasarım Atölyesi (DEFNE, KEREM, LEYLA, MERT) + Ajan Kaynakları (ARDA, MAYA, KAAN, VERA)
+      - name: 🤖 2. Adım — 28 Uzman Ajan Swarm + Öz-Evrim (EVREN) + Viral Senarist (BARIŞ) + Moda Atölyesi + Ajan Kaynakları Denetimi
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           IG_ENABLE_UPLOAD: '0'
@@ -88,7 +93,7 @@ jobs:
           fi
           python src/kombin_agent_swarm.py --role all
 
-      - name: 📱 3. Adım — Telegram (@guzelaibot) 4'lü Süper Yayın Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
+      - name: 📱 3. Adım — Telegram (@guzelaibot) Sinematik Süper Yayın Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
         env:
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
@@ -102,7 +107,7 @@ jobs:
           fi
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
 
-      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak, Sıfır-Tekrar Defteri ve 26-Ajan Moda Atölyesi Raporlarını Kaydet
+      - name: 📤 4. Adım — 2K Sinematik Reels, Evrim Genomu, Viral Senaryo ve 28-Ajan Denetim Raporlarını Kaydet
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
@@ -112,6 +117,10 @@ jobs:
             output/hook_cover.jpg
             output/pinterest_fashion_collage.jpg
             output/caption.txt
+            output/self_evolution_genome.json
+            output/viral_screenplay_current.json
+            output/self_evolution_report.json
+            output/self_evolution_report.md
             output/zero_repeat_ledger.json
             output/dynamic_creations_catalog.json
             output/fashion_atelier_designers_report.json
@@ -127,17 +136,17 @@ jobs:
             output/outfit_links.json
           retention-days: 7
 
-      - name: 💾 5. Adım — Sıfır-Tekrar Defterini, Dinamik Bulut Kreasyonlarını ve 26-Ajan Raporlarını Depoya Kaydet
+      - name: 💾 5. Adım — Evrimsel Hafızayı (`self_evolution_genome.json`), Sıfır-Tekrar Defterini ve Bulut Kreasyonlarını Depoya Kaydet
         if: ${{ always() }}
         run: |
           if [ -f output/skip_cooldown_active.flag ]; then
             rm -f output/skip_cooldown_active.flag
             exit 0
           fi
-          git config user.name "GuzelAI 26-Agent Atelier Bot"
+          git config user.name "GuzelAI 28-Agent Self-Evolving Bot"
           git config user.email "bot@guzelai.com"
-          git add output/zero_repeat_ledger.json output/dynamic_creations_catalog.json output/fashion_atelier_designers_report.json output/fashion_atelier_designers_report.md output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json assets/atelier_* assets/items/atelier_* 2>/dev/null || true
-          git diff --staged --quiet || (git commit -m "chore(26-agent-atelier): sync zero-repeat ledger & cloud winter creations [skip ci]" && (git pull --rebase origin main || true) && git push)
+          git add output/self_evolution_genome.json output/viral_screenplay_current.json output/self_evolution_report.json output/self_evolution_report.md output/zero_repeat_ledger.json output/dynamic_creations_catalog.json output/fashion_atelier_designers_report.json output/fashion_atelier_designers_report.md output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json assets/atelier_* assets/items/atelier_* 2>/dev/null || true
+          git diff --staged --quiet || (git commit -m "chore(28-agent-evolution): evolve generation genome, viral screenplay & zero-repeat ledger [skip ci]" && (git pull --rebase origin main || true) && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

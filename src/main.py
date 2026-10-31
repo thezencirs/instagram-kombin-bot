@@ -87,13 +87,25 @@ def build_caption(outfit: dict) -> str:
         col_label = "%100 AI KADIN 2026-2027 KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: DEFNE)"
         hashtags = "#kombinönerileri #kadınkombin #kışkombini #oldmoney #guzelai"
 
+    sp = outfit.get("viral_screenplay") or {}
+    is_flight = bool(sp.get("is_viral_flight"))
+    flight_prefix = "🚀 [GUZEL AI VİRAL UÇUŞ BÖLÜMÜ] " if is_flight else "🔥 "
+    story_block = sp.get("caption_story_script", "").strip()
+    debate_question = sp.get("comment_explosion_prompt") or (
+        f"💬 STİL ANKETİ: Bu 2026-2027 Kış Tasarım Kreasyonunda senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨"
+    )
+
     lines = [
-        f"🔥 {hook_title}",
+        f"{flight_prefix}{hook_title}",
         "📌 'Bugün ne giysem?' krizinden saniyeler içinde kurtulmak için bu 2K kış tasarım kombinini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! ❄️✨",
         "",
+    ]
+    if story_block:
+        lines.extend([story_block, ""])
+    lines.extend([
         viral_hook,
         "",
-        f"💬 STİL ANKETİ: Bu 2026-2027 Kış Tasarım Kreasyonunda senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨",
+        debate_question,
         "",
         f"🛍️ KOMBİN FİYAT, MARKA & ÜRÜN KODU DETAYLARI ({col_label}):",
         f"1️⃣ 🧥 {c_out}: {items['outerwear']['brand']} – {items['outerwear']['name']} | Fiyat: {items['outerwear']['price']} | Ürün Kodu: {items['outerwear'].get('sku', '-')}",
@@ -112,7 +124,7 @@ def build_caption(outfit: dict) -> str:
         TR_LEGAL_NOTICE_FULL,
         "",
         hashtags,
-    ]
+    ])
     return "\n".join(lines)
 
 
@@ -183,6 +195,14 @@ def main():
     watermark = os.environ.get("IG_WATERMARK", "@guzelaicom")
 
     outfit = select_daily_outfit(slot_name=slot)
+
+    # Ajan 27 (BARIŞ - Viral Senarist) & Ajan 28 (EVREN - Otonom Öz-Evrim Motoru):
+    from viral_screenwriter_evolution import evolve_and_write_viral_screenplay
+    screenplay = evolve_and_write_viral_screenplay(outfit)
+    outfit["viral_screenplay"] = screenplay
+    if screenplay.get("safe_spoken_hook"):
+        outfit["spoken_hook_text"] = screenplay["safe_spoken_hook"]
+
     render_kombin_reel(outfit, args.output, watermark=watermark)
 
     # Otomatik Video & Ses Yapaylık / Kalite Kontrolü (Quality Gate)

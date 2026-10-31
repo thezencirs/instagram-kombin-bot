@@ -29,7 +29,8 @@
     "kadin_kasim_etiler_antrasit_kase_murdum",
     "erkek_kasim_levent_haki_kase_ekru_balikci",
     "cocuk_kiz_kasim_suadiye_krem_pelus_bordo",
-    "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal"
+    "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal",
+    "kadin_kasim_flight01_zorlu_yakut_kase_noir"
   ],
   "retired_model_frames": [
     "assets/hw_couple1_step1.jpg",
@@ -61,7 +62,8 @@
     "assets/kadin_etiler1_step1.jpg",
     "assets/erkek_levent1_step1.jpg",
     "assets/kid_girl3_step1.jpg",
-    "assets/kid_boy3_step1.jpg"
+    "assets/kid_boy3_step1.jpg",
+    "assets/kadin_zorlu_flight1_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -93,8 +95,9 @@
     "kadin_kasim_etiler_antrasit_kase_murdum",
     "erkek_kasim_levent_haki_kase_ekru_balikci",
     "cocuk_kiz_kasim_suadiye_krem_pelus_bordo",
-    "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal"
+    "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal",
+    "kadin_kasim_flight01_zorlu_yakut_kase_noir"
   ],
-  "last_telegram_dispatch_ts": 1793479870.7278976,
-  "updated_at": "2026-10-31T20:51:10.733792Z"
+  "last_telegram_dispatch_ts": 1793485711.6090353,
+  "updated_at": "2026-10-31T22:32:16.417940Z"
 }

@@ -143,13 +143,16 @@ def _normalize_items(outfit: Dict[str, Any]) -> List[Dict[str, str]]:
 
 
 def build_telegram_html(outfit: Dict[str, Any], reel_url: str = "", threads_url: str = "") -> str:
-    """Builds a rich HTML caption (compatible with Telegram parse_mode='HTML', < 1024 chars for media caption)."""
-    title = html.escape(
+    """Builds a rich HTML caption (compatible with Telegram parse_mode='HTML', strictly < 1024 UTF-16 code units for sendVideo)."""
+    raw_title = str(
         outfit.get("hook_title")
         or outfit.get("archetype_title")
         or outfit.get("title")
         or "5.000₺ Bütçeyle 50.000₺'lik 'Old Money' Görünmenin Sırrı! 🔥"
-    )
+    ).strip()
+    if len(raw_title) > 110:
+        raw_title = raw_title[:109].rstrip() + "…"
+    title = html.escape(raw_title)
     total_str = html.escape(outfit.get("total_price_str", ""))
     seg = outfit.get("gender_segment", "kadin")
     seg_label_map = {
@@ -161,11 +164,21 @@ def build_telegram_html(outfit: Dict[str, Any], reel_url: str = "", threads_url:
         "cift": "Kadın & Erkek Kış Koleksiyonu",
     }
     seg_badge = html.escape(seg_label_map.get(seg, "Moda Tasarım Atölyesi"))
+    sp = outfit.get("viral_screenplay") or {}
+    is_flight = bool(sp.get("is_viral_flight"))
     items = _normalize_items(outfit)
 
     lines = [
-        f"🔥 <b>{title}</b>",
+        f"{'🚀' if is_flight else '🔥'} <b>{title}</b>",
     ]
+    if sp.get("scenario_name"):
+        mode_tag = "🚀 VİRAL UÇUŞ BÖLÜMÜ" if is_flight else "🎬 SENARYO KURGUSU"
+        gen_no = sp.get("generation", 1)
+        v_score = sp.get("predicted_viral_score", 98.0)
+        lines.append(
+            f"🎬 <b>{mode_tag} (BARIŞ &amp; EVREN • Gen #{gen_no} • Skor: {v_score}):</b> "
+            f"<i>{html.escape(str(sp.get('scenario_name', '')))}</i>"
+        )
     if total_str:
         lines.append(f"💰 <b>Toplam Kombin:</b> {total_str} (<i>{seg_badge} • 1:1 Doğrulanmış Linkler</i>)")
     lines.append("")
@@ -173,7 +186,7 @@ def build_telegram_html(outfit: Dict[str, Any], reel_url: str = "", threads_url:
 
     for it in items:
         brand = html.escape(it["brand"])
-        name = html.escape(it["name"][:28])
+        name = html.escape(it["name"][:22])
         price = html.escape(it["price"])
         sku = html.escape(it["sku"])
         url = it["url"]
@@ -715,7 +728,29 @@ def send_outfit_to_chat(
             )
             results["video"] = res_vid.get("ok", False)
             if not res_vid.get("ok"):
-                results["video_error"] = res_vid.get("description")
+                err_desc = str(res_vid.get("description") or "")
+                if "caption is too long" in err_desc.lower():
+                    short_cap = "\n".join(html_caption.splitlines()[:11])
+                    with open(video_path, "rb") as vf2:
+                        res_vid2 = tg_api(
+                            "sendVideo",
+                            data={
+                                "chat_id": chat_id,
+                                "caption": short_cap,
+                                "parse_mode": "HTML",
+                                "reply_markup": reply_markup_json,
+                                "supports_streaming": "true",
+                                "width": "1440",
+                                "height": "2560",
+                            },
+                            files={"video": vf2},
+                            token=tok,
+                        )
+                    results["video"] = res_vid2.get("ok", False)
+                    if not res_vid2.get("ok"):
+                        results["video_error"] = res_vid2.get("description")
+                else:
+                    results["video_error"] = err_desc
     else:
         res_msg = tg_api(
             "sendMessage",

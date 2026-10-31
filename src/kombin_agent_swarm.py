@@ -1856,6 +1856,22 @@ def run_fashion_atelier_designers() -> Dict[str, Any]:
     return report
 
 
+def run_self_evolving_viral_screenwriter_division() -> Dict[str, Any]:
+    """
+    Ajan 27 BARIŞ (viral-screenwriter-story-director) &
+    Ajan 28 EVREN (self-evolving-meta-optimizer):
+    Kendini geliştiren otonom evrim raporunu ve aktif 3 perdeli viral senaryo durumunu günceller.
+    """
+    from viral_screenwriter_evolution import generate_self_evolution_reports
+    rep = generate_self_evolution_reports()
+    print(
+        f"🚀 [Ajan 27 BARIŞ & Ajan 28 EVREN | 28-Ajan Öz-Evrim & Viral Senarist] "
+        f"Generation #{rep.get('current_generation', 0)} | Toplam Viral Uçuş: {rep.get('total_viral_flights_launched', 0)} "
+        f"-> {OUTPUT_DIR / 'self_evolution_report.json'}"
+    )
+    return rep
+
+
 # ============================================================================
 # AJAN 3: KOORDİNASYON VE ANA AJANA BİLDİRİM AJANI (kombin-dispatcher-reporter)
 # ============================================================================
@@ -1874,6 +1890,7 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     hr_audit_data = run_hr_agent_trainer_director()
     agent_resources_data = run_agent_resources_division()
     fashion_atelier_data = run_fashion_atelier_designers()
+    self_evolution_data = run_self_evolving_viral_screenwriter_division()
     compliance_data = run_prepublish_compliance_auditor()
     health_data = _load_json(HEALTH_REPORT_PATH, {})
 
@@ -1906,6 +1923,7 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
         "hr_department_audit_and_training": hr_audit_data,
         "agent_resources_division": agent_resources_data,
         "fashion_atelier_designers": fashion_atelier_data,
+        "self_evolving_viral_screenwriter_division": self_evolution_data,
         "instagram_health_snapshot": {
             "account_status": ig_health.get("account_status", "HEALTHY_ACTIVE"),
             "risk_level": ig_health.get("risk_level", "LOW"),
@@ -1919,12 +1937,12 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     }
 
     CURATED_OUTFITS_PATH.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"📨 [Ajan 3 - Dispatcher Reporter] 26 Ajanlı ortak paket (DEFNE + KEREM + LEYLA + MERT + ARDA + MAYA + KAAN + VERA + İREM + SARP) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
+    print(f"📨 [Ajan 3 - Dispatcher Reporter] 28 Ajanlı ortak paket (BARIŞ + EVREN + DEFNE + KEREM + LEYLA + MERT + ARDA + MAYA + KAAN + VERA + İREM + SARP) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
     return summary
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="GuzelAI 26 Ajanlı Otonom Moda Tasarım Atölyesi, Ajan Kaynakları, Sıfır-Tekrar Mevsimsel Kreasyon, İK ve 1:1 Görsel Denetim Sistemi")
+    parser = argparse.ArgumentParser(description="GuzelAI 28 Ajanlı Kendini Geliştiren Otonom Evrim, Viral Senarist, Moda Tasarım Atölyesi ve Sıfır-Tekrar Sistemi")
     parser.add_argument(
         "--role",
         choices=[
@@ -1942,6 +1960,7 @@ if __name__ == "__main__":
             "hr_audit",
             "agent_resources",
             "fashion_atelier",
+            "self_evolution",
             "compliance",
             "dispatcher",
             "all",
@@ -1979,6 +1998,8 @@ if __name__ == "__main__":
         run_agent_resources_division()
     elif args.role == "fashion_atelier":
         run_fashion_atelier_designers()
+    elif args.role == "self_evolution":
+        run_self_evolving_viral_screenwriter_division()
     elif args.role == "compliance":
         run_prepublish_compliance_auditor()
     else:

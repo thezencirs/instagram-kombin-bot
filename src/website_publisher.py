@@ -291,12 +291,17 @@ def build_verified_kombin_entry(
     model_photo_url = f"/pinterest-models/{os.path.basename(m_frames[0])}" if m_frames else "/data/latest_kombin_collage.jpg"
 
     # Build Telegram-identical 1-click copy-paste text block
+    sp = outfit.get("viral_screenplay") or {}
     tg_lines = [
-        f"✨ {title}",
-        "",
-        outfit.get("viral_hook", "🛑 %100 AI Manken ile 1:1 birebir uyumlu 6 parçalık kombin ve mağaza linkleri:"),
+        f"{'🚀' if sp.get('is_viral_flight') else '✨'} {title}",
         "",
     ]
+    if sp.get("caption_story_script"):
+        tg_lines.extend([sp["caption_story_script"], ""])
+    tg_lines.extend([
+        outfit.get("viral_hook", "🛑 %100 AI Manken ile 1:1 birebir uyumlu 6 parçalık kombin ve mağaza linkleri:"),
+        "",
+    ])
     for it in verified_items:
         tg_lines.append(
             f"{it['slot_number']}️⃣ {it['emoji']} {it['category']}: {it['brand']} – {it['name']} ({it['price']} | Kod: {it['sku']}) 👉 {it['guzelai_url']}"
@@ -328,6 +333,7 @@ def build_verified_kombin_entry(
         "video_url": "/data/latest_kombin_video.mp4",
         "telegram_bot_url": "https://t.me/guzelaibot",
         "telegram_copy_text": telegram_copy_text,
+        "viral_screenplay": outfit.get("viral_screenplay") or {},
         "website_showcase_url": GUZELAI_SHOWCASE_URL,
         "verification_summary": {
             "total_items": len(verified_items),
