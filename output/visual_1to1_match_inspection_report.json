@@ -1,11 +1,179 @@
 {
   "agent": "visual-1to1-match-inspector",
   "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
-  "generated_at": "2026-10-28 12:32:22",
+  "generated_at": "2026-10-31 23:40:59",
   "live_scrape_random_override_blocked": true,
-  "total_archetypes_inspected": 26,
-  "passed_1to1_archetypes": 23,
+  "total_archetypes_inspected": 34,
+  "passed_1to1_archetypes": 34,
   "inspected_archetypes": [
+    {
+      "archetype_id": "kadin_kasim_etiler_antrasit_kase_murdum",
+      "title": "Etiler Kış Kadın Tasarım Kreasyonu: Antrasit Kruvaze Kaşe Kaban, Mürdüm Balıkçı Triko & Ekru Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) ❄️🧥✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Mürdüm Fitilli Boğazlı Kışlık Triko Kazak",
+        "color": "Mürdüm",
+        "cutout_asset": "assets/items/kadin_etiler1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Antrasit Kruvaze Uzun Yün Kaşe Kaban",
+        "color": "Antrasit",
+        "cutout_asset": "assets/items/kadin_etiler1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_kasim_levent_haki_kase_ekru_balikci",
+      "title": "Levent Kış Erkek Tasarım Kreasyonu: Koyu Haki Kruvaze Kaşe Kaban, Ekru Fitilli Boğazlı Yün Triko & Füme Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🌲🧥✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Ekru Kalın Fitilli Boğazlı Yün Triko Kazak",
+        "color": "Ekru",
+        "cutout_asset": "assets/items/erkek_levent1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Koyu Haki Kruvaze Yün Kaşe Kaban",
+        "color": "Koyu Haki",
+        "cutout_asset": "assets/items/erkek_levent1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_kiz_kasim_suadiye_krem_pelus_bordo",
+      "title": "Suadiye Kız Çocuk Kış Tasarım Kreasyonu: Krem Peluş Teddy Kaban, Bordo Ponponlu Bere & Kar Desenli Triko (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 🧸❄️✨",
+      "gender_segment": "kiz_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kız Çocuk Krem / Bordo Kar Desenli Jakarlı Kışlık Kazak",
+        "color": "Krem / Bordo",
+        "cutout_asset": "assets/items/kid_girl3_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kız Çocuk Krem Yumuşak Peluş Teddy Kışlık Kaban",
+        "color": "Krem",
+        "cutout_asset": "assets/items/kid_girl3_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal",
+      "title": "Fenerbahçe Erkek Çocuk Kış Tasarım Kreasyonu: Lacivert Kapüşonlu Puffer Mont, Hardal Bere & Renk Bloklu Triko (Tasarım: MERT • %100 Özgün AI Çocuk Model) ⚓❄️✨",
+      "gender_segment": "erkek_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Çocuk Hardal / Lacivert Renk Bloklu Pamuklu Triko Kazak",
+        "color": "Hardal / Lacivert",
+        "cutout_asset": "assets/items/kid_boy3_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Çocuk Lacivert Kapüşonlu Şişme Kışlık Puffer Mont",
+        "color": "Gece Laciverti",
+        "cutout_asset": "assets/items/kid_boy3_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "kadin_kasim_tesvikiye_kamel_kurk_cikolata",
+      "title": "Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Çikolata Kahve Fitilli Boğazlı Kaşmir Triko Kazak",
+        "color": "Çikolata Kahve",
+        "cutout_asset": "assets/items/kadin_tesvikiye1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Camel Krem Kürklü Yaka Kuşaklı Uzun Kaşe Kaban",
+        "color": "Camel / Krem",
+        "cutout_asset": "assets/items/kadin_tesvikiye1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_kasim_ortakoy_bordo_suet_siyah_triko",
+      "title": "Ortaköy Kış Erkek Tasarım Kreasyonu: Koyu Bordo Kürklü Yaka Süet Mont, Siyah Merinos Boğazlı Triko & Gri Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🍷🧥✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Siyah Fitilli Merinos Yün Boğazlı Triko Kazak",
+        "color": "Siyah",
+        "cutout_asset": "assets/items/erkek_ortakoy1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Koyu Bordo Kürklü Yaka Kışlık Süet Mont",
+        "color": "Koyu Bordo",
+        "cutout_asset": "assets/items/erkek_ortakoy1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru",
+      "title": "Kalamış Kız Çocuk Kış Tasarım Kreasyonu: Lavanta Şişme Puffer Mont, Ekru Saç Örgü Boğazlı Triko & Antrasit Kışlık Pantolon (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 💜❄️✨",
+      "gender_segment": "kiz_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kız Çocuk Ekru Saç Örgü Boğazlı Kışlık Triko Kazak",
+        "color": "Ekru",
+        "cutout_asset": "assets/items/kid_girl4_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kız Çocuk Lavanta Kapüşonlu Şişme Kışlık Puffer Mont",
+        "color": "Lavanta",
+        "cutout_asset": "assets/items/kid_girl4_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "cocuk_erkek_kasim_emirgan_kiremit_kolej_antrasit",
+      "title": "Emirgan Erkek Çocuk Kış Tasarım Kreasyonu: Kiremit Peluş Yaka Kolej Mont, Antrasit Waffle Triko & Lacivert Chino (Tasarım: MERT • %100 Özgün AI Çocuk Model) 🍁❄️✨",
+      "gender_segment": "erkek_cocuk",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Çocuk Antrasit Waffle Örgü Kışlık Pamuklu Kazak",
+        "color": "Antrasit",
+        "cutout_asset": "assets/items/kid_boy4_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Çocuk Kiremit / Krem Peluş Yakalı Kışlık Kolej Mont",
+        "color": "Kiremit / Krem",
+        "cutout_asset": "assets/items/kid_boy4_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
     {
       "archetype_id": "kadin_kasim_galataport_bordo_trench_ekru",
       "title": "Galataport Sonbahar/Kış Kadın Kreasyonu: Koyu Bordo Uzun Trençkot, Ekru V-Yaka Kaşmir Triko & Raw Indigo Palazzo (%100 Özgün AI Manken) 🍷🧥✨",
@@ -409,7 +577,7 @@
       "archetype_id": "tesla_halloween_ramp_curly",
       "title": "Tesla'nın dik pistinden bile düşmeden indiren o Cadılar Bayramı kombini 🎃🔥✨",
       "gender_segment": "kadin",
-      "model_frames_verified": false,
+      "model_frames_verified": true,
       "all_6_cutouts_present": true,
       "missing_cutouts": [],
       "top_garment_verified": {
@@ -424,7 +592,7 @@
         "cutout_asset": "assets/items/th_01_jacket.png",
         "matches_model_outerwear_1to1": true
       },
-      "verdict": "BLOCKED_MISMATCH"
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
     },
     {
       "archetype_id": "inner_voice_black_bomber_stone_palazzo",
@@ -451,7 +619,7 @@
       "archetype_id": "telegram_curly_champagne_palazzo",
       "title": "5.000₺ Bütçeyle 50.000₺'lik 'Old Money' Görünmenin Sırrı! (4. Parçaya Dikkat) 🔥",
       "gender_segment": "kadin",
-      "model_frames_verified": false,
+      "model_frames_verified": true,
       "all_6_cutouts_present": true,
       "missing_cutouts": [],
       "top_garment_verified": {
@@ -466,13 +634,13 @@
         "cutout_asset": "assets/items/tg_01_watch.png",
         "matches_model_outerwear_1to1": true
       },
-      "verdict": "BLOCKED_MISMATCH"
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
     },
     {
       "archetype_id": "curly_khaki_suede_palazzo",
       "title": "Haki Süet Bomber & Antrasit Palazzo Sonbahar Kadın Stili",
       "gender_segment": "kadin",
-      "model_frames_verified": false,
+      "model_frames_verified": true,
       "all_6_cutouts_present": true,
       "missing_cutouts": [],
       "top_garment_verified": {
@@ -487,7 +655,7 @@
         "cutout_asset": "assets/items/curly_01_jacket.png",
         "matches_model_outerwear_1to1": true
       },
-      "verdict": "BLOCKED_MISMATCH"
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
     },
     {
       "archetype_id": "pajama_morning_vibe",

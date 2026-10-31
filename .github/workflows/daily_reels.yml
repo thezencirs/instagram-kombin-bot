@@ -1,12 +1,12 @@
-name: GuzelAI.com 7/24 Argon'suz Bulut 22-Ajan Sıfır-Tekrar Kombin, Özgün AI Manken & Vitrin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
+name: GuzelAI.com 7/24 Argon'suz Bulut 26-Ajan Moda Tasarım Atölyesi & Sıfır-Tekrar Kombin Otomasyonu (Telegram @guzelaibot + GuzelAI.com)
 
 on:
   schedule:
     # Türkiye Saati (TSİ / UTC+3) ile her gün 4 Kuşak (Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk Rotasyonu):
-    # 06:15 UTC = 09:15 TSİ (Sabah Kuşağı)
-    # 10:15 UTC = 13:15 TSİ (Öğle Kuşağı)
-    # 14:15 UTC = 17:15 TSİ (İkindi Kuşağı)
-    # 17:15 UTC = 20:15 TSİ (Akşam Prime-Time Kuşağı)
+    # 06:15 UTC = 09:15 TSİ (Sabah Kuşağı - DEFNE Kadın Kış Tasarım)
+    # 10:15 UTC = 13:15 TSİ (Öğle Kuşağı - KEREM Erkek Kış Tasarım)
+    # 14:15 UTC = 17:15 TSİ (İkindi Kuşağı - LEYLA Kız Çocuk Kış Tasarım)
+    # 17:15 UTC = 20:15 TSİ (Akşam Prime-Time Kuşağı - MERT Erkek Çocuk Kış Tasarım)
     - cron: '15 6,10,14,17 * * *'
   workflow_dispatch:
     inputs:
@@ -22,6 +22,10 @@ on:
         description: 'Zorunlu Kombin ID (boş bırakılırsa sıradaki segment kombini seçilir)'
         required: false
         default: ''
+      bypass_cooldown:
+        description: '2 Saatlik Çift-Tetikleme Korumasını Atla (0 / 1)'
+        required: false
+        default: '0'
 
 permissions:
   contents: write
@@ -57,13 +61,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 👗 1. Adım — 1:1 Manken-Kombin Eşleşmesi + 2K QHD+ Reels + GuzelAI.com Vitrin Üretimi (Kadın / Erkek / Kız Çocuk / Erkek Çocuk)
+      - name: 👗 1. Adım — Moda Tasarım Atölyesi (DEFNE, KEREM, LEYLA, MERT) 1:1 Kış Kreasyonu + 2K QHD+ Reels + Sonsuz Bulut FLUX Sentezi
         env:
           IG_WATERMARK: ${{ vars.IG_WATERMARK || '@guzelaicom' }}
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           SLOT_NAME: ${{ github.event.inputs.slot_name || 'otomatik' }}
           FORCE_SEGMENT: ${{ github.event.inputs.force_segment || 'otomatik' }}
           FORCE_ARCHETYPE_ID: ${{ github.event.inputs.force_archetype_id || '' }}
+          BYPASS_CLOUD_COOLDOWN: ${{ github.event.inputs.bypass_cooldown || '0' }}
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -71,15 +76,19 @@ jobs:
         run: |
           python src/main.py --output output/reel_final.mp4
 
-      - name: 🤖 2. Adım — 22 Uzman Ajan Swarm + Ajan Kaynakları Birimi (ARDA, MAYA, KAAN, VERA) + İK (İREM) & 1:1 Görsel Denetim (SARP)
+      - name: 🤖 2. Adım — 26 Uzman Ajan Swarm + Moda Tasarım Atölyesi (DEFNE, KEREM, LEYLA, MERT) + Ajan Kaynakları (ARDA, MAYA, KAAN, VERA)
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
         run: |
+          if [ -f output/skip_cooldown_active.flag ]; then
+            echo "🛡️ Çift tetikleme koruması aktif, 2. adım atlandı."
+            exit 0
+          fi
           python src/kombin_agent_swarm.py --role all
 
-      - name: 📱 3. Adım — Telegram (@guzelaibot) 4'lü Stok Paketi & GuzelAI.com Telegram-Tarzı Vitrin Yayını (Instagram API Devre Dışı)
+      - name: 📱 3. Adım — Telegram (@guzelaibot) 4'lü Süper Yayın Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
         env:
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
@@ -87,9 +96,13 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID || '995164733' }}
         run: |
+          if [ -f output/skip_cooldown_active.flag ]; then
+            echo "🛡️ Çift tetikleme koruması aktif, mükerrer Telegram yayını güvenle atlandı."
+            exit 0
+          fi
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
 
-      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak, Sıfır-Tekrar Defteri ve 22-Ajan Denetim Raporlarını Artifacts Olarak Kaydet
+      - name: 📤 4. Adım — 2K Reels, Pinterest Kolajı, Hook Kapak, Sıfır-Tekrar Defteri ve 26-Ajan Moda Atölyesi Raporlarını Kaydet
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
@@ -100,6 +113,9 @@ jobs:
             output/pinterest_fashion_collage.jpg
             output/caption.txt
             output/zero_repeat_ledger.json
+            output/dynamic_creations_catalog.json
+            output/fashion_atelier_designers_report.json
+            output/fashion_atelier_designers_report.md
             output/agent_resources_division_report.json
             output/agent_resources_division_report.md
             output/quality_check_report.json
@@ -111,13 +127,17 @@ jobs:
             output/outfit_links.json
           retention-days: 7
 
-      - name: 💾 5. Adım — Sıfır-Tekrar Manken/Kombin Defterini (`zero_repeat_ledger.json`) ve Yayın Geçmişini Depoya Kaydet
+      - name: 💾 5. Adım — Sıfır-Tekrar Defterini, Dinamik Bulut Kreasyonlarını ve 26-Ajan Raporlarını Depoya Kaydet
         if: ${{ always() }}
         run: |
-          git config user.name "GuzelAI 22-Agent Bot"
+          if [ -f output/skip_cooldown_active.flag ]; then
+            rm -f output/skip_cooldown_active.flag
+            exit 0
+          fi
+          git config user.name "GuzelAI 26-Agent Atelier Bot"
           git config user.email "bot@guzelai.com"
-          git add output/zero_repeat_ledger.json output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json 2>/dev/null || true
-          git diff --staged --quiet || (git commit -m "chore(zero-repeat): sync 7/24 Argon-free 22-agent zero-repeat model & outfit ledger [skip ci]" && git push)
+          git add output/zero_repeat_ledger.json output/dynamic_creations_catalog.json output/fashion_atelier_designers_report.json output/fashion_atelier_designers_report.md output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json assets/atelier_* assets/items/atelier_* 2>/dev/null || true
+          git diff --staged --quiet || (git commit -m "chore(26-agent-atelier): sync zero-repeat ledger & cloud winter creations [skip ci]" && (git pull --rebase origin main || true) && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

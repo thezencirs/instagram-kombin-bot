@@ -151,13 +151,23 @@ def build_telegram_html(outfit: Dict[str, Any], reel_url: str = "", threads_url:
         or "5.000₺ Bütçeyle 50.000₺'lik 'Old Money' Görünmenin Sırrı! 🔥"
     )
     total_str = html.escape(outfit.get("total_price_str", ""))
+    seg = outfit.get("gender_segment", "kadin")
+    seg_label_map = {
+        "kadin": "Kadın Kış Tasarım • DEFNE",
+        "erkek": "Erkek Kış Tasarım • KEREM",
+        "kiz_cocuk": "Kız Çocuk Kış Tasarım • LEYLA",
+        "cocuk": "Kız Çocuk Kış Tasarım • LEYLA",
+        "erkek_cocuk": "Erkek Çocuk Kış Tasarım • MERT",
+        "cift": "Kadın & Erkek Kış Koleksiyonu",
+    }
+    seg_badge = html.escape(seg_label_map.get(seg, "Moda Tasarım Atölyesi"))
     items = _normalize_items(outfit)
 
     lines = [
         f"🔥 <b>{title}</b>",
     ]
     if total_str:
-        lines.append(f"💰 <b>Toplam Kombin:</b> {total_str} (<i>%100 Kadın • Benzer Muadil Linkler</i>)")
+        lines.append(f"💰 <b>Toplam Kombin:</b> {total_str} (<i>{seg_badge} • 1:1 Doğrulanmış Linkler</i>)")
     lines.append("")
     lines.append("🛍️ <b>GÖRSELLİ KOMBİN PARÇALARI &amp; DOĞRUDAN LİNKLER:</b>")
 

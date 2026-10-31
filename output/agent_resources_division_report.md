@@ -1,5 +1,5 @@
 # 🏛️ AJAN KAYNAKLARI BİRİMİ & SIFIR-TEKRAR MEVSİMSEL KREASYON RAPORU (22 AJAN)
-**Tarih:** `2026-10-28 12:32:22` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
+**Tarih:** `2026-10-31 23:51:10` | **Toplam Ajan Sayısı:** `22 Ajan` | **Bulut Mimari:** `Argon'suz %100 Bağımsız GitHub Actions (ubuntu-latest)`
 
 ## 1. Ajan Kaynakları Birimi (Yeni Kurulan 4 Uzman Ajan — Ajan 19..22)
 - **Ajan 19 — ARDA (`agent-resources-director`) — Ajan Kaynakları, Performans & Sıfır-Tekrar Orkestrasyon Direktörü:** 22 ajanın görev dağılımını yönetir; daha önce paylaşılmış 20 kombin ve 20 mankenin `output/zero_repeat_ledger.json` ile kalıcı olarak emekliye ayrılmasını (`PERMANENTLY_RETIRED`) denetler.
@@ -13,3 +13,7 @@
 - **Telegram Çift Gönderim Kalkanı (`telegram_dispatched_ids`):** `AKTİF` (`telegram_publisher.py` içinde aynı ID'nin ikinci kez gönderilmesi imkansız hale getirildi)
 
 ## 3. Yeni Üretilen 2026-2027 Sonbahar/Kış Özgün Kreasyonlar ve Yepyeni AI Mankenler
+- **`kadin_kasim_tesvikiye_kamel_kurk_cikolata` (kadin):** Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨ | Manken: `assets/kadin_tesvikiye1_step1.jpg` | 1:1 Dekupe: `6/6`
+- **`erkek_kasim_ortakoy_bordo_suet_siyah_triko` (erkek):** Ortaköy Kış Erkek Tasarım Kreasyonu: Koyu Bordo Kürklü Yaka Süet Mont, Siyah Merinos Boğazlı Triko & Gri Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🍷🧥✨ | Manken: `assets/erkek_ortakoy1_step1.jpg` | 1:1 Dekupe: `6/6`
+- **`cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru` (kiz_cocuk):** Kalamış Kız Çocuk Kış Tasarım Kreasyonu: Lavanta Şişme Puffer Mont, Ekru Saç Örgü Boğazlı Triko & Antrasit Kışlık Pantolon (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 💜❄️✨ | Manken: `assets/kid_girl4_step1.jpg` | 1:1 Dekupe: `6/6`
+- **`cocuk_erkek_kasim_emirgan_kiremit_kolej_antrasit` (erkek_cocuk):** Emirgan Erkek Çocuk Kış Tasarım Kreasyonu: Kiremit Peluş Yaka Kolej Mont, Antrasit Waffle Triko & Lacivert Chino (Tasarım: MERT • %100 Özgün AI Çocuk Model) 🍁❄️✨ | Manken: `assets/kid_boy4_step1.jpg` | 1:1 Dekupe: `6/6`

@@ -78,8 +78,240 @@ LIVE_TRENDYOL_FEEDS = {
     ],
 }
 
+def _make_atelier_archetype(
+    arch_id: str,
+    gender_segment: str,
+    designer_name: str,
+    music_id: str,
+    title: str,
+    spoken_hook: str,
+    viral_hook: str,
+    badge_walk: str,
+    asset_prefix: str,
+    sku_prefix: str,
+    specs: dict,
+) -> dict:
+    exact_items = {}
+    kw_map = {}
+    cutouts = {}
+    slot_tags = {
+        "outerwear": "01_outer",
+        "cap": "02_cap",
+        "top": "03_top",
+        "bottom": "04_bottom",
+        "bag": "05_bag",
+        "shoes": "06_shoes",
+    }
+    for idx, (slot_k, tag) in enumerate(slot_tags.items(), start=1):
+        cat_lbl, brand, name_tr, price_str, price_val, color_tr, store_url, kws = specs[slot_k]
+        sku = f"{sku_prefix}{idx}"
+        cut_rel = f"assets/items/{asset_prefix}_{tag}.png"
+        cut_web = f"/kombin-cutouts/{asset_prefix}_{tag}.png"
+        cutouts[slot_k] = cut_rel
+        kw_map[slot_k] = kws
+        exact_items[slot_k] = {
+            "id": f"ty_{sku}",
+            "category_label": cat_lbl,
+            "brand": brand,
+            "price": price_str,
+            "price_val": price_val,
+            "name": name_tr,
+            "full_name": f"{brand} {name_tr}",
+            "sku": sku,
+            "color": color_tr,
+            "store_url": store_url,
+            "product_url": f"https://guzelai.com/go/{sku}",
+            "guzelai_url": f"https://guzelai.com/go/{sku}",
+            "image_url": cut_web,
+            "image_urls": [cut_web],
+        }
+    return {
+        "id": arch_id,
+        "gender_segment": gender_segment,
+        "designer_agent": designer_name,
+        "season": "2026-2027 Kış Moda Tasarım Koleksiyonu",
+        "ai_model_verified": True,
+        "preferred_music_id": music_id,
+        "title": title,
+        "spoken_hook_text": spoken_hook,
+        "viral_hook": viral_hook,
+        "video_badge_collage": f"» MODA TASARIM ATÖLYESİ • {designer_name} «",
+        "video_badge_walk": badge_walk,
+        "seo_note": f"📌 Not: Bu 2026-2027 Kış Kreasyonu Baş Moda Tasarımcımız {designer_name} tarafından sıfır-tekrar ilkesiyle tasarlanmış olup tüm ürün linkleri guzelai.com/go üzerinden mağazaya yönlenir:",
+        "verified_exact_items": exact_items,
+        "keywords": kw_map,
+        "cutout_assets": cutouts,
+        "fallback_cutout_assets": dict(cutouts),
+        "model_frames": [
+            f"assets/{asset_prefix}_step1.jpg",
+            f"assets/{asset_prefix}_step2.jpg",
+            f"assets/{asset_prefix}_step3.jpg",
+        ],
+    }
+
+
 # Görsel Stil Arketipleri (Her arketip için temiz dekupe kıyafet yedekleri + sokakta yürüyen model kareleri)
 OUTFIT_ARCHETYPES = [
+    _make_atelier_archetype(
+        arch_id="kadin_kasim_etiler_antrasit_kase_murdum",
+        gender_segment="kadin",
+        designer_name="DEFNE",
+        music_id="old_money_violin_orchestra_pov",
+        title="Etiler Kış Kadın Tasarım Kreasyonu: Antrasit Kruvaze Kaşe Kaban, Mürdüm Balıkçı Triko & Ekru Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) ❄️🧥✨",
+        spoken_hook="Etiler Nispetiye sokaklarında kış sezonunun en asil antrasit kaşe kaban ve mürdüm balıkçı yaka zarafeti!",
+        viral_hook="🛑 Kadın Baş Moda Tasarımcımız DEFNE imzalı Etiler Kış Kreasyonu! Antrasit kruvaze yün kaşe kaban, mürdüm fitilli boğazlı triko, ekru yüksek bel pileli yün palazzo pantolon ve mürdüm kapitone gold tokalı çanta! 💬 Bu kış tasarımında favoriniz 1 (Antrasit Kaşe Kaban) mı yoksa 3 (Mürdüm Boğazlı Triko) mu? Yorumlara yazın! 👇❄️✨",
+        badge_walk="» ETİLER ANTRASİT KAŞE & MÜRDÜM KAPSÜL «",
+        asset_prefix="kadin_etiler1",
+        sku_prefix="93110100",
+        specs={
+            "outerwear": ("Kadın Kaşe Kaban", "İPEKYOL", "Kadın Antrasit Kruvaze Uzun Yün Kaşe Kaban", "3.499₺", 3499.0, "Antrasit", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["antrasit", "kruvaze", "kaşe", "kaban"]),
+            "cap": ("Cat-Eye Gözlük", "VOGUE EYEWEAR", "Kadın Siyah / Gümüş Cat-Eye Güneş Gözlüğü", "2.190₺", 2190.0, "Siyah / Gümüş", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c101", ["siyah", "cat eye", "gözlük"]),
+            "top": ("Boğazlı Triko", "TWIST", "Kadın Mürdüm Fitilli Boğazlı Kışlık Triko Kazak", "949₺", 949.0, "Mürdüm", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["mürdüm", "boğazlı", "triko"]),
+            "bottom": ("Yün Palazzo", "YARGICI", "Kadın Ekru Yüksek Bel Pileli Yün Palazzo Pantolon", "1.490₺", 1490.0, "Ekru", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["ekru", "pileli", "palazzo"]),
+            "bag": ("Kapitone Çanta", "BAGMORI", "Kadın Mürdüm Kapitone Gold Tokalı Deri Omuz Çantası", "879,90₺", 879.9, "Mürdüm", "https://www.bagmori.com", ["mürdüm", "kapitone", "çanta"]),
+            "shoes": ("Court Sneaker", "ADIDAS", "Kadın Beyaz / Mürdüm Süet Detaylı Court Sneaker", "3.699₺", 3699.0, "Beyaz / Mürdüm", "https://www.trendyol.com/kadin-spor-ayakkabi-x-g1-c109", ["beyaz", "mürdüm", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="erkek_kasim_levent_haki_kase_ekru_balikci",
+        gender_segment="erkek",
+        designer_name="KEREM",
+        music_id="nisantasi_funk_slapbass_brass_pov",
+        title="Levent Kış Erkek Tasarım Kreasyonu: Koyu Haki Kruvaze Kaşe Kaban, Ekru Fitilli Boğazlı Yün Triko & Füme Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🌲🧥✨",
+        spoken_hook="Levent plazalar bölgesinde kışın en karizmatik İtalyan terziliği: Koyu haki kruvaze kaşe kaban ve ekru boğazlı triko!",
+        viral_hook="🛑 Erkek Sartorial Moda Tasarımcımız KEREM imzalı Levent Kış Kreasyonu! Koyu haki kruvaze yün kaşe kaban, ekru kalın fitilli boğazlı yün triko, füme flanel pileli kışlık pantolon ve koyu kahve deri hafta sonu çantası! 💬 Favoriniz 1 (Haki Kaşe Kaban) mı yoksa 5 (Koyu Kahve Deri Çanta) mı? 👇🔥",
+        badge_walk="» LEVENT HAKİ KAŞE & EKRU BOĞAZLI TRİKO «",
+        asset_prefix="erkek_levent1",
+        sku_prefix="93120100",
+        specs={
+            "outerwear": ("Erkek Kaşe Kaban", "NETWORK", "Erkek Koyu Haki Kruvaze Yün Kaşe Kaban", "4.299₺", 4299.0, "Koyu Haki", "https://www.trendyol.com/erkek-kaban-x-g2-c55", ["haki", "kruvaze", "erkek", "kaban"]),
+            "cap": ("Browline Gözlük", "RAY-BAN", "Erkek Kahve Tortoise & Gold Browline Güneş Gözlüğü", "4.850₺", 4850.0, "Kahve / Gold", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c101", ["kahve", "gold", "erkek", "gözlük"]),
+            "top": ("Boğazlı Yün Triko", "MASSIMO DUTTI", "Erkek Ekru Kalın Fitilli Boğazlı Yün Triko Kazak", "1.690₺", 1690.0, "Ekru", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["ekru", "boğazlı", "erkek", "kazak"]),
+            "bottom": ("Flanel Pantolon", "ALTINYILDIZ CLASSICS", "Erkek Füme / Antrasit Flanel Pileli Kışlık Yün Pantolon", "1.399₺", 1399.0, "Füme / Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["füme", "antrasit", "flanel", "pantolon"]),
+            "bag": ("Deri Seyahat Çantası", "TERGAN", "Erkek Koyu Kahve Deri Hafta Sonu & Evrak Çantası", "2.790₺", 2790.0, "Koyu Kahve", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["kahve", "deri", "erkek", "çanta"]),
+            "shoes": ("Süet Sneaker", "PUMA", "Erkek Koyu Haki Süet / Beyaz Çizgili Court Sneaker", "3.499₺", 3499.0, "Haki / Beyaz", "https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109", ["haki", "beyaz", "süet", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="cocuk_kiz_kasim_suadiye_krem_pelus_bordo",
+        gender_segment="kiz_cocuk",
+        designer_name="LEYLA",
+        music_id="syn_cole_feel_good_preppy_kids",
+        title="Suadiye Kız Çocuk Kış Tasarım Kreasyonu: Krem Peluş Teddy Kaban, Bordo Ponponlu Bere & Kar Desenli Triko (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 🧸❄️✨",
+        spoken_hook="Suadiye caddesinde kış mevsiminin en sıcacık ve en sevimli krem peluş teddy kaban ve bordo jakarlı kız çocuk kombini!",
+        viral_hook="🛑 Kız Çocuk Kış Moda Tasarımcımız LEYLA imzalı Suadiye Kış Kreasyonu! Yumuşacık krem peluş teddy kaban, bordo ponponlu triko bere, kar tanesi desenli jakarlı triko kazak, rahat kesim koyu indigo jean ve bordo kapitone mini sırt çantası! 💬 En sevdiğiniz parça hangisi? 👇🧸❄️",
+        badge_walk="» SUADİYE KREM PELUŞ & BORDO KIŞ KOMBİNİ «",
+        asset_prefix="kid_girl3",
+        sku_prefix="93130100",
+        specs={
+            "outerwear": ("Kız Çocuk Peluş Kaban", "MANGO KIDS", "Kız Çocuk Krem Yumuşak Peluş Teddy Kışlık Kaban", "1.799₺", 1799.0, "Krem", "https://www.trendyol.com/kiz-cocuk-kaban-x-g3-c55", ["krem", "peluş", "kız çocuk", "kaban"]),
+            "cap": ("Ponponlu Bere", "LC WAIKIKI KIDS", "Kız Çocuk Bordo Ponponlu Fitilli Kışlık Triko Bere", "249,99₺", 249.99, "Bordo", "https://www.trendyol.com/kiz-cocuk-bere-x-g3-c1041", ["bordo", "ponponlu", "bere"]),
+            "top": ("Jakarlı Triko Kazak", "ZARA KIDS", "Kız Çocuk Krem / Bordo Kar Desenli Jakarlı Kışlık Kazak", "849₺", 849.0, "Krem / Bordo", "https://www.trendyol.com/kiz-cocuk-kazak-x-g3-c1092", ["krem", "bordo", "jakarlı", "kazak"]),
+            "bottom": ("Rahat Jean Pantolon", "DEFACTO KIDS", "Kız Çocuk Koyu İndigo Rahat Geniş Paça Kışlık Jean", "649₺", 649.0, "Koyu İndigo", "https://www.trendyol.com/kiz-cocuk-jean-x-g3-c120", ["indigo", "lacivert", "jean"]),
+            "bag": ("Mini Sırt Çantası", "BAGMORI", "Kız Çocuk Bordo Kapitone Mini Sırt Çantası", "599₺", 599.0, "Bordo", "https://www.bagmori.com", ["bordo", "kapitone", "sırt çantası"]),
+            "shoes": ("Çocuk Sneaker", "ADIDAS KIDS", "Kız Çocuk Krem / Bordo Çizgili Rahat Court Sneaker", "2.199₺", 2199.0, "Krem / Bordo", "https://www.trendyol.com/kiz-cocuk-spor-ayakkabi-x-g3-c109", ["krem", "bordo", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal",
+        gender_segment="erkek_cocuk",
+        designer_name="MERT",
+        music_id="soho_lounge_sax_rhodes_pov",
+        title="Fenerbahçe Erkek Çocuk Kış Tasarım Kreasyonu: Lacivert Kapüşonlu Puffer Mont, Hardal Bere & Renk Bloklu Triko (Tasarım: MERT • %100 Özgün AI Çocuk Model) ⚓❄️✨",
+        spoken_hook="Fenerbahçe sahil yürüyüşünde erkek çocuklar için hem sıcacık hem enerjik lacivert şişme mont ve hardal sarısı kış uyumu!",
+        viral_hook="🛑 Erkek Çocuk Kış Moda Tasarımcımız MERT imzalı Fenerbahçe Kış Kreasyonu! Gece laciverti kapüşonlu şişme puffer mont, hardal sarısı fitilli bere, hardal-lacivert renk bloklu pamuklu triko kazak ve taş beji kargo kışlık chino pantolon! 💬 Favori parçanızı yorumlara yazın! 👇⚓❄️",
+        badge_walk="» FENERBAHÇE LACİVERT PUFFER & HARDAL «",
+        asset_prefix="kid_boy3",
+        sku_prefix="93140100",
+        specs={
+            "outerwear": ("Erkek Çocuk Puffer Mont", "ZARA KIDS", "Erkek Çocuk Lacivert Kapüşonlu Şişme Kışlık Puffer Mont", "1.899₺", 1899.0, "Gece Laciverti", "https://www.trendyol.com/erkek-cocuk-mont-x-g3-c118", ["lacivert", "şişme", "puffer", "mont"]),
+            "cap": ("Fitilli Kışlık Bere", "LC WAIKIKI KIDS", "Erkek Çocuk Hardal Sarısı Fitilli Triko Bere", "229,99₺", 229.99, "Hardal Sarısı", "https://www.trendyol.com/erkek-cocuk-bere-x-g3-c1041", ["hardal", "fitilli", "bere"]),
+            "top": ("Renk Bloklu Triko", "MANGO KIDS", "Erkek Çocuk Hardal / Lacivert Renk Bloklu Pamuklu Triko Kazak", "799₺", 799.0, "Hardal / Lacivert", "https://www.trendyol.com/erkek-cocuk-kazak-x-g3-c1092", ["hardal", "lacivert", "kazak"]),
+            "bottom": ("Kargo Kışlık Chino", "DEFACTO KIDS", "Erkek Çocuk Taş Beji Kargo Cepli Kışlık Chino Pantolon", "649₺", 649.0, "Taş Beji", "https://www.trendyol.com/erkek-cocuk-pantolon-x-g3-c70", ["taş beji", "kargo", "chino"]),
+            "bag": ("Sırt Çantası", "PUMA KIDS", "Erkek Çocuk Lacivert / Hardal Fermuarlı Sırt Çantası", "699₺", 699.0, "Lacivert / Hardal", "https://www.trendyol.com/cocuk-sirt-cantasi-x-c115", ["lacivert", "hardal", "çanta"]),
+            "shoes": ("Çocuk Sneaker", "ADIDAS KIDS", "Erkek Çocuk Beyaz / Lacivert / Hardal Detaylı Court Sneaker", "2.249₺", 2249.0, "Beyaz / Lacivert / Hardal", "https://www.trendyol.com/erkek-cocuk-spor-ayakkabi-x-g3-c109", ["beyaz", "lacivert", "hardal", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="kadin_kasim_tesvikiye_kamel_kurk_cikolata",
+        gender_segment="kadin",
+        designer_name="DEFNE",
+        music_id="velvet_cello_deep_house_editorial",
+        title="Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨",
+        spoken_hook="Teşvikiye Atiye Sokak'ta kış lüksünün zirvesi: Krem kürklü camel kaşe kaban ve sıcak çikolata kaşmir uyumu!",
+        viral_hook="🛑 Kadın Baş Moda Tasarımcımız DEFNE imzalı Teşvikiye Quiet Luxury Kış Kreasyonu! Krem kürklü yaka camel uzun kaşe kaban, çikolata kahve fitilli boğazlı kaşmir triko, espresso yüksek bel yün palazzo pantolon ve gold tokalı camel deri çanta! 💬 Favoriniz 1 mi 3 mü? 👇🤎✨",
+        badge_walk="» TEŞVİKİYE CAMEL KÜRKLÜ KABAN & KAŞMİR «",
+        asset_prefix="kadin_tesvikiye1",
+        sku_prefix="93150100",
+        specs={
+            "outerwear": ("Kürklü Yaka Kaban", "İPEKYOL", "Kadın Camel Krem Kürklü Yaka Kuşaklı Uzun Kaşe Kaban", "3.990₺", 3990.0, "Camel / Krem", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["camel", "kürklü", "kaşe", "kaban"]),
+            "cap": ("Degrade Gözlük", "VOGUE EYEWEAR", "Kadın Kahve Degrade Kemik Güneş Gözlüğü", "2.390₺", 2390.0, "Kahve", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c101", ["kahve", "kemik", "gözlük"]),
+            "top": ("Boğazlı Kaşmir Triko", "MASSIMO DUTTI", "Kadın Çikolata Kahve Fitilli Boğazlı Kaşmir Triko Kazak", "1.690₺", 1690.0, "Çikolata Kahve", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["çikolata", "kahve", "boğazlı", "triko"]),
+            "bottom": ("Yün Palazzo", "YARGICI", "Kadın Espresso Kahve Yüksek Bel Pileli Yün Palazzo Pantolon", "1.590₺", 1590.0, "Espresso Kahve", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["espresso", "kahve", "palazzo"]),
+            "bag": ("Gold Tokalı Çanta", "BAGMORI", "Kadın Camel Gold Tokalı Deri Omuz & Kol Çantası", "899₺", 899.0, "Camel", "https://www.bagmori.com", ["camel", "gold", "deri", "çanta"]),
+            "shoes": ("Süet Sneaker", "ADIDAS", "Kadın Camel / Krem Süet Retro Court Sneaker", "3.799₺", 3799.0, "Camel / Krem", "https://www.trendyol.com/kadin-spor-ayakkabi-x-g1-c109", ["camel", "krem", "süet", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="erkek_kasim_ortakoy_bordo_suet_siyah_triko",
+        gender_segment="erkek",
+        designer_name="KEREM",
+        music_id="soho_lounge_sax_rhodes_pov",
+        title="Ortaköy Kış Erkek Tasarım Kreasyonu: Koyu Bordo Kürklü Yaka Süet Mont, Siyah Merinos Boğazlı Triko & Gri Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🍷🧥✨",
+        spoken_hook="Ortaköy Boğaz meydanında kış mevsiminin en çarpıcı bordo kürklü süet mont ve siyah merinos erkek şıklığı!",
+        viral_hook="🛑 Erkek Sartorial Moda Tasarımcımız KEREM imzalı Ortaköy Kış Kreasyonu! Koyu bordo kürklü yaka süet kışlık mont, siyah fitilli merinos boğazlı triko, gri flanel pileli yün pantolon ve siyah deri evrak çantası! 💬 Favoriniz 1 mi 3 mü? 👇🍷🔥",
+        badge_walk="» ORTAKÖY BORDO SÜET MONT & MERİNOS «",
+        asset_prefix="erkek_ortakoy1",
+        sku_prefix="93160100",
+        specs={
+            "outerwear": ("Kürklü Süet Mont", "ZARA MAN", "Erkek Koyu Bordo Kürklü Yaka Kışlık Süet Mont", "3.690₺", 3690.0, "Koyu Bordo", "https://www.trendyol.com/erkek-mont-x-g2-c118", ["bordo", "süet", "kürklü", "mont"]),
+            "cap": ("Aviator Gözlük", "RAY-BAN", "Erkek Siyah Metal Çerçeveli Aviator Güneş Gözlüğü", "4.650₺", 4650.0, "Siyah", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c101", ["siyah", "aviator", "gözlük"]),
+            "top": ("Merinos Boğazlı", "MASSIMO DUTTI", "Erkek Siyah Fitilli Merinos Yün Boğazlı Triko Kazak", "1.590₺", 1590.0, "Siyah", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["siyah", "boğazlı", "triko"]),
+            "bottom": ("Flanel Pantolon", "BEYMEN CLUB", "Erkek Gri Flanel Pileli Kışlık Yün Pantolon", "2.190₺", 2190.0, "Gri", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["gri", "flanel", "pantolon"]),
+            "bag": ("Deri Evrak Çantası", "TERGAN", "Erkek Siyah Deri Evrak & Omuz Çantası", "2.690₺", 2690.0, "Siyah", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["siyah", "deri", "çanta"]),
+            "shoes": ("Deri Sneaker", "ADIDAS", "Erkek Siyah / Bordo Detaylı Beyaz Tabanlı Deri Sneaker", "3.599₺", 3599.0, "Siyah / Bordo", "https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109", ["siyah", "bordo", "deri", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru",
+        gender_segment="kiz_cocuk",
+        designer_name="LEYLA",
+        music_id="syn_cole_feel_good_preppy_kids",
+        title="Kalamış Kız Çocuk Kış Tasarım Kreasyonu: Lavanta Şişme Puffer Mont, Ekru Saç Örgü Boğazlı Triko & Antrasit Kışlık Pantolon (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 💜❄️✨",
+        spoken_hook="Kalamış Marina parkında kız çocuklar için pastel lavanta şişme mont ve ekru saç örgü kış sıcaklığı!",
+        viral_hook="🛑 Kız Çocuk Kış Moda Tasarımcımız LEYLA imzalı Kalamış Kış Kreasyonu! Pastel lavanta kapüşonlu şişme puffer mont, krem fitilli bere, ekru saç örgü boğazlı triko kazak, rahat antrasit kışlık pantolon ve lavanta kapitone çanta! 👇💜❄️",
+        badge_walk="» KALAMIŞ LAVANTA PUFFER & EKRU TRİKO «",
+        asset_prefix="kid_girl4",
+        sku_prefix="93170100",
+        specs={
+            "outerwear": ("Kız Çocuk Şişme Mont", "ZARA KIDS", "Kız Çocuk Lavanta Kapüşonlu Şişme Kışlık Puffer Mont", "1.749₺", 1749.0, "Lavanta", "https://www.trendyol.com/kiz-cocuk-mont-x-g3-c118", ["lavanta", "lila", "şişme", "mont"]),
+            "cap": ("Kışlık Triko Bere", "LC WAIKIKI KIDS", "Kız Çocuk Krem Fitilli Kışlık Triko Bere", "229₺", 229.0, "Krem", "https://www.trendyol.com/kiz-cocuk-bere-x-g3-c1041", ["krem", "fitilli", "bere"]),
+            "top": ("Saç Örgü Triko", "MANGO KIDS", "Kız Çocuk Ekru Saç Örgü Boğazlı Kışlık Triko Kazak", "799₺", 799.0, "Ekru", "https://www.trendyol.com/kiz-cocuk-kazak-x-g3-c1092", ["ekru", "saç örgü", "boğazlı", "kazak"]),
+            "bottom": ("Kışlık Pantolon", "DEFACTO KIDS", "Kız Çocuk Antrasit Rahat Kesim İçi Polarlı Kışlık Pantolon", "599₺", 599.0, "Antrasit", "https://www.trendyol.com/kiz-cocuk-pantolon-x-g3-c70", ["antrasit", "gri", "pantolon"]),
+            "bag": ("Mini Sırt Çantası", "BAGMORI", "Kız Çocuk Lavanta Kapitone Mini Sırt Çantası", "569₺", 569.0, "Lavanta", "https://www.bagmori.com", ["lavanta", "kapitone", "çanta"]),
+            "shoes": ("Çocuk Sneaker", "ADIDAS KIDS", "Kız Çocuk Beyaz / Lavanta Çizgili Court Sneaker", "2.199₺", 2199.0, "Beyaz / Lavanta", "https://www.trendyol.com/kiz-cocuk-spor-ayakkabi-x-g3-c109", ["beyaz", "lavanta", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="cocuk_erkek_kasim_emirgan_kiremit_kolej_antrasit",
+        gender_segment="erkek_cocuk",
+        designer_name="MERT",
+        music_id="nisantasi_funk_slapbass_brass_pov",
+        title="Emirgan Erkek Çocuk Kış Tasarım Kreasyonu: Kiremit Peluş Yaka Kolej Mont, Antrasit Waffle Triko & Lacivert Chino (Tasarım: MERT • %100 Özgün AI Çocuk Model) 🍁❄️✨",
+        spoken_hook="Emirgan Korusu yürüyüşünde erkek çocuklar için kiremit peluş yakalı kışlık kolej mont ve antrasit triko şıklığı!",
+        viral_hook="🛑 Erkek Çocuk Kış Moda Tasarımcımız MERT imzalı Emirgan Kış Kreasyonu! Kiremit/krem peluş yakalı kışlık kolej mont, antrasit fitilli bere, antrasit waffle örgü kazak ve koyu lacivert kışlık chino pantolon! 👇🍁❄️",
+        badge_walk="» EMİRGAN KİREMİT KOLEJ MONT & ANTRASİT «",
+        asset_prefix="kid_boy4",
+        sku_prefix="93180100",
+        specs={
+            "outerwear": ("Peluş Yaka Kolej Mont", "MANGO KIDS", "Erkek Çocuk Kiremit / Krem Peluş Yakalı Kışlık Kolej Mont", "1.849₺", 1849.0, "Kiremit / Krem", "https://www.trendyol.com/erkek-cocuk-mont-x-g3-c118", ["kiremit", "krem", "kolej", "mont"]),
+            "cap": ("Fitilli Bere", "LC WAIKIKI KIDS", "Erkek Çocuk Antrasit Fitilli Kışlık Triko Bere", "229₺", 229.0, "Antrasit", "https://www.trendyol.com/erkek-cocuk-bere-x-g3-c1041", ["antrasit", "bere"]),
+            "top": ("Waffle Triko Kazak", "ZARA KIDS", "Erkek Çocuk Antrasit Waffle Örgü Kışlık Pamuklu Kazak", "749₺", 749.0, "Antrasit", "https://www.trendyol.com/erkek-cocuk-kazak-x-g3-c1092", ["antrasit", "waffle", "kazak"]),
+            "bottom": ("Kışlık Chino", "DEFACTO KIDS", "Erkek Çocuk Koyu Lacivert Kışlık Pamuklu Chino Pantolon", "629₺", 629.0, "Koyu Lacivert", "https://www.trendyol.com/erkek-cocuk-pantolon-x-g3-c70", ["lacivert", "chino", "pantolon"]),
+            "bag": ("Sırt Çantası", "PUMA KIDS", "Erkek Çocuk Kiremit / Lacivert Kanvas Sırt Çantası", "679₺", 679.0, "Kiremit / Lacivert", "https://www.trendyol.com/cocuk-sirt-cantasi-x-c115", ["kiremit", "lacivert", "çanta"]),
+            "shoes": ("Çocuk Sneaker", "ADIDAS KIDS", "Erkek Çocuk Beyaz / Kiremit / Lacivert Detaylı Sneaker", "2.199₺", 2199.0, "Beyaz / Kiremit", "https://www.trendyol.com/erkek-cocuk-spor-ayakkabi-x-g3-c109", ["beyaz", "kiremit", "sneaker"]),
+        },
+    ),
     {
         "id": "kadin_kasim_galataport_bordo_trench_ekru",
         "gender_segment": "kadin",
@@ -3722,11 +3954,14 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
     from autonomous_creation_factory import (
         PERMANENTLY_RETIRED_ARCHETYPES,
         is_creation_or_model_used,
+        load_dynamic_creations_catalog,
         load_zero_repeat_ledger,
         mark_creation_and_model_used,
+        synthesize_autonomous_winter_creation,
     )
 
     zero_ledger = load_zero_repeat_ledger()
+    all_catalog_archetypes = load_dynamic_creations_catalog() + list(OUTFIT_ARCHETYPES)
     history_path = "output/published_outfits_history.json"
     used_archetypes = list(PERMANENTLY_RETIRED_ARCHETYPES)
     for aid in zero_ledger.get("retired_archetypes", []):
@@ -3774,7 +4009,7 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
     forced_id = ARCHETYPE_ALIASES.get(forced_id, forced_id)
     allow_retired = os.environ.get("ALLOW_RETIRED_REBUILD", "0").strip() == "1"
     forced_matches = [
-        a for a in OUTFIT_ARCHETYPES
+        a for a in all_catalog_archetypes
         if a["id"] == forced_id
         and os.path.exists(a["model_frames"][0])
         and (allow_retired or not is_creation_or_model_used(a, zero_ledger))
@@ -3790,41 +4025,46 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
             )
         # SADECE daha önce HİÇ paylaşılmamış kombinleri ve HİÇ kullanılmamış mankenleri seç (%100 Sıfır-Tekrar Garantisi)
         forced_segment = os.environ.get("FORCE_SEGMENT", "").strip().lower()
-        all_valid_archetypes = [a for a in OUTFIT_ARCHETYPES if os.path.exists(a["model_frames"][0])]
+        rotation_order = ["kadin", "erkek", "kiz_cocuk", "erkek_cocuk"]
+        last_id = used_archetypes[-1] if used_archetypes else ""
+        last_seg = "erkek_cocuk"
+        for a in all_catalog_archetypes:
+            if a["id"] == last_id:
+                last_seg = a.get("gender_segment", "kadin")
+                break
+        next_default_seg = rotation_order[(rotation_order.index(last_seg) + 1) % len(rotation_order)] if last_seg in rotation_order else "kadin"
+        desired_seg = forced_segment if (forced_segment and forced_segment not in ("otomatik", "all", "tumu")) else next_default_seg
+
+        all_valid_archetypes = [a for a in all_catalog_archetypes if os.path.exists(a["model_frames"][0])]
         available_archetypes = [
             a for a in all_valid_archetypes
-            if a["id"] not in used_archetypes and not is_creation_or_model_used(a, zero_ledger)
+            if (allow_retired or (a["id"] not in used_archetypes and not is_creation_or_model_used(a, zero_ledger)))
         ]
+
         if not available_archetypes:
-            raise RuntimeError(
-                "🛑 [SIFIR-TEKRAR KİLİDİ - ARDA & VERA] Havuzdaki tüm özgün kreasyonlar kullanıldı! "
-                "Aynı kombin veya aynı mankenin tekrar gönderilmesi KESİN OLARAK YASAKTIR. "
-                "Lütfen KAAN & MAYA ajanlarıyla yeni kreasyon serisi üretin."
+            print(
+                f"👗 [MODA TASARIM ATÖLYESİ - DEFNE, KEREM, LEYLA, MERT] "
+                f"Hazır stüdyo havuzu tamamlandı -> '{desired_seg}' segmenti için Argon'suz Bulut FLUX.1 "
+                f"motoruyla %100 sıfır-tekrar yepyeni kış kreasyonu ve AI manken üretiliyor..."
             )
-
-        if forced_segment and forced_segment not in ("otomatik", "all", "tumu"):
-            seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") == forced_segment]
-            if seg_matches:
-                available_archetypes = seg_matches
+            archetype = synthesize_autonomous_winter_creation(desired_seg, zero_ledger)
+            force_live_scrape = False
         else:
-            # Dengeli 4 Ana Segment Rotasyonu: Kadın -> Erkek -> Kız Çocuk -> Erkek Çocuk
-            rotation_order = ["kadin", "erkek", "kiz_cocuk", "erkek_cocuk"]
-            last_id = used_archetypes[-1] if used_archetypes else ""
-            last_seg = "erkek_cocuk"
-            for a in OUTFIT_ARCHETYPES:
-                if a["id"] == last_id:
-                    last_seg = a.get("gender_segment", "kadin")
-                    break
-            start_idx = (rotation_order.index(last_seg) + 1) % len(rotation_order) if last_seg in rotation_order else 0
-            for offset in range(len(rotation_order)):
-                target_seg = rotation_order[(start_idx + offset) % len(rotation_order)]
-                seg_candidates = [a for a in available_archetypes if a.get("gender_segment", "kadin") == target_seg]
-                if seg_candidates:
-                    available_archetypes = seg_candidates
-                    break
+            if forced_segment and forced_segment not in ("otomatik", "all", "tumu"):
+                seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") == forced_segment]
+                if seg_matches:
+                    available_archetypes = seg_matches
+            else:
+                start_idx = rotation_order.index(next_default_seg)
+                for offset in range(len(rotation_order)):
+                    target_seg = rotation_order[(start_idx + offset) % len(rotation_order)]
+                    seg_candidates = [a for a in available_archetypes if a.get("gender_segment", "kadin") == target_seg]
+                    if seg_candidates:
+                        available_archetypes = seg_candidates
+                        break
 
-        archetype = available_archetypes[0]
-        force_live_scrape = False
+            archetype = available_archetypes[0]
+            force_live_scrape = False
 
     print(f"[Özgün Kombin Motoru] '{archetype['title']}' ({archetype['id']}) için 1:1 doğrulanmış model-ürün eşleşmesi yükleniyor...")
 

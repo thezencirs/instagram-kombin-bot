@@ -438,6 +438,11 @@ def main():
     )
     args = parser.parse_args()
 
+    cooldown_flag = Path(args.video).parent / "skip_cooldown_active.flag"
+    if cooldown_flag.exists():
+        print("🛡️ [BULUT ÇİFT TETİKLEME KORUMASI] Cooldown bayrağı aktif; mükerrer kanal gönderimi güvenle atlandı.")
+        return
+
     reel_url = ""
     if os.environ.get("TELEGRAM_ONLY_MODE", "1") != "1" and os.environ.get("FORCE_DIRECT_IG_UPLOAD", "0") == "1":
         with open(args.caption_file, "r", encoding="utf-8") as f:

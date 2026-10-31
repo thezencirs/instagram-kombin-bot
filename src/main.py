@@ -72,25 +72,28 @@ def build_caption(outfit: dict) -> str:
 
     seg = outfit.get("gender_segment", "kadin")
     if seg == "cift":
-        col_label = "%100 AI KADIN & ERKEK CADILAR BAYRAMI PARTİ ÇİFT KOLEKSİYONU"
-        hashtags = "#kombinönerileri #çiftkombini #cadılarbayramı #partikombini #guzelai"
+        col_label = "%100 AI KADIN & ERKEK KIŞ MODA TASARIM ÇİFT KOLEKSİYONU"
+        hashtags = "#kombinönerileri #çiftkombini #kışkombini #oldmoney #guzelai"
     elif seg == "erkek":
-        col_label = "%100 AI ERKEK SONBAHAR/KIŞ KOLEKSİYONU"
-        hashtags = "#kombinönerileri #erkekkombin #sonbaharkombini #cadılarbayramı #guzelai"
-    elif seg == "cocuk":
-        col_label = "%100 AI ÇOCUK SONBAHAR/KIŞ KOLEKSİYONU"
-        hashtags = "#kombinönerileri #çocukkombin #sonbaharkombini #cadılarbayramı #guzelai"
+        col_label = "%100 AI ERKEK SONBAHAR/KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: KEREM)"
+        hashtags = "#kombinönerileri #erkekkombin #kışkombini #oldmoney #guzelai"
+    elif seg in ("cocuk", "kiz_cocuk"):
+        col_label = "%100 AI KIZ ÇOCUK KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: LEYLA)"
+        hashtags = "#kombinönerileri #çocukkombin #kızçocukkombin #kışkombini #guzelai"
+    elif seg == "erkek_cocuk":
+        col_label = "%100 AI ERKEK ÇOCUK KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: MERT)"
+        hashtags = "#kombinönerileri #çocukkombin #erkekçocukkombin #kışkombini #guzelai"
     else:
-        col_label = "%100 AI KADIN 2027 AW & CADILAR BAYRAMI KOLEKSİYONU"
-        hashtags = "#kombinönerileri #kadınkombin #sonbaharkombini #cadılarbayramı #guzelai"
+        col_label = "%100 AI KADIN 2026-2027 KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: DEFNE)"
+        hashtags = "#kombinönerileri #kadınkombin #kışkombini #oldmoney #guzelai"
 
     lines = [
         f"🔥 {hook_title}",
-        "📌 'Bugün ne giysem?' krizinde saniyeler içinde kurtulmak için bu 2K kapsül kombini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! 🎃✨",
+        "📌 'Bugün ne giysem?' krizinden saniyeler içinde kurtulmak için bu 2K kış tasarım kombinini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! ❄️✨",
         "",
         viral_hook,
         "",
-        f"💬 STİL ANKETİ: Bu 2027 Sonbahar/Kış & Cadılar Bayramı kombininde senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨",
+        f"💬 STİL ANKETİ: Bu 2026-2027 Kış Tasarım Kreasyonunda senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨",
         "",
         f"🛍️ KOMBİN FİYAT, MARKA & ÜRÜN KODU DETAYLARI ({col_label}):",
         f"1️⃣ 🧥 {c_out}: {items['outerwear']['brand']} – {items['outerwear']['name']} | Fiyat: {items['outerwear']['price']} | Ürün Kodu: {items['outerwear'].get('sku', '-')}",
@@ -138,12 +141,43 @@ def build_links_comment(outfit: dict) -> str:
 
 
 def main():
+    import time
+    from autonomous_creation_factory import load_zero_repeat_ledger
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="output/daily_kombin_reel.mp4")
     args = parser.parse_args()
 
     out_dir = os.path.dirname(args.output) or "output"
     os.makedirs(out_dir, exist_ok=True)
+
+    cooldown_flag = os.path.join(out_dir, "skip_cooldown_active.flag")
+    if os.path.exists(cooldown_flag):
+        try:
+            os.remove(cooldown_flag)
+        except Exception:
+            pass
+
+    # Bulut (GitHub Actions) arka arkaya çift tetikleme (schedule + harici workflow_dispatch çakışması) koruması:
+    if (
+        os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
+        and not os.environ.get("FORCE_ARCHETYPE_ID", "").strip()
+        and os.environ.get("BYPASS_CLOUD_COOLDOWN", "0") != "1"
+    ):
+        zero_ledger = load_zero_repeat_ledger()
+        last_tg_ts = float(zero_ledger.get("last_telegram_dispatch_ts", 0.0) or 0.0)
+        min_gap_sec = int(os.environ.get("CLOUD_MIN_DISPATCH_GAP_SEC", "7200"))
+        elapsed = time.time() - last_tg_ts
+        if last_tg_ts > 0 and 0 <= elapsed < min_gap_sec:
+            rem_min = int((min_gap_sec - elapsed) // 60)
+            with open(cooldown_flag, "w", encoding="utf-8") as cf:
+                cf.write(f"cooldown_active_remaining_min={rem_min}\n")
+            print(
+                f"🛡️ [BULUT ÇİFT TETİKLEME KORUMASI] Son Telegram yayınından bu yana yalnızca "
+                f"{int(elapsed // 60)} dk geçti (Minimum aralık: {min_gap_sec // 60} dk, kalan: {rem_min} dk). "
+                f"Rezerv kreasyon israfını önlemek için bu çakışan tetikleme güvenle atlandı."
+            )
+            return
 
     slot = os.environ.get("SLOT_NAME", "otomatik")
     watermark = os.environ.get("IG_WATERMARK", "@guzelaicom")

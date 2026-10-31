@@ -1,6 +1,6 @@
 """
-GuzelAI 22 Ajanlı (Ajan Kaynakları Birimi ARDA, MAYA, KAAN, VERA + İK Direktörü İREM + 1:1 Görsel Başdenetçisi SARP Onaylı)
-%100 Sıfır-Tekrar (Zero-Repeat) Manken & Kombin Garantili, Mevsimsel Özgün Telegram Stok Üretim Hattı
+GuzelAI 26 Ajanlı (Moda Tasarım Atölyesi DEFNE, KEREM, LEYLA, MERT + Ajan Kaynakları Birimi ARDA, MAYA, KAAN, VERA + İK Direktörü İREM + 1:1 Görsel Başdenetçisi SARP Onaylı)
+%100 Sıfır-Tekrar (Zero-Repeat) Manken & Kombin Garantili, 2026-2027 Kış Sezonu Telegram Süper Yayın Üretim Hattı
 """
 import os
 import sys
@@ -19,6 +19,7 @@ os.environ["TELEGRAM_ONLY_MODE"] = "1"
 os.environ["IG_ENABLE_UPLOAD"] = "0"
 
 from kombin_agent_swarm import (
+    run_fashion_atelier_designers,
     run_agent_resources_division,
     run_hr_agent_trainer_director,
     run_visual_1to1_match_inspector,
@@ -27,18 +28,20 @@ from kombin_agent_swarm import (
 import main as main_mod
 from instagram_uploader import dispatch_all_channels
 
-# Ajan Kaynakları Birimi (ARDA, MAYA, KAAN, VERA) & SARP tarafından %100 1:1 model-kıyafet
-# ve %100 SIFIR-TEKRAR (daha önce hiç kullanılmamış manken & kombin) uyumu doğrulanan 4-Segment Yeni Sezon Kreasyon Listesi:
+# Moda Tasarım Atölyesi (DEFNE, KEREM, LEYLA, MERT) + Ajan Kaynakları Birimi (ARDA, MAYA, KAAN, VERA) & SARP tarafından
+# %100 1:1 manken-kıyafet eşleşmesi ve %100 SIFIR-TEKRAR uyumu doğrulanan 4-Segment Kış Süper Yayın Listesi
+# (Not: Diğer 4 yeni stüdyo kış kreasyonu + Sonsuz Bulut FLUX.1 Sentez Motoru GitHub Actions otomatik yayınları için rezervde bırakılmıştır!):
 VERIFIED_1TO1_STOCK_QUEUE = [
-    ("yeni_sezon_kadin_galataport", "kadin_kasim_galataport_bordo_trench_ekru"),
-    ("yeni_sezon_erkek_nisantasi", "erkek_kasim_nisantasi_lacivert_kaban_camel"),
-    ("yeni_sezon_kiz_cocuk_moda", "cocuk_kiz_kasim_moda_pembe_tuvit_kolej"),
-    ("yeni_sezon_erkek_cocuk_gokturk", "cocuk_erkek_kasim_gokturk_haki_puffer_street"),
+    ("kis_atolye_kadin_etiler", "kadin_kasim_etiler_antrasit_kase_murdum"),
+    ("kis_atolye_erkek_levent", "erkek_kasim_levent_haki_kase_ekru_balikci"),
+    ("kis_atolye_kiz_cocuk_suadiye", "cocuk_kiz_kasim_suadiye_krem_pelus_bordo"),
+    ("kis_atolye_erkek_cocuk_fenerbahce", "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal"),
 ]
 
 
 def run_stock_batch():
-    print("🏛️ [Ajan Kaynakları Birimi - ARDA, MAYA, KAAN, VERA & SARP] Sıfır-Tekrar Manken/Kombin Kilidi ve 1:1 Görsel Eşleşme Kontrolü Başlatılıyor...")
+    print("👗 [Moda Tasarım Atölyesi - DEFNE, KEREM, LEYLA, MERT & Ajan Kaynakları - ARDA, MAYA, KAAN, VERA] 26-Ajan Kış Kreasyon ve Sıfır-Tekrar Denetimi Başlatılıyor...")
+    atelier_report = run_fashion_atelier_designers()
     ar_report = run_agent_resources_division()
     v_report = run_visual_1to1_match_inspector()
     hr_report = run_hr_agent_trainer_director()
@@ -49,7 +52,7 @@ def run_stock_batch():
 
     for idx, (slot_label, arch_id) in enumerate(VERIFIED_1TO1_STOCK_QUEUE, start=1):
         print(f"\n==================================================================")
-        print(f"📦 [SIFIR-TEKRAR YENİ SEZON 4-SEGMENT KREASYON PAKETİ {idx}/{len(VERIFIED_1TO1_STOCK_QUEUE)}] {arch_id}")
+        print(f"📦 [26-AJAN MODA ATÖLYESİ KIŞ SÜPER YAYIN PAKETİ {idx}/{len(VERIFIED_1TO1_STOCK_QUEUE)}] {arch_id}")
         print(f"==================================================================")
         os.environ["FORCE_ARCHETYPE_ID"] = arch_id
         os.environ["SLOT_NAME"] = slot_label
@@ -59,7 +62,10 @@ def run_stock_batch():
         main_mod.main()
         dispatch_all_channels("output/daily_kombin_reel.mp4", reel_url="")
 
-    print("\n✅ [TAMAMLANDI] Tüm 4-segment yeni sezon sıfır-tekrar kreasyon paketleri @guzelaibot'a ve guzelai.com'a iletildi!")
+    # Son olarak raporları güncel rezerv/emekli sayılarıyla tekrar senkronize et
+    run_fashion_atelier_designers()
+    run_agent_resources_division()
+    print("\n✅ [TAMAMLANDI] Tüm 4-segment Kış Moda Tasarım Atölyesi süper yayın paketleri @guzelaibot'a ve guzelai.com'a iletildi!")
 
 
 if __name__ == "__main__":

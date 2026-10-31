@@ -405,8 +405,8 @@ def _gh_put_file(repo_path: str, content_bytes: bytes, commit_message: str) -> b
     return True
 
 
-def _get_existing_go_files() -> set:
-    """Returns the set of filenames (e.g. '981976289.html') already present in `public/go` on GitHub."""
+def _get_existing_repo_dir_files(repo_dir: str) -> set:
+    """Returns the set of filenames already present in `repo_dir` on GitHub."""
     if (
         os.environ.get("LOCAL_ONLY", "0") == "1"
         or os.environ.get("DISABLE_GITHUB_SYNC", "0") == "1"
@@ -416,7 +416,7 @@ def _get_existing_go_files() -> set:
         return set()
     try:
         raw = subprocess.check_output(
-            [GH_EXE, "api", f"repos/{GUZELAI_REPO}/contents/public/go"],
+            [GH_EXE, "api", f"repos/{GUZELAI_REPO}/contents/{repo_dir}"],
             stderr=subprocess.DEVNULL,
         )
         items = json.loads(raw)
@@ -425,6 +425,11 @@ def _get_existing_go_files() -> set:
     except Exception:
         pass
     return set()
+
+
+def _get_existing_go_files() -> set:
+    """Returns the set of filenames (e.g. '981976289.html') already present in `public/go` on GitHub."""
+    return _get_existing_repo_dir_files("public/go")
 
 
 def publish_to_guzelai_website(
@@ -443,18 +448,46 @@ def publish_to_guzelai_website(
     os.makedirs(out_dir, exist_ok=True)
     entry = build_verified_kombin_entry(outfit, ig_reel_url=ig_reel_url)
 
-    # Build all 1:1 verified sample outfits (Kadın, Erkek, Kız Çocuk, Erkek Çocuk & Çift) from OUTFIT_ARCHETYPES
+    # Build all 1:1 verified sample outfits (Kadın, Erkek, Kız Çocuk, Erkek Çocuk & Çift) from dynamic + static OUTFIT_ARCHETYPES
     sample_entries: List[Dict[str, Any]] = [entry]
     seen_ids = {entry["archetype_id"]}
     try:
+        from autonomous_creation_factory import load_dynamic_creations_catalog
         from outfit_generator import OUTFIT_ARCHETYPES
-        for arch in OUTFIT_ARCHETYPES:
+        for arch in (load_dynamic_creations_catalog() + list(OUTFIT_ARCHETYPES)):
             aid = arch.get("id", "")
             if aid and aid not in seen_ids and arch.get("verified_exact_items"):
                 sample_entries.append(build_verified_kombin_entry(arch, ig_reel_url=ig_reel_url))
                 seen_ids.add(aid)
     except Exception:
         pass
+
+    # Bulut (GitHub Actions) üzerinde dinamik sentezlenen yeni AI manken ve 6 dekupe PNG'sini guzelai.com'a otomatik yükle
+    try:
+        existing_models = _get_existing_repo_dir_files("public/pinterest-models")
+        existing_cutouts = _get_existing_repo_dir_files("public/kombin-cutouts")
+        m_frames_active = outfit.get("model_frames") or []
+        if m_frames_active:
+            m0_path = Path(m_frames_active[0])
+            if m0_path.exists() and m0_path.name not in existing_models:
+                _gh_put_file(
+                    f"public/pinterest-models/{m0_path.name}",
+                    m0_path.read_bytes(),
+                    f"feat(model): sync new unique AI model {m0_path.name} to guzelai.com",
+                )
+        active_cutouts = outfit.get("cutout_assets") or {}
+        for _, c_rel in active_cutouts.items():
+            if not c_rel:
+                continue
+            c_path = Path(c_rel)
+            if c_path.exists() and c_path.name not in existing_cutouts:
+                _gh_put_file(
+                    f"public/kombin-cutouts/{c_path.name}",
+                    c_path.read_bytes(),
+                    f"feat(cutout): sync 1:1 cutout {c_path.name} to guzelai.com",
+                )
+    except Exception as sync_err:
+        print(f"[UYARI] Dinamik model/dekupe guzelai.com senkronizasyon uyarısı: {sync_err}")
     for sample_outfit in PREVERIFIED_GUZELAI_OUTFITS:
         sid = sample_outfit.get("id", "")
         if sid not in seen_ids:
