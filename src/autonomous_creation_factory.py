@@ -54,6 +54,7 @@ PERMANENTLY_RETIRED_ARCHETYPES = [
     "pajama_morning_vibe",
     "chic_black_biker_denim",
     "casual_denim_sherpa_grey",
+    "erkek_kasim_ortakoy_bordo_suet_siyah_triko",
 ]
 
 PERMANENTLY_RETIRED_MODEL_FRAMES = [
@@ -77,6 +78,7 @@ PERMANENTLY_RETIRED_MODEL_FRAMES = [
     "assets/outfit3_model_step1.jpg",
     "assets/outfit2_model_step1.jpg",
     "assets/trial1_model_street.jpg",
+    "assets/erkek_ortakoy1_step1.jpg",
 ]
 
 FASHION_ATELIER_DESIGNERS = [
@@ -528,14 +530,20 @@ def synthesize_autonomous_winter_creation(
         else f"Vertical 9:16 photorealistic full-body street fashion lookbook photograph of a 100% AI adult fashion model with {chosen_bp['hair_face']}"
     )
 
+    try:
+        from guzelai_holding_hr_academy import build_supermodel_editorial_prompt
+    except Exception:
+        build_supermodel_editorial_prompt = lambda p, is_3d_avatar=False: p
+
     for s_idx, pose_txt in enumerate(step_poses, start=1):
         rel_frame = f"assets/{archetype_id}_step{s_idx}.jpg"
         abs_frame = BASE_DIR / rel_frame
-        prompt = (
+        raw_prompt = (
             f"{subject_prefix} walking along {chosen_bp['district']} Istanbul in crisp winter daylight, {pose_txt}, "
             f"wearing an open {outer_desc} over a {top_desc}, {bottom_desc}, {cap_desc}, carrying a {bag_desc}, "
             f"and wearing {shoes_desc}, editorial winter fashion lookbook, soft bokeh, no text, no watermark"
         )
+        prompt = build_supermodel_editorial_prompt(raw_prompt, is_3d_avatar=is_3d)
         img = cloud_fetch_ai_image(prompt, width=768, height=1344, seed=base_seed + s_idx * 17)
         if img is None:
             raise RuntimeError(f"Bulut FLUX motoru manken karesi üretemedi: {rel_frame}")

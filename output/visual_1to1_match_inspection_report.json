@@ -1,11 +1,53 @@
 {
   "agent": "visual-1to1-match-inspector",
   "agent_code_name": "SARP (Ajan 18 - 1:1 Görsel & Üst Giyim Eşleşme Başdenetçisi)",
-  "generated_at": "2026-11-01 01:32:16",
+  "generated_at": "2026-11-02 03:17:49",
   "live_scrape_random_override_blocked": true,
-  "total_archetypes_inspected": 35,
-  "passed_1to1_archetypes": 35,
+  "total_archetypes_inspected": 37,
+  "passed_1to1_archetypes": 37,
   "inspected_archetypes": [
+    {
+      "archetype_id": "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
+      "title": "Nişantaşı Abdi İpekçi 'GüzelAI Holding Reklam Lansmanı': Zümrüt Yeşili Kruvaze Kaşe Kaban, Fildişi Kaşmir Triko & Espresso Yün Palazzo (36 Ajan • 2K Sinema Reels) 🏛️💚✨",
+      "gender_segment": "kadin",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Kadın Fildişi Fitilli Boğazlı Saf Kaşmir Triko Kazak",
+        "color": "Fildişi / Ekru",
+        "cutout_asset": "assets/items/kadin_holding_zumrut1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Kadın Zümrüt Yeşili Kruvaze Uzun Yün Kaşe Kaban",
+        "color": "Zümrüt Yeşili",
+        "cutout_asset": "assets/items/kadin_holding_zumrut1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
+    {
+      "archetype_id": "erkek_kasim_bebek_konyak_kase_lacivert",
+      "title": "Bebek Sahil Kış Erkek Sartorial Reklam Kreasyonu: Konyak Kruvaze Kaşe Kaban, Gece Laciverti Boğazlı Merinos & Antrasit Flanel (GüzelAI Holding • %100 Özgün AI Erkek Manken) 🏛️🥃✨",
+      "gender_segment": "erkek",
+      "model_frames_verified": true,
+      "all_6_cutouts_present": true,
+      "missing_cutouts": [],
+      "top_garment_verified": {
+        "name": "Erkek Gece Laciverti Fitilli Boğazlı Merinos Triko Kazak",
+        "color": "Gece Laciverti",
+        "cutout_asset": "assets/items/erkek_bebek_holding1_03_top.png",
+        "matches_model_upper_body_1to1": true
+      },
+      "outerwear_garment_verified": {
+        "name": "Erkek Konyak Taba Kruvaze Uzun Yün Kaşe Kaban",
+        "color": "Konyak / Taba",
+        "cutout_asset": "assets/items/erkek_bebek_holding1_01_outer.png",
+        "matches_model_outerwear_1to1": true
+      },
+      "verdict": "PASS_100_PERCENT_1TO1_MATCH"
+    },
     {
       "archetype_id": "kadin_kasim_flight01_zorlu_yakut_kase_noir",
       "title": "Zorlu Center 'CEO Sessizliği' Kış Viral Uçuş Kreasyonu: Yakut Kırmızısı Kruvaze Kaşe Kaban & Obsidyen Siyah Kaşmir (Senaryo: BARIŞ • Evrim: EVREN • Tasarım: DEFNE) 🚀❤️‍🔥✨",

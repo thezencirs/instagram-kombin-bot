@@ -1,4 +1,4 @@
-name: GuzelAI.com 7/24 Argon'suz Bulut 28-Ajan Kendini Geliştiren Evrim, Viral Senarist (BARIŞ & EVREN) & Moda Atölyesi Otomasyonu
+name: GüzelAI Holding A.Ş. 7/24 Argon'suz Bulut 36-Ajan (İK/CV Akademisi, Manken, Moda, Reklam/Sinema & Medya Ajansı) 2K Reels Otomasyonu
 
 on:
   schedule:
@@ -65,7 +65,7 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🚀 1. Adım — Öz-Evrim (EVREN) + Viral Senarist (BARIŞ) + Moda Atölyesi (DEFNE/KEREM/LEYLA/MERT) Sinematik 2K Reels Üretimi
+      - name: 🚀 1. Adım — GüzelAI Holding Reklam & Sinema Ajansı (ATLAS/LARA/BARIŞ/OZAN) + Manken & Moda Ajansı 2K Sinematik Reels Üretimi
         env:
           IG_WATERMARK: ${{ vars.IG_WATERMARK || '@guzelaicom' }}
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
@@ -81,7 +81,7 @@ jobs:
         run: |
           python src/main.py --output output/reel_final.mp4
 
-      - name: 🤖 2. Adım — 28 Uzman Ajan Swarm + Öz-Evrim (EVREN) + Viral Senarist (BARIŞ) + Moda Atölyesi + Ajan Kaynakları Denetimi
+      - name: 🤖 2. Adım — GüzelAI Holding 36 Uzman Ajan Swarm (İK & CV Akademisi, Manken, Moda, Reklam/Sinema & Medya Ajansı) Denetimi
         env:
           GH_TOKEN: ${{ secrets.GUZELAI_PAT || secrets.GITHUB_TOKEN }}
           IG_ENABLE_UPLOAD: '0'
@@ -93,7 +93,7 @@ jobs:
           fi
           python src/kombin_agent_swarm.py --role all
 
-      - name: 📱 3. Adım — Telegram (@guzelaibot) Sinematik Süper Yayın Paketi & GuzelAI.com Vitrin Yayını (Instagram API Devre Dışı)
+      - name: 📱 3. Adım — Medya Ajansı (DENİZ) Telegram (@guzelaibot) 2K Sinema Paketi & GuzelAI.com Vitrin Yayını
         env:
           IG_ENABLE_UPLOAD: '0'
           TELEGRAM_ONLY_MODE: '1'
@@ -107,7 +107,7 @@ jobs:
           fi
           python src/instagram_uploader.py --video output/reel_final.mp4 --caption-file output/caption.txt --all-channels
 
-      - name: 📤 4. Adım — 2K Sinematik Reels, Evrim Genomu, Viral Senaryo ve 28-Ajan Denetim Raporlarını Kaydet
+      - name: 📤 4. Adım — 2K Sinematik Reels, Holding 36-Ajan CV Sicilleri, Sinema Kalite Sertifikası ve Denetim Raporlarını Kaydet
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
@@ -117,6 +117,10 @@ jobs:
             output/hook_cover.jpg
             output/pinterest_fashion_collage.jpg
             output/caption.txt
+            output/guzelai_holding_agent_cvs.json
+            output/guzelai_holding_agent_cvs.md
+            output/reels_cinema_quality_report.json
+            output/reels_cinema_quality_report.md
             output/self_evolution_genome.json
             output/viral_screenplay_current.json
             output/self_evolution_report.json
@@ -136,17 +140,44 @@ jobs:
             output/outfit_links.json
           retention-days: 7
 
-      - name: 💾 5. Adım — Evrimsel Hafızayı (`self_evolution_genome.json`), Sıfır-Tekrar Defterini ve Bulut Kreasyonlarını Depoya Kaydet
+      - name: 💾 5. Adım — Holding CV Sicilini, Evrimsel Hafızayı, Sıfır-Tekrar Defterini ve Bulut Kreasyonlarını Depoya Kaydet
         if: ${{ always() }}
+        shell: bash
         run: |
           if [ -f output/skip_cooldown_active.flag ]; then
             rm -f output/skip_cooldown_active.flag
             exit 0
           fi
-          git config user.name "GuzelAI 28-Agent Self-Evolving Bot"
+          git config user.name "GuzelAI Holding 36-Agent Bot"
           git config user.email "bot@guzelai.com"
-          git add output/self_evolution_genome.json output/viral_screenplay_current.json output/self_evolution_report.json output/self_evolution_report.md output/zero_repeat_ledger.json output/dynamic_creations_catalog.json output/fashion_atelier_designers_report.json output/fashion_atelier_designers_report.md output/agent_resources_division_report.json output/agent_resources_division_report.md output/instagram_uploaded_history.json output/published_outfits_history.json output/last_used_music_profiles.json output/social_health_report.json output/prepublish_compliance_certificate.json output/visual_1to1_match_inspection_report.json output/hr_department_audit_and_training_report.json assets/atelier_* assets/items/atelier_* 2>/dev/null || true
-          git diff --staged --quiet || (git commit -m "chore(28-agent-evolution): evolve generation genome, viral screenplay & zero-repeat ledger [skip ci]" && (git pull --rebase origin main || true) && git push)
+          shopt -s nullglob
+          git add \
+            output/guzelai_holding_agent_cvs.json \
+            output/guzelai_holding_agent_cvs.md \
+            output/reels_cinema_quality_report.json \
+            output/reels_cinema_quality_report.md \
+            output/self_evolution_genome.json \
+            output/viral_screenplay_current.json \
+            output/self_evolution_report.json \
+            output/self_evolution_report.md \
+            output/zero_repeat_ledger.json \
+            output/dynamic_creations_catalog.json \
+            output/fashion_atelier_designers_report.json \
+            output/fashion_atelier_designers_report.md \
+            output/agent_resources_division_report.json \
+            output/agent_resources_division_report.md \
+            output/instagram_uploaded_history.json \
+            output/published_outfits_history.json \
+            output/last_used_music_profiles.json \
+            output/social_health_report.json \
+            output/prepublish_compliance_certificate.json \
+            output/visual_1to1_match_inspection_report.json \
+            output/hr_department_audit_and_training_report.json || true
+          atelier_files=(assets/atelier_* assets/items/atelier_*)
+          if [ ${#atelier_files[@]} -gt 0 ]; then
+            git add "${atelier_files[@]}" || true
+          fi
+          git diff --staged --quiet || (git commit -m "chore(holding-36-agents): persist zero-repeat ledger, CVs, cinema telemetry & evolution genome [skip ci]" && (git pull --rebase origin main || true) && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

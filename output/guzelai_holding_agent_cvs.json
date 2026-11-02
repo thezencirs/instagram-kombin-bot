@@ -1,0 +1,490 @@
+{
+  "holding_name": "GüzelAI Moda, Manken/Model, Reklam & Medya Holding A.Ş.",
+  "hr_board": "Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)",
+  "generated_at": "2026-11-02 03:18:10",
+  "total_certified_agents": 36,
+  "previously_active_agents": 28,
+  "newly_recruited_with_cv_count": 8,
+  "holding_academy_graduation_average": 99.55,
+  "subsidiary_agencies": [
+    {
+      "agency_code": "HR_ACADEMY",
+      "agency_name": "GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı",
+      "director": "Ajan 17 İREM (CHRO) & Ajan 29 SELİN (Akademi Dekanı)",
+      "mission": "CV tabanlı seçme-yerleştirme, 4 modüllü ajan yetiştirme akademisi, performans karnesi ve %100 sıfır-tekrar yönetişimi."
+    },
+    {
+      "agency_code": "MODEL_AGENCY",
+      "agency_name": "GüzelAI Elite Manken & Model Ajansı",
+      "director": "Ajan 20 MAYA (Baş Casting) • Ajan 30 DERİN (Fizik & Işık) • Ajan 31 KUZEY (Podyum Koreografi)",
+      "mission": "Kadın, Erkek, Kız Çocuk ve Erkek Çocuk kategorilerinde %100 özgün, fotogerçekçi 85mm lens dokulu süpermodel üretimi ve 1:1 kıyafet uyumu."
+    },
+    {
+      "agency_code": "FASHION_HOUSE",
+      "agency_name": "GüzelAI Haute Couture & Moda Tasarım Evi",
+      "director": "Ajan 23 DEFNE • Ajan 24 KEREM • Ajan 25 LEYLA • Ajan 26 MERT",
+      "mission": "Mevsime uygun yüksek moda kış kreasyonları, renk/kumaş uyumu ve doğrulanmış mağaza link/ikiz ürün mimarisi."
+    },
+    {
+      "agency_code": "AD_CINEMA_AGENCY",
+      "agency_name": "GüzelAI Reklam & Sinema Prodüksiyon Ajansı",
+      "director": "Ajan 32 ATLAS (DoP) • Ajan 27 BARIŞ (Senarist) • Ajan 33 LARA (Art Director) • Ajan 34 OZAN (Copywriter)",
+      "mission": "2K (1440x2560) sinematik reklam kalitesinde Reels üretimi: radyal stüdyo spotu, çift katmanlı derinlik gölgesi, altın anamorfik ışık geçişi, gimbal kamera akışı ve 3 perdeli hikaye kurgusu."
+    },
+    {
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "agency_name": "GüzelAI Medya Planlama, Dağıtım & Otonom Büyüme Ajansı",
+      "director": "Ajan 35 DENİZ (Medya Başkanı) • Ajan 28 EVREN (Öz-Evrim) • Ajan 36 EMİR (Reels Kalite Telemetri)",
+      "mission": "Telegram (@guzelaibot) ve guzelai.com/#kombinler merkezli prime-time yayın planlaması, otonom genetik evrim ve kare-kare Reels kalite sertifikasyonu."
+    }
+  ],
+  "academy_curriculum_modules": [
+    "Modül 1: %100 Sıfır-Tekrar & 1:1 Manken-Kıyafet Birebir Görsel Sadakat (Eğitmen: SARP & VERA)",
+    "Modül 2: 2K QHD+ OLED Sinematik Reklam, Işık Geçişi & Tipografi Standardı (Eğitmen: ATLAS & LARA)",
+    "Modül 3: Argon'suz GitHub Actions Bulut Otonomisi & FLUX.1 Süpermodel Üretimi (Eğitmen: KAAN & DERİN)",
+    "Modül 4: 3 Perdeli Viral Senaryo, AIDA Reklam Dili & Medya Dönüşümü (Eğitmen: BARIŞ, OZAN & EVREN)"
+  ],
+  "new_executive_hires_cvs": [
+    {
+      "agent_number": 29,
+      "sicil_no": "GZL-HLD-2026-029",
+      "code_name": "SELİN",
+      "subagent_id": "holding-academy-cv-dean",
+      "agency_code": "HR_ACADEMY",
+      "agency_name": "GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı",
+      "role_title": "Holding Akademi Dekanı, CV Seçme-Yerleştirme & Ajan Yetiştirme Başeğitmeni",
+      "education": "Boğaziçi Üniversitesi İşletme & Örgütsel Psikoloji Yüksek Lisans + Paris Luxury Talent Management Sertifikası",
+      "experience_years": 14,
+      "prior_experience": "Global moda ve dijital medya holdinglerinde Üst Düzey Yetenek Kazanımı ve Kurumsal Akademi Kurucu Direktörlüğü.",
+      "core_competencies": [
+        "Yetkinlik bazlı teknik CV değerlendirme ve kadro mimarisi",
+        "4 modüllü Ajan Yetiştirme Kampı (1:1 Görsel Sadakat, 2K Sinema Estetiği, Bulut Otonomi, Viral Dönüşüm)",
+        "Sürekli performans denetimi ve disiplin/kalite standardizasyonu"
+      ],
+      "owned_module": "src/guzelai_holding_hr_academy.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.8,
+        "modul_2_sinema_reels": 99.4,
+        "modul_3_bulut_otonomi": 99.7,
+        "modul_4_viral_donusum": 99.5
+      },
+      "graduation_average": 99.6,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM İMZASIYLA ASİL KADROYA ATANDI"
+    },
+    {
+      "agent_number": 30,
+      "sicil_no": "GZL-HLD-2026-030",
+      "code_name": "DERİN",
+      "subagent_id": "supermodel-physique-lighting-director",
+      "agency_code": "MODEL_AGENCY",
+      "agency_name": "GüzelAI Elite Manken & Model Ajansı",
+      "role_title": "Baş Manken Fizik, Cilt/Kumaş Dokusu & Editorial Işık Yönetmeni",
+      "education": "Milano Istituto Marangoni Fashion Photography & Lighting + Münih Hesaplamalı Görüntüleme Yüksek Lisansı",
+      "experience_years": 12,
+      "prior_experience": "Avrupa lüks moda kampanyalarında Baş Portre/Kumaş Işık Yönetmenliği ve fotogerçekçi dijital süpermodel aydınlatma danışmanlığı.",
+      "core_competencies": [
+        "85mm f/1.4 prime lens optik alan derinliği ve altın saat kenar ışığı (rim light) simülasyonu",
+        "Plastik AI hissini yok eden gerçek kaşe, kaşmir, merinos, süet ve cilt mikro-doku kalibrasyonu",
+        "Baştan ayağa (ayakkabı tabanına kadar) eksiksiz anatomik manken kadraj standardı"
+      ],
+      "owned_module": "src/autonomous_creation_factory.py & src/guzelai_holding_hr_academy.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.9,
+        "modul_2_sinema_reels": 99.7,
+        "modul_3_bulut_otonomi": 99.1,
+        "modul_4_viral_donusum": 99.3
+      },
+      "graduation_average": 99.5,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 31,
+      "sicil_no": "GZL-HLD-2026-031",
+      "code_name": "KUZEY",
+      "subagent_id": "runway-choreography-pose-coach",
+      "agency_code": "MODEL_AGENCY",
+      "agency_name": "GüzelAI Elite Manken & Model Ajansı",
+      "role_title": "Podyum Yürüyüş Koreografisi, Bakış & 3-Adım Kamera Akış Koçu",
+      "education": "Londra Central Saint Martins Fashion Movement & Runway Direction",
+      "experience_years": 11,
+      "prior_experience": "Uluslararası moda haftaları podyum koreograflığı ve dikey moda reklam filmlerinde hareket/poz direktörlüğü.",
+      "core_competencies": [
+        "3 karelik yürüyüş sekansında (sağ adım -> sol adım palto savrulması -> özgüvenli yakın bakış) akıcı fizik sürekliliği",
+        "Gimbal kamera süzülmesi ve kareler arası pürüzsüz optik geçiş (smooth step cross-blend) kurgusu",
+        "Kadın, Erkek ve Çocuk segmentlerine özel doğal beden dili koçluğu"
+      ],
+      "owned_module": "src/render_reels.py & src/guzelai_holding_hr_academy.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.6,
+        "modul_2_sinema_reels": 99.8,
+        "modul_3_bulut_otonomi": 99.0,
+        "modul_4_viral_donusum": 99.4
+      },
+      "graduation_average": 99.45,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 32,
+      "sicil_no": "GZL-HLD-2026-032",
+      "code_name": "ATLAS",
+      "subagent_id": "commercial-reels-cinematographer-dop",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "agency_name": "GüzelAI Reklam & Sinema Prodüksiyon Ajansı",
+      "role_title": "Baş Reklam Görüntü Yönetmeni (DoP), Color Grading & Anamorfik Işık Geçiş Mimarı",
+      "education": "Mimar Sinan Güzel Sanatlar Sinema-TV + Los Angeles Commercial Cinematography & DaVinci Color Mastering",
+      "experience_years": 15,
+      "prior_experience": "Lüks tekstil ve kozmetik televizyon/Reels reklamlarında Baş Görüntü Yönetmenliği (DoP) ve HDR/AMOLED renk uzmanı.",
+      "core_competencies": [
+        "Radyal şampanya-fildişi stüdyo spot aydınlatması ve altın çerçeveli reklam sahnesi kompozisyonu",
+        "Çift katmanlı fiziksel temas + ortam gölgesi (Dual-Layer Contact & Ambient Occlusion Shadow)",
+        "5.2. saniyede Altın Anamorfik Işık Süpürmesi (Golden Anamorphic Light-Sweep Whip Transition)",
+        "2K (1440x2560) 20 Mbps BT.709 yüksek bit hızlı sinema renk kalibrasyonu ve alt/üst sinema kontrast vinyeti"
+      ],
+      "owned_module": "src/render_reels.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.7,
+        "modul_2_sinema_reels": 100.0,
+        "modul_3_bulut_otonomi": 99.4,
+        "modul_4_viral_donusum": 99.7
+      },
+      "graduation_average": 99.7,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 33,
+      "sicil_no": "GZL-HLD-2026-033",
+      "code_name": "LARA",
+      "subagent_id": "luxury-ad-art-director-typographer",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "agency_name": "GüzelAI Reklam & Sinema Prodüksiyon Ajansı",
+      "role_title": "Reklam Sanat Yönetmeni, Dergi Tipografisi & Motion Graphics Baştasarımcısı",
+      "education": "Parsons School of Design Editorial Art Direction & Luxury Motion Typography",
+      "experience_years": 10,
+      "prior_experience": "Uluslararası moda dergileri dijital kapak tasarımı ve sosyal medya lüks ürün lansman grafikleri sanat yönetmenliği.",
+      "core_competencies": [
+        "Numaralı (#1..#6) altın rozetli ve varış parlamalı (gold arrival ring) lüks marka/fiyat kartları",
+        "Üst şampanya-altın hikaye ilerleme çubuğu (Cinema Retention Progress Bar) ve holding ajans imzası",
+        "3:4 profil ızgarası ve 9:16 tam ekranda sıfır taşmalı dergi kapak tipografisi"
+      ],
+      "owned_module": "src/render_reels.py & src/components/VerifiedKombinShowcase.tsx",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.5,
+        "modul_2_sinema_reels": 99.9,
+        "modul_3_bulut_otonomi": 99.2,
+        "modul_4_viral_donusum": 99.6
+      },
+      "graduation_average": 99.55,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 34,
+      "sicil_no": "GZL-HLD-2026-034",
+      "code_name": "OZAN",
+      "subagent_id": "commercial-copywriter-conversion-strategist",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "agency_name": "GüzelAI Reklam & Sinema Prodüksiyon Ajansı",
+      "role_title": "Baş Reklam Metin Yazarı (Copywriter) & AIDA Satın Alma Psikolojisi Stratejisti",
+      "education": "Galatasaray Üniversitesi İletişim + Londra Dijital Reklamcılık & Davranışsal Ekonomi Sertifikası",
+      "experience_years": 12,
+      "prior_experience": "Global kreatif reklam ajanslarında Kıdemli Reklam Metin Yazarlığı ve moda e-ticaret dönüşüm stratejistliği.",
+      "core_competencies": [
+        "BARIŞ'ın film senaryosunu AIDA (Dikkat-İlgi-Arzu-Aksiyon) reklam metniyle birleştirme",
+        "Kaydetme (Save), Arkadaşa Gönderme (Share) ve Yorum tartışma oranını büyüten Türkçe reklam dili",
+        "Yasal mevzuata (%100 zorunlu #reklam uyumu) tam sadık prestijli marka metinleri"
+      ],
+      "owned_module": "src/main.py & src/telegram_publisher.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.3,
+        "modul_2_sinema_reels": 99.4,
+        "modul_3_bulut_otonomi": 99.5,
+        "modul_4_viral_donusum": 99.9
+      },
+      "graduation_average": 99.53,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 35,
+      "sicil_no": "GZL-HLD-2026-035",
+      "code_name": "DENİZ",
+      "subagent_id": "media-agency-campaign-director",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "agency_name": "GüzelAI Medya Planlama, Dağıtım & Otonom Büyüme Ajansı",
+      "role_title": "Medya Ajansı Başkanı, Prime-Time Yayın Planlama & Çok-Kanallı Kampanya Direktörü",
+      "education": "ODTÜ Endüstri Mühendisliği + Dijital Medya Planlama & Çok-Kanallı Büyüme Yönetimi MBA",
+      "experience_years": 13,
+      "prior_experience": "Çok uluslu medya planlama ajanslarında Dijital Kampanya Başkan Yardımcılığı ve yayın akışı optimizasyonu.",
+      "core_competencies": [
+        "Telegram (@guzelaibot) ve guzelai.com/#kombinler eşzamanlı kampanya orkestrasyonu",
+        "Sabah/Öğle/İkindi/Akşam 4 kuşak Kadın-Erkek-Kız Çocuk-Erkek Çocuk dengeli medya frekans yönetimi",
+        "Bulut GitHub Actions sıfır-kayıp yayın senkronizasyonu"
+      ],
+      "owned_module": "src/website_publisher.py & .github/workflows/daily_reels.yml",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.4,
+        "modul_2_sinema_reels": 99.3,
+        "modul_3_bulut_otonomi": 99.9,
+        "modul_4_viral_donusum": 99.8
+      },
+      "graduation_average": 99.6,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 36,
+      "sicil_no": "GZL-HLD-2026-036",
+      "code_name": "EMİR",
+      "subagent_id": "reels-retention-telemetry-auditor",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "agency_name": "GüzelAI Medya Planlama, Dağıtım & Otonom Büyüme Ajansı",
+      "role_title": "Reels Sinema Kalite, Keskinlik & İzlenme Tutma (Retention) Başdenetçisi",
+      "education": "İTÜ Elektronik & Haberleşme Mühendisliği (Sayısal Video ve Ses Sinyal İşleme Yüksek Lisansı)",
+      "experience_years": 9,
+      "prior_experience": "Yayın teknolojileri ve kısa video platformlarında Görüntü Kalite Metrikleri (VMAF/Laplacian/HDR) Başmühendisliği.",
+      "core_competencies": [
+        "Üretilen 2K Reels karelerinde Laplacian netlik/keskinlik ve dinamik kontrast (P95-P05) ölçümü",
+        "5.2s anamorfik ışık geçişi sürekliliği ve 44.1 kHz stereo ses RMS/Peak denetimi",
+        "Her yayın öncesi resmi Reels Sinema Kalite Sertifikası (`reels_cinema_quality_report.json`) üretimi"
+      ],
+      "owned_module": "src/guzelai_holding_hr_academy.py & src/quality_checker.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.8,
+        "modul_2_sinema_reels": 99.9,
+        "modul_3_bulut_otonomi": 99.8,
+        "modul_4_viral_donusum": 99.5
+      },
+      "graduation_average": 99.75,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    }
+  ],
+  "upgraded_existing_roster_28": [
+    {
+      "agent_no": "1A",
+      "code_name": "ALP-1A",
+      "subagent_id": "store-link-researcher",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Ana Mağaza & Doğrulanmış Link Araştırma Uzmanı",
+      "grad_score": 99.1
+    },
+    {
+      "agent_no": "1B",
+      "code_name": "ALP-1B",
+      "subagent_id": "store-deep-matcher-agent",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Derin İkiz-Model & Renk Eşleştirme Uzmanı",
+      "grad_score": 99.0
+    },
+    {
+      "agent_no": "2",
+      "code_name": "ADA",
+      "subagent_id": "pinterest-trend-scout",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Pinterest & Global Trend Kombin Araştırmacısı",
+      "grad_score": 99.2
+    },
+    {
+      "agent_no": "3",
+      "code_name": "MERİÇ",
+      "subagent_id": "kombin-dispatcher-reporter",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "Holding Ajanslar Arası Koordinasyon & Raporlama Sorumlusu",
+      "grad_score": 99.4
+    },
+    {
+      "agent_no": "4",
+      "code_name": "ECE",
+      "subagent_id": "social-health-analyst",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "Sosyal Medya Hesap Sağlığı & Analitik Uzmanı",
+      "grad_score": 98.9
+    },
+    {
+      "agent_no": "5",
+      "code_name": "EFE",
+      "subagent_id": "tiktok-viral-music-scout",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "Viral Müzik & Ritim Senkron Direktörü",
+      "grad_score": 99.5
+    },
+    {
+      "agent_no": "6",
+      "code_name": "HAKAN",
+      "subagent_id": "prepublish-compliance-auditor",
+      "agency_code": "HR_ACADEMY",
+      "role_title": "Yayın Öncesi Hukuk, Telif & Mevzuat Uyum Başdenetçisi",
+      "grad_score": 99.8
+    },
+    {
+      "agent_no": "7",
+      "code_name": "DORUK",
+      "subagent_id": "viral-hook-music-director",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "role_title": "İlk 1 Saniye Kanca (Hook) & Müzik Darbe Yönetmeni",
+      "grad_score": 99.3
+    },
+    {
+      "agent_no": "8",
+      "code_name": "SİNAN",
+      "subagent_id": "visual-qa-runway-inspector",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "role_title": "2K OLED Görsel Kalite Kontrol Müfettişi",
+      "grad_score": 99.4
+    },
+    {
+      "agent_no": "9",
+      "code_name": "BURAK",
+      "subagent_id": "price-stock-conversion-guard",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "GuzelAI.com /go/{sku} Fiyat, Stok & Dönüşüm Kalkanı",
+      "grad_score": 99.2
+    },
+    {
+      "agent_no": "11",
+      "code_name": "CAN",
+      "subagent_id": "algorithm-reach-diagnostician",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "Keşfet Algoritması & Erişim Teşhis Uzmanı",
+      "grad_score": 99.3
+    },
+    {
+      "agent_no": "12",
+      "code_name": "KOR",
+      "subagent_id": "fashion-concept-architect",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "2026-2027 Kış İleri Moda Konsept Mimarı",
+      "grad_score": 99.5
+    },
+    {
+      "agent_no": "13",
+      "code_name": "MİA",
+      "subagent_id": "fashion-design-specialist",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Silüet, Kumaş & Renk Teorisi Uzmanı",
+      "grad_score": 99.6
+    },
+    {
+      "agent_no": "14",
+      "code_name": "LEO",
+      "subagent_id": "party-couture-designer",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Gece, Davet & Gala Kreasyon Tasarımcısı",
+      "grad_score": 99.3
+    },
+    {
+      "agent_no": "15",
+      "code_name": "LİA",
+      "subagent_id": "pinterest-collage-fashion-designer",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "9:16 Pinterest Lookbook & Moodboard Tasarımcısı",
+      "grad_score": 99.6
+    },
+    {
+      "agent_no": "16",
+      "code_name": "NİL",
+      "subagent_id": "kids-fashion-stylist",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Çocuk Moda Stilisti & Katalog Koordinatörü",
+      "grad_score": 99.4
+    },
+    {
+      "agent_no": "17",
+      "code_name": "İREM",
+      "subagent_id": "hr-agent-trainer-director",
+      "agency_code": "HR_ACADEMY",
+      "role_title": "GüzelAI Holding İK Başkanı (CHRO) & Kadro Başdenetçisi",
+      "grad_score": 99.9
+    },
+    {
+      "agent_no": "18",
+      "code_name": "SARP",
+      "subagent_id": "visual-1to1-match-inspector",
+      "agency_code": "MODEL_AGENCY",
+      "role_title": "1:1 Manken-Kıyafet Birebir Eşleşme Başmüfettişi",
+      "grad_score": 99.9
+    },
+    {
+      "agent_no": "19",
+      "code_name": "ARDA",
+      "subagent_id": "agent-resources-director",
+      "agency_code": "HR_ACADEMY",
+      "role_title": "Ajan Kaynakları & Sıfır-Tekrar Orkestrasyon Direktörü",
+      "grad_score": 99.7
+    },
+    {
+      "agent_no": "20",
+      "code_name": "MAYA",
+      "subagent_id": "ai-model-casting-director",
+      "agency_code": "MODEL_AGENCY",
+      "role_title": "Manken Ajansı Baş Casting & Özgün Yüz Üretim Direktörü",
+      "grad_score": 99.7
+    },
+    {
+      "agent_no": "21",
+      "code_name": "KAAN",
+      "subagent_id": "seasonal-creation-factory-agent",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "role_title": "Bulut FLUX.1 1:1 Şeffaf Stüdyo Dekupe Üretim Mühendisi",
+      "grad_score": 99.8
+    },
+    {
+      "agent_no": "22",
+      "code_name": "VERA",
+      "subagent_id": "zero-repeat-quality-auditor",
+      "agency_code": "HR_ACADEMY",
+      "role_title": "Sıfır-Tekrar & Tekil Telegram Gönderim Başdenetçisi",
+      "grad_score": 99.9
+    },
+    {
+      "agent_no": "23",
+      "code_name": "DEFNE",
+      "subagent_id": "womenswear-couture-atelier-designer",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Kadın Kış & Quiet Luxury Baş Moda Tasarımcısı",
+      "grad_score": 99.8
+    },
+    {
+      "agent_no": "24",
+      "code_name": "KEREM",
+      "subagent_id": "menswear-sartorial-atelier-designer",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Erkek Sartorial & Smart-Luxury Baş Moda Tasarımcısı",
+      "grad_score": 99.8
+    },
+    {
+      "agent_no": "25",
+      "code_name": "LEYLA",
+      "subagent_id": "girls-winter-atelier-designer",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Kız Çocuk Kış & Preppy Kolej Moda Tasarımcısı",
+      "grad_score": 99.7
+    },
+    {
+      "agent_no": "26",
+      "code_name": "MERT",
+      "subagent_id": "boys-urban-winter-atelier-designer",
+      "agency_code": "FASHION_HOUSE",
+      "role_title": "Erkek Çocuk Kış & Urban Kolej Moda Tasarımcısı",
+      "grad_score": 99.7
+    },
+    {
+      "agent_no": "27",
+      "code_name": "BARIŞ",
+      "subagent_id": "viral-screenwriter-story-director",
+      "agency_code": "AD_CINEMA_AGENCY",
+      "role_title": "Viral Senarist & 3 Perdeli Mini-Film Başyönetmeni",
+      "grad_score": 99.9
+    },
+    {
+      "agent_no": "28",
+      "code_name": "EVREN",
+      "subagent_id": "self-evolving-meta-optimizer",
+      "agency_code": "MEDIA_GROWTH_AGENCY",
+      "role_title": "Kendini Geliştiren Otonom Evrim & Genetik Algoritma Başmimarı",
+      "grad_score": 99.9
+    }
+  ],
+  "latest_reels_cinema_telemetry_summary": {
+    "cinema_grade_score_100": 99.58,
+    "verdict": "CERTIFIED_2K_LUXURY_COMMERCIAL_REEL",
+    "average_laplacian_sharpness": 1010.85
+  },
+  "status": "HOLDING_36_AGENT_FULL_CADRE_CERTIFIED_AND_ACTIVE"
+}

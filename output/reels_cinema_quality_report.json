@@ -1,0 +1,63 @@
+{
+  "auditor_agent": "Ajan 36 EMİR (reels-retention-telemetry-auditor) & Ajan 32 ATLAS (DoP)",
+  "holding_entity": "GüzelAI Holding Reklam, Sinema & Medya Kalite Kurulu",
+  "generated_at": "2026-11-02 03:14:54",
+  "archetype_id": "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
+  "resolution_standard": "1440x2560 (2K QHD+ 9:16 • 30 FPS • BT.709 High@L5.1 20 Mbps)",
+  "cinema_upgrades_verified": [
+    "Radyal Şampanya-Fildişi Stüdyo Spotu & Çift Altın İnce Çerçeve (ATLAS & LARA)",
+    "Çift Katmanlı Fiziksel Temas + Ortam Derinlik Gölgesi (Dual-Layer Drop Shadow)",
+    "Numaralı (#1..#6) Altın Rozetli & Varış Parlamalı Lüks Ürün Etiketleri",
+    "5.2s Altın Anamorfik Işık Süpürmesi Geçişi (Golden Anamorphic Light-Sweep Whip)",
+    "Kareler Arası Yumuşak Optik Adım Geçişi & 3 Eksenli Gimbal Kamera Süzülmesi (KUZEY)",
+    "Üst Şampanya-Altın Hikaye İlerleme Çubuğu (Cinema Retention Progress Bar) & Sinema Vinyeti"
+  ],
+  "average_laplacian_sharpness": 1010.85,
+  "average_dynamic_contrast_p95_p05": 238.16,
+  "cinema_grade_score_100": 99.58,
+  "verdict": "CERTIFIED_2K_LUXURY_COMMERCIAL_REEL",
+  "frame_checkpoints": {
+    "hook_cover_0_16s": {
+      "width": 1440,
+      "height": 2560,
+      "laplacian_sharpness": 709.24,
+      "dynamic_range_p95_p05": 227.65,
+      "color_richness_spread": 23.58
+    },
+    "studio_collage_3_50s": {
+      "width": 1440,
+      "height": 2560,
+      "laplacian_sharpness": 1427.29,
+      "dynamic_range_p95_p05": 235.15,
+      "color_richness_spread": 17.79
+    },
+    "anamorphic_transition_5_20s": {
+      "width": 1440,
+      "height": 2560,
+      "laplacian_sharpness": 1402.86,
+      "dynamic_range_p95_p05": 238.02,
+      "color_richness_spread": 16.64
+    },
+    "runway_stride_8_00s": {
+      "width": 1440,
+      "height": 2560,
+      "laplacian_sharpness": 788.77,
+      "dynamic_range_p95_p05": 245.03,
+      "color_richness_spread": 23.29
+    },
+    "finale_loop_9_83s": {
+      "width": 1440,
+      "height": 2560,
+      "laplacian_sharpness": 726.09,
+      "dynamic_range_p95_p05": 244.97,
+      "color_richness_spread": 23.51
+    }
+  },
+  "audio_master_telemetry": {
+    "sample_rate_hz": 44100,
+    "channels": 2,
+    "rms_dbfs": -9.9,
+    "peak_dbfs": -0.35,
+    "status": "STUDIO_MASTER_OK"
+  }
+}

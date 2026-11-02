@@ -1891,6 +1891,8 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     agent_resources_data = run_agent_resources_division()
     fashion_atelier_data = run_fashion_atelier_designers()
     self_evolution_data = run_self_evolving_viral_screenwriter_division()
+    from guzelai_holding_hr_academy import run_holding_hr_cv_and_academy_audit
+    holding_hr_data = run_holding_hr_cv_and_academy_audit()
     compliance_data = run_prepublish_compliance_auditor()
     health_data = _load_json(HEALTH_REPORT_PATH, {})
 
@@ -1924,6 +1926,7 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
         "agent_resources_division": agent_resources_data,
         "fashion_atelier_designers": fashion_atelier_data,
         "self_evolving_viral_screenwriter_division": self_evolution_data,
+        "guzelai_holding_hr_cv_academy_36_agents": holding_hr_data,
         "instagram_health_snapshot": {
             "account_status": ig_health.get("account_status", "HEALTHY_ACTIVE"),
             "risk_level": ig_health.get("risk_level", "LOW"),
@@ -1937,12 +1940,12 @@ def run_dispatcher_reporter() -> Dict[str, Any]:
     }
 
     CURATED_OUTFITS_PATH.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"📨 [Ajan 3 - Dispatcher Reporter] 28 Ajanlı ortak paket (BARIŞ + EVREN + DEFNE + KEREM + LEYLA + MERT + ARDA + MAYA + KAAN + VERA + İREM + SARP) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
+    print(f"📨 [Ajan 3 - Dispatcher Reporter] 36 Ajanlı GüzelAI Holding Paketi (5 Bağlı Ajans: İK & Akademi [İREM/SELİN] + Manken Ajansı [MAYA/DERİN/KUZEY] + Moda Tasarım Evi [DEFNE/KEREM/LEYLA/MERT] + Reklam & Sinema Ajansı [ATLAS/BARIŞ/LARA/OZAN] + Medya & Evrim Ajansı [DENİZ/EVREN/EMİR]) Ana Ajana hazırlandı -> {CURATED_OUTFITS_PATH}")
     return summary
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="GuzelAI 28 Ajanlı Kendini Geliştiren Otonom Evrim, Viral Senarist, Moda Tasarım Atölyesi ve Sıfır-Tekrar Sistemi")
+    parser = argparse.ArgumentParser(description="GüzelAI Holding 36 Ajanlı (İK & CV Akademisi, Manken/Model, Moda Tasarım, Reklam/Sinema & Medya Ajansı) Otonom Sistemi")
     parser.add_argument(
         "--role",
         choices=[
@@ -1958,6 +1961,7 @@ if __name__ == "__main__":
             "kids_stylist",
             "visual_1to1",
             "hr_audit",
+            "holding_hr",
             "agent_resources",
             "fashion_atelier",
             "self_evolution",
@@ -1994,6 +1998,9 @@ if __name__ == "__main__":
         run_visual_1to1_match_inspector()
     elif args.role == "hr_audit":
         run_hr_agent_trainer_director()
+    elif args.role == "holding_hr":
+        from guzelai_holding_hr_academy import run_holding_hr_cv_and_academy_audit
+        run_holding_hr_cv_and_academy_audit()
     elif args.role == "agent_resources":
         run_agent_resources_division()
     elif args.role == "fashion_atelier":

@@ -1,14 +1,16 @@
 {
-  "generation": 1,
+  "generation": 3,
   "runs_since_last_viral_flight": 0,
   "viral_flight_cadence": 2,
-  "total_viral_flights_launched": 1,
+  "total_viral_flights_launched": 3,
   "recent_scenario_ids": [
+    "kadin_flight_ceo_silence",
+    "kadin_flight_oldmoney_illusion",
     "kadin_flight_ceo_silence"
   ],
   "scenario_weights": {
-    "kadin_flight_ceo_silence": 1.3995,
-    "kadin_flight_oldmoney_illusion": 1.32,
+    "kadin_flight_ceo_silence": 1.4475,
+    "kadin_flight_oldmoney_illusion": 1.3704,
     "kadin_pov_ex_encounter": 1.18,
     "erkek_flight_italian_architect": 1.34,
     "erkek_pov_friday_executive": 1.2,
@@ -19,7 +21,9 @@
     "5 Saniyede Karakter Değiştiren Kış Matematiği",
     "Logoya Değil Kesime Para Verenlerin Gizli Formülü",
     "Sokakta Yürürken Podyum Işığı Yaratan 6 Parça",
-    "Podyum Etkisini Sokağa Taşıyan Sinematik Kurgu: Yüksek Kontrastlı Kış Katman Matematiği"
+    "Podyum Etkisini Sokağa Taşıyan Sinematik Kurgu: Yüksek Kontrastlı Kış Katman Matematiği",
+    "İlk 3 Saniyede Statü Algısını Değiştiren Sır: Yüksek Kontrastlı Kış Katman Matematiği",
+    "Dolabındaki Karmaşayı Tek Hamlede Bitiren Formül: Yüksek Kontrastlı Kış Katman Matematiği"
   ],
   "evolved_atelier_blueprints": {
     "kadin": [
@@ -76,9 +80,118 @@
           "Siyah / Kırmızı",
           "clean black leather low-top court sneakers with white sole and deep crimson-red heel tab"
         ]
+      },
+      {
+        "district": "Bebek Koru Yokuşu",
+        "slug": "bebek_koru_chocolate_ivory",
+        "hair_face": "voluminous blowout chestnut-brown hair and warm hazel eyes",
+        "palette_tr": "Acı Çikolata Kürklü Deri Trençkot & Kırık Beyaz Merinos",
+        "outer": [
+          "MANGO",
+          "Kadın Acı Çikolata Kürklü Yaka Uzun Kışlık Trençkot Kaban",
+          "3.999₺",
+          3999.0,
+          "Acı Çikolata",
+          "women dark chocolate-brown winter coat with plush cream shearling collar"
+        ],
+        "cap": [
+          "VOGUE EYEWEAR",
+          "Kadın Kahve Kemik Oval Güneş Gözlüğü",
+          "2.390₺",
+          2390.0,
+          "Kahve",
+          "women dark tortoiseshell oval acetate sunglasses"
+        ],
+        "top": [
+          "İPEKYOL",
+          "Kadın Kırık Beyaz Fitilli Boğazlı Merinos Triko Kazak",
+          "1.390₺",
+          1390.0,
+          "Kırık Beyaz",
+          "women warm ivory-white ribbed turtleneck merino wool sweater"
+        ],
+        "bottom": [
+          "ZARA",
+          "Kadın Kum Beji Yüksek Bel Kışlık Yün Palazzo Pantolon",
+          "1.590₺",
+          1590.0,
+          "Kum Beji",
+          "women warm sand-beige high-waisted pleated wide-leg wool palazzo trousers"
+        ],
+        "bag": [
+          "BAGMORI",
+          "Kadın Acı Çikolata Gold Zincirli Omuz Çantası",
+          "889₺",
+          889.0,
+          "Acı Çikolata",
+          "women structured dark chocolate-brown leather shoulder bag with gold clasp"
+        ],
+        "shoes": [
+          "NEW BALANCE",
+          "Kadın Krem / Acı Çikolata Süet Kışlık Retro Sneaker",
+          "3.950₺",
+          3950.0,
+          "Krem / Kahve",
+          "women cream and dark chocolate-brown suede retro court sneakers"
+        ]
       }
     ],
-    "erkek": [],
+    "erkek": [
+      {
+        "district": "İstinyePark Lüks Meydan",
+        "slug": "istinyepark_camel_noir",
+        "hair_face": "textured dark espresso hair swept back and sharp stubbled jawline",
+        "palette_tr": "Devetüyü İtalyan Kaşe & Kömür Siyahı Boğazlı Merinos",
+        "outer": [
+          "BEYMEN CLUB",
+          "Erkek Devetüyü / Camel Kruvaze İtalyan Yün Kaşe Kaban",
+          "4.890₺",
+          4890.0,
+          "Camel",
+          "men warm camel tailored double-breasted knee-length wool winter overcoat"
+        ],
+        "cap": [
+          "RAY-BAN",
+          "Erkek Siyah / Gold Clubmaster Güneş Gözlüğü",
+          "4.650₺",
+          4650.0,
+          "Siyah / Gold",
+          "men black and gold browline clubmaster sunglasses"
+        ],
+        "top": [
+          "MASSIMO DUTTI",
+          "Erkek Siyah İnce Fitilli Merinos Boğazlı Triko Kazak",
+          "1.690₺",
+          1690.0,
+          "Siyah",
+          "men fitted jet-black vertical ribbed merino wool turtleneck sweater"
+        ],
+        "bottom": [
+          "NETWORK",
+          "Erkek Koyu Antrasit Pileli Flanel Kışlık Yün Pantolon",
+          "1.990₺",
+          1990.0,
+          "Koyu Antrasit",
+          "men dark charcoal anthracite pleated wool flannel winter trousers"
+        ],
+        "bag": [
+          "TERGAN",
+          "Erkek Siyah Kroko Dokulu Deri Evrak & Seyahat Çantası",
+          "2.950₺",
+          2950.0,
+          "Siyah",
+          "men structured jet-black leather weekender briefcase bag"
+        ],
+        "shoes": [
+          "PUMA",
+          "Erkek Siyah / Camel Süet Detaylı Beyaz Tabanlı Sneaker",
+          "3.690₺",
+          3690.0,
+          "Siyah / Camel",
+          "men black leather low-top court sneakers with warm camel suede stripe and white cupsole"
+        ]
+      }
+    ],
     "kiz_cocuk": [],
     "erkek_cocuk": []
   },
@@ -95,7 +208,33 @@
       "unlocked_fashion_genes": [
         "kadin:zorlu_crimson_noir (Yakut Kırmızısı Kruvaze Kaşe & Obsidyen Siyah Kaşmir)"
       ]
+    },
+    {
+      "generation": 2,
+      "timestamp": "2026-11-02 03:03:20",
+      "archetype_id": "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
+      "segment": "kadin",
+      "scenario_id": "kadin_flight_oldmoney_illusion",
+      "is_viral_flight": true,
+      "predicted_viral_score": 99.3,
+      "mutated_hook_gene": "İlk 3 Saniyede Statü Algısını Değiştiren Sır: Yüksek Kontrastlı Kış Katman Matematiği",
+      "unlocked_fashion_genes": [
+        "erkek:istinyepark_camel_noir (Devetüyü İtalyan Kaşe & Kömür Siyahı Boğazlı Merinos)"
+      ]
+    },
+    {
+      "generation": 3,
+      "timestamp": "2026-11-02 03:12:40",
+      "archetype_id": "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
+      "segment": "kadin",
+      "scenario_id": "kadin_flight_ceo_silence",
+      "is_viral_flight": true,
+      "predicted_viral_score": 98.1,
+      "mutated_hook_gene": "Dolabındaki Karmaşayı Tek Hamlede Bitiren Formül: Yüksek Kontrastlı Kış Katman Matematiği",
+      "unlocked_fashion_genes": [
+        "kadin:bebek_koru_chocolate_ivory (Acı Çikolata Kürklü Deri Trençkot & Kırık Beyaz Merinos)"
+      ]
     }
   ],
-  "updated_at": "2026-10-31T22:25:10.085431Z"
+  "updated_at": "2026-11-02T00:12:40.145388Z"
 }

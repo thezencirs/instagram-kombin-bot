@@ -28,6 +28,10 @@ from website_publisher import publish_to_guzelai_website
 
 
 from quality_checker import inspect_rendered_reel_quality
+from guzelai_holding_hr_academy import (
+    audit_reels_cinema_telemetry,
+    build_holding_ad_copy_tagline,
+)
 
 
 def build_caption(outfit: dict) -> str:
@@ -95,9 +99,11 @@ def build_caption(outfit: dict) -> str:
         f"💬 STİL ANKETİ: Bu 2026-2027 Kış Tasarım Kreasyonunda senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨"
     )
 
+    holding_ad_tagline = build_holding_ad_copy_tagline(outfit)
     lines = [
         f"{flight_prefix}{hook_title}",
-        "📌 'Bugün ne giysem?' krizinden saniyeler içinde kurtulmak için bu 2K kış tasarım kombinini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! ❄️✨",
+        holding_ad_tagline,
+        "📌 'Bugün ne giysem?' krizinden saniyeler içinde kurtulmak için bu 2K sinematik kış reklam kombinini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! ❄️✨",
         "",
     ]
     if story_block:
@@ -213,6 +219,14 @@ def main():
         out_report_path=os.path.join(out_dir, "quality_check_report.json"),
     )
     outfit["quality_report"] = qc_report
+
+    # Ajan 36 (EMİR) & Ajan 32 (ATLAS) — GüzelAI Holding 2K Sinema Reklam Kalite Telemetri Sertifikası:
+    cinema_telemetry = audit_reels_cinema_telemetry(
+        frames_dir=os.path.join(out_dir, "_frames"),
+        wav_path=os.path.join(out_dir, "viral_fashion_track.wav"),
+        outfit=outfit,
+    )
+    outfit["cinema_telemetry"] = cinema_telemetry
 
     caption_path = os.path.join(out_dir, "caption.txt")
     with open(caption_path, "w", encoding="utf-8") as f:

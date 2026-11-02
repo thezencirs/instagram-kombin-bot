@@ -1,24 +1,24 @@
 {
-  "generation": 1,
+  "generation": 3,
   "agent_writer": "BARIŞ (Ajan 27 - Viral Senarist, Mini-Film & Hikaye Kurgu Başyönetmeni)",
   "agent_evolver": "EVREN (Ajan 28 - Kendini Geliştiren Otonom Evrim & Algoritma Mutasyon Başmimarı)",
   "scenario_id": "kadin_flight_ceo_silence",
   "scenario_name": "Toplantı Odasında Sessizliği Başlatan 4 Saniye",
   "is_viral_flight": true,
   "mode_label": "🚀 GUZEL AI VİRAL UÇUŞ MODU (BLOCKBUSTER MİNİ-FİLM)",
-  "predicted_viral_score": 98.7,
-  "mutated_hook_gene": "Podyum Etkisini Sokağa Taşıyan Sinematik Kurgu: Yüksek Kontrastlı Kış Katman Matematiği",
+  "predicted_viral_score": 98.1,
+  "mutated_hook_gene": "Dolabındaki Karmaşayı Tek Hamlede Bitiren Formül: Yüksek Kontrastlı Kış Katman Matematiği",
   "cover_kicker": "» GUZEL AI VİRAL UÇUŞ BÖLÜMÜ • MİNİ-FİLM «",
   "cover_headline": "ODAYA GİRDİĞİN AN SESSİZLİĞİ BAŞLATAN KIŞ KURGUSU",
   "act1_collage_beat1": "SAHNE 1: 'Bugün sadece sade giyineceğim' dediğin o sabah...",
   "act1_collage_beat2": "SAHNE 2: 6 parça birleştiğinde aynadaki karakter seviye atlar.",
   "act2_walk_beat1": "SAHNE 3: Sokağa adım attığın ilk 3 saniyede tüm bakışlar döner.",
-  "act2_walk_beat2": "Kimse bu 150.000₺'lik duruşun 16.749₺ olduğuna inanmaz!",
+  "act2_walk_beat2": "Kimse bu 150.000₺'lik duruşun 17.139₺ olduğuna inanmaz!",
   "act3_plot_twist": "FİNAL: 3. parçayı kaçırdıysan başa sar • Kodlar açıklamada!",
   "safe_spoken_hook": "Odaya girdiğin ilk dört saniyede tek kelime etmeden tüm bakışları toplayan kış senaryosu!",
-  "caption_story_script": "🎬 MİNİ SENARYO (Kurgu: BARIŞ):\n• 00:00 — Evden çıkarken 'sadece üşümeyeyim yeter' dersin.\n• 00:04 — Doğru renk kontrastı ve kesim birleştiği an yürüyüşün bile değişir.\n• 00:09 — Herkes gizlice markasını tahmin etmeye çalışır ama sırrın toplam 16.749₺'lik kusursuz kurgudadır.",
+  "caption_story_script": "🎬 MİNİ SENARYO (Kurgu: BARIŞ):\n• 00:00 — Evden çıkarken 'sadece üşümeyeyim yeter' dersin.\n• 00:04 — Doğru renk kontrastı ve kesim birleştiği an yürüyüşün bile değişir.\n• 00:09 — Herkes gizlice markasını tahmin etmeye çalışır ama sırrın toplam 17.139₺'lik kusursuz kurgudadır.",
   "comment_explosion_prompt": "🔥 SENARYO SORUSU: Bu duruşla kritik bir imza toplantısına mı gidilir, yoksa eski defterleri tek bakışla kapatmaya mı? Yorumlarda senaryoyu tamamla 👇✨",
   "unlocked_fashion_genes_this_gen": [
-    "kadin:zorlu_crimson_noir (Yakut Kırmızısı Kruvaze Kaşe & Obsidyen Siyah Kaşmir)"
+    "kadin:bebek_koru_chocolate_ivory (Acı Çikolata Kürklü Deri Trençkot & Kırık Beyaz Merinos)"
   ]
 }

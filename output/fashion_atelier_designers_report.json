@@ -1,6 +1,6 @@
 {
   "atelier_name": "GuzelAI 2026-2027 Kış Moda Tasarım Atölyesi (26 Ajan)",
-  "generated_at": "2026-11-01 01:32:16",
+  "generated_at": "2026-11-02 03:17:59",
   "total_agents_in_swarm": 26,
   "stall_root_cause_and_permanent_fix": {
     "what_happened_oct28_to_oct31": "28 Ekim'de 4 yeni kreasyon anında gönderilmiş, kalan 2 yedek kreasyon (`kadin_kasim_bebek` ve `erkek_kasim_karakoy`) ise GitHub Actions (`#40650257242` ve `#40688027131`) tarafından başarıyla yayınlanmıştı. Ancak 26 kombinin tamamı `zero_repeat_ledger.json` defterine işlenip havuz boşalınca, Sıfır-Tekrar Kilidi eski kombinleri tekrar göndermemek için `RuntimeError: Havuzdaki tüm özgün kreasyonlar kullanıldı!` fırlatarak 18 ardışık çalışmayı durdurdu.",
@@ -43,16 +43,16 @@
   "ready_unshared_studio_stock_count": 4,
   "ready_unshared_studio_stock": [
     {
+      "id": "erkek_kasim_bebek_konyak_kase_lacivert",
+      "segment": "erkek",
+      "title": "Bebek Sahil Kış Erkek Sartorial Reklam Kreasyonu: Konyak Kruvaze Kaşe Kaban, Gece Laciverti Boğazlı Merinos & Antrasit Flanel (GüzelAI Holding • %100 Özgün AI Erkek Manken) 🏛️🥃✨",
+      "model": "assets/erkek_bebek_holding1_step1.jpg"
+    },
+    {
       "id": "kadin_kasim_tesvikiye_kamel_kurk_cikolata",
       "segment": "kadin",
       "title": "Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨",
       "model": "assets/kadin_tesvikiye1_step1.jpg"
-    },
-    {
-      "id": "erkek_kasim_ortakoy_bordo_suet_siyah_triko",
-      "segment": "erkek",
-      "title": "Ortaköy Kış Erkek Tasarım Kreasyonu: Koyu Bordo Kürklü Yaka Süet Mont, Siyah Merinos Boğazlı Triko & Gri Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🍷🧥✨",
-      "model": "assets/erkek_ortakoy1_step1.jpg"
     },
     {
       "id": "cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru",

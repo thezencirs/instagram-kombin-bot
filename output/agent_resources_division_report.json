@@ -1,14 +1,14 @@
 {
   "division": "Ajan Kaynakları ve Özgün Mevsimsel Kreasyon Üretim Birimi",
-  "generated_at": "2026-11-01 01:32:16",
+  "generated_at": "2026-11-02 03:17:54",
   "total_agents_in_swarm": 22,
   "argon_free_github_actions_ready": true,
   "zero_repeat_enforcement": {
     "ledger_path": "output/zero_repeat_ledger.json",
-    "permanently_retired_outfits_count": 20,
-    "permanently_retired_models_count": 20,
+    "permanently_retired_outfits_count": 21,
+    "permanently_retired_models_count": 21,
     "telegram_duplicate_guard_active": true,
-    "retired_creations_blocked_in_catalog": 31
+    "retired_creations_blocked_in_catalog": 33
   },
   "new_agent_resources_division": [
     {
@@ -42,6 +42,19 @@
   ],
   "fresh_seasonal_creations_pool": [
     {
+      "archetype_id": "erkek_kasim_bebek_konyak_kase_lacivert",
+      "title": "Bebek Sahil Kış Erkek Sartorial Reklam Kreasyonu: Konyak Kruvaze Kaşe Kaban, Gece Laciverti Boğazlı Merinos & Antrasit Flanel (GüzelAI Holding • %100 Özgün AI Erkek Manken) 🏛️🥃✨",
+      "gender_segment": "erkek",
+      "unique_ai_model_frames": [
+        "assets/erkek_bebek_holding1_step1.jpg",
+        "assets/erkek_bebek_holding1_step2.jpg",
+        "assets/erkek_bebek_holding1_step3.jpg"
+      ],
+      "cutout_assets_count": 6,
+      "already_dispatched_to_telegram": false,
+      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
+    },
+    {
       "archetype_id": "kadin_kasim_tesvikiye_kamel_kurk_cikolata",
       "title": "Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨",
       "gender_segment": "kadin",
@@ -49,19 +62,6 @@
         "assets/kadin_tesvikiye1_step1.jpg",
         "assets/kadin_tesvikiye1_step2.jpg",
         "assets/kadin_tesvikiye1_step3.jpg"
-      ],
-      "cutout_assets_count": 6,
-      "already_dispatched_to_telegram": false,
-      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
-    },
-    {
-      "archetype_id": "erkek_kasim_ortakoy_bordo_suet_siyah_triko",
-      "title": "Ortaköy Kış Erkek Tasarım Kreasyonu: Koyu Bordo Kürklü Yaka Süet Mont, Siyah Merinos Boğazlı Triko & Gri Flanel Pantolon (Tasarım: KEREM • %100 Özgün AI Erkek Manken) 🍷🧥✨",
-      "gender_segment": "erkek",
-      "unique_ai_model_frames": [
-        "assets/erkek_ortakoy1_step1.jpg",
-        "assets/erkek_ortakoy1_step2.jpg",
-        "assets/erkek_ortakoy1_step3.jpg"
       ],
       "cutout_assets_count": 6,
       "already_dispatched_to_telegram": false,
