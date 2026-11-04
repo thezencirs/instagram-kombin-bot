@@ -45,7 +45,8 @@
     "cocuk_erkek_kasim_gokturk_haki_puffer_street",
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
-    "kadin_agenda01_nisantasi_bordo_kase_mocha"
+    "kadin_agenda01_nisantasi_bordo_kase_mocha",
+    "erkek_agenda01_bebek_antrasit_kase_ekru"
   ],
   "retired_model_frames": [
     "assets/hw_couple1_step1.jpg",
@@ -90,7 +91,8 @@
     "assets/kadin_galata1_step1.jpg",
     "assets/kid_girl2_model_step1.jpg",
     "assets/kid_boy2_model_step1.jpg",
-    "assets/kadin_agenda01_step1.jpg"
+    "assets/kadin_agenda01_step1.jpg",
+    "assets/erkek_agenda01_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -138,8 +140,9 @@
     "cocuk_erkek_kasim_gokturk_haki_puffer_street",
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
-    "kadin_agenda01_nisantasi_bordo_kase_mocha"
+    "kadin_agenda01_nisantasi_bordo_kase_mocha",
+    "erkek_agenda01_bebek_antrasit_kase_ekru"
   ],
-  "last_telegram_dispatch_ts": 1793790480.8892198,
-  "updated_at": "2026-11-04T11:11:58.250300Z"
+  "last_telegram_dispatch_ts": 1793802592.576232,
+  "updated_at": "2026-11-04T14:29:52.576255Z"
 }
