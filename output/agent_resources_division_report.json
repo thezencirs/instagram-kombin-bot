@@ -1,14 +1,14 @@
 {
   "division": "Ajan Kaynakları ve Özgün Mevsimsel Kreasyon Üretim Birimi",
-  "generated_at": "2026-11-02 03:17:54",
+  "generated_at": "2026-11-04 14:11:58",
   "total_agents_in_swarm": 22,
   "argon_free_github_actions_ready": true,
   "zero_repeat_enforcement": {
     "ledger_path": "output/zero_repeat_ledger.json",
-    "permanently_retired_outfits_count": 21,
-    "permanently_retired_models_count": 21,
+    "permanently_retired_outfits_count": 39,
+    "permanently_retired_models_count": 39,
     "telegram_duplicate_guard_active": true,
-    "retired_creations_blocked_in_catalog": 33
+    "retired_creations_blocked_in_catalog": 38
   },
   "new_agent_resources_division": [
     {
@@ -42,52 +42,13 @@
   ],
   "fresh_seasonal_creations_pool": [
     {
-      "archetype_id": "erkek_kasim_bebek_konyak_kase_lacivert",
-      "title": "Bebek Sahil Kış Erkek Sartorial Reklam Kreasyonu: Konyak Kruvaze Kaşe Kaban, Gece Laciverti Boğazlı Merinos & Antrasit Flanel (GüzelAI Holding • %100 Özgün AI Erkek Manken) 🏛️🥃✨",
+      "archetype_id": "erkek_agenda01_bebek_antrasit_kase_ekru",
+      "title": "Bebek 2026-2027 Erkek Kış Moda Gündemi: Koyu Espresso Kürklü Yaka Süet Mont, Sıcak Ekru Saç Örgü Merinos & Antrasit İtalyan Flanel (%100 Fotogerçekçi İnsan AI Erkek Manken • 2K Sinema) 🏛️☕✨",
       "gender_segment": "erkek",
       "unique_ai_model_frames": [
-        "assets/erkek_bebek_holding1_step1.jpg",
-        "assets/erkek_bebek_holding1_step2.jpg",
-        "assets/erkek_bebek_holding1_step3.jpg"
-      ],
-      "cutout_assets_count": 6,
-      "already_dispatched_to_telegram": false,
-      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
-    },
-    {
-      "archetype_id": "kadin_kasim_tesvikiye_kamel_kurk_cikolata",
-      "title": "Teşvikiye Kış Kadın Tasarım Kreasyonu: Camel Kürklü Yaka Kaşe Kaban, Çikolata Kaşmir Triko & Espresso Yün Palazzo (Tasarım: DEFNE • %100 Özgün AI Manken) 🤎🧥✨",
-      "gender_segment": "kadin",
-      "unique_ai_model_frames": [
-        "assets/kadin_tesvikiye1_step1.jpg",
-        "assets/kadin_tesvikiye1_step2.jpg",
-        "assets/kadin_tesvikiye1_step3.jpg"
-      ],
-      "cutout_assets_count": 6,
-      "already_dispatched_to_telegram": false,
-      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
-    },
-    {
-      "archetype_id": "cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru",
-      "title": "Kalamış Kız Çocuk Kış Tasarım Kreasyonu: Lavanta Şişme Puffer Mont, Ekru Saç Örgü Boğazlı Triko & Antrasit Kışlık Pantolon (Tasarım: LEYLA • %100 Özgün AI Çocuk Model) 💜❄️✨",
-      "gender_segment": "kiz_cocuk",
-      "unique_ai_model_frames": [
-        "assets/kid_girl4_step1.jpg",
-        "assets/kid_girl4_step2.jpg",
-        "assets/kid_girl4_step3.jpg"
-      ],
-      "cutout_assets_count": 6,
-      "already_dispatched_to_telegram": false,
-      "season_compliance": "2026-2027 Sonbahar/Kış (Trençkot, Kaşe Kaban, Süet Ceket, Peluş Aviator, Kolej & Kapitone Mont)"
-    },
-    {
-      "archetype_id": "cocuk_erkek_kasim_emirgan_kiremit_kolej_antrasit",
-      "title": "Emirgan Erkek Çocuk Kış Tasarım Kreasyonu: Kiremit Peluş Yaka Kolej Mont, Antrasit Waffle Triko & Lacivert Chino (Tasarım: MERT • %100 Özgün AI Çocuk Model) 🍁❄️✨",
-      "gender_segment": "erkek_cocuk",
-      "unique_ai_model_frames": [
-        "assets/kid_boy4_step1.jpg",
-        "assets/kid_boy4_step2.jpg",
-        "assets/kid_boy4_step3.jpg"
+        "assets/erkek_agenda01_step1.jpg",
+        "assets/erkek_agenda01_step2.jpg",
+        "assets/erkek_agenda01_step3.jpg"
       ],
       "cutout_assets_count": 6,
       "already_dispatched_to_telegram": false,

@@ -151,7 +151,12 @@ jobs:
           git config user.name "GuzelAI Holding 36-Agent Bot"
           git config user.email "bot@guzelai.com"
           shopt -s nullglob
-          git add \
+          for f in \
+            assets/telegram_subscribers.json \
+            output/zero_repeat_ledger.json \
+            output/telegram_pending_outfits_queue.json \
+            output/fashion_agenda_report.json \
+            output/fashion_agenda_report.md \
             output/guzelai_holding_agent_cvs.json \
             output/guzelai_holding_agent_cvs.md \
             output/reels_cinema_quality_report.json \
@@ -160,7 +165,6 @@ jobs:
             output/viral_screenplay_current.json \
             output/self_evolution_report.json \
             output/self_evolution_report.md \
-            output/zero_repeat_ledger.json \
             output/dynamic_creations_catalog.json \
             output/fashion_atelier_designers_report.json \
             output/fashion_atelier_designers_report.md \
@@ -172,12 +176,16 @@ jobs:
             output/social_health_report.json \
             output/prepublish_compliance_certificate.json \
             output/visual_1to1_match_inspection_report.json \
-            output/hr_department_audit_and_training_report.json || true
-          atelier_files=(assets/atelier_* assets/items/atelier_*)
-          if [ ${#atelier_files[@]} -gt 0 ]; then
-            git add "${atelier_files[@]}" || true
+            output/hr_department_audit_and_training_report.json; do
+            if [ -e "$f" ]; then
+              git add -f "$f" || true
+            fi
+          done
+          extra_assets=(assets/atelier_* assets/items/atelier_* assets/tg_custom_* assets/items/tg_custom_* assets/tg_input_*)
+          if [ ${#extra_assets[@]} -gt 0 ]; then
+            git add -f "${extra_assets[@]}" || true
           fi
-          git diff --staged --quiet || (git commit -m "chore(holding-36-agents): persist zero-repeat ledger, CVs, cinema telemetry & evolution genome [skip ci]" && (git pull --rebase origin main || true) && git push)
+          git diff --staged --quiet || (git commit -m "chore(holding-36-agents): persist zero-repeat ledger, fashion agenda, telegram queue & CVs [skip ci]" && (git pull --rebase origin main || true) && git push)
 
       - name: ☁️ 6. Adım — Tüm Verileri, 2K Reels Videosunu ve Raporları Google Drive'a (mehmetzenciir@gmail.com) Kaydet
         if: ${{ always() }}

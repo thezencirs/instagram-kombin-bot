@@ -30,32 +30,27 @@ from website_publisher import publish_to_guzelai_website
 from quality_checker import inspect_rendered_reel_quality
 from guzelai_holding_hr_academy import (
     audit_reels_cinema_telemetry,
-    build_holding_ad_copy_tagline,
 )
+from fashion_agenda_engine import enrich_outfit_with_fashion_agenda
+from telegram_outfit_ingestor import poll_and_enqueue_telegram_outfits
 
 
 def build_caption(outfit: dict) -> str:
     items = outfit["items"]
     total_str = outfit.get("total_price_str", "")
-    music_name = outfit.get("music_info", {}).get("name", "Veor Uranis – Da Da Da Dadada (Viral Edit)")
     hook_title = (
         outfit.get("hook_title")
         or outfit.get("archetype_title")
-        or "Bordo & Koyu Kahve Peluş Deri Mont: Sonbaharın En Viral 2K Kapsül Kombini 🔥🍂✨"
+        or "2026-2027 Kış Moda Gündemi & Kombin Önerisi ✨"
     )
-    viral_hook = outfit.get(
-        "viral_hook",
-        "🛑 Önce guzelai.com'da doğrulanan 6 parçalık 2K kapsül kombin! 👇🔥",
-    )
-    seo_note = outfit.get(
-        "seo_note",
-        "📌 Not: Videodaki %100 Kadın kombin parçaları önce guzelai.com üzerinde görsel ve renk olarak doğrulanmış olup tüm ürün linkleri guzelai.com/go/ üzerinden doğrudan ilgili mağazaya yönlendirilmektedir:",
-    )
+    # Başlıktaki dahili ajan parantezlerini temizle ki doğrudan kopyala-yapıştır metni %100 net olsun
+    import re
+    clean_headline = re.sub(r"\s*\([^)]*(?:Tasarım|Ajan|Senaryo|Holding|Model)[^)]*\)", "", hook_title).strip()
 
-    c_out = items["outerwear"].get("category_label", "Mont / Ceket")
-    c_cap = items["cap"].get("category_label", "Gözlük / Aksesuar")
-    c_top = items["top"].get("category_label", "Kazak / Üst")
-    c_bot = items["bottom"].get("category_label", "Pantolon / Alt")
+    c_out = items["outerwear"].get("category_label", "Dış Giyim")
+    c_cap = items["cap"].get("category_label", "Aksesuar")
+    c_top = items["top"].get("category_label", "Üst Giyim")
+    c_bot = items["bottom"].get("category_label", "Alt Giyim")
     c_bag = items["bag"].get("category_label", "Çanta")
     c_sho = items["shoes"].get("category_label", "Ayakkabı")
 
@@ -66,71 +61,40 @@ def build_caption(outfit: dict) -> str:
     u_bag = items["bag"].get("guzelai_url") or items["bag"]["product_url"]
     u_sho = items["shoes"].get("guzelai_url") or items["shoes"]["product_url"]
 
-    cal = outfit.get("calendar_concept", {})
-    cal_title = cal.get("concept_title", "17 Ekim Altın Sonbahar & Pinterest 'Old Money / Quiet Luxury' Hafta Sonu Zarafeti")
-    cal_date = cal.get("date_label", "17 Ekim 2026 Cumartesi")
-    palette_note = outfit.get(
-        "color_palette_note",
-        "Pinterest 'Old Money / Quiet Luxury' Sonbahar Renk Kurgusu: Camel Kruvaze Trençkot (#C8A98E) + Buz Mavisi Çizgili Gömlek (#A8C3D4) + Taba Kemerli Ekru Pantolon (#F3EFEA) + Acı Kahve & Gold Deri Detaylar (#4A2E1B)",
-    )
-
     seg = outfit.get("gender_segment", "kadin")
-    if seg == "cift":
-        col_label = "%100 AI KADIN & ERKEK KIŞ MODA TASARIM ÇİFT KOLEKSİYONU"
-        hashtags = "#kombinönerileri #çiftkombini #kışkombini #oldmoney #guzelai"
-    elif seg == "erkek":
-        col_label = "%100 AI ERKEK SONBAHAR/KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: KEREM)"
-        hashtags = "#kombinönerileri #erkekkombin #kışkombini #oldmoney #guzelai"
+    if seg == "erkek":
+        hashtags = "#kombinönerileri #erkekkombin #kışmodası #oldmoney #erkekgiyim #guzelai #reklam #işbirliğideğil"
     elif seg in ("cocuk", "kiz_cocuk"):
-        col_label = "%100 AI KIZ ÇOCUK KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: LEYLA)"
-        hashtags = "#kombinönerileri #çocukkombin #kızçocukkombin #kışkombini #guzelai"
+        hashtags = "#kombinönerileri #çocukkombin #kızçocukkombin #kışkombini #guzelai #reklam #işbirliğideğil"
     elif seg == "erkek_cocuk":
-        col_label = "%100 AI ERKEK ÇOCUK KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: MERT)"
-        hashtags = "#kombinönerileri #çocukkombin #erkekçocukkombin #kışkombini #guzelai"
+        hashtags = "#kombinönerileri #çocukkombin #erkekçocukkombin #kışkombini #guzelai #reklam #işbirliğideğil"
     else:
-        col_label = "%100 AI KADIN 2026-2027 KIŞ MODA TASARIM KOLEKSİYONU (TASARIM: DEFNE)"
-        hashtags = "#kombinönerileri #kadınkombin #kışkombini #oldmoney #guzelai"
+        hashtags = "#kombinönerileri #kadınkombin #kışmodası #quietluxury #oldmoney #guzelai #reklam #işbirliğideğil"
 
-    sp = outfit.get("viral_screenplay") or {}
-    is_flight = bool(sp.get("is_viral_flight"))
-    flight_prefix = "🚀 [GUZEL AI VİRAL UÇUŞ BÖLÜMÜ] " if is_flight else "🔥 "
-    story_block = sp.get("caption_story_script", "").strip()
-    debate_question = sp.get("comment_explosion_prompt") or (
-        f"💬 STİL ANKETİ: Bu 2026-2027 Kış Tasarım Kreasyonunda senin favori parçan {items['outerwear']['name']} mi yoksa {items['top']['name']} mu? Yorumlarda buluşalım 👇✨"
+    fa = outfit.get("fashion_agenda") or {}
+    styling_block = fa.get("custom_styling_summary") or (
+        "✨ MODA GÜNDEMİ & STİL ÖNERİSİ:\n"
+        "• Silüet & Oran: Yüksek bel alt giyim ve uzun dış giyim ile 1/3 - 2/3 dikey boy uzatma oranı yakalanır.\n"
+        "• Renk & Doku: 60-30-10 renk dengesiyle mat yün kaşe, yumuşak triko ve deri aksesuarlar kusursuz bütünlük sağlar."
     )
 
-    holding_ad_tagline = build_holding_ad_copy_tagline(outfit)
     lines = [
-        f"{flight_prefix}{hook_title}",
-        holding_ad_tagline,
-        "📌 'Bugün ne giysem?' krizinden saniyeler içinde kurtulmak için bu 2K sinematik kış reklam kombinini hemen KAYDET ve stil sahibi arkadaşına GÖNDER! ❄️✨",
+        f"✨ {clean_headline}",
         "",
-    ]
-    if story_block:
-        lines.extend([story_block, ""])
-    lines.extend([
-        viral_hook,
+        styling_block,
         "",
-        debate_question,
+        f"1️⃣ 🧥 {c_out}: {items['outerwear']['brand']} – {items['outerwear']['name']} ({items['outerwear']['price']} | Kod: {items['outerwear'].get('sku', '-')}) 👉 {u_out}",
+        f"2️⃣ 🕶️ {c_cap}: {items['cap']['brand']} – {items['cap']['name']} ({items['cap']['price']} | Kod: {items['cap'].get('sku', '-')}) 👉 {u_cap}",
+        f"3️⃣ 👚 {c_top}: {items['top']['brand']} – {items['top']['name']} ({items['top']['price']} | Kod: {items['top'].get('sku', '-')}) 👉 {u_top}",
+        f"4️⃣ 👖 {c_bot}: {items['bottom']['brand']} – {items['bottom']['name']} ({items['bottom']['price']} | Kod: {items['bottom'].get('sku', '-')}) 👉 {u_bot}",
+        f"5️⃣ 👜 {c_bag}: {items['bag']['brand']} – {items['bag']['name']} ({items['bag']['price']} | Kod: {items['bag'].get('sku', '-')}) 👉 {u_bag}",
+        f"6️⃣ 👟 {c_sho}: {items['shoes']['brand']} – {items['shoes']['name']} ({items['shoes']['price']} | Kod: {items['shoes'].get('sku', '-')}) 👉 {u_sho}",
         "",
-        f"🛍️ KOMBİN FİYAT, MARKA & ÜRÜN KODU DETAYLARI ({col_label}):",
-        f"1️⃣ 🧥 {c_out}: {items['outerwear']['brand']} – {items['outerwear']['name']} | Fiyat: {items['outerwear']['price']} | Ürün Kodu: {items['outerwear'].get('sku', '-')}",
-        f"2️⃣ 🕶️ {c_cap}: {items['cap']['brand']} – {items['cap']['name']} | Fiyat: {items['cap']['price']} | Ürün Kodu: {items['cap'].get('sku', '-')}",
-        f"3️⃣ 👚 {c_top}: {items['top']['brand']} – {items['top']['name']} | Fiyat: {items['top']['price']} | Ürün Kodu: {items['top'].get('sku', '-')}",
-        f"4️⃣ 👖 {c_bot}: {items['bottom']['brand']} – {items['bottom']['name']} | Fiyat: {items['bottom']['price']} | Ürün Kodu: {items['bottom'].get('sku', '-')}",
-        f"5️⃣ 👜 {c_bag}: {items['bag']['brand']} – {items['bag']['name']} | Fiyat: {items['bag']['price']} | Ürün Kodu: {items['bag'].get('sku', '-')}",
-        f"6️⃣ 👟 {c_sho}: {items['shoes']['brand']} – {items['shoes']['name']} | Fiyat: {items['shoes']['price']} | Ürün Kodu: {items['shoes'].get('sku', '-')}",
-        "",
-        f"💰 TOPLAM 6 PARÇA KOMBİN BÜTÇESİ: {total_str}",
-        "",
-        "🔗 Tüm parçaların fotoğraflı mağaza kartları ve doğrudan alışveriş bağlantıları profildeki linkte (guzelai.com) yer almaktadır.",
-        "",
-        f"🎵 Müzik: {music_name}",
-        "",
-        TR_LEGAL_NOTICE_FULL,
+        f"💰 Toplam Kombin: {total_str} | 🌐 Tüm Linkler: https://guzelai.com/#kombinler",
+        f"💬 Senin favorin kaç numaralı parça? (1-6 arası yoruma yaz 👇)",
         "",
         hashtags,
-    ])
+    ]
     return "\n".join(lines)
 
 
@@ -176,11 +140,17 @@ def main():
         except Exception:
             pass
 
-    # Bulut (GitHub Actions) arka arkaya çift tetikleme (schedule + harici workflow_dispatch çakışması) koruması:
+    # Önce Telegram (@guzelaibot) üzerinden yönetici veya herhangi bir kullanıcı tarafından gönderilmiş
+    # bekleyen kombin / ürün linki / fotoğraf taleplerini yakala:
+    tg_pending_requests = poll_and_enqueue_telegram_outfits()
+
+    # Bulut (GitHub Actions) arka arkaya çift tetikleme (schedule + harici workflow_dispatch çakışması) koruması
+    # (NOT: Telegram'dan kullanıcı kombin gönderdiyse bekleme süresi otomatik atlanır!):
     if (
         os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
         and not os.environ.get("FORCE_ARCHETYPE_ID", "").strip()
         and os.environ.get("BYPASS_CLOUD_COOLDOWN", "0") != "1"
+        and not tg_pending_requests
     ):
         zero_ledger = load_zero_repeat_ledger()
         last_tg_ts = float(zero_ledger.get("last_telegram_dispatch_ts", 0.0) or 0.0)
@@ -201,6 +171,7 @@ def main():
     watermark = os.environ.get("IG_WATERMARK", "@guzelaicom")
 
     outfit = select_daily_outfit(slot_name=slot)
+    outfit = enrich_outfit_with_fashion_agenda(outfit)
 
     # Ajan 27 (BARIŞ - Viral Senarist) & Ajan 28 (EVREN - Otonom Öz-Evrim Motoru):
     from viral_screenwriter_evolution import evolve_and_write_viral_screenplay

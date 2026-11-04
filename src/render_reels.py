@@ -763,10 +763,11 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                     anchor="mm",
                 )
 
-            # Ajan 27 (BARIŞ) 1. Perde Sinematik Hikaye Alt Yazı Bandı (Y = S(1445) — Kıyafetlerle Çakışmasız)
+            # Ajan 1 (ADA) Moda Gündemi & Ajan 27 (BARIŞ) 1. Perde Sinematik Hikaye Alt Yazı Bandı (Y = S(1445))
             sp_scene1 = outfit.get("viral_screenplay") or {}
+            fa_scene1 = outfit.get("fashion_agenda") or {}
             beat1_txt = sp_scene1.get("act1_collage_beat1", "")
-            beat2_txt = sp_scene1.get("act1_collage_beat2", "")
+            beat2_txt = fa_scene1.get("hud_styling_tip") or sp_scene1.get("act1_collage_beat2", "")
             active_s1_line = beat1_txt if t < 2.65 else beat2_txt
             if active_s1_line:
                 clean_s1 = "".join(ch for ch in active_s1_line if ord(ch) < 0x2000 or ch in "’‘“”–—•₺")
@@ -821,47 +822,54 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
             if abs(t - 4.8) < (0.5 / FPS):
                 canvas.convert("RGB").save(os.path.join(out_dir, "kombin_collage.png"), compress_level=1)
 
-        # 2. BÖLÜM: Ajan 31 KUZEY & Ajan 32 ATLAS — 3 Eksenli Gimbal Kamera + Sinema Kontrastlı Podyum Yürüyüşü (5.2sn - 11.0sn)
+        # 2. BÖLÜM: Ajan 31 KUZEY & Ajan 32 ATLAS — 3 Eksenli Gimbal Kamera + Optik Cross-Blend Podyum Yürüyüşü (5.2sn - 11.0sn)
         if t >= collage_end_sec:
             walk_t = t - collage_end_sec
             walk_dur = total_duration - collage_end_sec  # 5.8s toplam (5.2s -> 11.0s)
 
+            def _sample_gimbal_step(step_idx: int, u_val: float) -> Image.Image:
+                m_im = model_frames[min(step_idx, len(model_frames) - 1)]
+                eu = ease_in_out_cubic(max(0.0, min(1.0, u_val)))
+                if step_idx == 0:
+                    zm = 1.085 - 0.06 * eu
+                    cw, ch = int(W / zm), int(H / zm)
+                    px = max(0, min(W - cw, int((W - cw) * (0.42 + 0.16 * eu))))
+                    py = int((H - ch) * (0.34 + 0.16 * eu))
+                elif step_idx == 1:
+                    zm = 1.025 + 0.06 * eu
+                    cw, ch = int(W / zm), int(H / zm)
+                    px = max(0, min(W - cw, int((W - cw) * (0.58 - 0.16 * eu))))
+                    py = int((H - ch) * (0.44 + 0.11 * eu))
+                else:
+                    zm = 1.075 - 0.05 * eu
+                    cw, ch = int(W / zm), int(H / zm)
+                    px = (W - cw) // 2
+                    py = int((H - ch) * (0.52 - 0.06 * eu))
+                return m_im.crop((px, py, px + cw, py + ch)).resize((W, H), Image.Resampling.LANCZOS).convert("RGBA")
+
             if len(model_frames) >= 3:
                 if walk_t < 1.9:
-                    active_model = model_frames[0]
-                    local_u = max(0.0, min(1.0, walk_t / 1.9))
-                    eased_u = ease_in_out_cubic(local_u)
-                    zoom = 1.085 - 0.06 * eased_u
-                    crop_w = int(W / zoom)
-                    crop_h = int(H / zoom)
-                    pan_x = int((W - crop_w) * (0.42 + 0.16 * eased_u))
-                    cx = max(0, min(W - crop_w, pan_x))
-                    cy = int((H - crop_h) * (0.34 + 0.16 * eased_u))
+                    walk_frame = _sample_gimbal_step(0, walk_t / 1.9)
+                    if walk_t > 1.76:
+                        blend_a = ease_in_out_cubic((walk_t - 1.76) / 0.28)
+                        next_f = _sample_gimbal_step(1, 0.0)
+                        walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
                 elif walk_t < 3.8:
-                    active_model = model_frames[1]
-                    local_u = max(0.0, min(1.0, (walk_t - 1.9) / 1.9))
-                    eased_u = ease_in_out_cubic(local_u)
-                    zoom = 1.025 + 0.06 * eased_u
-                    crop_w = int(W / zoom)
-                    crop_h = int(H / zoom)
-                    pan_x = int((W - crop_w) * (0.58 - 0.16 * eased_u))
-                    cx = max(0, min(W - crop_w, pan_x))
-                    cy = int((H - crop_h) * (0.44 + 0.11 * eased_u))
+                    walk_frame = _sample_gimbal_step(1, (walk_t - 1.9) / 1.9)
+                    if walk_t < 2.04:
+                        blend_a = ease_in_out_cubic((2.04 - walk_t) / 0.28)
+                        prev_f = _sample_gimbal_step(0, 1.0)
+                        walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
+                    elif walk_t > 3.66:
+                        blend_a = ease_in_out_cubic((walk_t - 3.66) / 0.28)
+                        next_f = _sample_gimbal_step(2, 0.0)
+                        walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
                 else:
-                    active_model = model_frames[2]
-                    local_u = max(0.0, min(1.0, (walk_t - 3.8) / 2.0))
-                    eased_u = ease_in_out_cubic(local_u)
-                    zoom = 1.075 - 0.05 * eased_u
-                    crop_w = int(W / zoom)
-                    crop_h = int(H / zoom)
-                    cx = (W - crop_w) // 2
-                    cy = int((H - crop_h) * (0.52 - 0.06 * eased_u))
-
-                walk_frame = (
-                    active_model.crop((cx, cy, cx + crop_w, cy + crop_h))
-                    .resize((W, H), Image.Resampling.LANCZOS)
-                    .convert("RGBA")
-                )
+                    walk_frame = _sample_gimbal_step(2, (walk_t - 3.8) / 2.0)
+                    if walk_t < 3.94:
+                        blend_a = ease_in_out_cubic((3.94 - walk_t) / 0.28)
+                        prev_f = _sample_gimbal_step(1, 1.0)
+                        walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
             elif len(model_frames) > 0:
                 idx_m = min(len(model_frames) - 1, int((walk_t / walk_dur) * len(model_frames)))
                 active_model = model_frames[idx_m]
@@ -879,10 +887,10 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
             else:
                 walk_frame = bg_base.copy()
 
-            # Adım geçişlerinde (1.9s ve 3.8s) hayalet izi bırakmayan 2 karelik sıcak şampanya kamera flaş darbesi
+            # Adım geçişlerinde (1.9s ve 3.8s) zarif sıcak şampanya optik darbesi
             cut_dist = min(abs(walk_t - 1.9), abs(walk_t - 3.8))
             if cut_dist < 0.045:
-                flash_a = int(68 * (1.0 - cut_dist / 0.045))
+                flash_a = int(52 * (1.0 - cut_dist / 0.045))
                 shutter_overlay = Image.new("RGBA", (W, H), (255, 232, 188, flash_a))
                 walk_frame = Image.alpha_composite(walk_frame, shutter_overlay)
 
@@ -911,32 +919,30 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 outline_width=S(2),
             )
 
-            # Ajan 27 (BARIŞ) & Ajan 28 (EVREN) 2. ve 3. Perde Sinematik Yürüyüş & Plot-Twist Alt Yazısı
+            # Canlı Moda Gündemi Rozeti (Y = S(190)) + 2./3. Perde Stil Önerisi & Hikaye Alt Yazısı
             sp_walk = outfit.get("viral_screenplay") or {}
-            if sp_walk:
-                if sp_walk.get("is_viral_flight"):
-                    gen_tag = f"» VİRAL UÇUŞ BÖLÜMÜ • SENARYO: BARIŞ • GEN #{sp_walk.get('generation', 1)} «"
-                else:
-                    gen_tag = f"» GÜZELAI HOLDİNG SİNEMA REKLAMI • SENARYO: BARIŞ • GEN #{sp_walk.get('generation', 1)} «"
+            fa_walk = outfit.get("fashion_agenda") or {}
+            if sp_walk or fa_walk:
+                agenda_tag = fa_walk.get("hud_badge") or "» 2026-2027 KÜRESEL MODA GÜNDEMİ & STİL ÖNERİSİ «"
                 _draw_auto_pill_badge(
                     draw=mini_draw,
                     center_x=W // 2,
                     center_y=S(190),
-                    text=gen_tag,
+                    text=agenda_tag,
                     font=font_legal,
-                    fill_rgba=(230, 90, 127, 234) if sp_walk.get("is_viral_flight") else (20, 18, 22, 224),
-                    text_rgba=(255, 255, 255, 255) if sp_walk.get("is_viral_flight") else (238, 210, 152, 255),
+                    fill_rgba=(20, 18, 22, 232),
+                    text_rgba=(242, 214, 158, 255),
                     pad_x=S(22),
                     pad_y=S(8),
                     radius=S(18),
-                    outline_rgba=(220, 182, 116, 200),
+                    outline_rgba=(220, 182, 116, 210),
                     outline_width=S(1),
                 )
                 if walk_t < 1.9:
-                    walk_story_line = sp_walk.get("act2_walk_beat1", "")
+                    walk_story_line = fa_walk.get("hud_styling_tip") or sp_walk.get("act2_walk_beat1", "")
                     is_final_beat = False
                 elif walk_t < 3.8:
-                    walk_story_line = sp_walk.get("act2_walk_beat2", "")
+                    walk_story_line = sp_walk.get("act2_walk_beat2", "") or fa_walk.get("hud_styling_tip", "")
                     is_final_beat = False
                 else:
                     walk_story_line = sp_walk.get("act3_plot_twist", "")
@@ -1036,7 +1042,7 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
     # 2K QHD+ (1440x2560) GüzelAI Holding Sinema & Reklam Master Kodlama (ATLAS DoP):
     # - BT.709 tam renk uzayı ve kontrast bayrakları
     # - Luma/Chroma unsharp mask filtresi (unsharp=5:5:0.65:3:3:0.0)
-    # - Yüksek profil H.264 (CRF 13, ~20 Mbps, 28 Mbps tepe) + 320 kbps AAC Stereo Ses
+    # - Yüksek profil H.264 (CRF 12, ~22 Mbps, 30 Mbps tepe) + 320 kbps AAC Stereo Ses
     import shutil
     ffmpeg_bin = shutil.which("ffmpeg")
     if not ffmpeg_bin:
@@ -1049,16 +1055,16 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
         "-i", os.path.join(frames_dir, "frame_%04d.jpg"),
         "-i", wav_path,
         "-t", str(total_duration),
-        "-vf", "unsharp=5:5:0.65:3:3:0.0",
+        "-vf", "unsharp=5:5:0.75:3:3:0.0",
         "-map", "0:v", "-map", "1:a",
         "-c:v", "libx264",
         "-preset", "slow",
         "-profile:v", "high",
         "-level:v", "5.1",
-        "-crf", "13",
-        "-b:v", "20M",
-        "-maxrate", "28M",
-        "-bufsize", "42M",
+        "-crf", "12",
+        "-b:v", "22M",
+        "-maxrate", "30M",
+        "-bufsize", "45M",
         "-pix_fmt", "yuv420p",
         "-color_primaries", "bt709",
         "-color_trc", "bt709",

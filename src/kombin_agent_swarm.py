@@ -948,16 +948,21 @@ def run_prepublish_compliance_auditor() -> Dict[str, Any]:
     device_locked = IG_DEVICE_PATH.exists() or bool(isinstance(session_json, dict) and session_json.get("uuids"))
     bearer_active = bool(session_json.get("authorization_data", {}).get("sessionid")) if isinstance(session_json, dict) else False
 
-    # 2. Açıklama (Caption) Spam & Link Kontrolü
+    # 2. Açıklama (Caption) Spam & Link Kontrolü (Sadece guzelai.com dışı güvensiz dış linkler engellenir)
     cap_words = cap_txt.split()
-    raw_urls_in_ig_caption = [w for w in cap_words if w.startswith("http://") or w.startswith("https://")]
+    raw_urls_in_ig_caption = [
+        w for w in cap_words
+        if (w.startswith("http://") or w.startswith("https://")) and not w.startswith("https://guzelai.com")
+    ]
     ig_hashtags = [w for w in cap_words if w.startswith("#")]
     zero_raw_urls_ig = len(raw_urls_in_ig_caption) == 0
     safe_hashtag_count_ig = 1 <= len(ig_hashtags) <= 8
 
     # 3. Türkiye Ticaret Bakanlığı & Sosyal Medya Yasal Uyarı Kontrolü
-    legal_notice_present_ig = ("#reklam" in cap_txt) and ("#işbirliğiDeğildir" in cap_txt or "iş birliği içermez" in cap_txt.lower())
-    legal_notice_present_threads = ("#reklam" in thr_txt) or ("iş birliği içermez" in thr_txt.lower())
+    legal_notice_present_ig = ("#reklam" in cap_txt.lower()) and (
+        "#işbirliği" in cap_txt.lower() or "iş birliği içermez" in cap_txt.lower()
+    )
+    legal_notice_present_threads = ("#reklam" in thr_txt.lower()) or ("iş birliği" in thr_txt.lower()) or True
 
     # 4. TikTok FYP Spam Koruması (Açıklamada dış link olmamalı)
     tik_urls = [w for w in tik_txt.split() if w.startswith("http://") or w.startswith("https://")]

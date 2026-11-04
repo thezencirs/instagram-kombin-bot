@@ -276,19 +276,16 @@ def build_supermodel_editorial_prompt(base_prompt: str, is_3d_avatar: bool = Fal
     Ajan 30 DERİN (Manken Ajansı Baş Işık & Doku Yönetmeni) ve Ajan 31 KUZEY (Podyum Koreografı):
     Bulut FLUX.1 manken üretim komutlarına lüks moda kampanyası optik, cilt/kumaş mikro-dokusu
     ve baştan ayağa kusursuz anatomik yürüyüş standartlarını ekler.
+    NOT: Animasyon / 3D CGI / Pixar karakterler KESİN OLARAK YASAKTIR; Kadın, Erkek ve Çocuk dahil
+    tüm modeller %100 fotogerçekçi gerçek insan AI modellerdir.
     """
-    if is_3d_avatar:
-        cinematic_tag = (
-            ", ultra-clean Pixar/Disney-grade luxury kids fashion lookbook lighting, rich wool and quilted fabric weave detail, "
-            "crisp full-length head-to-toe framing showing shoes clearly on ground, natural balanced stride"
-        )
-    else:
-        cinematic_tag = (
-            ", shot on Hasselblad H6D-100c with 85mm f/1.4 prime editorial lens, authentic natural skin micro-texture, "
-            "tactile luxury wool cashmere and leather weave detail, warm golden-hour rim light with balanced soft key fill, "
-            "strictly full-body head-to-toe runway framing clearly showing footwear on pavement, natural anatomical posture"
-        )
-    if "Hasselblad" in base_prompt or "Pixar/Disney-grade" in base_prompt:
+    cinematic_tag = (
+        ", shot on Hasselblad H6D-100c with 85mm f/1.4 prime editorial lens, authentic natural human skin micro-texture, "
+        "tactile luxury wool cashmere and leather weave detail, warm golden-hour rim light with balanced soft key fill, "
+        "strictly full-body head-to-toe runway framing clearly showing footwear on pavement, natural anatomical posture, "
+        "photorealistic live-action fashion photography, zero 3D render, zero cartoon, zero CGI"
+    )
+    if "Hasselblad" in base_prompt:
         return base_prompt
     return base_prompt.rstrip(", ") + cinematic_tag
 

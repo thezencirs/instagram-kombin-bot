@@ -153,6 +153,46 @@ def _make_atelier_archetype(
 # Görsel Stil Arketipleri (Her arketip için temiz dekupe kıyafet yedekleri + sokakta yürüyen model kareleri)
 OUTFIT_ARCHETYPES = [
     _make_atelier_archetype(
+        arch_id="kadin_agenda01_nisantasi_bordo_kase_mocha",
+        gender_segment="kadin",
+        designer_name="DEFNE x ATLAS",
+        music_id="old_money_violin_orchestra_pov",
+        title="Nişantaşı 2026-2027 Kış Moda Gündemi: Koyu Bordo (Oxblood) Kruvaze Kaşe Kaban, Mocha Mousse Kaşmir Triko & Şampanya Fildişi Yün Palazzo (%100 Fotogerçekçi İnsan AI Süpermodel • 2K Sinema Reels) 🍷🤎✨",
+        spoken_hook="2026-2027 Milano ve Paris kış podyumlarının bir numaralı renk denklemi Nişantaşı sokaklarında: Koyu bordo kaşe kaban, Mocha Mousse kaşmir ve şampanya fildişi palazzo!",
+        viral_hook="🌍 2026-2027 GLOBAL MODA GÜNDEMİ & STİL REHBERİ (Milano / Paris / Nişantaşı FW 26-27 • Tasarım: DEFNE • Sinema DoP: ATLAS): Koyu bordo (Oxblood) kruvaze uzun yün kaşe kaban, sıcak Mocha Mousse fitilli boğazlı kaşmir triko, yüksek bel şampanya fildişi yün palazzo pantolon ve gold tokalı bordo deri omuz çantası! 💡 Stil Önerisi: Yüksek bel fildişi palazzo pantolon ile mocha trikoyu 1/3–2/3 altın oranında eşleştirip koyu bordo kaşe kabanı açık bırakarak dikey silüeti uzatın. 💬 Favori parçanız 1 (Koyu Bordo Kaşe Kaban) mı yoksa 3 (Mocha Mousse Kaşmir Triko) mu? 👇🍷🤎✨",
+        badge_walk="» FW 26/27 MODA GÜNDEMİ: OXBLOOD & MOCHA MOUSSE «",
+        asset_prefix="kadin_agenda01",
+        sku_prefix="94010100",
+        specs={
+            "outerwear": ("Oxblood Kaşe Kaban", "İPEKYOL", "Kadın Koyu Bordo (Oxblood) Kruvaze Uzun Yün Kaşe Kaban", "4.590₺", 4590.0, "Koyu Bordo / Oxblood", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["bordo", "kruvaze", "kaşe", "kaban"]),
+            "cap": ("Gold/Kahve Gözlük", "CELINE EYEWEAR", "Kadın Gold Çerçeveli Kahve Degrade Dikdörtgen Güneş Gözlüğü", "4.650₺", 4650.0, "Gold / Kahve", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c105", ["gold", "kahve", "dikdörtgen", "gözlük"]),
+            "top": ("Mocha Mousse Kaşmir", "MASSIMO DUTTI", "Kadın Mocha Mousse Fitilli Boğazlı Saf Kaşmir Triko Kazak", "1.890₺", 1890.0, "Mocha Mousse / Sütlü Kahve", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["mocha", "kahve", "boğazlı", "kaşmir"]),
+            "bottom": ("Fildişi Yün Palazzo", "YARGICI", "Kadın Şampanya Fildişi Yüksek Bel Pileli Yün Palazzo Pantolon", "1.750₺", 1750.0, "Şampanya Fildişi / Ekru", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["fildişi", "ekru", "pileli", "palazzo"]),
+            "bag": ("Bordo Deri Çanta", "BAGMORI", "Kadın Koyu Bordo Gold Tokalı Dokulu Deri Omuz Çantası", "949₺", 949.0, "Koyu Bordo", "https://www.bagmori.com", ["bordo", "gold", "deri", "çanta"]),
+            "shoes": ("Fildişi/Bordo Sneaker", "ADIDAS", "Kadın Fildişi Deri Bordo Süet Çizgili Court Sneaker", "3.990₺", 3990.0, "Fildişi / Bordo", "https://www.trendyol.com/kadin-sneaker-x-g1-c1172", ["fildişi", "bordo", "süet", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="erkek_agenda01_bebek_antrasit_kase_ekru",
+        gender_segment="erkek",
+        designer_name="KEREM x ATLAS",
+        music_id="nisantasi_funk_slapbass_brass_pov",
+        title="Bebek 2026-2027 Erkek Kış Moda Gündemi: Koyu Espresso Kürklü Yaka Süet Mont, Sıcak Ekru Saç Örgü Merinos & Antrasit İtalyan Flanel (%100 Fotogerçekçi İnsan AI Erkek Manken • 2K Sinema) 🏛️☕✨",
+        spoken_hook="2026-2027 Milano ve Londra erkek kış modasının zirvesi Bebek sahilinde: Krem kürklü koyu espresso süet mont ve sıcak ekru merinos uyumu!",
+        viral_hook="🌍 2026-2027 ERKEK MODA GÜNDEMİ & SARTORIAL STİL REHBERİ (Milano / Savile Row FW 26-27 • Tasarım: KEREM • Sinema DoP: ATLAS): Koyu espresso süet krem kürklü yaka kışlık mont, sıcak ekru saç örgü boğazlı saf merinos kazak, koyu antrasit pileli İtalyan flanel yün pantolon ve koyu espresso deri hafta sonu çantası! 💡 Stil Önerisi: Mat süet ve yün flanel dokularını sıcak ekru triko ile kırarak 60-30-10 renk dengesinde Zahmetsiz İtalyan (Sprezzatura) derinliği yakalayın. 💬 Favoriniz 1 (Espresso Süet Mont) mu yoksa 3 (Ekru Merinos Kazak) mı? 👇☕🔥",
+        badge_walk="» FW 26/27 ERKEK GÜNDEMİ: ESPRESSO SÜET & EKRU MERİNOS «",
+        asset_prefix="erkek_agenda01",
+        sku_prefix="94020100",
+        specs={
+            "outerwear": ("Espresso Süet Mont", "MASSIMO DUTTI", "Erkek Koyu Espresso Süet Krem Kürklü Yaka Kışlık Mont", "4.890₺", 4890.0, "Koyu Espresso / Krem", "https://www.trendyol.com/erkek-mont-x-g2-c118", ["espresso", "kahve", "süet", "kürklü", "mont"]),
+            "cap": ("Havanna Gold Gözlük", "RAY-BAN", "Erkek Koyu Havanna Kemik & Gold Köprülü Güneş Gözlüğü", "4.850₺", 4850.0, "Koyu Havanna / Gold", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c105", ["havanna", "kahve", "gold", "gözlük"]),
+            "top": ("Ekru Merinos Kazak", "BEYMEN CLUB", "Erkek Sıcak Ekru Saç Örgü Boğazlı Saf Merinos Yün Kazak", "1.850₺", 1850.0, "Sıcak Ekru", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["ekru", "saç örgü", "boğazlı", "merinos"]),
+            "bottom": ("Antrasit Flanel Pantolon", "NETWORK", "Erkek Koyu Antrasit Pileli İtalyan Flanel Yün Pantolon", "2.390₺", 2390.0, "Koyu Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["antrasit", "flanel", "pileli", "pantolon"]),
+            "bag": ("Espresso Deri Çanta", "TERGAN", "Erkek Koyu Espresso Deri Hafta Sonu & Evrak Çantası", "2.990₺", 2990.0, "Koyu Espresso", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["espresso", "kahve", "deri", "çanta"]),
+            "shoes": ("Ekru/Espresso Sneaker", "ADIDAS", "Erkek Ekru Deri Espresso Süet Çizgili Court Sneaker", "3.890₺", 3890.0, "Ekru / Espresso", "https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109", ["ekru", "kahve", "süet", "sneaker"]),
+        },
+    ),
+    _make_atelier_archetype(
         arch_id="kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
         gender_segment="kadin",
         designer_name="DEFNE x ATLAS",
@@ -4067,14 +4107,29 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         or slot_name
     )
     forced_id = ARCHETYPE_ALIASES.get(forced_id, forced_id)
-    allow_retired = os.environ.get("ALLOW_RETIRED_REBUILD", "0").strip() == "1"
+    allow_retired = (
+        os.environ.get("ALLOW_RETIRED_REBUILD", "0").strip() == "1"
+        or os.environ.get("LOCAL_ONLY", "0").strip() == "1"
+    )
+    # ÖNCELİK #1: Telegram (@guzelaibot) üzerinden yönetici veya herhangi bir kullanıcı tarafından
+    # gönderilen kombin / ürün linki / görsel isteği varsa (Kadın/Erkek/Çocuk algılayarak %100 gerçekçi AI modelle) hemen üret!
+    tg_custom_arch = None
+    try:
+        from telegram_outfit_ingestor import build_telegram_custom_archetype_if_pending
+        tg_custom_arch = build_telegram_custom_archetype_if_pending(scrape_single_product_url)
+    except Exception as tge:
+        print(f"[Telegram Özel Kombin Kontrol Uyarısı] {tge}")
+
     forced_matches = [
         a for a in all_catalog_archetypes
         if a["id"] == forced_id
         and os.path.exists(a["model_frames"][0])
         and (allow_retired or not is_creation_or_model_used(a, zero_ledger))
     ]
-    if forced_matches:
+    if tg_custom_arch and tg_custom_arch.get("model_frames"):
+        archetype = tg_custom_arch
+        force_live_scrape = False
+    elif forced_matches:
         archetype = forced_matches[0]
         force_live_scrape = False
     else:
@@ -4083,11 +4138,11 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
                 f"🛡️ [SIFIR-TEKRAR KİLİDİ - ARDA & VERA] '{forced_id}' daha önce paylaşıldığı için "
                 f"tekrar kullanımı engellendi! Sıradaki %100 özgün ve paylaşılmamış kreasyona geçiliyor..."
             )
-        # SADECE daha önce HİÇ paylaşılmamış kombinleri ve HİÇ kullanılmamış mankenleri seç (%100 Sıfır-Tekrar Garantisi)
+        # SADECE daha önce HİÇ paylaşılmamış kombinleri ve HİÇ kullanılmamış %100 fotogerçekçi insan mankenleri seç
         forced_segment = os.environ.get("FORCE_SEGMENT", "").strip().lower()
-        rotation_order = ["kadin", "erkek", "kiz_cocuk", "erkek_cocuk"]
+        rotation_order = ["kadin", "erkek"]
         last_id = used_archetypes[-1] if used_archetypes else ""
-        last_seg = "erkek_cocuk"
+        last_seg = "erkek"
         for a in all_catalog_archetypes:
             if a["id"] == last_id:
                 last_seg = a.get("gender_segment", "kadin")
@@ -4095,26 +4150,31 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         next_default_seg = rotation_order[(rotation_order.index(last_seg) + 1) % len(rotation_order)] if last_seg in rotation_order else "kadin"
         desired_seg = forced_segment if (forced_segment and forced_segment not in ("otomatik", "all", "tumu")) else next_default_seg
 
-        all_valid_archetypes = [a for a in all_catalog_archetypes if os.path.exists(a["model_frames"][0])]
+        all_valid_archetypes = [
+            a for a in all_catalog_archetypes
+            if os.path.exists(a["model_frames"][0]) and not a.get("is_3d_avatar", False)
+        ]
         available_archetypes = [
             a for a in all_valid_archetypes
             if (allow_retired or (a["id"] not in used_archetypes and not is_creation_or_model_used(a, zero_ledger)))
         ]
 
-        if not available_archetypes:
+        if forced_segment and forced_segment not in ("otomatik", "all", "tumu"):
+            seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") == forced_segment]
+        else:
+            seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") in rotation_order]
+
+        if not seg_matches:
             print(
                 f"👗 [MODA TASARIM ATÖLYESİ - DEFNE, KEREM, LEYLA, MERT] "
                 f"Hazır stüdyo havuzu tamamlandı -> '{desired_seg}' segmenti için Argon'suz Bulut FLUX.1 "
-                f"motoruyla %100 sıfır-tekrar yepyeni kış kreasyonu ve AI manken üretiliyor..."
+                f"motoruyla %100 sıfır-tekrar yepyeni kış kreasyonu ve %100 fotogerçekçi gerçek insan AI manken üretiliyor..."
             )
             archetype = synthesize_autonomous_winter_creation(desired_seg, zero_ledger)
             force_live_scrape = False
         else:
-            if forced_segment and forced_segment not in ("otomatik", "all", "tumu"):
-                seg_matches = [a for a in available_archetypes if a.get("gender_segment", "kadin") == forced_segment]
-                if seg_matches:
-                    available_archetypes = seg_matches
-            else:
+            available_archetypes = seg_matches
+            if not (forced_segment and forced_segment not in ("otomatik", "all", "tumu")):
                 start_idx = rotation_order.index(next_default_seg)
                 for offset in range(len(rotation_order)):
                     target_seg = rotation_order[(start_idx + offset) % len(rotation_order)]
@@ -4363,11 +4423,13 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         chosen_hook_pack = rng.choice(hook_packs)
     archetype_title = archetype.get("title") or chosen_hook_pack["hook_title"]
 
-    return {
+    result_outfit = {
         "slot": slot_name,
         "is_trial": False,
         "archetype_id": archetype["id"],
         "gender_segment": archetype.get("gender_segment", "kadin"),
+        "requester_chat_id": archetype.get("requester_chat_id", ""),
+        "requester_name": archetype.get("requester_name", ""),
         "ai_model_verified": archetype.get("ai_model_verified", True),
         "archetype_title": archetype_title,
         "calendar_concept": active_concept,
@@ -4394,5 +4456,11 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         "total_price_str": total_price_str,
         "model_frames": model_frames,
     }
+    try:
+        from fashion_agenda_engine import enrich_outfit_with_fashion_agenda
+        result_outfit = enrich_outfit_with_fashion_agenda(result_outfit)
+    except Exception as fa_e:
+        print(f"[Fashion Agenda Zenginleştirme Uyarısı] {fa_e}")
+    return result_outfit
 
 

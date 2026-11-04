@@ -1,7 +1,7 @@
 {
   "holding_name": "GüzelAI Moda, Manken/Model, Reklam & Medya Holding A.Ş.",
   "hr_board": "Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)",
-  "generated_at": "2026-11-02 03:18:10",
+  "generated_at": "2026-11-04 14:11:58",
   "total_certified_agents": 36,
   "previously_active_agents": 28,
   "newly_recruited_with_cv_count": 8,
@@ -482,9 +482,9 @@
     }
   ],
   "latest_reels_cinema_telemetry_summary": {
-    "cinema_grade_score_100": 99.58,
+    "cinema_grade_score_100": 99.77,
     "verdict": "CERTIFIED_2K_LUXURY_COMMERCIAL_REEL",
-    "average_laplacian_sharpness": 1010.85
+    "average_laplacian_sharpness": 1092.72
   },
   "status": "HOLDING_36_AGENT_FULL_CADRE_CERTIFIED_AND_ACTIVE"
 }

@@ -14,6 +14,7 @@ Moda Tasarım Atölyesi (Yeni İşe Alınan Baş Moda Tasarımcıları):
 - Ajan 25: LEYLA (girls-winter-atelier-designer) -> Kız Çocuk Kış & Preppy Kolej Moda Tasarımcısı
 - Ajan 26: MERT (boys-urban-winter-atelier-designer) -> Erkek Çocuk Kış & Urban Kolej Moda Tasarımcısı
 """
+import base64
 import hashlib
 import json
 import os
@@ -32,7 +33,7 @@ LEDGER_PATH = BASE_DIR / "output" / "zero_repeat_ledger.json"
 DYNAMIC_CATALOG_PATH = BASE_DIR / "output" / "dynamic_creations_catalog.json"
 
 # @guzelaicom Instagram profilinde ve Telegram'da daha önce paylaşılmış TÜM eski kombinler ve mankenler
-# KALICI OLARAK EMEKLİYE AYRILDI (ASLA TEKRAR SEÇİLEMEZ VE GÖNDERİLEMEZ):
+# + Tüm eski animasyon/3D çocuk karakterleri KALICI OLARAK EMEKLİYE AYRILDI (ASLA TEKRAR SEÇİLEMEZ VE GÖNDERİLEMEZ):
 PERMANENTLY_RETIRED_ARCHETYPES = [
     "halloween_party_couple_vampiric_noir",
     "halloween_party_couple_gothic_oldmoney",
@@ -54,7 +55,25 @@ PERMANENTLY_RETIRED_ARCHETYPES = [
     "pajama_morning_vibe",
     "chic_black_biker_denim",
     "casual_denim_sherpa_grey",
+    "kadin_kasim_nisantasi_bordo_kase_ekru_triko",
+    "erkek_kasim_karakoy_kahve_deri_antrasit",
+    "cocuk_kiz_kasim_bagdat_pembe_pelus_krem",
+    "cocuk_erkek_kasim_etiler_haki_puffer_ekru",
+    "kadin_kasim_bebek_camel_trenckot_bordo",
+    "erkek_kasim_nisantasi_lacivert_kase_kamel",
+    "cocuk_kiz_kasim_ulus_ekru_kase_bordo",
+    "cocuk_erkek_kasim_moda_lacivert_kolej_gri",
+    "kadin_kasim_etiler_antrasit_kase_murdum",
+    "erkek_kasim_levent_haki_kase_ekru_balikci",
+    "cocuk_kiz_kasim_suadiye_krem_pelus_bordo",
+    "cocuk_erkek_kasim_fenerbahce_lacivert_puffer_hardal",
+    "kadin_kasim_tesvikiye_kamel_kurk_cikolata",
     "erkek_kasim_ortakoy_bordo_suet_siyah_triko",
+    "cocuk_kiz_kasim_kalamis_lavanta_puffer_ekru",
+    "cocuk_erkek_kasim_emirgan_kiremit_kolej_antrasit",
+    "kadin_kasim_flight01_zorlu_yakut_kase_noir",
+    "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
+    "erkek_kasim_bebek_konyak_kase_lacivert",
 ]
 
 PERMANENTLY_RETIRED_MODEL_FRAMES = [
@@ -78,7 +97,25 @@ PERMANENTLY_RETIRED_MODEL_FRAMES = [
     "assets/outfit3_model_step1.jpg",
     "assets/outfit2_model_step1.jpg",
     "assets/trial1_model_street.jpg",
+    "assets/kadin_nisantasi1_step1.jpg",
+    "assets/erkek_karakoy1_step1.jpg",
+    "assets/kid_girl1_step1.jpg",
+    "assets/kid_boy1_kis_step1.jpg",
+    "assets/kadin_bebek1_step1.jpg",
+    "assets/erkek_nisantasi1_step1.jpg",
+    "assets/kid_girl2_step1.jpg",
+    "assets/kid_boy2_step1.jpg",
+    "assets/kadin_etiler1_step1.jpg",
+    "assets/erkek_levent1_step1.jpg",
+    "assets/kid_girl3_step1.jpg",
+    "assets/kid_boy3_step1.jpg",
+    "assets/kadin_tesvikiye1_step1.jpg",
     "assets/erkek_ortakoy1_step1.jpg",
+    "assets/kid_girl4_step1.jpg",
+    "assets/kid_boy4_step1.jpg",
+    "assets/kadin_zorlu_flight1_step1.jpg",
+    "assets/kadin_holding_zumrut1_step1.jpg",
+    "assets/erkek_bebek_holding1_step1.jpg",
 ]
 
 FASHION_ATELIER_DESIGNERS = [
@@ -135,7 +172,31 @@ def load_zero_repeat_ledger() -> dict:
                     if item and item not in data[k]:
                         data[k].append(item)
             if saved.get("last_telegram_dispatch_ts"):
-                data["last_telegram_dispatch_ts"] = float(saved["last_telegram_dispatch_ts"])
+                ts_val = float(saved["last_telegram_dispatch_ts"])
+                # Saat farkı (clock-skew) koruması: Gelecekteki bir zaman damgası varsa sıfırla
+                if ts_val <= time.time() + 60:
+                    data["last_telegram_dispatch_ts"] = ts_val
+        except Exception:
+            pass
+
+    # GitHub Contents API üzerinden buluttaki en güncel sıfır-tekrar defterini çek ve birleştir
+    gh_token = os.environ.get("GH_TOKEN", "").strip()
+    if gh_token:
+        try:
+            r = requests.get(
+                "https://api.github.com/repos/thezencirs/instagram-kombin-bot/contents/output/zero_repeat_ledger.json",
+                headers={"Authorization": f"Bearer {gh_token}", "Accept": "application/vnd.github+json"},
+                timeout=12,
+            )
+            if r.status_code == 200:
+                rem = json.loads(base64.b64decode(r.json().get("content", "")).decode("utf-8"))
+                for k in ("retired_archetypes", "retired_model_frames", "telegram_dispatched_ids"):
+                    for item in rem.get(k, []):
+                        if item and item not in data[k]:
+                            data[k].append(item)
+                rem_ts = float(rem.get("last_telegram_dispatch_ts") or 0.0)
+                if 0 < rem_ts <= time.time() + 60 and rem_ts > data["last_telegram_dispatch_ts"]:
+                    data["last_telegram_dispatch_ts"] = rem_ts
         except Exception:
             pass
 
@@ -157,11 +218,28 @@ def load_zero_repeat_ledger() -> dict:
     return data
 
 
-def save_zero_repeat_ledger(data: dict) -> None:
+def save_zero_repeat_ledger(data: dict, sync_github: bool = False) -> None:
     os.makedirs(LEDGER_PATH.parent, exist_ok=True)
     data["updated_at"] = datetime.utcnow().isoformat() + "Z"
+    raw_json = json.dumps(data, ensure_ascii=False, indent=2)
     with open(LEDGER_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write(raw_json)
+
+    gh_token = os.environ.get("GH_TOKEN", "").strip()
+    if sync_github and gh_token:
+        try:
+            api_url = "https://api.github.com/repos/thezencirs/instagram-kombin-bot/contents/output/zero_repeat_ledger.json"
+            headers = {"Authorization": f"Bearer {gh_token}", "Accept": "application/vnd.github+json"}
+            get_r = requests.get(api_url, headers=headers, timeout=12)
+            payload: Dict[str, Any] = {
+                "message": "chore(zero-repeat): atomic update zero_repeat_ledger.json [skip ci]",
+                "content": base64.b64encode(raw_json.encode("utf-8")).decode("ascii"),
+            }
+            if get_r.status_code == 200 and get_r.json().get("sha"):
+                payload["sha"] = get_r.json()["sha"]
+            requests.put(api_url, headers=headers, json=payload, timeout=15)
+        except Exception:
+            pass
 
 
 def is_creation_or_model_used(archetype: dict, ledger: dict | None = None) -> bool:
@@ -191,7 +269,7 @@ def mark_creation_and_model_used(archetype_id: str, model_frame: str = "", teleg
         if archetype_id and archetype_id not in ledger["telegram_dispatched_ids"]:
             ledger["telegram_dispatched_ids"].append(archetype_id)
         ledger["last_telegram_dispatch_ts"] = time.time()
-    save_zero_repeat_ledger(ledger)
+    save_zero_repeat_ledger(ledger, sync_github=telegram_sent)
 
 
 def load_dynamic_creations_catalog() -> List[Dict[str, Any]]:
@@ -422,9 +500,9 @@ PROCEDURAL_ATELIER_MATRIX: Dict[str, List[Dict[str, Any]]] = {
         {
             "district": "Caddebostan Sahil Parkı",
             "slug": "caddebostan_park",
-            "hair_face": "3D CGI virtual fashion catalog character avatar with chestnut braided pigtails",
+            "hair_face": "photorealistic real-looking 9-year-old girl fashion model with natural wavy chestnut hair and warm smile",
             "palette_tr": "Bebek Mavisi Kapitone Mont & Ekru Örgü Triko",
-            "is_3d_avatar": True,
+            "is_3d_avatar": False,
             "outer": ("MANGO KIDS", "Kız Çocuk Bebek Mavisi Kapüşonlu Şişme Kışlık Mont", "1.699₺", 1699.0, "Bebek Mavisi", "kids pastel sky-blue hooded quilted winter puffer jacket"),
             "cap": ("LC WAIKIKI KIDS", "Kız Çocuk Krem Ponponlu Fitilli Triko Bere", "249₺", 249.0, "Krem", "kids cream ribbed knit winter beanie with yarn pom-pom"),
             "top": ("ZARA KIDS", "Kız Çocuk Ekru / Mavi Kar Tanesi Desenli Triko Kazak", "799₺", 799.0, "Ekru / Mavi", "kids cream knit crewneck sweater with sky-blue winter snowflake pattern"),
@@ -437,9 +515,9 @@ PROCEDURAL_ATELIER_MATRIX: Dict[str, List[Dict[str, Any]]] = {
         {
             "district": "Maçka Sanat Parkı",
             "slug": "macka_park",
-            "hair_face": "3D CGI virtual fashion catalog character avatar with wavy light-chestnut hair",
+            "hair_face": "photorealistic real-looking 9-year-old boy fashion model with natural short brown hair and confident smile",
             "palette_tr": "Zümrüt Yeşili Kışlık Parka & Krem Triko",
-            "is_3d_avatar": True,
+            "is_3d_avatar": False,
             "outer": ("ZARA KIDS", "Erkek Çocuk Zümrüt / Orman Yeşili Kapüşonlu Kışlık Parka", "1.899₺", 1899.0, "Orman Yeşili", "kids dark forest-green hooded quilted winter parka jacket"),
             "cap": ("LC WAIKIKI KIDS", "Erkek Çocuk Lacivert Fitilli Kışlık Triko Bere", "229₺", 229.0, "Lacivert", "kids dark navy vertical ribbed knit folded winter beanie"),
             "top": ("MANGO KIDS", "Erkek Çocuk Krem / Yeşil Çizgili Pamuklu Triko Kazak", "749₺", 749.0, "Krem / Yeşil", "kids cream cotton knit crewneck sweater with forest-green chest stripes"),
@@ -458,8 +536,8 @@ def synthesize_autonomous_winter_creation(
     """
     Ajan 23-26 (DEFNE, KEREM, LEYLA, MERT) + Ajan 20 MAYA + Ajan 21 KAAN:
     Statik kombin havuzu tükendiğinde GitHub Actions (ubuntu-latest) üzerinde HİÇ DURMADAN
-    yepyeni, %100 sıfır-tekrar kış kreasyonu, 3 kare yürüyen AI manken ve 6 adet 1:1 şeffaf PNG
-    dekupe görseli üretip `output/dynamic_creations_catalog.json` içine kaydeder.
+    yepyeni, %100 sıfır-tekrar kış kreasyonu, 3 kare %100 fotogerçekçi gerçek insan AI manken
+    (SIFIR animasyon/3D!) ve 6 adet 1:1 şeffaf PNG dekupe görseli üretir.
     """
     if zero_ledger is None:
         zero_ledger = load_zero_repeat_ledger()
@@ -509,7 +587,6 @@ def synthesize_autonomous_winter_creation(
     items_dir.mkdir(parents=True, exist_ok=True)
 
     base_seed = int(hashlib.md5(archetype_id.encode("utf-8")).hexdigest()[:8], 16)
-    is_3d = bool(chosen_bp.get("is_3d_avatar", False))
 
     outer_desc = chosen_bp["outer"][5]
     cap_desc = chosen_bp["cap"][5]
@@ -524,33 +601,30 @@ def synthesize_autonomous_winter_creation(
         "left foot stepping forward mid-stride, winter coat swaying naturally, full body head to toe showing shoes",
         "confident warm smile stepping closer towards camera, full body head to toe showing shoes",
     ]
-    subject_prefix = (
-        f"Vertical 9:16 full-body stylized 3D CGI virtual fashion catalog character ({chosen_bp['hair_face']})"
-        if is_3d
-        else f"Vertical 9:16 photorealistic full-body street fashion lookbook photograph of a 100% AI adult fashion model with {chosen_bp['hair_face']}"
-    )
-
-    try:
-        from guzelai_holding_hr_academy import build_supermodel_editorial_prompt
-    except Exception:
-        build_supermodel_editorial_prompt = lambda p, is_3d_avatar=False: p
+    from fashion_agenda_engine import build_photorealistic_human_model_prompt
 
     for s_idx, pose_txt in enumerate(step_poses, start=1):
         rel_frame = f"assets/{archetype_id}_step{s_idx}.jpg"
         abs_frame = BASE_DIR / rel_frame
-        raw_prompt = (
-            f"{subject_prefix} walking along {chosen_bp['district']} Istanbul in crisp winter daylight, {pose_txt}, "
-            f"wearing an open {outer_desc} over a {top_desc}, {bottom_desc}, {cap_desc}, carrying a {bag_desc}, "
-            f"and wearing {shoes_desc}, editorial winter fashion lookbook, soft bokeh, no text, no watermark"
+        prompt = build_photorealistic_human_model_prompt(
+            segment=seg,
+            district=chosen_bp["district"],
+            hair_face=chosen_bp["hair_face"],
+            outer_desc=outer_desc,
+            top_desc=top_desc,
+            bottom_desc=bottom_desc,
+            cap_desc=cap_desc,
+            bag_desc=bag_desc,
+            shoes_desc=shoes_desc,
+            pose_txt=pose_txt,
         )
-        prompt = build_supermodel_editorial_prompt(raw_prompt, is_3d_avatar=is_3d)
         img = cloud_fetch_ai_image(prompt, width=768, height=1344, seed=base_seed + s_idx * 17)
         if img is None:
             raise RuntimeError(f"Bulut FLUX motoru manken karesi üretemedi: {rel_frame}")
         img_hd = img.resize((1080, 1920), Image.Resampling.LANCZOS)
         img_hd.save(abs_frame, format="JPEG", quality=93)
         model_frames.append(rel_frame)
-        print(f"  ✓ [MAYA Manken Karesi {s_idx}/3] {rel_frame}")
+        print(f"  ✓ [MAYA %100 Fotogerçekçi İnsan Manken Karesi {s_idx}/3] {rel_frame}")
 
     slot_defs = [
         ("outerwear", "01_outer", chosen_bp["outer"], "https://www.trendyol.com/kaban-x-c55"),

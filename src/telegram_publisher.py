@@ -430,124 +430,17 @@ def _trigger_full_automation_pipeline(
 
 
 def sync_subscribers_from_updates(token: Optional[str] = None, handle_commands: bool = True, out_dir: str = "output") -> List[str]:
-    """Polls getUpdates, registers users/channels, and handles commands, links, photos, videos, and button callbacks."""
-    import re
-    tok = token or get_bot_token()
+    """
+    Polls getUpdates via multi-user telegram_outfit_ingestor so ANY user who sends an outfit
+    (links, photo, or description) to @guzelaibot gets their outfit queued for a real AI model Reel.
+    """
+    try:
+        from telegram_outfit_ingestor import poll_and_enqueue_telegram_outfits
+        poll_and_enqueue_telegram_outfits(acknowledge_users=handle_commands)
+    except Exception as e:
+        print(f"[Telegram Multi-User Queue Sync Uyarısı] {e}")
+
     sub_data = load_subscribers()
-    offset = int(sub_data.get("last_update_id", 0)) + 1
-
-    res = tg_api("getUpdates", {"offset": offset, "timeout": 1}, token=tok)
-    if not res.get("ok"):
-        return list(sub_data.get("chats", {}).keys())
-
-    updates = res.get("result", [])
-    for upd in updates:
-        uid = upd.get("update_id", 0)
-        if uid > sub_data.get("last_update_id", 0):
-            sub_data["last_update_id"] = uid
-
-        # 1. Handle inline button callback_query (ADMIN ONLY: 995164733)
-        if handle_commands and "callback_query" in upd:
-            cb = upd["callback_query"]
-            cb_id = cb.get("id")
-            cb_data = cb.get("data", "")
-            cb_chat = (cb.get("message") or {}).get("chat") or {}
-            cb_cid = str(cb_chat.get("id", ""))
-            if cb_cid != "995164733":
-                if cb_id:
-                    tg_api("answerCallbackQuery", {"callback_query_id": cb_id, "text": "🔒 Bu kumanda paneli yalnızca yöneticiye özeldir."}, token=tok)
-                continue
-            if cb_id:
-                tg_api("answerCallbackQuery", {"callback_query_id": cb_id, "text": "İşlem başlatılıyor..."}, token=tok)
-            if cb_cid and cb_data == "trigger_new_broadcast":
-                _trigger_full_automation_pipeline(cb_cid, tok, out_dir=out_dir)
-            continue
-
-        # 2. Extract chat from message, channel_post, or my_chat_member
-        msg = upd.get("message") or upd.get("channel_post") or (upd.get("my_chat_member") or {}).get("chat")
-        chat = msg.get("chat") if isinstance(msg, dict) and "chat" in msg else msg
-        if isinstance(chat, dict) and "id" in chat:
-            cid = str(chat["id"])
-            # Only register Admin (995164733) or official channels
-            if cid != "995164733" and chat.get("type") == "private":
-                if handle_commands and "message" in upd:
-                    tg_api(
-                        "sendMessage",
-                        {
-                            "chat_id": cid,
-                            "text": (
-                                "🔒 <b>Bu bot yalnızca GüzelAI Medya yöneticisine özel uzaktan kumanda panelidir.</b>\n\n"
-                                "🌐 Güncel kombinler ve doğrulanmış mağaza linkleri için web sitemizi ziyaret edin:\n"
-                                "👉 https://guzelai.com/#kombinler\n\n"
-                                "💬 WhatsApp Kombin Kanalımız:\n"
-                                "👉 https://whatsapp.com/channel/0029VbDetYc3mFYDwZSry016"
-                            ),
-                            "parse_mode": "HTML",
-                        },
-                        token=tok,
-                    )
-                continue
-
-            sub_data["chats"][cid] = {
-                "id": chat["id"],
-                "type": chat.get("type", "private"),
-                "title": chat.get("title") or chat.get("username") or chat.get("first_name") or cid,
-                "username": chat.get("username", ""),
-                "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-            }
-
-            if handle_commands and "message" in upd and cid == "995164733":
-                m = upd["message"]
-                text = (m.get("text") or "").strip()
-                caption = (m.get("caption") or "").strip()
-                combined_text = text or caption
-                found_urls = re.findall(r"https?://[^\s<>\"']+", combined_text)
-                clean_title = re.sub(r"https?://[^\s<>\"']+", "", combined_text).replace("/yayinla", "").replace("/uret", "").replace("/paylas", "").strip()
-
-                # Case A: Admin uploaded a Photo (with optional product link/title in caption)
-                if m.get("photo"):
-                    best_photo = m["photo"][-1]
-                    photo_dest = Path(out_dir) / "telegram_uploaded_photo.jpg"
-                    if _download_telegram_file(best_photo["file_id"], photo_dest, tok):
-                        _trigger_full_automation_pipeline(
-                            cid,
-                            tok,
-                            out_dir=out_dir,
-                            custom_urls=found_urls,
-                            custom_image=str(photo_dest),
-                            custom_title=clean_title,
-                        )
-                    continue
-
-                # Case B: Admin uploaded a Video (with optional product link/title in caption)
-                if m.get("video"):
-                    vid_dest = Path(out_dir) / "daily_kombin_reel.mp4"
-                    if _download_telegram_file(m["video"]["file_id"], vid_dest, tok):
-                        _trigger_full_automation_pipeline(
-                            cid,
-                            tok,
-                            out_dir=out_dir,
-                            custom_urls=found_urls,
-                            custom_video=str(vid_dest),
-                            custom_title=clean_title,
-                        )
-                    continue
-
-                # Case C: Admin slash command
-                if text.startswith("/"):
-                    _handle_bot_command(cid, text, out_dir=out_dir, token=tok)
-                # Case D: Admin directly pasted one or more product links in chat
-                elif found_urls:
-                    _trigger_full_automation_pipeline(
-                        cid,
-                        tok,
-                        out_dir=out_dir,
-                        custom_urls=found_urls,
-                        custom_title=clean_title,
-                    )
-
-    save_subscribers(sub_data)
-
     env_chat = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
     chat_ids = list(sub_data.get("chats", {}).keys())
     if env_chat and env_chat not in chat_ids:
@@ -583,28 +476,13 @@ def _handle_bot_command(chat_id: str, text: str, out_dir: str = "output", token:
 
     if cmd in ("/start", "/kombin"):
         welcome = (
-            "👋 <b>Güzel AI (@guzelaicom) 10 Kanallı Otomasyon &amp; Kombin Kontrol Merkezine Hoş Geldiniz!</b>\n\n"
-            "Günün her saatinde buradan otomasyonu tetikleyebilirsiniz:\n"
-            "• 🚀 <b>/yayinla</b> yazarak veya aşağıdaki butona basarak anında yeni 2K kombin üretip 10 kanalda yayınlatabilirsiniz.\n"
-            "• 🔗 <b>Doğrudan Ürün Linki Gönderin:</b> Trendyol/Zara vb. ürün linki yapıştırırsanız o ürünle 2K video üretip tüm hesaplarda paylaşır.\n"
-            "• 🖼️ <b>Fotoğraf veya Video Gönderin:</b> Bota fotoğraf/video atarsanız (açıklamasına link de ekleyebilirsiniz) doğrudan o görselle tüm platformlarda yayına çıkar!\n\n"
-            "👇 <i>En son hazırlanan kombin aşağıda yükleniyor...</i>"
+            "👋 <b>Güzel AI (@guzelaicom) 2K Moda &amp; Kombin Botuna Hoş Geldiniz!</b>\n\n"
+            "• 🔗 <b>Ürün Linki Gönderin:</b> Trendyol/Zara vb. ürün linki gönderirseniz kadın/erkek/çocuk algılayarak %100 gerçekçi AI manken üzerinde 2K Reels hazırlar.\n"
+            "• 🖼️ <b>Kombin Fotoğrafı Gönderin:</b> Kıyafet veya kombin görseli gönderirseniz gerçekçi AI manken üzerinde 2K video olarak hazırlar.\n"
+            "• 🚀 <b>/yayinla</b> yazarak anında yeni 2K kombin üretebilirsiniz."
         )
-        control_kb = {
-            "inline_keyboard": [
-                [{"text": "🚀 Yeni 2K Kombin Üret & 10 Kanalda Yayınla", "callback_data": "trigger_new_broadcast"}],
-                [
-                    {"text": "🌐 GuzelAI.com Görselli Linkler", "url": "https://guzelai.com/#kombinler"},
-                    {"text": "💬 WhatsApp Kanalımız", "url": "https://whatsapp.com/channel/0029VbDetYc3mFYDwZSry016"},
-                ],
-            ]
-        }
         if cmd == "/start":
-            tg_api(
-                "sendMessage",
-                {"chat_id": chat_id, "text": welcome, "parse_mode": "HTML", "reply_markup": control_kb},
-                token=tok,
-            )
+            tg_api("sendMessage", {"chat_id": chat_id, "text": welcome, "parse_mode": "HTML"}, token=tok)
         if outfit:
             send_outfit_to_chat(
                 chat_id=chat_id,
@@ -613,49 +491,6 @@ def _handle_bot_command(chat_id: str, text: str, out_dir: str = "output", token:
                 collage_path=Path(out_dir) / "kombin_collage.png",
                 token=tok,
             )
-    elif cmd == "/linkler":
-        if outfit:
-            html_cap = build_telegram_html(outfit)
-            kb = build_inline_keyboard(outfit)
-            tg_api(
-                "sendMessage",
-                {
-                    "chat_id": chat_id,
-                    "text": html_cap,
-                    "parse_mode": "HTML",
-                    "reply_markup": kb,
-                    "disable_web_page_preview": True,
-                },
-                token=tok,
-            )
-    elif cmd == "/durum":
-        sub_data = load_subscribers()
-        status_msg = (
-            "📊 <b>@guzelaibot 10 Kanallı Otomasyon Durumu</b>\n\n"
-            "• 🌐 <b>GuzelAI.com Vitrini:</b> Aktif (https://guzelai.com/#kombinler)\n"
-            "• 📸 <b>Instagram Reels:</b> Bağlı (@guzelaicom)\n"
-            "• 📘 <b>Facebook:</b> Bağlı (Güzel Ai - archzencir@gmail.com)\n"
-            "• 🎵 <b>TikTok:</b> Bağlı (@guzelaicom)\n"
-            "• ▶️ <b>YouTube Shorts:</b> Bağlı (youtube.com/@guzelaicom)\n"
-            "• 𝕏 <b>X (Twitter):</b> Bağlı (x.com/guzelaicom)\n"
-            "• 📌 <b>Pinterest:</b> Bağlı (archzencir@gmail.com)\n"
-            "• 🧵 <b>Threads:</b> Bağlı (@guzelaicom)\n"
-            "• 💬 <b>WhatsApp Kanalı:</b> Bağlı (whatsapp.com/channel/0029VbDetYc3mFYDwZSry016)\n"
-            "• 🤖 <b>Telegram Uzaktan Tetikleyici:</b> Aktif (/yayinla, Link veya Görsel Gönderimi)\n"
-            f"• 👥 <b>Kayıtlı Abone Sayısı:</b> {len(sub_data.get('chats', {}))}\n"
-            "• 🛍️ <b>Son Kombin:</b> " + html.escape(outfit.get("archetype_title", "Hazır"))
-        )
-        control_kb = {
-            "inline_keyboard": [
-                [{"text": "🚀 Şimdi Yeni Kombin Üret & Yayınla", "callback_data": "trigger_new_broadcast"}],
-                [{"text": "🌐 GuzelAI.com Görselli Linkler", "url": "https://guzelai.com/#kombinler"}],
-            ]
-        }
-        tg_api(
-            "sendMessage",
-            {"chat_id": chat_id, "text": status_msg, "parse_mode": "HTML", "reply_markup": control_kb},
-            token=tok,
-        )
 
 
 def send_outfit_to_chat(
@@ -670,54 +505,44 @@ def send_outfit_to_chat(
     threads_url: str = "",
     token: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Sends the full Stock Package (Hook Cover, Pinterest Collage, 2K Reel Video, and 1-Tap Copy-Paste Captions) to a chat_id."""
+    """
+    Medya dosyalarını (Kapak, Lookbook Kolajı ve 2K Reels Videosu) temiz şekilde gönderir;
+    metin mesajında ise hiçbir 'Kopyalanacak metin' veya '3/3' başlığı olmadan
+    YALNIZCA doğrudan kopyalanıp yapıştırılacak net paylaşım metnini iletir.
+    """
     tok = token or get_bot_token()
-    html_caption = build_telegram_html(outfit, reel_url=reel_url, threads_url=threads_url)
     reply_markup_json = json.dumps(build_inline_keyboard(outfit, reel_url=reel_url, threads_url=threads_url))
-    title_str = html.escape(outfit.get("archetype_title") or outfit.get("hook_title") or "Günün 2K Kombini")
-    arch_id = html.escape(outfit.get("archetype_id") or "")
-
     results: Dict[str, Any] = {}
 
-    # 1. Send 2K Hook Cover / Product Collage Photo
+    # 1. 2K Hook Kapak Görseli (Ekstra başlık yazısı olmadan saf görsel)
     if collage_path and collage_path.exists():
         with open(collage_path, "rb") as pf:
             res_photo = tg_api(
                 "sendPhoto",
-                data={
-                    "chat_id": chat_id,
-                    "caption": f"🖼️ <b>[STOK KAPAK 1/3] {title_str}</b>\n🆔 <code>{arch_id}</code> — 2K Reels Kapak &amp; 6'lı Ürün Kolajı",
-                    "parse_mode": "HTML",
-                },
+                data={"chat_id": chat_id},
                 files={"photo": pf},
                 token=tok,
             )
             results["photo"] = res_photo.get("ok", False)
 
-    # 2. Send LİA 1080x1920 Pinterest Lookbook & Moodboard Collage if available
+    # 2. LİA 9:16 Pinterest / Story Lookbook Kolajı (Ekstra başlık yazısı olmadan saf görsel)
     if pinterest_collage_path and pinterest_collage_path.exists():
         with open(pinterest_collage_path, "rb") as ppf:
             res_pin = tg_api(
                 "sendPhoto",
-                data={
-                    "chat_id": chat_id,
-                    "caption": f"📌 <b>[STOK PINTEREST KOLAJI 2/3] {title_str}</b>\n🎨 LİA 9:16 Lookbook &amp; Moodboard Kolajı (Pinterest / Story için hazır)",
-                    "parse_mode": "HTML",
-                },
+                data={"chat_id": chat_id},
                 files={"photo": ppf},
                 token=tok,
             )
             results["pinterest_collage"] = res_pin.get("ok", False)
 
-    # 3. Send 2K Reel Video with full HTML caption + Inline Shopping Buttons
+    # 3. 2K Reels Videosu (Tıklanabilir mağaza butonlarıyla, ekstra tekrar metni olmadan)
     if video_path and video_path.exists():
         with open(video_path, "rb") as vf:
             res_vid = tg_api(
                 "sendVideo",
                 data={
                     "chat_id": chat_id,
-                    "caption": html_caption,
-                    "parse_mode": "HTML",
                     "reply_markup": reply_markup_json,
                     "supports_streaming": "true",
                     "width": "1440",
@@ -728,72 +553,29 @@ def send_outfit_to_chat(
             )
             results["video"] = res_vid.get("ok", False)
             if not res_vid.get("ok"):
-                err_desc = str(res_vid.get("description") or "")
-                if "caption is too long" in err_desc.lower():
-                    short_cap = "\n".join(html_caption.splitlines()[:11])
-                    with open(video_path, "rb") as vf2:
-                        res_vid2 = tg_api(
-                            "sendVideo",
-                            data={
-                                "chat_id": chat_id,
-                                "caption": short_cap,
-                                "parse_mode": "HTML",
-                                "reply_markup": reply_markup_json,
-                                "supports_streaming": "true",
-                                "width": "1440",
-                                "height": "2560",
-                            },
-                            files={"video": vf2},
-                            token=tok,
-                        )
-                    results["video"] = res_vid2.get("ok", False)
-                    if not res_vid2.get("ok"):
-                        results["video_error"] = res_vid2.get("description")
-                else:
-                    results["video_error"] = err_desc
-    else:
-        res_msg = tg_api(
-            "sendMessage",
-            data={
-                "chat_id": chat_id,
-                "text": html_caption,
-                "parse_mode": "HTML",
-                "reply_markup": json.loads(reply_markup_json),
-            },
-            token=tok,
-        )
-        results["message"] = res_msg.get("ok", False)
+                results["video_error"] = str(res_vid.get("description") or "")
 
-    # 4. Send 1-Tap Copy-Paste Ready Caption & Store Links for Manual Channel Upload
+    # 4. SADECE DOĞRUDAN KOPYALANIP YAPIŞTIRILACAK NET PAYLAŞIM METNİ (Hiçbir ekstra etiket/başlık yok!)
+    raw_cap = ""
     if caption_txt_path and caption_txt_path.exists():
         try:
             raw_cap = caption_txt_path.read_text(encoding="utf-8").strip()
-            raw_com = ""
-            if comment_links_path and comment_links_path.exists():
-                raw_com = comment_links_path.read_text(encoding="utf-8").strip()
-            copy_msg = (
-                f"📋 <b>[KOPYALA-YAPIŞTIR AÇIKLAMA &amp; LİNKLER 3/3]</b>\n"
-                f"👇 <i>Instagram Reels / TikTok / YouTube Shorts / Pinterest için aşağıdaki kutuya dokunarak açıklamayı tek tıkla kopyalayabilirsiniz:</i>\n\n"
-                f"<pre>{html.escape(raw_cap[:2400])}</pre>"
-            )
-            if raw_com:
-                copy_msg += (
-                    f"\n💬 <b>Sabit Yorum / Mağaza Linkleri (Tek Tıkla Kopyala):</b>\n"
-                    f"<pre>{html.escape(raw_com[:1200])}</pre>"
-                )
-            res_copy = tg_api(
-                "sendMessage",
-                data={
-                    "chat_id": chat_id,
-                    "text": copy_msg,
-                    "parse_mode": "HTML",
-                    "disable_web_page_preview": True,
-                },
-                token=tok,
-            )
-            results["copy_caption"] = res_copy.get("ok", False)
-        except Exception as ce:
-            results["copy_caption_error"] = str(ce)
+        except Exception:
+            raw_cap = ""
+    if not raw_cap:
+        raw_cap = str(outfit.get("viral_hook") or outfit.get("archetype_title") or "").strip()
+
+    if raw_cap:
+        res_copy = tg_api(
+            "sendMessage",
+            data={
+                "chat_id": chat_id,
+                "text": raw_cap[:4000],
+                "disable_web_page_preview": True,
+            },
+            token=tok,
+        )
+        results["copy_caption"] = res_copy.get("ok", False)
 
     return results
 
@@ -806,7 +588,7 @@ def publish_to_telegram(
     token: Optional[str] = None,
     video_override: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Saves Telegram outputs and broadcasts full stock package to all registered subscribers / TELEGRAM_CHAT_ID."""
+    """Saves Telegram outputs and broadcasts full stock package to all registered subscribers / requester / TELEGRAM_CHAT_ID."""
     from autonomous_creation_factory import load_zero_repeat_ledger, mark_creation_and_model_used
 
     arch_id = str(outfit.get("archetype_id") or "").strip()
@@ -826,6 +608,10 @@ def publish_to_telegram(
     default_admin_chat = os.environ.get("TELEGRAM_CHAT_ID", "995164733").strip()
     if default_admin_chat and default_admin_chat not in chat_ids:
         chat_ids.append(default_admin_chat)
+
+    requester_cid = str(outfit.get("requester_chat_id") or "").strip()
+    if requester_cid and requester_cid not in chat_ids:
+        chat_ids.append(requester_cid)
 
     out_path = Path(out_dir)
     if video_override and Path(video_override).exists():
@@ -858,6 +644,14 @@ def publish_to_telegram(
 
     if arch_id:
         mark_creation_and_model_used(arch_id, model_frame, telegram_sent=True)
+
+    # Eğer kuyrukta başka bir kullanıcının bekleyen kombin isteği varsa bulut iş akışını tetikle
+    try:
+        from telegram_outfit_ingestor import load_tg_queue, trigger_cloud_workflow_if_needed
+        if load_tg_queue():
+            trigger_cloud_workflow_if_needed()
+    except Exception:
+        pass
 
     return {"status": "published", "results": sent_results}
 
