@@ -48,7 +48,8 @@
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
     "kadin_gala01_venedik_film_galasi_bordo_deri_saten",
-    "erkek_gala01_cannes_promiyer_siyah_boxy_deri_ipek"
+    "erkek_gala01_cannes_promiyer_siyah_boxy_deri_ipek",
+    "atelier_kadin_bebek_koru_chocolate_ivory_kis"
   ],
   "retired_model_frames": [
     "assets/kadin_agenda01_step1.jpg",
@@ -96,7 +97,8 @@
     "assets/kid_girl2_model_step1.jpg",
     "assets/kid_boy2_model_step1.jpg",
     "assets/kadin_gala01_step1.jpg",
-    "assets/erkek_gala01_step1.jpg"
+    "assets/erkek_gala01_step1.jpg",
+    "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -147,8 +149,9 @@
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
     "kadin_gala01_venedik_film_galasi_bordo_deri_saten",
-    "erkek_gala01_cannes_promiyer_siyah_boxy_deri_ipek"
+    "erkek_gala01_cannes_promiyer_siyah_boxy_deri_ipek",
+    "atelier_kadin_bebek_koru_chocolate_ivory_kis"
   ],
-  "last_telegram_dispatch_ts": 1793882061.8119848,
-  "updated_at": "2026-11-05T14:35:33.878906Z"
+  "last_telegram_dispatch_ts": 1793918675.7816021,
+  "updated_at": "2026-11-05T22:44:35.781635Z"
 }
