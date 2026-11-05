@@ -377,16 +377,24 @@ def dispatch_all_channels(video_path: str, reel_url: str = ""):
     except Exception as webe:
         print(f"[GuzelAI.com Vitrin Bilgilendirmesi] {webe}")
 
-    # 2. Ajan 15 (LİA) 1080x1920 Pinterest Moda Tasarım Kolajını üret (Telegram stok paketine eklemek için)
+    # 2. Ajan 15 (LİA) 1080x1920 Pinterest Moda Tasarım Kolajını üret ve Pinterest oturumu aktifse doğrudan Pin yayınla
     try:
         from kombin_agent_swarm import run_pinterest_collage_fashion_designer
-        from pinterest_publisher import save_pinterest_outputs
+        from pinterest_publisher import (
+            PINTEREST_PROFILE_DIR,
+            publish_to_pinterest_cdp,
+            save_pinterest_outputs,
+        )
         lia_rep = run_pinterest_collage_fashion_designer()
         lia_collage = Path(lia_rep.get("collage_path", str(Path(out_dir) / "pinterest_fashion_collage.jpg")))
         save_pinterest_outputs(outfit_data, out_dir=out_dir, reel_url=reel_url)
         print(f"[LİA Pinterest Kolajı Hazır] {lia_collage}")
+        if PINTEREST_PROFILE_DIR.exists() and os.environ.get("DISABLE_PINTEREST_AUTO_PUBLISH", "0") != "1":
+            pin_media = lia_collage if lia_collage.exists() else (Path(out_dir) / "kombin_collage.png")
+            pin_res = publish_to_pinterest_cdp(outfit_data, pin_media, reel_url=reel_url)
+            print(f"[Pinterest Otomatik Pin Paylaşımı] Durum: {pin_res}")
     except Exception as pne:
-        print(f"[Pinterest Kolaj Hazırlık Bilgilendirmesi] {pne}")
+        print(f"[Pinterest Kolaj & Paylaşım Bilgilendirmesi] {pne}")
 
     # 3. Diğer platform metin şablonlarını yerel dosyaya kaydet (otomatik yükleme yapmadan)
     try:
