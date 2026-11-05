@@ -1,16 +1,19 @@
 ---
 name: guzelai-telegram-outfit-ingestor
-description: Ingests outfits, product links, flat-lay photos, or text descriptions sent by the user to @guzelaibot on Telegram, automatically detects the gender/age segment (kadin, erkek, kiz_cocuk, erkek_cocuk), and synthesizes 100% photorealistic real-looking human AI models wearing those exact items plus 6 studio 1:1 cutouts.
+description: Ingests outfits, product links, flat-lay photos, or text descriptions sent by ANY user to @guzelaibot on Telegram, automatically detects the gender/age segment (kadin, erkek, kiz_cocuk, erkek_cocuk), synthesizes 100% photorealistic real-looking human AI models wearing those exact items plus 6 studio 1:1 cutouts, and delivers the 2K Reel back to the requesting user and admin.
 ---
 
 # GüzelAI Holding — Telegram Outfit Ingestor & Photorealistic AI Model Synthesis Skill (`guzelai-telegram-outfit-ingestor`)
 
 ## Core Mandate
-1. **Priority #1: Always Process Outfits Sent via Telegram (`@guzelaibot`):**
-   - At the very start of `src/main.py` (before `select_daily_outfit`), poll `@guzelaibot` (`getUpdates`) and check `output/telegram_pending_outfits_queue.json` + `output/telegram_trigger_override.json` (plus remote GitHub queue via `GH_TOKEN`).
-   - Whenever the user (`995164733`) sends product links (Trendyol, Zara, Mango, Bagmori, İpekyol, etc.), a flat-lay/collage photo, or an outfit description to `@guzelaibot`:
+1. **Priority #1: Always Process Outfits Sent via Telegram (`@guzelaibot`) by Admin OR Any External User:**
+   - At the very start of `src/main.py` (before cooldown check and before `select_daily_outfit`), call `poll_and_enqueue_telegram_outfits()` to poll `@guzelaibot` (`getUpdates`) and check `output/telegram_pending_outfits_queue.json` + `output/telegram_trigger_override.json` (plus remote GitHub queue via `GH_TOKEN`).
+   - Whenever the admin (`995164733`) OR **any other Telegram user (`requester_chat_id`)** sends product links (Trendyol, Zara, Mango, Bagmori, İpekyol, etc.), a flat-lay/collage photo, or an outfit description to `@guzelaibot`:
      - Never lose or discard the update in a short-lived daemon thread!
-     - Persist the incoming Telegram outfit request into `output/telegram_pending_outfits_queue.json` (and sync to GitHub via Contents API) AND immediately trigger a GitHub Actions `workflow_dispatch` (if running in webhook/polling mode) or process it immediately in `select_daily_outfit()`.
+     - Never block non-admin users (`cid != "995164733"` restriction is forbidden).
+     - Bypass the 4-hour cooldown whenever a Telegram outfit request is pending.
+     - Persist the incoming Telegram outfit request into `output/telegram_pending_outfits_queue.json` (with `requester_chat_id` and `requester_name`, synced to GitHub via Contents API) and process it immediately in `generate_daily_outfit()`.
+     - Once rendered, deliver the finished 2K Reel package + pure net copy-paste caption directly to `requester_chat_id` as well as `995164733`.
 
 2. **Automatic Gender & Age Segment Detection (`kadın`, `erkek`, `kız çocuk`, `erkek çocuk`):**
    - Analyze all product URLs, scraped product titles/breadcrumbs, and Telegram message/caption text:

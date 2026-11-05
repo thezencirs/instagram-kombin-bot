@@ -20,11 +20,28 @@ def S(val: float) -> int:
 
 
 def ease_out_back(t: float) -> float:
-    """Graph Motion yaylanma (spring overshoot) eğrisi."""
+    """
+    Ajan 39 KORAY (Remotion Cinema Crew):
+    Resmi `remotion-dev/skills` Sönümlü Harmonik Yay Fiziği (Damped Harmonic Oscillator Spring:
+    damping=13.0, stiffness=135.0, mass=0.75). Doğrusal/polinom kayma yerine gerçek fiziksel yaylanma sağlar.
+    """
     t = max(0.0, min(1.0, t))
-    c1 = 1.70158
-    c3 = c1 + 1.0
-    return 1.0 + c3 * pow(t - 1.0, 3) + c1 * pow(t - 1.0, 2)
+    if t <= 0.0:
+        return 0.0
+    if t >= 1.0:
+        return 1.0
+    damping = 13.0
+    stiffness = 135.0
+    mass = 0.75
+    omega0 = math.sqrt(stiffness / mass)
+    zeta = damping / (2.0 * math.sqrt(stiffness * mass))
+    tau = t * 0.48
+    if zeta < 1.0:
+        omega_d = omega0 * math.sqrt(1.0 - zeta * zeta)
+        env = math.exp(-zeta * omega0 * tau)
+        val = 1.0 - env * (math.cos(omega_d * tau) + (zeta * omega0 / omega_d) * math.sin(omega_d * tau))
+        return float(val)
+    return 1.0 - math.exp(-omega0 * tau)
 
 
 def ease_in_out_cubic(t: float) -> float:
@@ -831,20 +848,21 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 m_im = model_frames[min(step_idx, len(model_frames) - 1)]
                 eu = ease_in_out_cubic(max(0.0, min(1.0, u_val)))
                 if step_idx == 0:
-                    zm = 1.085 - 0.06 * eu
+                    # Ajan 41 BARAN: Çok Açılı Gimbal Pull-Back (Yakın Gala Hero Kadraj -> Tam Boy Podyum Yürüyüşü)
+                    zm = 1.135 - 0.115 * eu
                     cw, ch = int(W / zm), int(H / zm)
-                    px = max(0, min(W - cw, int((W - cw) * (0.42 + 0.16 * eu))))
-                    py = int((H - ch) * (0.34 + 0.16 * eu))
+                    px = max(0, min(W - cw, int((W - cw) * (0.44 + 0.12 * eu))))
+                    py = int((H - ch) * (0.22 + 0.28 * eu))
                 elif step_idx == 1:
-                    zm = 1.025 + 0.06 * eu
+                    zm = 1.02 + 0.055 * eu
                     cw, ch = int(W / zm), int(H / zm)
-                    px = max(0, min(W - cw, int((W - cw) * (0.58 - 0.16 * eu))))
-                    py = int((H - ch) * (0.44 + 0.11 * eu))
+                    px = max(0, min(W - cw, int((W - cw) * (0.56 - 0.12 * eu))))
+                    py = int((H - ch) * (0.46 + 0.08 * eu))
                 else:
-                    zm = 1.075 - 0.05 * eu
+                    zm = 1.07 - 0.055 * eu
                     cw, ch = int(W / zm), int(H / zm)
                     px = (W - cw) // 2
-                    py = int((H - ch) * (0.52 - 0.06 * eu))
+                    py = int((H - ch) * (0.52 - 0.04 * eu))
                 return m_im.crop((px, py, px + cw, py + ch)).resize((W, H), Image.Resampling.LANCZOS).convert("RGBA")
 
             if len(model_frames) >= 3:
@@ -887,11 +905,11 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
             else:
                 walk_frame = bg_base.copy()
 
-            # Adım geçişlerinde (1.9s ve 3.8s) zarif sıcak şampanya optik darbesi
-            cut_dist = min(abs(walk_t - 1.9), abs(walk_t - 3.8))
-            if cut_dist < 0.045:
-                flash_a = int(52 * (1.0 - cut_dist / 0.045))
-                shutter_overlay = Image.new("RGBA", (W, H), (255, 232, 188, flash_a))
+            # Ajan 40 SEDA: Kırmızı Halı Paparazzi Flaş Patlaması & Anamorfik Film Light-Leak (0.22s, 1.9s, 3.8s)
+            cut_dist = min(abs(walk_t - 0.22), abs(walk_t - 1.9), abs(walk_t - 3.8))
+            if cut_dist < 0.055:
+                flash_a = int(64 * (1.0 - cut_dist / 0.055))
+                shutter_overlay = Image.new("RGBA", (W, H), (255, 240, 208, flash_a))
                 walk_frame = Image.alpha_composite(walk_frame, shutter_overlay)
 
             # Üst ve alt sinematik kontrast vinyetini uygula

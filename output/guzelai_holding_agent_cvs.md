@@ -1,15 +1,19 @@
-# 🏛️ GÜZELAI HOLDİNG A.Ş. — İK İŞE ALIM, KURUMSAL CV SİCİL & AKADEMİ MEZUNİYET RAPORU (36 AJAN)
-**Tarih:** `2026-11-02 03:18:10` | **İK & Akademi Kurulu:** `Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)`
-**Toplam Sertifikalı Kadro:** `36 Uzman Ajan` (`28 Yetiştirilen Mevcut Kadro + 8 CV ile Yeni İşe Alınan Ajans Direktörü`) | **Akademi Ortalaması:** **`99.55 / 100`**
+# 🏛️ GÜZELAI HOLDİNG A.Ş. — İK SINIRSIZ İŞE ALIM, KURUMSAL CV SİCİL & AKADEMİ RAPORU (50+ AJAN)
+**Tarih:** `2026-11-05 12:21:00` | **İK & Akademi Kurulu:** `Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)`
+**Toplam Aktif Kadro:** `50 Uzman Ajan` (`28 Mevcut + 20 CV ile İşe Alınan Direktör/Başmühendis + 2 Elastik Gala Uzmanı | Sınırsız İşe Alım Açık`) | **Akademi Ortalaması:** **`99.6 / 100`**
 
-## 1. GüzelAI Holding A.Ş. Bağlı Şirket & Ajans Yapılanması (5 Uzman Ajans)
+## 1. GüzelAI Holding A.Ş. Bağlı Şirket & Ajans Yapılanması (9 Uzman Ajans)
 - **GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı (`HR_ACADEMY`):** *Yönetim:* Ajan 17 İREM (CHRO) & Ajan 29 SELİN (Akademi Dekanı) — CV tabanlı seçme-yerleştirme, 4 modüllü ajan yetiştirme akademisi, performans karnesi ve %100 sıfır-tekrar yönetişimi.
 - **GüzelAI Elite Manken & Model Ajansı (`MODEL_AGENCY`):** *Yönetim:* Ajan 20 MAYA (Baş Casting) • Ajan 30 DERİN (Fizik & Işık) • Ajan 31 KUZEY (Podyum Koreografi) — Kadın, Erkek, Kız Çocuk ve Erkek Çocuk kategorilerinde %100 özgün, fotogerçekçi 85mm lens dokulu süpermodel üretimi ve 1:1 kıyafet uyumu.
 - **GüzelAI Haute Couture & Moda Tasarım Evi (`FASHION_HOUSE`):** *Yönetim:* Ajan 23 DEFNE • Ajan 24 KEREM • Ajan 25 LEYLA • Ajan 26 MERT — Mevsime uygun yüksek moda kış kreasyonları, renk/kumaş uyumu ve doğrulanmış mağaza link/ikiz ürün mimarisi.
 - **GüzelAI Reklam & Sinema Prodüksiyon Ajansı (`AD_CINEMA_AGENCY`):** *Yönetim:* Ajan 32 ATLAS (DoP) • Ajan 27 BARIŞ (Senarist) • Ajan 33 LARA (Art Director) • Ajan 34 OZAN (Copywriter) — 2K (1440x2560) sinematik reklam kalitesinde Reels üretimi: radyal stüdyo spotu, çift katmanlı derinlik gölgesi, altın anamorfik ışık geçişi, gimbal kamera akışı ve 3 perdeli hikaye kurgusu.
 - **GüzelAI Medya Planlama, Dağıtım & Otonom Büyüme Ajansı (`MEDIA_GROWTH_AGENCY`):** *Yönetim:* Ajan 35 DENİZ (Medya Başkanı) • Ajan 28 EVREN (Öz-Evrim) • Ajan 36 EMİR (Reels Kalite Telemetri) — Telegram (@guzelaibot) ve guzelai.com/#kombinler merkezli prime-time yayın planlaması, otonom genetik evrim ve kare-kare Reels kalite sertifikasyonu.
+- **GüzelAI GitHub DevOps, Açık Kaynak Yetenek Avcılığı & Kalite Otomasyon Ajansı (`GITHUB_DEVOPS_AGENCY`):** *Yönetim:* Ajan 37 PARS (Chief GitHub Architect) • Ajan 38 TEOMAN (Open-Source Remotion Harvester) — GitHub Actions iş akışlarını otonom onarma, Atomic Git Data API senkronizasyonu ve açık kaynak Remotion/Sinema/AI yeteneklerini kod tabanına entegre etme.
+- **GüzelAI Remotion Yay Fiziği, Red-Carpet Işık & Çok Açılı Video Prodüksiyon Ekibi (`REMOTION_CINEMA_CREW`):** *Yönetim:* Ajan 39 KORAY (Remotion Spring & Motion-Blur) • Ajan 40 SEDA (Paparazzi Flash & Light-Leak) • Ajan 41 DORUK (Multi-Angle Gimbal) — 2K Reels videolarında sönümlü harmonik yay fiziği (_remotion_spring), kırmızı halı flaş patlamaları, anamorfik film ışık sızıntısı ve çok açılı gimbal kamera akışı.
+- **GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı (`CELEBRITY_GALA_FILMS_AGENCY`):** *Yönetim:* Ajan 42 ALARA (Gala & Red-Carpet) • Ajan 43 MİRA (It-Girl/It-Boy) • Ajan 44 YİĞİT (Film/Dizi Gardırop) • Ajan 45 CEYLA (Modernlik Denetçisi) — Venedik, Cannes, Oscar, Met Gala, vizyon filmleri ve küresel ünlülerin (Hailey Bieber, Zendaya, Timothée Chalamet, Jacob Elordi vb.) en modern kombinlerini mağaza parçalarıyla 1:1 kurgulama.
+- **GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı (`DATA_ARCHITECTURE_AGENCY`):** *Yönetim:* Ajan 46 DEMİR (Chief Data Architect) • Ajan 47 DURU (Telemetry Compactor) • Ajan 48 KAAN_DB (Multi-Repo Sync) — O(1) SHA-256 sıfır-tekrar indeksleme, aylık zaman-parçalı (time-sharded) veri gölü yönetimi ve sınırsız sayıda uzman ajan işe alım/ölçekleme altyapısı.
 
-## 2. İK Tarafından CV İncelemesi ve Akademi Sınavıyla İşe Alınan 8 Yeni Üst Düzey Ajan (Ajan 29 – Ajan 36)
+## 2. İK Tarafından CV İncelemesi ve Akademi Sınavıyla İşe Alınan 20 Üst Düzey Ajan (Ajan 29 – Ajan 48)
 ### 📋 Ajan 29 — `SELİN` (`holding-academy-cv-dean`) | Sicil: `GZL-HLD-2026-029`
 - **Bağlı Ajans & Unvan:** GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı — *Holding Akademi Dekanı, CV Seçme-Yerleştirme & Ajan Yetiştirme Başeğitmeni*
 - **Eğitim:** Boğaziçi Üniversitesi İşletme & Örgütsel Psikoloji Yüksek Lisans + Paris Luxury Talent Management Sertifikası
@@ -65,6 +69,90 @@
 - **Deneyim (9 Yıl):** Yayın teknolojileri ve kısa video platformlarında Görüntü Kalite Metrikleri (VMAF/Laplacian/HDR) Başmühendisliği.
 - **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/guzelai_holding_hr_academy.py & src/quality_checker.py`):** Üretilen 2K Reels karelerinde Laplacian netlik/keskinlik ve dinamik kontrast (P95-P05) ölçümü • 5.2s anamorfik ışık geçişi sürekliliği ve 44.1 kHz stereo ses RMS/Peak denetimi • Her yayın öncesi resmi Reels Sinema Kalite Sertifikası (`reels_cinema_quality_report.json`) üretimi
 - **Holding Akademisi Mezuniyet Ortalaması:** **`99.75 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 37 — `PARS` (`github-devops-ci-architect`) | Sicil: `GZL-HLD-2026-037`
+- **Bağlı Ajans & Unvan:** GüzelAI GitHub DevOps, Açık Kaynak Yetenek Avcılığı & Kalite Otomasyon Ajansı — *Baş GitHub DevOps, Atomic Git Data API & CI/CD Otonom Onarım Mimarı*
+- **Eğitim:** ODTÜ Bilgisayar Mühendisliği + ETH Zürich Dağıtık Sistemler & Bulut Otomasyonu Yüksek Lisansı
+- **Deneyim (13 Yıl):** Küresel bulut platformlarında GitHub Actions otonom iş akışı mimarlığı ve sıfır-kesintili çoklu repo senkronizasyonu.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & .github/workflows/daily_reels.yml`):** GitHub Git Data API (blobs/trees/commits) ile üstel geri-çekilmeli (exponential backoff) atomik commit • thezencirs/instagram-kombin-bot, thezencirs/guzelai ve thezencirs/guzelai-fashion-skills eşzamanlı yönetimi • Bulut sıfır-tekrar defteri (zero_repeat_ledger.json) ve iş akışı kendi-kendini onarma (self-healing) kalkanı
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.75 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 38 — `TEOMAN` (`github-opensource-video-skill-harvester`) | Sicil: `GZL-HLD-2026-038`
+- **Bağlı Ajans & Unvan:** GüzelAI GitHub DevOps, Açık Kaynak Yetenek Avcılığı & Kalite Otomasyon Ajansı — *GitHub Açık Kaynak Video/Remotion Yetenek Avcısı & Kod Kalite Yükseltici*
+- **Eğitim:** İTÜ Yapay Zeka & Veri Mühendisliği + Stanford Open-Source AI Tooling Araştırma Programı
+- **Deneyim (11 Yıl):** remotion-dev/skills ve açık kaynak sinema/shader kütüphanelerini prodüksiyon boru hatlarına entegre eden Ar-Ge direktörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & skills/`):** Resmi remotion-dev/skills (13 modül) ve evrensel 2K Reels yeteneklerinin sürekli senkronizasyonu • Açık kaynak görüntü işleme, yay fiziği ve ses-ritim algoritmalarını Python/FFmpeg motoruna aktarma • Çoklu konsept ve yeni sohbetler için taşınabilir SKILL.md mimarisi
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.75 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 39 — `KORAY` (`remotion-spring-motionblur-lead`) | Sicil: `GZL-HLD-2026-039`
+- **Bağlı Ajans & Unvan:** GüzelAI Remotion Yay Fiziği, Red-Carpet Işık & Çok Açılı Video Prodüksiyon Ekibi — *Remotion Harmonik Yay Fiziği (_remotion_spring) & 180° Shutter Motion-Blur Başmühendisi*
+- **Eğitim:** Bilkent Üniversitesi Fizik & Bilgisayar Grafikleri + Zürich Programmatic Video Engineering
+- **Deneyim (12 Yıl):** Apple ve lüks moda lansmanlarında fizik tabanlı kinetik tipografi ve Remotion yay animasyonu başmühendisliği.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/render_reels.py`):** Sönümlü harmonik osilatör yay fiziği (damping=13, stiffness=135, mass=0.75) ile organik kart girişi • Hıza duyarlı 180° sinema deklanşör hareket bulanıklığı (directional shutter motion blur) • Müzik bas vuruşlarına (beat-sync) duyarlı altın çerçeve mikro-nabız animasyonu
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.8 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 40 — `SEDA` (`anamorphic-lightleak-paparazzi-colorist`) | Sicil: `GZL-HLD-2026-040`
+- **Bağlı Ajans & Unvan:** GüzelAI Remotion Yay Fiziği, Red-Carpet Işık & Çok Açılı Video Prodüksiyon Ekibi — *Red-Carpet Paparazzi Flaş, Anamorfik Film Light-Leak & ACES Sinema Colorist'i*
+- **Eğitim:** Londra National Film and Television School (NFTS) Digital Color Grading & Optical VFX
+- **Deneyim (11 Yıl):** Venedik ve Cannes kırmızı halı moda filmlerinde optik flaş simülasyonu ve anamorfik renk düzenleme uzmanlığı.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/render_reels.py`):** Film galası ve kırmızı halı sahnelerinde gerçekçi paparazzi speküler flaş patlamaları • Sahne geçişlerinde sıcak şampanya/kehribar anamorfik film ışık sızıntısı (Light-Leak Screen Blend) • Rugan deri, ipek saten ve kaşmir dokularını parlatan ACES filmik mikro-kontrast kalibrasyonu
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.75 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 41 — `BARAN` (`multi-angle-gimbal-camera-director`) | Sicil: `GZL-HLD-2026-041`
+- **Bağlı Ajans & Unvan:** GüzelAI Remotion Yay Fiziği, Red-Carpet Işık & Çok Açılı Video Prodüksiyon Ekibi — *Çok Açılı (Bel Plan Hero -> Tam Boy Podyum) Gimbal Kamera & Dinamik Kadraj Yönetmeni*
+- **Eğitim:** Paris La Fémis Sinematografi & Steadicam/Gimbal Hareket Tasarımı
+- **Deneyim (12 Yıl):** Paris ve Milano moda haftalarında dikey 9:16 Steadicam/Arri Trinity kamera operatörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/render_reels.py`):** Sahne 2 açılışında yakın editöryal bel-plan (waist-up hero shot) ile başlayıp pürüzsüz gimbal geri çekilmeyle (pull-back) tam boy yürüyüşe geçiş • Optik kare harmanlama (_sample_gimbal_step) ile sıfır titremeli 30fps akış • İzleyiciyi ilk 3 saniyeden son saniyeye kadar ekrana kilitleyen dinamik odak kontrolü
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.7 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 42 — `ALARA` (`celebrity-redcarpet-gala-scout`) | Sicil: `GZL-HLD-2026-042`
+- **Bağlı Ajans & Unvan:** GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı — *Venedik, Cannes, Oscar & Met Gala Kırmızı Halı Ünlü Kombin Avcısı*
+- **Eğitim:** Milano Università Bocconi Luxury Management + New York FIT Celebrity Styling
+- **Deneyim (10 Yıl):** Uluslararası film festivalleri ve kırmızı halı galalarında ünlü stil danışmanlığı ve trend analistliği.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & src/fashion_agenda_engine.py`):** Venedik, Cannes, Londra BAFTA ve Met Gala kırmızı halı/after-party ünlü kombinlerinin anlık takibi • Sıkıcı klasik kombinler yerine yüksek kontrastlı (rugan deri, akışkan saten, boxy deri, rimless gözlük) gala görünümleri • Kırmızı halı lüksünü günlük giyilebilir ve satın alınabilir 6 parçalık kapsüllere dönüştürme
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.78 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 43 — `MİRA` (`viral-itgirl-itboy-celebrity-stylist`) | Sicil: `GZL-HLD-2026-043`
+- **Bağlı Ajans & Unvan:** GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı — *Küresel It-Girl & It-Boy (Hailey Bieber, Zendaya, Timothée Chalamet, Jacob Elordi) Modern Stilisti*
+- **Eğitim:** Londra London College of Fashion Styling & Pop-Culture Image Making
+- **Deneyim (9 Yıl):** Los Angeles ve Paris'te Z kuşağı ve genç yetişkin ikonlarının sokak stili ve prömiyer kombin küratörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/outfit_generator.py & src/fashion_agenda_engine.py`):** Hailey Bieber, Zendaya, Bella Hadid, Kendall Jenner, Timothée Chalamet ve Jacob Elordi'nin viral kombin formülleri • Kısa boxy ceket + yüksek bel geniş paça (wide-leg puddle) pantolon + dar çerçevesiz gözlük modern silüet kurgusu • Sosyal medyada en yüksek kaydetme (save) ve paylaşım (share) alan modern doku eşleştirmeleri
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.7 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 44 — `YİĞİT` (`cinema-series-iconic-wardrobe-recreator`) | Sicil: `GZL-HLD-2026-044`
+- **Bağlı Ajans & Unvan:** GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı — *Vizyon Filmleri & Popüler Dizilerin Başrol Gardırobunu Mağaza Parçalarıyla 1:1 Kurma Uzmanı*
+- **Eğitim:** USC School of Cinematic Arts Costume Design & Merchandising
+- **Deneyim (11 Yıl):** Sinema filmleri ve dijital platform dizilerinde başrol kostüm tasarımı ve moda marka iş birlikleri direktörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/outfit_generator.py & src/scalable_data_manager.py`):** Gişe rekortmeni filmlerin ve popüler dizilerin başrol kombinlerini ulaşılabilir mağaza ürünleriyle 1:1 yeniden kurma • Film/gala atmosferine uygun sahne ışığı, mekan ve müzik eşleştirmesi • İzleyicide 'Bu filmdeki kombini hemen almalıyım' etkisi yaratan hikaye kancaları
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.73 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 45 — `CEYLA` (`modernity-audience-buzz-critic`) | Sicil: `GZL-HLD-2026-045`
+- **Bağlı Ajans & Unvan:** GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı — *Kitle Beğeni, Modernlik & Viral Çekicilik Başdenetçisi (Sıkıcı/Klasik Kombin Veto Yetkili)*
+- **Eğitim:** Columbia University Consumer Psychology & Fashion Media Analytics
+- **Deneyim (10 Yıl):** Global moda platformlarında izleyici tutma (retention), kaydetme oranı ve koleksiyon modernlik denetimi.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & src/fashion_agenda_engine.py`):** Sıradan veya demode kombinleri yayına girmeden veto etme (modernity_buzz_score >= 95.0 şartı) • Kumaş kontrastı (rugan × saten, deri × ipek, kürk × barathea yün) ve modern aksesuar denetimi • Kitle geri bildirimlerini anında yeni kreasyon kurallarına dönüştürme
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.78 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 46 — `DEMİR` (`chief-data-lake-sharding-architect`) | Sicil: `GZL-HLD-2026-046`
+- **Bağlı Ajans & Unvan:** GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı — *Veri Gölü (Data Lake), O(1) SHA-256 Hash İndeksleme & Aylık Veri Parçalama (Sharding) Başmimarı*
+- **Eğitim:** Boğaziçi Üniversitesi Bilgisayar Mühendisliği + MIT Büyük Ölçekli Veri Sistemleri Sertifikası
+- **Deneyim (14 Yıl):** Yüksek trafikli e-ticaret ve medya holdinglerinde petabayt ölçekli veri gölü ve gerçek zamanlı indeksleme mimarlığı.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py`):** O(1) SHA-256 hash tablosu ile yüz binlerce kombin ve manken arasında <1 ms sürede sıfır-tekrar sorgulama • Aylık zaman-bölümlü (output/data_lake/shards/YYYY-MM/) veri parçalama ile JSON şişmesini kalıcı önleme • Sınırsız sayıda elastik ajan işe alımı için dinamik sicil ve telemetri yönetimi
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.75 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 47 — `DURU` (`realtime-dedup-telemetry-compactor`) | Sicil: `GZL-HLD-2026-047`
+- **Bağlı Ajans & Unvan:** GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı — *Gerçek Zamanlı Tekilleştirme, Bellek Sıkıştırma & Telemetri Analisti*
+- **Eğitim:** Koç Üniversitesi Endüstri ve Veri Mühendisliği Yüksek Lisansı
+- **Deneyim (9 Yıl):** Finans ve medya veri hatlarında gerçek zamanlı akış tekilleştirme (deduplication) ve indeks sıkıştırma.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py`):** SKU, ürün görseli ve manken yüz imzası bazında çok katmanlı tekilleştirme • Aktif katalog ve geçmiş dosyalarını otomatik sıkıştırarak çalışma hızını maksimumda tutma • 50+ ajanın ürettiği raporları çakışmasız tekil şemada birleştirme
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.65 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 48 — `KAAN_DB` (`multirepo-shard-sync-engineer`) | Sicil: `GZL-HLD-2026-048`
+- **Bağlı Ajans & Unvan:** GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı — *Çoklu GitHub Deposu (Bot + Web + Skills) Dağıtık Veri & Varlık Senkronizasyon Mühendisi*
+- **Eğitim:** Sabancı Üniversitesi Bilgisayar Bilimleri & Dağıtık Veritabanları
+- **Deneyim (10 Yıl):** Çoklu bulut ve CDN ortamlarında medya varlıkları ve yönlendirme (/go/{sku}) senkronizasyon mühendisliği.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & src/website_publisher.py`):** guzelai.com/go/{sku} yönlendirme sayfaları ile 1:1 PNG dekupe varlıklarının kayıpsız senkronizasyonu • Telegram çoklu kullanıcı kombin kuyruğu ile bulut veri gölü arasındaki atomik tutarlılık • Sınırsız ölçeklenen ajan kadrosunun ürettiği verilerin gerçek zamanlı yedeklenmesi
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.7 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
 
 ## 3. Akademi İleri Eğitiminden Geçirilerek Terfi Ettirilen 28 Mevcut Holding Ajanı
 - **Ajan 1A — `ALP-1A` (`store-link-researcher`)** | Ajans: `FASHION_HOUSE` | Ana Mağaza & Doğrulanmış Link Araştırma Uzmanı | Akademi Notu: `99.1/100`

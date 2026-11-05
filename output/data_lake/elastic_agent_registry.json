@@ -1,0 +1,29 @@
+{
+  "unlimited_hiring_enabled": true,
+  "core_certified_agents": 48,
+  "dynamic_spawned_agents": [
+    {
+      "agent_number": 49,
+      "sicil_no": "GZL-ELASTIC-2026-049",
+      "code_name": "UZMAN_49",
+      "agency_code": "CELEBRITY_GALA_FILMS_AGENCY",
+      "specialty_domain": "Met Gala & Oscar Red-Carpet Couture Analizi",
+      "role_title": "Met Gala, Oscar & Cannes Kırmızı Halı Silüet Çözümleme Uzmanı",
+      "graduation_average": 99.6,
+      "hired_at": "2026-11-05T09:21:00.906332",
+      "status": "AKTİF — SINIRSIZ ELASTİK KADRO"
+    },
+    {
+      "agent_number": 50,
+      "sicil_no": "GZL-ELASTIC-2026-050",
+      "code_name": "UZMAN_50",
+      "agency_code": "CELEBRITY_GALA_FILMS_AGENCY",
+      "specialty_domain": "Netflix / A24 / HBO Dizi & Film Başrol Gardırop Eşleştirme",
+      "role_title": "Popüler Dizi & Vizyon Filmleri Başrol Kombinlerini Mağaza Linkleriyle Eşleştirme Uzmanı",
+      "graduation_average": 99.6,
+      "hired_at": "2026-11-05T09:21:00.907604",
+      "status": "AKTİF — SINIRSIZ ELASTİK KADRO"
+    }
+  ],
+  "total_active_agents": 50
+}

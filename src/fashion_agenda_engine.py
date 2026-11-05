@@ -273,10 +273,24 @@ def enrich_outfit_with_fashion_agenda(outfit: Dict[str, Any]) -> Dict[str, Any]:
     bag_name = (items.get("bag") or {}).get("name", "Çanta")
     shoes_name = (items.get("shoes") or {}).get("name", "Ayakkabı")
 
+    gala_info = {}
+    try:
+        from scalable_data_manager import get_celebrity_gala_trend_for_outfit, sync_scalable_data_lake
+        gala_info = get_celebrity_gala_trend_for_outfit(outfit)
+        sync_scalable_data_lake(outfit=outfit)
+    except Exception:
+        gala_info = {}
+
+    if gala_info:
+        chosen["agenda_title"] = f"{gala_info['event_title']} | İlhâm: {gala_info['celebrity_inspiration']}"
+        chosen["hud_badge"] = gala_info.get("hud_badge") or chosen.get("hud_badge")
+        chosen["hud_styling_tip"] = gala_info.get("hud_styling_tip") or chosen.get("hud_styling_tip")
+        chosen["color_rule_tip"] = gala_info.get("texture_contrast_rule") or chosen.get("color_rule_tip")
+
     custom_styling_summary = (
-        f"✨ MODA GÜNDEMİ & STİL ÖNERİSİ ({chosen['agenda_title']}):\n"
-        f"• Silüet & Oran: {outer_name} ile {bottom_name} ikilisini {top_name} katmanıyla birleştirerek 1/3 - 2/3 dikey boy uzatma oranı yakalanır.\n"
-        f"• Doku & Renk Uyumu: {chosen['color_rule_tip']} {bag_name} ve {shoes_name} ile kombin bütünlüğü tamamlanır."
+        f"🎬 FİLM GALASI & ÜNLÜ STİL GÜNDEMİ ({chosen['agenda_title']}):\n"
+        f"• Modern Silüet & Oran: {outer_name} ile {bottom_name} ikilisini {top_name} katmanıyla eşleştirerek kırmızı halı ve prömiyer gecelerinin 1/3 - 2/3 modern silüet oranı yakalanır.\n"
+        f"• Doku Kontrastı & Aksesuar: {chosen['color_rule_tip']}. {bag_name} ve {shoes_name} ile görünüm tamamlanır."
     )
 
     outfit["fashion_agenda"] = {

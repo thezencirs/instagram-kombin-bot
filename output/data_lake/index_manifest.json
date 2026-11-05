@@ -1,0 +1,29 @@
+{
+  "schema_version": "3.0-scalable-datalake",
+  "updated_at": "2026-11-05T09:21:00.902138",
+  "active_shard": "2026-11",
+  "o1_archetype_hashes": {
+    "38405f4fafb2f306": "kadin_gala01_venedik_film_galasi_bordo_deri_saten"
+  },
+  "o1_model_frame_hashes": {
+    "95cb484c86601d2e": "assets/kadin_gala01_step1.jpg"
+  },
+  "o1_sku_hashes": {
+    "df233c422f984f09": "950101001:outerwear",
+    "8f9725f20038d7fa": "950101002:cap",
+    "46d3b8f182f91534": "950101003:top",
+    "74fe9a688d2dc45a": "950101004:bottom",
+    "a699cb9e76cc0f79": "950101005:bag",
+    "e5dfe7b87e6f953c": "950101006:shoes"
+  },
+  "shard_partitions": [
+    "2026-11"
+  ],
+  "metrics": {
+    "indexed_unique_outfits": 1,
+    "indexed_unique_models": 1,
+    "indexed_unique_skus": 6,
+    "active_monthly_shards": 1,
+    "lookup_complexity": "O(1) SHA-256 Hash Table"
+  }
+}

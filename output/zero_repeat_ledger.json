@@ -39,18 +39,19 @@
     "kadin_kasim_flight01_zorlu_yakut_kase_noir",
     "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
     "erkek_kasim_bebek_konyak_kase_lacivert",
+    "kadin_agenda01_nisantasi_bordo_kase_mocha",
+    "erkek_agenda01_bebek_antrasit_kase_ekru",
     "kadin_kasim_galataport_bordo_trench_ekru",
     "erkek_kasim_nisantasi_lacivert_kaban_camel",
     "cocuk_kiz_kasim_moda_pembe_tuvit_kolej",
     "cocuk_erkek_kasim_gokturk_haki_puffer_street",
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
-    "kadin_agenda01_nisantasi_bordo_kase_mocha",
-    "erkek_agenda01_bebek_antrasit_kase_ekru",
-    "atelier_kadin_bebek_koru_chocolate_ivory_kis",
-    "atelier_kadin_zorlu_crimson_noir_kis"
+    "kadin_gala01_venedik_film_galasi_bordo_deri_saten"
   ],
   "retired_model_frames": [
+    "assets/kadin_agenda01_step1.jpg",
+    "assets/erkek_agenda01_step1.jpg",
     "assets/hw_couple1_step1.jpg",
     "assets/hw_couple2_step1.jpg",
     "assets/mon1_model_step1.jpg",
@@ -93,10 +94,7 @@
     "assets/kadin_galata1_step1.jpg",
     "assets/kid_girl2_model_step1.jpg",
     "assets/kid_boy2_model_step1.jpg",
-    "assets/kadin_agenda01_step1.jpg",
-    "assets/erkek_agenda01_step1.jpg",
-    "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_step1.jpg",
-    "assets/atelier_kadin_zorlu_crimson_noir_kis_step1.jpg"
+    "assets/kadin_gala01_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -138,17 +136,16 @@
     "kadin_kasim_flight01_zorlu_yakut_kase_noir",
     "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
     "erkek_kasim_bebek_konyak_kase_lacivert",
+    "kadin_agenda01_nisantasi_bordo_kase_mocha",
+    "erkek_agenda01_bebek_antrasit_kase_ekru",
     "kadin_kasim_galataport_bordo_trench_ekru",
     "erkek_kasim_nisantasi_lacivert_kaban_camel",
     "cocuk_kiz_kasim_moda_pembe_tuvit_kolej",
     "cocuk_erkek_kasim_gokturk_haki_puffer_street",
     "kadin_kasim_bebek_zeytinyagi_suet_kapsul",
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
-    "kadin_agenda01_nisantasi_bordo_kase_mocha",
-    "erkek_agenda01_bebek_antrasit_kase_ekru",
-    "atelier_kadin_bebek_koru_chocolate_ivory_kis",
-    "atelier_kadin_zorlu_crimson_noir_kis"
+    "kadin_gala01_venedik_film_galasi_bordo_deri_saten"
   ],
-  "last_telegram_dispatch_ts": 1793832114.8461964,
-  "updated_at": "2026-11-05T07:30:14.689226Z"
+  "last_telegram_dispatch_ts": 1793870540.8971167,
+  "updated_at": "2026-11-05T09:22:20.898182Z"
 }

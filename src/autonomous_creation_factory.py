@@ -74,9 +74,13 @@ PERMANENTLY_RETIRED_ARCHETYPES = [
     "kadin_kasim_flight01_zorlu_yakut_kase_noir",
     "kadin_kasim_holding01_abdi_zumrut_kase_fildisi",
     "erkek_kasim_bebek_konyak_kase_lacivert",
+    "kadin_agenda01_nisantasi_bordo_kase_mocha",
+    "erkek_agenda01_bebek_antrasit_kase_ekru",
 ]
 
 PERMANENTLY_RETIRED_MODEL_FRAMES = [
+    "assets/kadin_agenda01_step1.jpg",
+    "assets/erkek_agenda01_step1.jpg",
     "assets/hw_couple1_step1.jpg",
     "assets/hw_couple2_step1.jpg",
     "assets/mon1_model_step1.jpg",
@@ -180,7 +184,13 @@ def load_zero_repeat_ledger() -> dict:
             pass
 
     # GitHub Contents API üzerinden buluttaki en güncel sıfır-tekrar defterini çek ve birleştir
-    gh_token = os.environ.get("GH_TOKEN", "").strip()
+    if (
+        os.environ.get("LOCAL_ONLY", "0") == "1"
+        or os.environ.get("DISABLE_GITHUB_SYNC", "0") == "1"
+    ):
+        gh_token = ""
+    else:
+        gh_token = os.environ.get("GH_TOKEN", "").strip()
     if gh_token:
         try:
             r = requests.get(
@@ -219,6 +229,11 @@ def load_zero_repeat_ledger() -> dict:
 
 
 def save_zero_repeat_ledger(data: dict, sync_github: bool = False) -> None:
+    if (
+        os.environ.get("LOCAL_ONLY", "0") == "1"
+        or os.environ.get("DISABLE_GITHUB_SYNC", "0") == "1"
+    ):
+        sync_github = False
     os.makedirs(LEDGER_PATH.parent, exist_ok=True)
     data["updated_at"] = datetime.utcnow().isoformat() + "Z"
     raw_json = json.dumps(data, ensure_ascii=False, indent=2)

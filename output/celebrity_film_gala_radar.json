@@ -1,0 +1,44 @@
+{
+  "updated_at": "2026-11-05T09:21:00.902138",
+  "active_celebrity_film_gala_trends": [
+    {
+      "radar_id": "venice_cannes_premiere_oxblood_patent_satin",
+      "segment": "kadin",
+      "event_title": "Venedik & Cannes Film Festivali Prömiyeri — Kırmızı Halı & After-Party",
+      "celebrity_inspiration": "Hailey Bieber × Zendaya × Rosie Huntington-Whiteley (Film Galası & Paris Gece Prömiyeri)",
+      "film_or_gala_reference": "Venedik Film Festivali Başrol Prömiyeri & Saint Laurent Rive Droite Gala",
+      "modern_silhouette_formula": "Parlak Rugan Deri Uzun Trençkot (Boxy Omuz) + Korsaj Dokulu İpek-Kaşmir Dik Yaka + Akışkan İpek Saten Geniş Paça Pantolon + Çerçevesiz (Rimless) Kehribar Camlı Gala Gözlüğü",
+      "texture_contrast_rule": "Yüksek Parlaklıkta Rugan Deri (%45) × Akışkan Gece Siyahı İpek Saten (%35) × Mat İpek-Kaşmir & Gümüş Metalik Aksesuar (%20)",
+      "why_audience_loves_it": "Klasik/sıkıcı kışlık kaşe kaban yerine film galası çıkışı flaşlar altında parlayan ultra-modern 'Matrix / Saint Laurent / Hailey Bieber' rugan-saten kontrastı.",
+      "hud_badge": "» FİLM GALASI & ÜNLÜ STİLİ: RUGAN DERİ & İPEK SATEN «",
+      "hud_styling_tip": "GALA SIRRI: Parlak Bordo Rugan Trençkot + Akışkan Saten Pantolon + Rimless Gözlük",
+      "modernity_buzz_score": 99.4
+    },
+    {
+      "radar_id": "cannes_a24_premiere_boxy_leather_burgundy_silk",
+      "segment": "erkek",
+      "event_title": "Cannes & Londra A24 Film Galası — Modern Başrol Kırmızı Halı Stili",
+      "celebrity_inspiration": "Timothée Chalamet × Jacob Elordi × Austin Butler (Film Prömiyeri & GQ Gala)",
+      "film_or_gala_reference": "Cannes Film Festivali Prömiyeri & Londra BAFTA After-Party",
+      "modern_silhouette_formula": "Kısa Kesim (Cropped Boxy) Kürk Yakalı Siyah Deri Ceket + Koyu Bordo İpek Dokulu Gömlek + Yüksek Bel Çift Pileli Geniş Paça (Wide-Leg) Gala Pantolonu + Gümüş Çerçeveli Füme Camlı Prömiyer Gözlüğü",
+      "texture_contrast_rule": "Mat Kuzu Derisi & Kürk Yaka (%45) × Parlak Bordo İpek Gömlek (%30) × İtalyan Yün Barathea Geniş Paça & Örgü Deri Çanta (%25)",
+      "why_audience_loves_it": "Klasik takım elbise veya sıradan kazak yerine Hollywood'un en çok konuşulan 1/3 kısa boxy deri ceket + 2/3 geniş paça pileli pantolon ve bordo ipek gömlek formülü.",
+      "hud_badge": "» CANNES FİLM PRÖMİYERİ: BOXY DERİ & BORDO İPEK «",
+      "hud_styling_tip": "BAŞROL ORANI: Kısa Boxy Deri Ceket + Yüksek Bel Wide-Leg Pantolon + İpek Gömlek",
+      "modernity_buzz_score": 99.2
+    },
+    {
+      "radar_id": "milan_frontrow_distressed_espresso_moto_denim",
+      "segment": "kadin",
+      "event_title": "Milano Moda Haftası Front-Row & Film Galası Sokak Çıkışı",
+      "celebrity_inspiration": "Bella Hadid × Kendall Jenner × Dua Lipa (Off-Duty Gala Street Style)",
+      "film_or_gala_reference": "Milano Prada / Gucci Front-Row & Gece Galası Çıkışı",
+      "modern_silhouette_formula": "Oversize Eskitme Espresso Deri Bomber + Bordo Transparan/Fitilli Katman + Koyu Gri/Siyah Geniş Kesim Tailored Pantolon + Dar Dikdörtgen Kemik Gözlük",
+      "texture_contrast_rule": "Vintage Deri × İnce Fitilli Merinos × Metalik Tokalı Mikro Çanta",
+      "why_audience_loves_it": "Z kuşağı ve genç yetişkin kitlenin kaydetme rekoru kırdığı zahmetsiz ünlü sokak stili.",
+      "hud_badge": "» ÜNLÜ SOKAK & GALA STİLİ: VINTAGE DERİ & BORDO «",
+      "hud_styling_tip": "IT-GIRL FORMÜLÜ: Oversize Deri Ceket + Dar Üst + Yüksek Bel Geniş Paça",
+      "modernity_buzz_score": 98.7
+    }
+  ]
+}
