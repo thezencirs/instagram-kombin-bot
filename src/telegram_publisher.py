@@ -110,15 +110,30 @@ def _normalize_items(outfit: Dict[str, Any]) -> List[Dict[str, str]]:
     """Extracts normalized item list from either dict-keyed or list-based outfit structure."""
     raw_items = outfit.get("items", {})
     normalized = []
+    seg = str(outfit.get("gender_segment") or outfit.get("gender_group") or "kadin").lower()
     if isinstance(raw_items, dict):
         for key, emoji, label in ITEM_SLOTS:
             it = raw_items.get(key)
             if not it:
                 continue
+            item_name_low = f"{it.get('category_label', '')} {it.get('category', '')} {it.get('name', '')}".lower()
+            custom_label = str(it.get("category_label") or it.get("category") or label)
+            custom_emoji = emoji
+            if "saat" in item_name_low:
+                custom_emoji = "⌚"
+                if custom_label == "Çanta":
+                    custom_label = "Kronograf Saat"
+            elif "kemer" in item_name_low:
+                custom_emoji = "ベルト" if False else "🎩"
+            elif "sırt çantası" in item_name_low or seg in ("erkek_cocuk", "kiz_cocuk"):
+                if key == "bag":
+                    custom_emoji = "🎒"
+            elif seg == "erkek" and key == "bag":
+                custom_emoji = "⌚" if "saat" in item_name_low else "💼"
             normalized.append({
                 "key": key,
-                "emoji": emoji,
-                "label": label,
+                "emoji": custom_emoji,
+                "label": custom_label,
                 "brand": str(it.get("brand", "Mağaza")),
                 "name": str(it.get("name", "Ürün")),
                 "price": str(it.get("price", "")),

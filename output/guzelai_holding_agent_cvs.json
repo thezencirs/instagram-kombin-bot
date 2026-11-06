@@ -1,14 +1,14 @@
 {
   "holding_name": "GüzelAI Moda, Manken/Model, Sinema/Gala, GitHub DevOps & Veri Holding A.Ş.",
   "hr_board": "Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)",
-  "generated_at": "2026-11-05 12:21:00",
+  "generated_at": "2026-11-06 22:05:42",
   "unlimited_hiring_policy": "AKTİF — İhtiyaç Duyulan Her Trend, Gala ve Teknik Alan İçin Sınırsız Elastik İşe Alım",
-  "total_certified_agents": 50,
-  "core_permanent_agents": 48,
+  "total_certified_agents": 56,
+  "core_permanent_agents": 54,
   "elastic_on_demand_agents": 2,
   "previously_active_agents": 28,
-  "newly_recruited_with_cv_count": 20,
-  "holding_academy_graduation_average": 99.6,
+  "newly_recruited_with_cv_count": 26,
+  "holding_academy_graduation_average": 99.62,
   "subsidiary_agencies": [
     {
       "agency_code": "HR_ACADEMY",
@@ -63,6 +63,12 @@
       "agency_name": "GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı",
       "director": "Ajan 46 DEMİR (Chief Data Architect) • Ajan 47 DURU (Telemetry Compactor) • Ajan 48 KAAN_DB (Multi-Repo Sync)",
       "mission": "O(1) SHA-256 sıfır-tekrar indeksleme, aylık zaman-parçalı (time-sharded) veri gölü yönetimi ve sınırsız sayıda uzman ajan işe alım/ölçekleme altyapısı."
+    },
+    {
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu (Old Money / Quiet Luxury / Sprezzatura), Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "director": "Ajan 49 FERİDE (Old Money & Quiet Luxury) • Ajan 50 HALUK (Erkek Sartorial & Saat/Aksesuar) • Ajan 51 BERİL (Tasarım Konseyi İletişim) • Ajan 52 KADİR (Sıfır-Tolerans Cinsiyet Denetçisi)",
+      "mission": "Rastgele mevsimsel kombinleri engelleyerek Old Money, Quiet Luxury, Italian Sprezzatura, Dark Academia gibi isimli tarz akımlarını kurgulama, ajanlar arası 5 aşamalı Tasarım Konseyi iletişimi yürütme ve erkek kombinlerinde kadın çantası/ürünü kullanımını %100 VETO etme."
     }
   ],
   "academy_curriculum_modules": [
@@ -592,6 +598,162 @@
       },
       "graduation_average": 99.7,
       "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 49,
+      "sicil_no": "GZL-HLD-2026-049",
+      "code_name": "FERİDE",
+      "subagent_id": "oldmoney-quietluxury-chief-curator",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Old Money Miras Stili & Quiet Luxury (Sessiz Lüks) Baş Küratörü",
+      "education": "Milano Polimoda Luxury Brand Heritage & Loro Piana / Ralph Lauren Arşiv Küratörlüğü",
+      "experience_years": 15,
+      "prior_experience": "Avrupa miras moda evlerinde Old Money kapsül koleksiyon ve 60-30-10 renk armonisi direktörlüğü.",
+      "core_competencies": [
+        "Rastgele mevsimsel kombin yerine Old Money, Quiet Luxury ve Italian Sprezzatura ekollerini kurgulama",
+        "Devetüyü (Camel), sıcak ekru kaşmir, çikolata kahve ve antrasit yün flanel renk denklemi",
+        "Moda Tasarımcıları (DEFNE, KEREM) ile birebir stil brifingi ve konsey liderliği"
+      ],
+      "owned_module": "src/gender_style_guardrail.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.9,
+        "modul_2_sinema_reels": 99.8,
+        "modul_3_bulut_otonomi": 99.7,
+        "modul_4_viral_donusum": 99.9
+      },
+      "graduation_average": 99.83,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 50,
+      "sicil_no": "GZL-HLD-2026-050",
+      "code_name": "HALUK",
+      "subagent_id": "menswear-sartorial-watch-director",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Erkek Sartorial, Savile Row & Lüks Kronograf Saat/Aksesuar Baş Direktörü",
+      "education": "Londra Savile Row Bespoke Tailoring Academy & Cenevre Yüksek Horoloji (Saat) Küratörlüğü",
+      "experience_years": 14,
+      "prior_experience": "Milano Pitti Uomo ve Londra Savile Row erkek giyim koleksiyonlarında aksesuar, saat ve terzilik direktörlüğü.",
+      "core_competencies": [
+        "Erkek kombinlerinde 5. parçayı %100 maskülen Lüks Kronograf Kol Saati / Hakiki Deri Kemer olarak kurgulama",
+        "Erkek kombinlerine kadın çantası veya portföy girmesini mimari düzeyde imkansız kılma",
+        "İtalyan kruvaze kaşe kaban, saç örgü merinos ve çift pileli yün flanel pantolon kalıp uzmanlığı"
+      ],
+      "owned_module": "src/gender_style_guardrail.py & src/outfit_generator.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 100.0,
+        "modul_2_sinema_reels": 99.8,
+        "modul_3_bulut_otonomi": 99.8,
+        "modul_4_viral_donusum": 99.9
+      },
+      "graduation_average": 99.88,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 51,
+      "sicil_no": "GZL-HLD-2026-051",
+      "code_name": "BERİL",
+      "subagent_id": "design-council-comms-moderator",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Moda Tasarım Konseyi Ajanlar Arası İletişim & Senkronizasyon Moderatörü",
+      "education": "ETH Zürich Çok-Ajanlı Sistemler & Paris IFM Moda Yönetimi Çift Anadal",
+      "experience_years": 11,
+      "prior_experience": "Yaratıcı tasarım ekipleri ile yapay zeka sinema prodüksiyon hatları arasında senkron iletişim mimarlığı.",
+      "core_competencies": [
+        "Tasarım Küratörü -> Baş Tasarımcı -> Cinsiyet Denetçisi -> Manken Ajansı -> Remotion Sinema Ekibi 5 aşamalı onay protokolü",
+        "Her yayın öncesi output/design_council_transcript.json iletişim tutanağı üretimi",
+        "Ajanlar arası kopukluğu sıfıra indiren ortak stil ve doku sözlüğü yönetimi"
+      ],
+      "owned_module": "src/gender_style_guardrail.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.9,
+        "modul_2_sinema_reels": 99.7,
+        "modul_3_bulut_otonomi": 99.9,
+        "modul_4_viral_donusum": 99.8
+      },
+      "graduation_average": 99.83,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 52,
+      "sicil_no": "GZL-HLD-2026-052",
+      "code_name": "KADİR",
+      "subagent_id": "zero-tolerance-gender-inspector",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Cinsiyet Uyumu, Çapraz Dosya İzolasyonu & Sıfır Kural İhlali Başdenetçisi (Hard Veto)",
+      "education": "ODTÜ Bilgisayar Mühendisliği & E-Ticaret Katalog Doğrulama Sistemleri",
+      "experience_years": 12,
+      "prior_experience": "Küresel moda pazaryerlerinde kategori/cinsiyet yanlış eşleşmelerini (cross-gender contamination) önleyen AI güvenlik duvarı başmühendisliği.",
+      "core_competencies": [
+        "Erkek (erkek / erkek_cocuk) kombinlerinde kadın çantası, kadın markası (Bagmori, İpekyol vb.) ve kadin_* PNG kullanımını %100 VETO etme",
+        "Bulut yedek (fallback) dekupe seçiminde sıkı cinsiyet öneki (seg_prefix) izolasyonu",
+        "Yayın öncesi tüm ürün başlıkları, emojiler (⌚ vs 👜) ve mağaza linklerinde sıfır-hata sertifikasyonu"
+      ],
+      "owned_module": "src/gender_style_guardrail.py & src/autonomous_creation_factory.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 100.0,
+        "modul_2_sinema_reels": 99.6,
+        "modul_3_bulut_otonomi": 100.0,
+        "modul_4_viral_donusum": 99.8
+      },
+      "graduation_average": 99.85,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 53,
+      "sicil_no": "GZL-HLD-2026-053",
+      "code_name": "ZEYNEP",
+      "subagent_id": "fabric-texture-color-harmonist",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Kumaş Dokusu (Kaşmir/Flanel/Süet) & 60-30-10 Renk Armonisi Denetçisi",
+      "education": "Londra Royal College of Art Textiles & Color Theory Yüksek Lisansı",
+      "experience_years": 10,
+      "prior_experience": "Lüks kış koleksiyonlarında kaşmir, İtalyan yün flanel, süet ve deri yüzey kontrastı danışmanlığı.",
+      "core_competencies": [
+        "60-30-10 renk oranı denetimi (Ana kaban/pantolon %60, triko %30, ayakkabı ve saat/çanta %10)",
+        "Mat yün kaşe ile saç örgü merinos ve süet/deri dokuların 2K videoda net ayrışmasını sağlama",
+        "Manken ve dekupe packshot görselleri arasında 1:1 renk sıcaklığı kalibrasyonu"
+      ],
+      "owned_module": "src/gender_style_guardrail.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.9,
+        "modul_2_sinema_reels": 99.8,
+        "modul_3_bulut_otonomi": 99.5,
+        "modul_4_viral_donusum": 99.7
+      },
+      "graduation_average": 99.73,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
+    },
+    {
+      "agent_number": 54,
+      "sicil_no": "GZL-HLD-2026-054",
+      "code_name": "TARIK",
+      "subagent_id": "dark-academia-alpine-curator",
+      "agency_code": "STYLE_CURATION_COUNCIL_AGENCY",
+      "agency_name": "GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı",
+      "role_title": "Dark Academia, Ivy League & St. Moritz Alpine Luxury Tarz Küratörü",
+      "education": "Oxford University Visual Culture & Milano Menswear/Womenswear Archival Studies",
+      "experience_years": 11,
+      "prior_experience": "Kış kapsül koleksiyonlarında Oxford Preppy, Dark Academia tüvit ve St. Moritz Alpine Après-Ski küratörlüğü.",
+      "core_competencies": [
+        "Old Money, Quiet Luxury, Italian Sprezzatura ve Dark Academia tarzlarının dengeli yayın rotasyonu",
+        "Balıksırtı tüvit, bordo/zümrüt merinos ve kürklü shearling kış arketiplerinin kurgulanması",
+        "Sosyal medya kaydetme (Save) oranını maksimize eden kültürel stil hikaye anlatımı"
+      ],
+      "owned_module": "src/gender_style_guardrail.py",
+      "academy_scores": {
+        "modul_1_1to1_sadakat": 99.8,
+        "modul_2_sinema_reels": 99.7,
+        "modul_3_bulut_otonomi": 99.6,
+        "modul_4_viral_donusum": 99.8
+      },
+      "graduation_average": 99.73,
+      "hiring_status": "ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI"
     }
   ],
   "elastic_spawned_agents": [
@@ -851,7 +1013,7 @@
       "Ajan 38 TEOMAN (GitHub Open-Source Remotion & Cinema Skill Harvester)",
       "Ajan 46 DEMİR (Chief Data Lake & Sharding Architect)"
     ],
-    "generated_at": "2026-11-05 12:21:00",
+    "generated_at": "2026-11-06 22:05:42",
     "repositories_monitored": [
       "thezencirs/instagram-kombin-bot",
       "thezencirs/guzelai",
@@ -866,9 +1028,9 @@
       "universal-reels-telegram-engine"
     ],
     "data_lake_metrics": {
-      "indexed_unique_outfits": 1,
-      "indexed_unique_models": 1,
-      "indexed_unique_skus": 6,
+      "indexed_unique_outfits": 5,
+      "indexed_unique_models": 5,
+      "indexed_unique_skus": 30,
       "active_monthly_shards": 1,
       "lookup_complexity": "O(1) SHA-256 Hash Table"
     },
@@ -910,9 +1072,9 @@
     ]
   },
   "latest_reels_cinema_telemetry_summary": {
-    "cinema_grade_score_100": 99.8,
+    "cinema_grade_score_100": 99.51,
     "verdict": "CERTIFIED_2K_LUXURY_COMMERCIAL_REEL",
-    "average_laplacian_sharpness": 1093.24
+    "average_laplacian_sharpness": 961.34
   },
   "status": "HOLDING_50_PLUS_UNLIMITED_ELASTIC_CADRE_CERTIFIED_AND_ACTIVE"
 }

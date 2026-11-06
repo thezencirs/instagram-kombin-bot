@@ -153,6 +153,46 @@ def _make_atelier_archetype(
 # Görsel Stil Arketipleri (Her arketip için temiz dekupe kıyafet yedekleri + sokakta yürüyen model kareleri)
 OUTFIT_ARCHETYPES = [
     _make_atelier_archetype(
+        arch_id="erkek_oldmoney01_bebek_camel_kase_ekru_kronograf",
+        gender_segment="erkek",
+        designer_name="HALUK x KEREM x KADİR x KORAY",
+        music_id="old_money_violin_orchestra_pov",
+        title="Bebek & Nişantaşı 'Old Money & Italian Sprezzatura' Kış Miras Kreasyonu: Devetüyü (Camel) Kruvaze İtalyan Kaşe Kaban, Sıcak Ekru Saç Örgü Merinos, Antrasit Flanel & Otomatik Kronograf Saat (Tasarım Konseyi: HALUK × KEREM • 2K Sinema) 🏛️⌚✨",
+        spoken_hook="Bebek ve Nişantaşı taş bulvarında Loro Piana ve Ralph Lauren ekolü gerçek Old Money mirası: Devetüyü kruvaze İtalyan kaşe kaban, sıcak ekru saç örgü merinos ve bilekte otomatik kronograf saat!",
+        viral_hook="🏛️ OLD MONEY MİRAS STİLİ & İTALYAN SPREZZATURA (Moda Tasarım Konseyi: HALUK & KEREM • Cinsiyet/Kalite Denetimi: KADİR • Remotion 2K Sinema: KORAY & ATLAS): Devetüyü (Camel) kruvaze uzun İtalyan yün kaşe kaban, koyu Havanna kemik gözlük, sıcak ekru saç örgü (cable-knit) saf merinos boğazlı kazak, koyu antrasit çift pileli İtalyan yün flanel pantolon, koyu kahve kroko deri kayışlı otomatik kronograf kol saati ve koyu kahve süet Chelsea bot! 💡 Old Money Stil Denklemi (60-30-10): %60 Devetüyü & Antrasit yün dokuyu %30 sıcak ekru saç örgü trikoyla aydınlatıp, %10 kahve süet Chelsea bot ve deri kayışlı kronograf saatle tamamlayın. 💬 Bu Old Money kombininde favoriniz 1 (Devetüyü Kruvaze Kaşe Kaban) mı yoksa 5 (Otomatik Kronograf Saat) mi? 👇🏛️⌚🔥",
+        badge_walk="» OLD MONEY MIRAS: CAMEL KAŞE, EKRU MERİNOS & KRONOGRAF SAAT «",
+        asset_prefix="erkek_oldmoney01",
+        sku_prefix="96010100",
+        specs={
+            "outerwear": ("Kruvaze Kaşe Kaban", "MASSIMO DUTTI", "Erkek Devetüyü (Camel) Kruvaze Uzun İtalyan Yün Kaşe Kaban", "5.290₺", 5290.0, "Devetüyü / Camel", "https://www.trendyol.com/erkek-kaban-x-g2-c55", ["camel", "devetüyü", "kruvaze", "kaban"]),
+            "cap": ("Havanna Old Money Gözlük", "PERSOL", "Erkek Koyu Havanna Kemik Klasik Old Money Güneş Gözlüğü", "4.890₺", 4890.0, "Koyu Havanna / Yeşil", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c105", ["havanna", "kemik", "old money", "gözlük"]),
+            "top": ("Saç Örgü Merinos Kazak", "BEYMEN CLUB", "Erkek Sıcak Ekru Saç Örgü (Cable-Knit) Boğazlı Saf Merinos Yün Kazak", "1.950₺", 1950.0, "Sıcak Ekru / Krem", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["ekru", "saç örgü", "boğazlı", "merinos"]),
+            "bottom": ("İtalyan Flanel Pantolon", "NETWORK", "Erkek Koyu Antrasit Çift Pileli İtalyan Yün Flanel Kışlık Pantolon", "2.590₺", 2590.0, "Koyu Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["antrasit", "flanel", "pileli", "pantolon"]),
+            "bag": ("Kronograf Kol Saati", "SEIKO PRESAGE", "Erkek Koyu Kahve Deri Kayışlı Gold/Çelik Otomatik Kronograf Kol Saati", "6.490₺", 6490.0, "Koyu Kahve / Gold", "https://www.trendyol.com/erkek-saat-x-g2-c34", ["kahve", "deri", "kronograf", "saat"]),
+            "shoes": ("Süet Chelsea Bot", "TERGAN", "Erkek Koyu Kahve (Espresso) Hakiki Süet Deri Klasik Chelsea Kışlık Bot", "3.690₺", 3690.0, "Koyu Kahve Süet", "https://www.trendyol.com/erkek-bot-x-g2-c102", ["kahve", "süet", "chelsea", "bot"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="kadin_oldmoney01_nisantasi_camel_kase_fildisi_binici",
+        gender_segment="kadin",
+        designer_name="FERİDE x DEFNE x ZEYNEP x KORAY",
+        music_id="old_money_violin_orchestra_pov",
+        title="Nişantaşı Abdi İpekçi 'Old Money & Quiet Luxury (Sessiz Lüks)' Kış Kapsülü: Devetüyü (Camel) Kuşaklı Kaşmir Kaban, Fildişi Saç Örgü Triko, Çikolata Yün Palazzo & Gold Tokalı Deri Çanta (Tasarım Konseyi: FERİDE × DEFNE • 2K Sinema) 🏛️🐎✨",
+        spoken_hook="Nişantaşı Abdi İpekçi bulvarında logosuz, sessiz ve asil Old Money zarafeti: Devetüyü kaşmir kaban, fildişi saç örgü triko ve çikolata yün palazzo!",
+        viral_hook="🏛️ KADIN OLD MONEY & SESSİZ LÜKS (QUIET LUXURY) KIŞ KAPSÜLÜ (Tasarım Konseyi: FERİDE & DEFNE • Doku Armonisi: ZEYNEP • Remotion 2K Sinema: KORAY & ATLAS): Sıcak devetüyü (Camel) kuşaklı uzun yün & kaşmir kaban, koyu tortoise & gold saplı oval gözlük, fildişi saç örgü yarım balıkçı saf kaşmir triko, koyu çikolata kahve yüksek bel pileli yün palazzo pantolon, konyak taba gold at nalı tokalı deri omuz çantası ve konyak deri kışlık bot! 💡 Sessiz Lüks Kuralı: Devetüyü, fildişi ve çikolata kahve üçlüsünü saç örgü kaşmir ve mat yün dokularla birleştirerek zamansız bir aristokrat silüet oluşturun. 💬 Favori parçanız 1 (Devetüyü Kaşmir Kaban) mı yoksa 5 (Konyak Gold Tokalı Old Money Çanta) mı? 👇🏛️🐎✨",
+        badge_walk="» OLD MONEY & SESSİZ LÜKS: CAMEL KAŞMİR & ÇİKOLATA YÜN «",
+        asset_prefix="kadin_oldmoney01",
+        sku_prefix="96020100",
+        specs={
+            "outerwear": ("Kaşmir/Yün Kaban", "İPEKYOL", "Kadın Sıcak Devetüyü (Camel) Kuşaklı Kruvaze Uzun Yün & Kaşmir Kaban", "4.890₺", 4890.0, "Devetüyü / Camel", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["camel", "devetüyü", "kuşaklı", "kaban"]),
+            "cap": ("Oval Old Money Gözlük", "CELINE EYEWEAR", "Kadın Koyu Tortoise & Gold Saplı Oval Old Money Güneş Gözlüğü", "4.750₺", 4750.0, "Tortoise / Gold", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c105", ["tortoise", "gold", "oval", "gözlük"]),
+            "top": ("Saç Örgü Kaşmir Triko", "MASSIMO DUTTI", "Kadın Fildişi (Ivory) Saç Örgü Yarım Balıkçı Yaka Saf Kaşmir Triko Kazak", "1.990₺", 1990.0, "Fildişi / Ekru", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["fildişi", "saç örgü", "kaşmir", "triko"]),
+            "bottom": ("Çikolata Yün Palazzo", "YARGICI", "Kadın Koyu Çikolata Kahve Yüksek Bel Pileli Geniş Paça Yün Pantolon", "1.890₺", 1890.0, "Koyu Çikolata Kahve", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["çikolata", "kahve", "pileli", "palazzo"]),
+            "bag": ("Old Money Deri Çanta", "VAKKO", "Kadın Konyak Taba Gold At Nalı Tokalı Hakiki Deri Old Money Omuz Çantası", "3.490₺", 3490.0, "Konyak Taba / Gold", "https://www.trendyol.com/kadin-omuz-cantasi-x-g1-c116", ["konyak", "taba", "gold", "çanta"]),
+            "shoes": ("Blok Topuk Deri Bot", "ZARA", "Kadın Konyak Taba Sivri Burunlu Blok Topuklu Deri Kışlık Bot", "2.990₺", 2990.0, "Konyak Taba", "https://www.trendyol.com/kadin-bot-x-g1-c102", ["konyak", "taba", "topuklu", "bot"]),
+        },
+    ),
+    _make_atelier_archetype(
         arch_id="kadin_gala01_venedik_film_galasi_bordo_deri_saten",
         gender_segment="kadin",
         designer_name="ALARA x MİRA x KORAY",
@@ -188,7 +228,7 @@ OUTFIT_ARCHETYPES = [
             "cap": ("Gümüş Prömiyer Gözlüğü", "PRADA EYEWEAR", "Erkek Gümüş Çerçeveli Füme Camlı Film Galası Gözlüğü", "4.950₺", 4950.0, "Gümüş / Füme", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c105", ["gümüş", "füme", "dikdörtgen", "gözlük"]),
             "top": ("Bordo İpek Gömlek", "ZARA MAN", "Erkek Koyu Bordo (Oxblood) İpek Dokulu Modern Kesim Gömlek", "1.890₺", 1890.0, "Koyu Bordo / Oxblood", "https://www.trendyol.com/erkek-gomlek-x-g2-c75", ["bordo", "ipek", "saten", "gömlek"]),
             "bottom": ("Geniş Paça Gala Pantolonu", "BEYMEN CLUB", "Erkek Gece Siyahı Çift Pileli Geniş Paça (Wide-Leg) Gala Pantolonu", "2.690₺", 2690.0, "Gece Siyahı", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["siyah", "pileli", "geniş paça", "pantolon"]),
-            "bag": ("Örgü Deri Çanta", "TERGAN", "Erkek Siyah Örgü Deri (Intrecciato) Modern Portföy & Hafta Sonu Çantası", "3.290₺", 3290.0, "Gece Siyahı Örgü", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["siyah", "örgü", "deri", "çanta"]),
+            "bag": ("Kronograf Kol Saati", "SEIKO PRESAGE", "Erkek Siyah Deri Kayışlı Çelik Kasalı Otomatik Kronograf Kol Saati", "6.290₺", 6290.0, "Gece Siyahı / Çelik", "https://www.trendyol.com/erkek-saat-x-g2-c34", ["siyah", "deri", "kronograf", "saat"]),
             "shoes": ("Kare Burun Chelsea Bot", "NETWORK", "Erkek Siyah Parlak Deri Kalın Tabanlı Modern Chelsea Bot", "3.990₺", 3990.0, "Parlak Siyah", "https://www.trendyol.com/erkek-bot-x-g2-c102", ["siyah", "deri", "chelsea", "bot"]),
         },
     ),
@@ -228,7 +268,7 @@ OUTFIT_ARCHETYPES = [
             "cap": ("Havanna Gold Gözlük", "RAY-BAN", "Erkek Koyu Havanna Kemik & Gold Köprülü Güneş Gözlüğü", "4.850₺", 4850.0, "Koyu Havanna / Gold", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c105", ["havanna", "kahve", "gold", "gözlük"]),
             "top": ("Ekru Merinos Kazak", "BEYMEN CLUB", "Erkek Sıcak Ekru Saç Örgü Boğazlı Saf Merinos Yün Kazak", "1.850₺", 1850.0, "Sıcak Ekru", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["ekru", "saç örgü", "boğazlı", "merinos"]),
             "bottom": ("Antrasit Flanel Pantolon", "NETWORK", "Erkek Koyu Antrasit Pileli İtalyan Flanel Yün Pantolon", "2.390₺", 2390.0, "Koyu Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["antrasit", "flanel", "pileli", "pantolon"]),
-            "bag": ("Espresso Deri Çanta", "TERGAN", "Erkek Koyu Espresso Deri Hafta Sonu & Evrak Çantası", "2.990₺", 2990.0, "Koyu Espresso", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["espresso", "kahve", "deri", "çanta"]),
+            "bag": ("Kronograf Kol Saati", "TISSOT", "Erkek Koyu Espresso Deri Kayışlı Otomatik Kronograf Kol Saati", "6.490₺", 6490.0, "Koyu Espresso / Gold", "https://www.trendyol.com/erkek-saat-x-g2-c34", ["espresso", "kahve", "kronograf", "saat"]),
             "shoes": ("Ekru/Espresso Sneaker", "ADIDAS", "Erkek Ekru Deri Espresso Süet Çizgili Court Sneaker", "3.890₺", 3890.0, "Ekru / Espresso", "https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109", ["ekru", "kahve", "süet", "sneaker"]),
         },
     ),
@@ -268,7 +308,7 @@ OUTFIT_ARCHETYPES = [
             "cap": ("Gold Aviator Gözlük", "RAY-BAN", "Erkek Gold Metal Çerçeveli Yeşil Camlı Aviator Gözlük", "4.750₺", 4750.0, "Gold / Yeşil", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c101", ["gold", "yeşil", "aviator", "gözlük"]),
             "top": ("Lacivert Merinos Triko", "MASSIMO DUTTI", "Erkek Gece Laciverti Fitilli Boğazlı Merinos Triko Kazak", "1.690₺", 1690.0, "Gece Laciverti", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["lacivert", "boğazlı", "merinos", "triko"]),
             "bottom": ("Antrasit Flanel Pantolon", "BEYMEN CLUB", "Erkek Antrasit Flanel Pileli Kışlık Yün Pantolon", "2.290₺", 2290.0, "Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["antrasit", "flanel", "pileli", "pantolon"]),
-            "bag": ("Konyak Deri Çanta", "TERGAN", "Erkek Konyak Taba Deri Hafta Sonu & Seyahat Çantası", "2.890₺", 2890.0, "Konyak / Taba", "https://www.trendyol.com/erkek-el-cantasi-x-g2-c101461", ["konyak", "taba", "deri", "çanta"]),
+            "bag": ("Kronograf Kol Saati", "SEIKO", "Erkek Konyak Taba Deri Kayışlı Otomatik Kronograf Kol Saati", "5.890₺", 5890.0, "Konyak / Taba", "https://www.trendyol.com/erkek-saat-x-g2-c34", ["konyak", "taba", "kronograf", "saat"]),
             "shoes": ("Beyaz/Lacivert Sneaker", "ADIDAS", "Erkek Beyaz Deri Lacivert Çizgili Klasik Court Sneaker", "3.690₺", 3690.0, "Beyaz / Lacivert", "https://www.trendyol.com/erkek-spor-ayakkabi-x-g2-c109", ["beyaz", "lacivert", "deri", "sneaker"]),
         },
     ),
@@ -4149,7 +4189,6 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
     forced_id = ARCHETYPE_ALIASES.get(forced_id, forced_id)
     allow_retired = (
         os.environ.get("ALLOW_RETIRED_REBUILD", "0").strip() == "1"
-        or os.environ.get("LOCAL_ONLY", "0").strip() == "1"
     )
     # ÖNCELİK #1: Telegram (@guzelaibot) üzerinden yönetici veya herhangi bir kullanıcı tarafından
     # gönderilen kombin / ürün linki / görsel isteği varsa (Kadın/Erkek/Çocuk algılayarak %100 gerçekçi AI modelle) hemen üret!
@@ -4501,6 +4540,15 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         result_outfit = enrich_outfit_with_fashion_agenda(result_outfit)
     except Exception as fa_e:
         print(f"[Fashion Agenda Zenginleştirme Uyarısı] {fa_e}")
+    try:
+        from gender_style_guardrail import (
+            inspect_and_enforce_gender_compliance,
+            run_fashion_design_council_session,
+        )
+        inspect_and_enforce_gender_compliance(result_outfit, auto_heal=True)
+        run_fashion_design_council_session(result_outfit)
+    except Exception as gc_e:
+        print(f"[Moda Tasarım Konseyi & Cinsiyet Uyum Denetimi Uyarısı] {gc_e}")
     return result_outfit
 
 

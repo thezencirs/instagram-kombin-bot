@@ -237,12 +237,23 @@ def build_verified_kombin_entry(
         # 1:1 Görsel Eşleşme Kilidi (SARP): Vitrinde her zaman modelin giydiği 1:1 dekupe görsel önceliklidir
         display_img_url = cutout_web_url or raw_img_url
 
-        cat_label = item.get("category_label") or default_cat_label
+        cat_label = item.get("category_label") or item.get("category") or default_cat_label
+        item_low = f"{cat_label} {item.get('name', '')}".lower()
+        seg_low = str(outfit.get("gender_segment") or outfit.get("gender_group") or "kadin").lower()
+        eff_emoji = emoji
+        if "saat" in item_low:
+            eff_emoji = "⌚"
+            if cat_label == "Çanta":
+                cat_label = "Kronograf Saat"
+        elif key == "bag" and seg_low == "erkek":
+            eff_emoji = "⌚" if "saat" in item_low else "💼"
+        elif key == "bag" and ("sırt" in item_low or seg_low in ("erkek_cocuk", "kiz_cocuk")):
+            eff_emoji = "🎒"
         verified_items.append({
             "slot_number": idx_num,
             "key": key,
             "category": cat_label,
-            "emoji": emoji,
+            "emoji": eff_emoji,
             "brand": item.get("brand", "Mağaza"),
             "name": item.get("name", "Ürün"),
             "full_name": item.get("full_name") or f"{item.get('brand', '')} {item.get('name', '')}".strip(),

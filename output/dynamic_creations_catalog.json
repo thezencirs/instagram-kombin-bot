@@ -1,0 +1,238 @@
+[
+  {
+    "id": "atelier_kadin_bebek_koru_chocolate_ivory_kis",
+    "gender_segment": "kadin",
+    "designer_agent": "DEFNE",
+    "title": "Bebek Koru Yokuşu Kış Tasarım Kreasyonu: Acı Çikolata Kürklü Deri Trençkot & Kırık Beyaz Merinos (👩 Kadın Kış Tasarım Kreasyonu • Tasarım: DEFNE) ❄️✨",
+    "viral_hook": "🛑 GuzelAI Moda Tasarım Atölyesi (DEFNE) imzalı yepyeni kış kreasyonu! Mankenin üzerindeki 6 parçanın birebir mağaza linkleri aşağıda 👇",
+    "model_frames": [
+      "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_step1.jpg",
+      "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_step2.jpg",
+      "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_step3.jpg"
+    ],
+    "cutout_assets": {
+      "outerwear": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_01_outer.png",
+      "cap": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_02_cap.png",
+      "top": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_03_top.png",
+      "bottom": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_04_bottom.png",
+      "bag": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_05_bag.png",
+      "shoes": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_06_shoes.png"
+    },
+    "fallback_cutout_assets": {
+      "outerwear": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_01_outer.png",
+      "cap": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_02_cap.png",
+      "top": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_03_top.png",
+      "bottom": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_04_bottom.png",
+      "bag": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_05_bag.png",
+      "shoes": "assets/items/atelier_kadin_bebek_koru_chocolate_ivory_kis_06_shoes.png"
+    },
+    "verified_exact_items": {
+      "outerwear": {
+        "brand": "MANGO",
+        "name": "Kadın Acı Çikolata Kürklü Yaka Uzun Kışlık Trençkot Kaban",
+        "full_name": "MANGO Kadın Acı Çikolata Kürklü Yaka Uzun Kışlık Trençkot Kaban",
+        "price": "3.999₺",
+        "price_val": 3999.0,
+        "sku": "988681197",
+        "color": "Acı Çikolata",
+        "store_url": "https://www.trendyol.com/kaban-x-c55"
+      },
+      "cap": {
+        "brand": "VOGUE EYEWEAR",
+        "name": "Kadın Kahve Kemik Oval Güneş Gözlüğü",
+        "full_name": "VOGUE EYEWEAR Kadın Kahve Kemik Oval Güneş Gözlüğü",
+        "price": "2.390₺",
+        "price_val": 2390.0,
+        "sku": "988681198",
+        "color": "Kahve",
+        "store_url": "https://www.trendyol.com/aksesuar-x-c27"
+      },
+      "top": {
+        "brand": "İPEKYOL",
+        "name": "Kadın Kırık Beyaz Fitilli Boğazlı Merinos Triko Kazak",
+        "full_name": "İPEKYOL Kadın Kırık Beyaz Fitilli Boğazlı Merinos Triko Kazak",
+        "price": "1.390₺",
+        "price_val": 1390.0,
+        "sku": "988681199",
+        "color": "Kırık Beyaz",
+        "store_url": "https://www.trendyol.com/kazak-x-c1092"
+      },
+      "bottom": {
+        "brand": "ZARA",
+        "name": "Kadın Kum Beji Yüksek Bel Kışlık Yün Palazzo Pantolon",
+        "full_name": "ZARA Kadın Kum Beji Yüksek Bel Kışlık Yün Palazzo Pantolon",
+        "price": "1.590₺",
+        "price_val": 1590.0,
+        "sku": "988681200",
+        "color": "Kum Beji",
+        "store_url": "https://www.trendyol.com/pantolon-x-c70"
+      },
+      "bag": {
+        "brand": "BAGMORI",
+        "name": "Kadın Acı Çikolata Gold Zincirli Omuz Çantası",
+        "full_name": "BAGMORI Kadın Acı Çikolata Gold Zincirli Omuz Çantası",
+        "price": "889₺",
+        "price_val": 889.0,
+        "sku": "988681201",
+        "color": "Acı Çikolata",
+        "store_url": "https://www.bagmori.com"
+      },
+      "shoes": {
+        "brand": "NEW BALANCE",
+        "name": "Kadın Krem / Acı Çikolata Süet Kışlık Retro Sneaker",
+        "full_name": "NEW BALANCE Kadın Krem / Acı Çikolata Süet Kışlık Retro Sneaker",
+        "price": "3.950₺",
+        "price_val": 3950.0,
+        "sku": "988681202",
+        "color": "Krem / Kahve",
+        "store_url": "https://www.trendyol.com/spor-ayakkabi-x-c109"
+      }
+    },
+    "category_map": {
+      "outerwear": "outerwear",
+      "cap": "cap",
+      "top": "top",
+      "bottom": "bottom",
+      "bag": "bag",
+      "shoes": "shoes"
+    },
+    "keywords": {
+      "outerwear": [
+        "acı çikolata"
+      ],
+      "cap": [
+        "kahve"
+      ],
+      "top": [
+        "kırık beyaz"
+      ],
+      "bottom": [
+        "kum beji"
+      ],
+      "bag": [
+        "acı çikolata"
+      ],
+      "shoes": [
+        "krem / kahve"
+      ]
+    }
+  },
+  {
+    "id": "atelier_kadin_zorlu_crimson_noir_kis",
+    "gender_segment": "kadin",
+    "designer_agent": "DEFNE",
+    "title": "Zorlu Center Raffles Bulvarı Kış Tasarım Kreasyonu: Yakut Kırmızısı Kruvaze Kaşe & Obsidyen Siyah Kaşmir (👩 Kadın Kış Tasarım Kreasyonu • Tasarım: DEFNE) ❄️✨",
+    "viral_hook": "🛑 GuzelAI Moda Tasarım Atölyesi (DEFNE) imzalı yepyeni kış kreasyonu! Mankenin üzerindeki 6 parçanın birebir mağaza linkleri aşağıda 👇",
+    "model_frames": [
+      "assets/atelier_kadin_zorlu_crimson_noir_kis_step1.jpg",
+      "assets/atelier_kadin_zorlu_crimson_noir_kis_step2.jpg",
+      "assets/atelier_kadin_zorlu_crimson_noir_kis_step3.jpg"
+    ],
+    "cutout_assets": {
+      "outerwear": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_01_outer.png",
+      "cap": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_02_cap.png",
+      "top": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_03_top.png",
+      "bottom": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_04_bottom.png",
+      "bag": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_05_bag.png",
+      "shoes": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_06_shoes.png"
+    },
+    "fallback_cutout_assets": {
+      "outerwear": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_01_outer.png",
+      "cap": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_02_cap.png",
+      "top": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_03_top.png",
+      "bottom": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_04_bottom.png",
+      "bag": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_05_bag.png",
+      "shoes": "assets/items/atelier_kadin_zorlu_crimson_noir_kis_06_shoes.png"
+    },
+    "verified_exact_items": {
+      "outerwear": {
+        "brand": "İPEKYOL",
+        "name": "Kadın Yakut Kırmızısı Kruvaze Uzun Yün Kaşe Kaban",
+        "full_name": "İPEKYOL Kadın Yakut Kırmızısı Kruvaze Uzun Yün Kaşe Kaban",
+        "price": "4.190₺",
+        "price_val": 4190.0,
+        "sku": "954594643",
+        "color": "Yakut Kırmızısı",
+        "store_url": "https://www.trendyol.com/kaban-x-c55"
+      },
+      "cap": {
+        "brand": "PRADA EYEWEAR",
+        "name": "Kadın Siyah Gold Detaylı Keskin Cat-Eye Güneş Gözlüğü",
+        "full_name": "PRADA EYEWEAR Kadın Siyah Gold Detaylı Keskin Cat-Eye Güneş Gözlüğü",
+        "price": "4.590₺",
+        "price_val": 4590.0,
+        "sku": "954594644",
+        "color": "Siyah / Gold",
+        "store_url": "https://www.trendyol.com/aksesuar-x-c27"
+      },
+      "top": {
+        "brand": "MASSIMO DUTTI",
+        "name": "Kadın Obsidyen Siyah Fitilli Boğazlı Kaşmir Triko Kazak",
+        "full_name": "MASSIMO DUTTI Kadın Obsidyen Siyah Fitilli Boğazlı Kaşmir Triko Kazak",
+        "price": "1.690₺",
+        "price_val": 1690.0,
+        "sku": "954594645",
+        "color": "Siyah",
+        "store_url": "https://www.trendyol.com/kazak-x-c1092"
+      },
+      "bottom": {
+        "brand": "YARGICI",
+        "name": "Kadın Siyah Yüksek Bel Pileli Kışlık Yün Palazzo Pantolon",
+        "full_name": "YARGICI Kadın Siyah Yüksek Bel Pileli Kışlık Yün Palazzo Pantolon",
+        "price": "1.590₺",
+        "price_val": 1590.0,
+        "sku": "954594646",
+        "color": "Siyah",
+        "store_url": "https://www.trendyol.com/pantolon-x-c70"
+      },
+      "bag": {
+        "brand": "BAGMORI",
+        "name": "Kadın Yakut Kırmızısı Kapitone Gold Tokalı Deri Çanta",
+        "full_name": "BAGMORI Kadın Yakut Kırmızısı Kapitone Gold Tokalı Deri Çanta",
+        "price": "899₺",
+        "price_val": 899.0,
+        "sku": "954594647",
+        "color": "Yakut Kırmızısı",
+        "store_url": "https://www.bagmori.com"
+      },
+      "shoes": {
+        "brand": "ADIDAS",
+        "name": "Kadın Siyah / Beyaz Kırmızı Topuk Detaylı Deri Court Sneaker",
+        "full_name": "ADIDAS Kadın Siyah / Beyaz Kırmızı Topuk Detaylı Deri Court Sneaker",
+        "price": "3.790₺",
+        "price_val": 3790.0,
+        "sku": "954594648",
+        "color": "Siyah / Kırmızı",
+        "store_url": "https://www.trendyol.com/spor-ayakkabi-x-c109"
+      }
+    },
+    "category_map": {
+      "outerwear": "outerwear",
+      "cap": "cap",
+      "top": "top",
+      "bottom": "bottom",
+      "bag": "bag",
+      "shoes": "shoes"
+    },
+    "keywords": {
+      "outerwear": [
+        "yakut kırmızısı"
+      ],
+      "cap": [
+        "siyah / gold"
+      ],
+      "top": [
+        "siyah"
+      ],
+      "bottom": [
+        "siyah"
+      ],
+      "bag": [
+        "yakut kırmızısı"
+      ],
+      "shoes": [
+        "siyah / kırmızı"
+      ]
+    }
+  }
+]

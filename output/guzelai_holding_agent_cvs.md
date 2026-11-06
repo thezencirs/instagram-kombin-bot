@@ -1,8 +1,8 @@
-# 🏛️ GÜZELAI HOLDİNG A.Ş. — İK SINIRSIZ İŞE ALIM, KURUMSAL CV SİCİL & AKADEMİ RAPORU (50+ AJAN)
-**Tarih:** `2026-11-05 12:21:00` | **İK & Akademi Kurulu:** `Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)`
-**Toplam Aktif Kadro:** `50 Uzman Ajan` (`28 Mevcut + 20 CV ile İşe Alınan Direktör/Başmühendis + 2 Elastik Gala Uzmanı | Sınırsız İşe Alım Açık`) | **Akademi Ortalaması:** **`99.6 / 100`**
+# 🏛️ GÜZELAI HOLDİNG A.Ş. — İK SINIRSIZ İŞE ALIM, KURUMSAL CV SİCİL & AKADEMİ RAPORU (56+ AJAN)
+**Tarih:** `2026-11-06 22:05:42` | **İK & Akademi Kurulu:** `Ajan 17 İREM (Holding CHRO / İK Başkanı) & Ajan 29 SELİN (Holding Akademi Dekanı)`
+**Toplam Aktif Kadro:** `56 Uzman Ajan` (`28 Mevcut + 26 CV ile İşe Alınan Direktör/Başmühendis + 2 Elastik Gala Uzmanı | Sınırsız İşe Alım Açık`) | **Akademi Ortalaması:** **`99.62 / 100`**
 
-## 1. GüzelAI Holding A.Ş. Bağlı Şirket & Ajans Yapılanması (9 Uzman Ajans)
+## 1. GüzelAI Holding A.Ş. Bağlı Şirket & Ajans Yapılanması (10 Uzman Ajans)
 - **GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı (`HR_ACADEMY`):** *Yönetim:* Ajan 17 İREM (CHRO) & Ajan 29 SELİN (Akademi Dekanı) — CV tabanlı seçme-yerleştirme, 4 modüllü ajan yetiştirme akademisi, performans karnesi ve %100 sıfır-tekrar yönetişimi.
 - **GüzelAI Elite Manken & Model Ajansı (`MODEL_AGENCY`):** *Yönetim:* Ajan 20 MAYA (Baş Casting) • Ajan 30 DERİN (Fizik & Işık) • Ajan 31 KUZEY (Podyum Koreografi) — Kadın, Erkek, Kız Çocuk ve Erkek Çocuk kategorilerinde %100 özgün, fotogerçekçi 85mm lens dokulu süpermodel üretimi ve 1:1 kıyafet uyumu.
 - **GüzelAI Haute Couture & Moda Tasarım Evi (`FASHION_HOUSE`):** *Yönetim:* Ajan 23 DEFNE • Ajan 24 KEREM • Ajan 25 LEYLA • Ajan 26 MERT — Mevsime uygun yüksek moda kış kreasyonları, renk/kumaş uyumu ve doğrulanmış mağaza link/ikiz ürün mimarisi.
@@ -12,8 +12,9 @@
 - **GüzelAI Remotion Yay Fiziği, Red-Carpet Işık & Çok Açılı Video Prodüksiyon Ekibi (`REMOTION_CINEMA_CREW`):** *Yönetim:* Ajan 39 KORAY (Remotion Spring & Motion-Blur) • Ajan 40 SEDA (Paparazzi Flash & Light-Leak) • Ajan 41 DORUK (Multi-Angle Gimbal) — 2K Reels videolarında sönümlü harmonik yay fiziği (_remotion_spring), kırmızı halı flaş patlamaları, anamorfik film ışık sızıntısı ve çok açılı gimbal kamera akışı.
 - **GüzelAI Film Galaları, Kırmızı Halı & Ünlü Kombinleri İkonik Stil Ajansı (`CELEBRITY_GALA_FILMS_AGENCY`):** *Yönetim:* Ajan 42 ALARA (Gala & Red-Carpet) • Ajan 43 MİRA (It-Girl/It-Boy) • Ajan 44 YİĞİT (Film/Dizi Gardırop) • Ajan 45 CEYLA (Modernlik Denetçisi) — Venedik, Cannes, Oscar, Met Gala, vizyon filmleri ve küresel ünlülerin (Hailey Bieber, Zendaya, Timothée Chalamet, Jacob Elordi vb.) en modern kombinlerini mağaza parçalarıyla 1:1 kurgulama.
 - **GüzelAI Ölçeklenebilir Veri Gölü (Data Lake), O(1) Hash İndeks & Sınırsız Elastik Kadro Ajansı (`DATA_ARCHITECTURE_AGENCY`):** *Yönetim:* Ajan 46 DEMİR (Chief Data Architect) • Ajan 47 DURU (Telemetry Compactor) • Ajan 48 KAAN_DB (Multi-Repo Sync) — O(1) SHA-256 sıfır-tekrar indeksleme, aylık zaman-parçalı (time-sharded) veri gölü yönetimi ve sınırsız sayıda uzman ajan işe alım/ölçekleme altyapısı.
+- **GüzelAI İkonik Tarz Kürasyonu (Old Money / Quiet Luxury / Sprezzatura), Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı (`STYLE_CURATION_COUNCIL_AGENCY`):** *Yönetim:* Ajan 49 FERİDE (Old Money & Quiet Luxury) • Ajan 50 HALUK (Erkek Sartorial & Saat/Aksesuar) • Ajan 51 BERİL (Tasarım Konseyi İletişim) • Ajan 52 KADİR (Sıfır-Tolerans Cinsiyet Denetçisi) — Rastgele mevsimsel kombinleri engelleyerek Old Money, Quiet Luxury, Italian Sprezzatura, Dark Academia gibi isimli tarz akımlarını kurgulama, ajanlar arası 5 aşamalı Tasarım Konseyi iletişimi yürütme ve erkek kombinlerinde kadın çantası/ürünü kullanımını %100 VETO etme.
 
-## 2. İK Tarafından CV İncelemesi ve Akademi Sınavıyla İşe Alınan 20 Üst Düzey Ajan (Ajan 29 – Ajan 48)
+## 2. İK Tarafından CV İncelemesi ve Akademi Sınavıyla İşe Alınan 26 Üst Düzey Ajan (Ajan 29 – Ajan 48)
 ### 📋 Ajan 29 — `SELİN` (`holding-academy-cv-dean`) | Sicil: `GZL-HLD-2026-029`
 - **Bağlı Ajans & Unvan:** GüzelAI Holding İK, Akademi & Kurumsal Yönetim Başkanlığı — *Holding Akademi Dekanı, CV Seçme-Yerleştirme & Ajan Yetiştirme Başeğitmeni*
 - **Eğitim:** Boğaziçi Üniversitesi İşletme & Örgütsel Psikoloji Yüksek Lisans + Paris Luxury Talent Management Sertifikası
@@ -153,6 +154,48 @@
 - **Deneyim (10 Yıl):** Çoklu bulut ve CDN ortamlarında medya varlıkları ve yönlendirme (/go/{sku}) senkronizasyon mühendisliği.
 - **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/scalable_data_manager.py & src/website_publisher.py`):** guzelai.com/go/{sku} yönlendirme sayfaları ile 1:1 PNG dekupe varlıklarının kayıpsız senkronizasyonu • Telegram çoklu kullanıcı kombin kuyruğu ile bulut veri gölü arasındaki atomik tutarlılık • Sınırsız ölçeklenen ajan kadrosunun ürettiği verilerin gerçek zamanlı yedeklenmesi
 - **Holding Akademisi Mezuniyet Ortalaması:** **`99.7 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 49 — `FERİDE` (`oldmoney-quietluxury-chief-curator`) | Sicil: `GZL-HLD-2026-049`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Old Money Miras Stili & Quiet Luxury (Sessiz Lüks) Baş Küratörü*
+- **Eğitim:** Milano Polimoda Luxury Brand Heritage & Loro Piana / Ralph Lauren Arşiv Küratörlüğü
+- **Deneyim (15 Yıl):** Avrupa miras moda evlerinde Old Money kapsül koleksiyon ve 60-30-10 renk armonisi direktörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py`):** Rastgele mevsimsel kombin yerine Old Money, Quiet Luxury ve Italian Sprezzatura ekollerini kurgulama • Devetüyü (Camel), sıcak ekru kaşmir, çikolata kahve ve antrasit yün flanel renk denklemi • Moda Tasarımcıları (DEFNE, KEREM) ile birebir stil brifingi ve konsey liderliği
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.83 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 50 — `HALUK` (`menswear-sartorial-watch-director`) | Sicil: `GZL-HLD-2026-050`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Erkek Sartorial, Savile Row & Lüks Kronograf Saat/Aksesuar Baş Direktörü*
+- **Eğitim:** Londra Savile Row Bespoke Tailoring Academy & Cenevre Yüksek Horoloji (Saat) Küratörlüğü
+- **Deneyim (14 Yıl):** Milano Pitti Uomo ve Londra Savile Row erkek giyim koleksiyonlarında aksesuar, saat ve terzilik direktörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py & src/outfit_generator.py`):** Erkek kombinlerinde 5. parçayı %100 maskülen Lüks Kronograf Kol Saati / Hakiki Deri Kemer olarak kurgulama • Erkek kombinlerine kadın çantası veya portföy girmesini mimari düzeyde imkansız kılma • İtalyan kruvaze kaşe kaban, saç örgü merinos ve çift pileli yün flanel pantolon kalıp uzmanlığı
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.88 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 51 — `BERİL` (`design-council-comms-moderator`) | Sicil: `GZL-HLD-2026-051`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Moda Tasarım Konseyi Ajanlar Arası İletişim & Senkronizasyon Moderatörü*
+- **Eğitim:** ETH Zürich Çok-Ajanlı Sistemler & Paris IFM Moda Yönetimi Çift Anadal
+- **Deneyim (11 Yıl):** Yaratıcı tasarım ekipleri ile yapay zeka sinema prodüksiyon hatları arasında senkron iletişim mimarlığı.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py`):** Tasarım Küratörü -> Baş Tasarımcı -> Cinsiyet Denetçisi -> Manken Ajansı -> Remotion Sinema Ekibi 5 aşamalı onay protokolü • Her yayın öncesi output/design_council_transcript.json iletişim tutanağı üretimi • Ajanlar arası kopukluğu sıfıra indiren ortak stil ve doku sözlüğü yönetimi
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.83 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 52 — `KADİR` (`zero-tolerance-gender-inspector`) | Sicil: `GZL-HLD-2026-052`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Cinsiyet Uyumu, Çapraz Dosya İzolasyonu & Sıfır Kural İhlali Başdenetçisi (Hard Veto)*
+- **Eğitim:** ODTÜ Bilgisayar Mühendisliği & E-Ticaret Katalog Doğrulama Sistemleri
+- **Deneyim (12 Yıl):** Küresel moda pazaryerlerinde kategori/cinsiyet yanlış eşleşmelerini (cross-gender contamination) önleyen AI güvenlik duvarı başmühendisliği.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py & src/autonomous_creation_factory.py`):** Erkek (erkek / erkek_cocuk) kombinlerinde kadın çantası, kadın markası (Bagmori, İpekyol vb.) ve kadin_* PNG kullanımını %100 VETO etme • Bulut yedek (fallback) dekupe seçiminde sıkı cinsiyet öneki (seg_prefix) izolasyonu • Yayın öncesi tüm ürün başlıkları, emojiler (⌚ vs 👜) ve mağaza linklerinde sıfır-hata sertifikasyonu
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.85 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 53 — `ZEYNEP` (`fabric-texture-color-harmonist`) | Sicil: `GZL-HLD-2026-053`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Kumaş Dokusu (Kaşmir/Flanel/Süet) & 60-30-10 Renk Armonisi Denetçisi*
+- **Eğitim:** Londra Royal College of Art Textiles & Color Theory Yüksek Lisansı
+- **Deneyim (10 Yıl):** Lüks kış koleksiyonlarında kaşmir, İtalyan yün flanel, süet ve deri yüzey kontrastı danışmanlığı.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py`):** 60-30-10 renk oranı denetimi (Ana kaban/pantolon %60, triko %30, ayakkabı ve saat/çanta %10) • Mat yün kaşe ile saç örgü merinos ve süet/deri dokuların 2K videoda net ayrışmasını sağlama • Manken ve dekupe packshot görselleri arasında 1:1 renk sıcaklığı kalibrasyonu
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.73 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
+
+### 📋 Ajan 54 — `TARIK` (`dark-academia-alpine-curator`) | Sicil: `GZL-HLD-2026-054`
+- **Bağlı Ajans & Unvan:** GüzelAI İkonik Tarz Kürasyonu, Moda Tasarım Konseyi İletişim & Sıfır-Tolerans Cinsiyet Uyum Ajansı — *Dark Academia, Ivy League & St. Moritz Alpine Luxury Tarz Küratörü*
+- **Eğitim:** Oxford University Visual Culture & Milano Menswear/Womenswear Archival Studies
+- **Deneyim (11 Yıl):** Kış kapsül koleksiyonlarında Oxford Preppy, Dark Academia tüvit ve St. Moritz Alpine Après-Ski küratörlüğü.
+- **Teknik Uzmanlık & Sorumlu Kod Modülü (`src/gender_style_guardrail.py`):** Old Money, Quiet Luxury, Italian Sprezzatura ve Dark Academia tarzlarının dengeli yayın rotasyonu • Balıksırtı tüvit, bordo/zümrüt merinos ve kürklü shearling kış arketiplerinin kurgulanması • Sosyal medya kaydetme (Save) oranını maksimize eden kültürel stil hikaye anlatımı
+- **Holding Akademisi Mezuniyet Ortalaması:** **`99.73 / 100`** — *ONAYLANDI — İK BAŞKANI İREM & DEKAN SELİN ONAYIYLA ATANDI*
 
 ## 3. Akademi İleri Eğitiminden Geçirilerek Terfi Ettirilen 28 Mevcut Holding Ajanı
 - **Ajan 1A — `ALP-1A` (`store-link-researcher`)** | Ajans: `FASHION_HOUSE` | Ana Mağaza & Doğrulanmış Link Araştırma Uzmanı | Akademi Notu: `99.1/100`

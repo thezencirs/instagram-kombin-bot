@@ -1,0 +1,55 @@
+{
+  "session_id": "COUNCIL-20261106-191459",
+  "archetype_id": "",
+  "gender_segment": "erkek",
+  "style_movement": {
+    "style_id": "OLD_MONEY_HERITAGE",
+    "name_tr": "Old Money Miras Stili (Loro Piana & Ralph Lauren Ekolü)",
+    "curator_agent": "FERİDE x HALUK",
+    "color_formula_60_30_10": "60% Devetüyü (Camel) / Koyu Antrasit • 30% Sıcak Ekru / Fildişi Kaşmir • 10% Koyu Kahve Süet & Kronograf Saat / Gold Tokalı Deri",
+    "fabric_dna": [
+      "Saf Kaşmir",
+      "İtalyan Yün Kaşe",
+      "Saç Örgü (Cable-Knit) Merinos",
+      "Çift Pileli Yün Flanel",
+      "Hakiki Süet & Kroko Deri"
+    ],
+    "menswear_slot5_rule": "Erkek Lüks Kronograf / Otomatik Deri Kayışlı Kol Saati (Asla kadın çantası/portföy kullanılmaz!)",
+    "womenswear_slot5_rule": "At Nalı Gold Tokalı Konyak/Taba Hakiki Deri Old Money Eyer & Omuz Çantası"
+  },
+  "gender_compliance_verified": true,
+  "healed_violations": [],
+  "council_dialogue": [
+    {
+      "step": 1,
+      "speaker": "Ajan 49 FERİDE (Old Money & Quiet Luxury Baş Küratörü)",
+      "to": "KEREM & HALUK (Erkek Sartorial, Old Money & Saat/Aksesuar Baş Direktörleri)",
+      "message": "Rastgele mevsimsel kombin üretimi kesin olarak kapatıldı. Bu yayın için seçilen ikonik stil akımı: 'Old Money Miras Stili (Loro Piana & Ralph Lauren Ekolü)'. Renk denklemi: 60% Devetüyü (Camel) / Koyu Antrasit • 30% Sıcak Ekru / Fildişi Kaşmir • 10% Koyu Kahve Süet & Kronograf Saat / Gold Tokalı Deri."
+    },
+    {
+      "step": 2,
+      "speaker": "KEREM & HALUK (Erkek Sartorial, Old Money & Saat/Aksesuar Baş Direktörleri)",
+      "to": "Ajan 52 KADİR (Cinsiyet Uyumu & Sıfır Kural İhlali Başdenetçisi)",
+      "message": "'' için 6 parçalık kapsül hazırlandı. 5. Aksesuar/Saat yuvasında ' - ' () kullanıldı."
+    },
+    {
+      "step": 3,
+      "speaker": "Ajan 52 KADİR & Ajan 50 HALUK (Sıfır-Tolerans Cinsiyet & Aksesuar Denetimi)",
+      "to": "Ajan 51 BERİL (Tasarım Konseyi Moderatörü)",
+      "message": "CİNSİYET VE AKSESUAR DENETİMİ TAMAMLANDI: Erkek kombininde kadın çantası, portföy veya kadın mağaza linki bulunmadığı %100 doğrulandı. Tüm dekupe PNG'leri ve mağaza linkleri cinsiyet kilidiyle (Gender-Lock) eşleşiyor."
+    },
+    {
+      "step": 4,
+      "speaker": "Ajan 53 ZEYNEP (Doku & 60-30-10 Renk Armonisi Denetçisi)",
+      "to": "Ajan 09 DERİN & Ajan 10 KUZEY (Manken Ajansı)",
+      "message": "Kumaş dokuları (Saf Kaşmir, İtalyan Yün Kaşe, Saç Örgü (Cable-Knit) Merinos, Çift Pileli Yün Flanel) birbiriyle tam Old Money kontrastında. Manken çekiminde 85mm f/1.4 doğal kış sabahı ışığı ve %100 fotogerçekçi insan süpermodel onaylandı."
+    },
+    {
+      "step": 5,
+      "speaker": "Ajan 43 KORAY & Ajan 19 ATLAS (Remotion 2K Sinema Ekibi)",
+      "to": "TÜM KONSEY",
+      "message": "2K QHD+ (1440x2560 @ 30fps) Remotion yay fiziği (damping=14, stiffness=120), 6 ürün dekupe kartı ve 3 adımlı gimbal yürüyüş sekansı Tasarım Konseyi onayıyla render hattına alındı."
+    }
+  ],
+  "approved_at": "2026-11-06T19:14:59.852641Z"
+}

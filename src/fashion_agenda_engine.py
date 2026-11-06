@@ -281,7 +281,19 @@ def enrich_outfit_with_fashion_agenda(outfit: Dict[str, Any]) -> Dict[str, Any]:
     except Exception:
         gala_info = {}
 
-    if gala_info:
+    is_oldmoney = "oldmoney" in arch_id.lower() or "old money" in str(outfit.get("archetype_title", "")).lower()
+    if is_oldmoney:
+        if seg == "erkek":
+            chosen["agenda_title"] = "2026/27 Old Money Miras & İtalyan Sprezzatura Erkek Kış Kürasyonu (Loro Piana × Ralph Lauren Ekolü)"
+            chosen["hud_badge"] = "» OLD MONEY MİRAS STİLİ: CAMEL KAŞE, EKRU MERİNOS & KRONOGRAF «"
+            chosen["hud_styling_tip"] = "OLD MONEY KURALI: Camel Kruvaze Kaşe + Ekru Saç Örgü + Kronograf Saat"
+            chosen["color_rule_tip"] = "60-30-10 Old Money Oranı: %60 Devetüyü & Antrasit Flanel, %30 Sıcak Ekru Merinos, %10 Kahve Süet Bot & Kronograf Saat"
+        else:
+            chosen["agenda_title"] = "2026/27 Old Money & Sessiz Lüks (Quiet Luxury) Kadın Kış Kürasyonu (The Row × Loro Piana Ekolü)"
+            chosen["hud_badge"] = "» OLD MONEY & SESSİZ LÜKS: CAMEL KAŞMİR & ÇİKOLATA YÜN PALAZZO «"
+            chosen["hud_styling_tip"] = "OLD MONEY KURALI: Camel Kaşmir Kaban + Fildişi Triko + Gold Tokalı Deri"
+            chosen["color_rule_tip"] = "60-30-10 Sessiz Lüks Oranı: %60 Devetüyü & Çikolata Kahve Yün, %30 Fildişi Saç Örgü Kaşmir, %10 Konyak Deri Çanta & Bot"
+    elif gala_info:
         chosen["agenda_title"] = f"{gala_info['event_title']} | İlhâm: {gala_info['celebrity_inspiration']}"
         chosen["hud_badge"] = gala_info.get("hud_badge") or chosen.get("hud_badge")
         chosen["hud_styling_tip"] = gala_info.get("hud_styling_tip") or chosen.get("hud_styling_tip")

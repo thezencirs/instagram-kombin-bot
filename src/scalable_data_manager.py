@@ -228,7 +228,7 @@ def spawn_elastic_agent_on_demand(
     DATA_LAKE_DIR.mkdir(parents=True, exist_ok=True)
     registry: Dict[str, Any] = {
         "unlimited_hiring_enabled": True,
-        "core_certified_agents": 48,
+        "core_certified_agents": 54,
         "dynamic_spawned_agents": [],
     }
     if ELASTIC_AGENT_REGISTRY_PATH.exists():

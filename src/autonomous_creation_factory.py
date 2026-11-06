@@ -18,6 +18,7 @@ import base64
 import hashlib
 import json
 import os
+import shutil
 import time
 from datetime import datetime
 from io import BytesIO
@@ -76,9 +77,15 @@ PERMANENTLY_RETIRED_ARCHETYPES = [
     "erkek_kasim_bebek_konyak_kase_lacivert",
     "kadin_agenda01_nisantasi_bordo_kase_mocha",
     "erkek_agenda01_bebek_antrasit_kase_ekru",
+    "kadin_gala01_venedik_film_galasi_bordo_deri_saten",
+    "erkek_gala01_cannes_promiyer_siyah_boxy_deri_ipek",
+    "atelier_erkek_moda_iskele_kis",
+    "atelier_erkek_akaretler_siraevler_kis",
 ]
 
 PERMANENTLY_RETIRED_MODEL_FRAMES = [
+    "assets/kadin_gala01_step1.jpg",
+    "assets/erkek_gala01_step1.jpg",
     "assets/kadin_agenda01_step1.jpg",
     "assets/erkek_agenda01_step1.jpg",
     "assets/hw_couple1_step1.jpg",
@@ -487,28 +494,30 @@ PROCEDURAL_ATELIER_MATRIX: Dict[str, List[Dict[str, Any]]] = {
     ],
     "erkek": [
         {
-            "district": "Moda İskele Bulvarı",
-            "slug": "moda_iskele",
-            "hair_face": "short dark-brown textured crop hair and clean jawline",
-            "palette_tr": "Kömür Siyahı Kaşe & Gri Merinos Balıkçı",
-            "outer": ("NETWORK", "Erkek Kömür Siyahı Kruvaze İtalyan Yün Kaşe Kaban", "4.690₺", 4690.0, "Siyah", "men jet black double-breasted tailored wool winter overcoat"),
-            "cap": ("PERSOL", "Erkek Siyah Asetat Köşeli Güneş Gözlüğü", "4.950₺", 4950.0, "Siyah", "men matte black rectangular acetate sunglasses"),
-            "top": ("MASSIMO DUTTI", "Erkek Gümüş Gri Fitilli Boğazlı Merinos Yün Kazak", "1.690₺", 1690.0, "Gümüş Gri", "men heather silver-grey ribbed merino turtleneck sweater"),
-            "bottom": ("BEYMEN CLUB", "Erkek Lacivert Flanel Pileli Kışlık Yün Pantolon", "2.190₺", 2190.0, "Koyu Lacivert", "men dark navy wool flannel pleated winter trousers"),
-            "bag": ("TERGAN", "Erkek Siyah Deri Hafta Sonu & Evrak Çantası", "2.890₺", 2890.0, "Siyah", "men black pebbled leather weekender duffel bag"),
-            "shoes": ("ADIDAS", "Erkek Siyah / Gri Süet Beyaz Tabanlı Court Sneaker", "3.690₺", 3690.0, "Siyah / Beyaz", "men black suede low-top court sneakers with grey stripes and white cupsole"),
+            "district": "Bebek & Nişantaşı Old Money Bulvarı",
+            "slug": "bebek_oldmoney_sartorial",
+            "style_movement_id": "OLD_MONEY_HERITAGE",
+            "hair_face": "short dark-brown swept-back Old Money hair and clean chiseled jawline, hands relaxed with no bag",
+            "palette_tr": "Old Money Devetüyü (Camel) Kaşe, Sıcak Ekru Merinos & Kronograf Saat",
+            "outer": ("MASSIMO DUTTI", "Erkek Devetüyü (Camel) Kruvaze İtalyan Yün Kaşe Kaban", "5.290₺", 5290.0, "Devetüyü / Camel", "men warm camel double-breasted tailored Italian wool winter overcoat"),
+            "cap": ("PERSOL", "Erkek Koyu Havanna Kemik Klasik Old Money Güneş Gözlüğü", "4.890₺", 4890.0, "Koyu Havanna", "men dark tortoise-shell acetate classic Old Money sunglasses"),
+            "top": ("BEYMEN CLUB", "Erkek Sıcak Ekru Saç Örgü Boğazlı Saf Merinos Yün Kazak", "1.950₺", 1950.0, "Sıcak Ekru", "men warm cream ecru cable-knit merino turtleneck sweater"),
+            "bottom": ("NETWORK", "Erkek Koyu Antrasit Çift Pileli İtalyan Yün Flanel Pantolon", "2.590₺", 2590.0, "Koyu Antrasit", "men dark charcoal grey wool flannel double-pleated winter trousers"),
+            "bag": ("SEIKO PRESAGE", "Erkek Koyu Kahve Deri Kayışlı Otomatik Kronograf Kol Saati", "6.490₺", 6490.0, "Koyu Kahve / Gold", "masculine luxury mechanical chronograph wristwatch with dark brown crocodile leather strap and gold steel bezel"),
+            "shoes": ("TERGAN", "Erkek Koyu Kahve Süet Deri Klasik Chelsea Kışlık Bot", "3.690₺", 3690.0, "Koyu Kahve Süet", "men dark espresso brown suede leather classic Chelsea ankle boots"),
         },
         {
-            "district": "Akaretler Sıraevler",
-            "slug": "akaretler_siraevler",
-            "hair_face": "medium wavy light-brown hair and neat short beard",
-            "palette_tr": "Taba Süet Shearling & Koyu Lacivert Triko",
-            "outer": ("ZARA MAN", "Erkek Taba / Konyak İçi Kürklü Süet Kışlık Mont", "3.490₺", 3490.0, "Taba / Krem", "men cognac tan suede winter jacket with cream shearling collar"),
+            "district": "Akaretler Sıraevler Italian Sprezzatura",
+            "slug": "akaretler_sprezzatura",
+            "style_movement_id": "ITALIAN_SPREZZATURA_SARTORIAL",
+            "hair_face": "medium wavy light-brown hair and neat short beard, hands relaxed with no bag",
+            "palette_tr": "İtalyan Sprezzatura: Koyu Espresso Süet Shearling, Lacivert Merinos & Kronograf Saat",
+            "outer": ("ZARA MAN", "Erkek Koyu Espresso İçi Kürklü Süet Kışlık Mont", "4.490₺", 4490.0, "Espresso / Krem", "men dark espresso suede winter jacket with cream shearling collar"),
             "cap": ("RAY-BAN", "Erkek Gold / Yeşil Camlı Klasik Aviator Gözlük", "4.750₺", 4750.0, "Gold", "men gold metal aviator sunglasses dark green lenses"),
-            "top": ("ALTINYILDIZ CLASSICS", "Erkek Koyu Lacivert Saç Örgü Yün Triko Kazak", "1.190₺", 1190.0, "Koyu Lacivert", "men dark navy blue cable-knit crewneck winter wool sweater"),
-            "bottom": ("MANGO MAN", "Erkek Kırık Beyaz / Taş Rengi Kışlık Kadife Chino Pantolon", "1.490₺", 1490.0, "Taş Beji", "men warm stone off-white fine corduroy straight winter chinos"),
-            "bag": ("TERGAN", "Erkek Taba Deri Postacı & Omuz Çantası", "2.490₺", 2490.0, "Taba", "men cognac tan leather messenger crossbody bag"),
-            "shoes": ("NEW BALANCE", "Erkek Lacivert / Taba Süet Kışlık Sneaker", "3.890₺", 3890.0, "Lacivert / Taba", "men navy and tan suede retro low-top sneakers"),
+            "top": ("MASSIMO DUTTI", "Erkek Gece Laciverti Saç Örgü Saf Merinos Yün Triko Kazak", "1.890₺", 1890.0, "Gece Laciverti", "men dark midnight navy cable-knit crewneck winter merino wool sweater"),
+            "bottom": ("BEYMEN CLUB", "Erkek Kırık Beyaz / Taş Rengi Kışlık Yün Flanel Pantolon", "2.290₺", 2290.0, "Taş Beji", "men warm stone off-white wool flannel pleated winter trousers"),
+            "bag": ("TISSOT", "Erkek Gece Laciverti Kadranlı Çelik & Deri Kronograf Kol Saati", "7.290₺", 7290.0, "Lacivert / Çelik", "masculine luxury stainless steel and brown leather strap chronograph wristwatch"),
+            "shoes": ("NETWORK", "Erkek Koyu Kahve Deri Klasik Kışlık Loafer & Chelsea Bot", "3.890₺", 3890.0, "Koyu Kahve", "men dark brown leather classic winter Chelsea boots"),
         },
     ],
     "kiz_cocuk": [
@@ -621,6 +630,11 @@ def synthesize_autonomous_winter_creation(
     for s_idx, pose_txt in enumerate(step_poses, start=1):
         rel_frame = f"assets/{archetype_id}_step{s_idx}.jpg"
         abs_frame = BASE_DIR / rel_frame
+        if abs_frame.exists() and abs_frame.stat().st_size > 10000:
+            model_frames.append(rel_frame)
+            print(f"  ✓ [MEVCUT %100 Fotogerçekçi İnsan Manken Karesi {s_idx}/3] {rel_frame}")
+            continue
+
         prompt = build_photorealistic_human_model_prompt(
             segment=seg,
             district=chosen_bp["district"],
@@ -635,19 +649,31 @@ def synthesize_autonomous_winter_creation(
         )
         img = cloud_fetch_ai_image(prompt, width=768, height=1344, seed=base_seed + s_idx * 17)
         if img is None:
-            raise RuntimeError(f"Bulut FLUX motoru manken karesi üretemedi: {rel_frame}")
+            # Yedek fotogerçekçi kare kontrolü (SADECE aynı cinsiyet segmentinden! Çapraz cinsiyet kesin yasaktır)
+            fb_frames = sorted(list(BASE_DIR.glob(f"assets/*{seg}*_step{s_idx}.jpg")))
+            if fb_frames and fb_frames[0].exists():
+                img = Image.open(fb_frames[0])
+            else:
+                raise RuntimeError(f"Bulut FLUX motoru manken karesi üretemedi: {rel_frame}")
         img_hd = img.resize((1080, 1920), Image.Resampling.LANCZOS)
         img_hd.save(abs_frame, format="JPEG", quality=93)
         model_frames.append(rel_frame)
         print(f"  ✓ [MAYA %100 Fotogerçekçi İnsan Manken Karesi {s_idx}/3] {rel_frame}")
+
+    slot5_store_url = {
+        "kadin": "https://www.trendyol.com/kadin-omuz-cantasi-x-g1-c116",
+        "erkek": "https://www.trendyol.com/erkek-saat-x-g2-c34",
+        "kiz_cocuk": "https://www.trendyol.com/kiz-cocuk-canta-x-g3-c115",
+        "erkek_cocuk": "https://www.trendyol.com/erkek-cocuk-sirt-cantasi-x-g3-c115",
+    }.get(seg, "https://www.trendyol.com/aksesuar-x-c27")
 
     slot_defs = [
         ("outerwear", "01_outer", chosen_bp["outer"], "https://www.trendyol.com/kaban-x-c55"),
         ("cap", "02_cap", chosen_bp["cap"], "https://www.trendyol.com/aksesuar-x-c27"),
         ("top", "03_top", chosen_bp["top"], "https://www.trendyol.com/kazak-x-c1092"),
         ("bottom", "04_bottom", chosen_bp["bottom"], "https://www.trendyol.com/pantolon-x-c70"),
-        ("bag", "05_bag", chosen_bp["bag"], "https://www.bagmori.com"),
-        ("shoes", "06_shoes", chosen_bp["shoes"], "https://www.trendyol.com/spor-ayakkabi-x-c109"),
+        ("bag", "05_bag", chosen_bp["bag"], slot5_store_url),
+        ("shoes", "06_shoes", chosen_bp["shoes"], "https://www.trendyol.com/bot-ve-cizme-x-c102"),
     ]
 
     cutout_assets: Dict[str, str] = {}
@@ -658,17 +684,49 @@ def synthesize_autonomous_winter_creation(
         brand, name_tr, price_str, price_val, color_tr, en_desc = spec_tuple
         rel_cut = f"assets/items/{archetype_id}_{file_tag}.png"
         abs_cut = BASE_DIR / rel_cut
-        pack_prompt = (
-            f"Clean isolated e-commerce studio product packshot photograph of {en_desc}, "
-            f"centered flat-lay ghost mannequin on a PURE SOLID WHITE BACKGROUND #FFFFFF, "
-            f"no model, no person, no shadows on edges, no hangtags, no text, ultra sharp"
-        )
-        raw_pack = cloud_fetch_ai_image(pack_prompt, width=768, height=768, seed=base_seed + 100 + idx_slot)
-        if raw_pack is None:
-            raise RuntimeError(f"Bulut FLUX motoru ürün dekupe görseli üretemedi: {rel_cut}")
-        cut_rgba = remove_white_studio_background(raw_pack)
-        cut_rgba.save(abs_cut, format="PNG")
-        cutout_assets[cat_key] = rel_cut
+        if abs_cut.exists() and abs_cut.stat().st_size > 5000:
+            cutout_assets[cat_key] = rel_cut
+            print(f"  ✓ [MEVCUT 1:1 Dekupe {idx_slot}/6] {rel_cut}")
+        else:
+            pack_prompt = (
+                f"Clean isolated e-commerce studio product packshot photograph of {en_desc}, "
+                f"centered flat-lay ghost mannequin on a PURE SOLID WHITE BACKGROUND #FFFFFF, "
+                f"no model, no person, no shadows on edges, no hangtags, no text, ultra sharp"
+            )
+            raw_pack = cloud_fetch_ai_image(pack_prompt, width=768, height=768, seed=base_seed + 100 + idx_slot)
+            if raw_pack is None:
+                # Yedek dekupe havuzundan SADECE AYNI CİNSİYETE (seg) ait şeffaf PNG'yi kullan (Kadın çantası erkek kombinine ASLA giremez!)
+                seg_prefix = "erkek" if seg == "erkek" else ("kid_boy" if seg == "erkek_cocuk" else ("kid_girl" if seg == "kiz_cocuk" else "kadin"))
+                existing_cuts = [
+                    p for p in (BASE_DIR / "assets" / "items").glob(f"*{file_tag}*.png")
+                    if seg_prefix in p.name.lower()
+                ]
+                if not existing_cuts:
+                    existing_cuts = [
+                        p for p in (BASE_DIR / "assets" / "cutouts").glob(f"*{file_tag}*.png")
+                        if seg_prefix in p.name.lower()
+                    ]
+                if existing_cuts and existing_cuts[0].exists():
+                    shutil.copy2(existing_cuts[0], abs_cut)
+                    cutout_assets[cat_key] = rel_cut
+                    sku_code = str(sku_base + idx_slot)
+                    verified_exact_items[cat_key] = {
+                        "brand": brand,
+                        "name": name_tr,
+                        "full_name": f"{brand} {name_tr}",
+                        "price": price_str,
+                        "price_val": price_val,
+                        "sku": sku_code,
+                        "color": color_tr,
+                        "store_url": store_link,
+                    }
+                    print(f"  ✓ [YEDEK 1:1 Dekupe {idx_slot}/6] {rel_cut} ({brand} - {name_tr})")
+                    continue
+                else:
+                    raise RuntimeError(f"Bulut FLUX motoru ürün dekupe görseli üretemedi: {rel_cut}")
+            cut_rgba = remove_white_studio_background(raw_pack)
+            cut_rgba.save(abs_cut, format="PNG")
+            cutout_assets[cat_key] = rel_cut
         sku_code = str(sku_base + idx_slot)
         verified_exact_items[cat_key] = {
             "brand": brand,
