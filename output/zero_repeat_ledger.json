@@ -55,7 +55,8 @@
     "atelier_erkek_istinyepark_camel_noir_kis",
     "atelier_kadin_zorlu_crimson_noir_kis",
     "erkek_oldmoney01_bebek_camel_kase_ekru_kronograf",
-    "kadin_oldmoney01_nisantasi_camel_kase_fildisi_binici"
+    "kadin_oldmoney01_nisantasi_camel_kase_fildisi_binici",
+    "atelier_erkek_bebek_oldmoney_sartorial_kis"
   ],
   "retired_model_frames": [
     "assets/kadin_gala01_step1.jpg",
@@ -108,7 +109,8 @@
     "assets/atelier_erkek_istinyepark_camel_noir_kis_step1.jpg",
     "assets/atelier_kadin_zorlu_crimson_noir_kis_step1.jpg",
     "assets/erkek_oldmoney01_step1.jpg",
-    "assets/kadin_oldmoney01_step1.jpg"
+    "assets/kadin_oldmoney01_step1.jpg",
+    "assets/atelier_erkek_bebek_oldmoney_sartorial_kis_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -164,8 +166,9 @@
     "erkek_kasim_karakoy_espresso_aviator_antrasit",
     "atelier_kadin_zorlu_crimson_noir_kis",
     "erkek_oldmoney01_bebek_camel_kase_ekru_kronograf",
-    "kadin_oldmoney01_nisantasi_camel_kase_fildisi_binici"
+    "kadin_oldmoney01_nisantasi_camel_kase_fildisi_binici",
+    "atelier_erkek_bebek_oldmoney_sartorial_kis"
   ],
-  "last_telegram_dispatch_ts": 1793992334.8672278,
-  "updated_at": "2026-11-06T19:16:46.226842Z"
+  "last_telegram_dispatch_ts": 1794036893.5700343,
+  "updated_at": "2026-11-07T07:34:53.570085Z"
 }
