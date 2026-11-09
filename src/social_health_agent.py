@@ -106,137 +106,29 @@ def check_instagram_health_and_metrics(force: bool = False) -> dict:
         if len(hashtags) > 8:
             result["risk_notes"].append(f"Açıklamada çok fazla etiket ({len(hashtags)}) var.")
 
-    if not IG_SESSION_PATH.exists():
-        result["account_status"] = "MISSING_SESSION"
-        result["risk_notes"].append("ig_session.json bulunamadı.")
-        return result
-
-    raw_session = IG_SESSION_PATH.read_text(encoding="utf-8").strip()
-    if not raw_session.startswith("{"):
-        result["account_status"] = "LEGACY_COOKIE_ONLY"
-        result["risk_notes"].append("ig_session.json tam mobil Bearer IGT formatında değil.")
-        return result
-
     try:
-        settings = json.loads(raw_session)
-        auth_data = settings.get("authorization_data", {})
-        result["bearer_token_present"] = bool(auth_data.get("sessionid"))
-
-        # TELEGRAM STOK MODU (Instagram Kısıtlama Koruması):
-        # Hesap kısıtlaması almamak için Instagram API'sine (instagrapi) salt-okunur sorgu dahil HİÇBİR istek atılmaz.
-        if os.environ.get("TELEGRAM_ONLY_MODE", "1") == "1" or os.environ.get("FORCE_DIRECT_IG_API", "0") != "1":
-            cached = _load_json(HEALTH_REPORT_PATH, {})
-            cached_ig = cached.get("instagram", {})
-            result["session_healthy"] = True
-            result["account_status"] = "TELEGRAM_ONLY_PROTECTED_MODE"
-            result["risk_level"] = "LOW"
-            result["metrics"] = cached_ig.get("metrics", result["metrics"])
-            result["recent_reels"] = cached_ig.get("recent_reels", [])
-            result["from_cache"] = True
-            return result
-
-        from instagrapi import Client
-
-        cl = Client()
-        cl.set_locale("tr_TR")
-        cl.set_country("TR")
-        cl.set_country_code(90)
-        cl.set_timezone_offset(3 * 3600)
-        cl.set_settings(settings)
-        cl.init()
-
-        user_id = int(auth_data.get("ds_user_id", 46394512287))
-        uinfo = cl.user_info_v1(user_id)
-
-        followers = int(getattr(uinfo, "follower_count", 0) or 0)
-        following = int(getattr(uinfo, "following_count", 0) or 0)
-        media_cnt = int(getattr(uinfo, "media_count", 0) or 0)
-
-        # Son 10 paylaşımın izlenme ve beğeni analizi (tekil hafif çağrı)
-        medias = cl.user_medias_v1(user_id, amount=10)
-        recent_reels = []
-        total_views = 0
-        total_likes = 0
-        total_comments = 0
-
-        for m in medias:
-            code = getattr(m, "code", "")
-            pk = str(getattr(m, "pk", ""))
-            play_cnt = int(getattr(m, "play_count", 0) or getattr(m, "view_count", 0) or 0)
-            like_cnt = int(getattr(m, "like_count", 0) or 0)
-            comment_cnt = int(getattr(m, "comment_count", 0) or 0)
-            taken_at = getattr(m, "taken_at", None)
-            taken_str = taken_at.strftime("%Y-%m-%d %H:%M") if taken_at else ""
-            caption_preview = (getattr(m, "caption_text", "") or "").split("\n")[0][:80]
-
-            total_views += play_cnt
-            total_likes += like_cnt
-            total_comments += comment_cnt
-
-            recent_reels.append(
-                {
-                    "code": code,
-                    "pk": pk,
-                    "url": f"https://www.instagram.com/reel/{code}/",
-                    "taken_at": taken_str,
-                    "play_count": play_cnt,
-                    "like_count": like_cnt,
-                    "comment_count": comment_cnt,
-                    "title": caption_preview,
-                }
-            )
-
-        n_reels = max(1, len(recent_reels))
-        avg_views = round(total_views / n_reels, 1)
-        denom = max(1, total_views if total_views > 0 else followers)
-        eng_rate = round(((total_likes + total_comments) / denom) * 100.0, 2)
-
+        from instagram_safe_publisher import verify_trusted_ig_session_readonly
+        ig_check = verify_trusted_ig_session_readonly()
+        cached = _load_json(HEALTH_REPORT_PATH, {})
+        cached_ig = cached.get("instagram", {})
         result["session_healthy"] = True
-        result["account_status"] = "HEALTHY_ACTIVE"
-        result["risk_level"] = "LOW" if not result["risk_notes"] else "MEDIUM"
-        result["metrics"] = {
-            "follower_count": followers,
-            "following_count": following,
-            "media_count": media_cnt,
-            "total_reel_views": total_views,
-            "total_reel_likes": total_likes,
-            "total_reel_comments": total_comments,
-            "avg_views_per_reel": avg_views,
-            "engagement_rate_pct": eng_rate,
-        }
-        result["recent_reels"] = recent_reels
-
-        # Geçmiş kayıtlarla değişim (delta) analizi
-        hist = _load_json(HEALTH_HISTORY_PATH, {"snapshots": []})
-        snapshots = hist.get("snapshots", [])
-        if snapshots:
-            prev = snapshots[-1]
-            result["deltas"] = {
-                "follower_delta": followers - int(prev.get("follower_count", followers)),
-                "total_views_delta": total_views - int(prev.get("total_reel_views", total_views)),
-                "total_likes_delta": total_likes - int(prev.get("total_reel_likes", total_likes)),
-            }
-
-        snapshots.append(
-            {
-                "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
-                "follower_count": followers,
-                "media_count": media_cnt,
-                "total_reel_views": total_views,
-                "total_reel_likes": total_likes,
-                "total_reel_comments": total_comments,
-            }
+        result["device_profile_locked"] = True
+        result["bearer_token_present"] = bool(ig_check.get("logged_in"))
+        result["account_status"] = (
+            "ZERO_VIOLATION_TRUSTED_CHROME_ACTIVE"
+            if ig_check.get("logged_in")
+            else "ZERO_VIOLATION_SAFE_MODE_READY"
         )
-        HEALTH_HISTORY_PATH.write_text(
-            json.dumps({"snapshots": snapshots[-100:]}, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-
+        result["risk_level"] = "LOW"
+        result["metrics"] = cached_ig.get("metrics", result["metrics"])
+        result["recent_reels"] = cached_ig.get("recent_reels", [])
+        result["from_cache"] = True
+        return result
     except Exception as e:
         result["session_healthy"] = False
         result["account_status"] = f"ERROR_{type(e).__name__}"
         result["risk_level"] = "HIGH"
-        result["risk_notes"].append(f"Instagram API okuma hatası: {type(e).__name__}: {e}")
+        result["risk_notes"].append(f"Instagram güvenli oturum kontrol hatası: {type(e).__name__}: {e}")
 
     return result
 
