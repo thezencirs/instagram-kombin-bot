@@ -140,14 +140,14 @@ def save_threads_outputs(outfit: dict, out_dir: str = "output", reel_url: str = 
     return chain
 
 
-def publish_to_threads_cdp(chain: dict, cdp_port: int = 9228) -> str:
-    """Publishes main Threads post via persistent local Chrome CDP session (ig_chrome_profile2)."""
+def publish_to_threads_cdp(chain: dict, cdp_port: int = 9230) -> str:
+    """Publishes main Threads post via the single canonical local Chrome CDP session (ig_chrome_trusted)."""
     import subprocess
     from pathlib import Path
     from urllib.parse import quote
     import websocket
 
-    profile_dir = Path(r"C:\Users\zenci\.gemini\antigravity\scratch\ig_chrome_profile2")
+    profile_dir = Path(r"C:\Users\zenci\.gemini\antigravity\scratch\ig_chrome_trusted")
     profile_dir.mkdir(parents=True, exist_ok=True)
     try:
         tabs = requests.get(f"http://127.0.0.1:{cdp_port}/json", timeout=2).json()
