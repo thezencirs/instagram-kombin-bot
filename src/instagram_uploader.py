@@ -142,208 +142,19 @@ def upload_via_instagrapi(
     session_str: str = "",
     comment_text: str = "",
 ) -> str:
-    # 0. TELEGRAM STOK MODU (Instagram Kısıtlama Koruması):
-    # Kullanıcı talimatı gereği doğrudan Instagram API'sine (instagrapi) hiçbir istek gönderilmez;
-    # tüm kombin videoları, kolajları ve linkleri yalnızca Telegram botuna (@guzelaibot) stok olarak iletilir.
-    if os.environ.get("TELEGRAM_ONLY_MODE", "1") == "1" or os.environ.get("FORCE_DIRECT_IG_UPLOAD", "0") != "1":
-        print(
-            "[TELEGRAM STOK MODU AKTİF] Instagram kısıtlama koruması gereği doğrudan Instagram API yüklemesi "
-            "%100 devre dışı bırakıldı. İçerik yalnızca Telegram (@guzelaibot) üzerinden size iletiliyor."
-        )
-        return ""
-
-    # 1. Kısıt / Güvenlik Kilidi: IG_ENABLE_UPLOAD=1 olmadan Instagram'a istek gönderilmez
-    if os.environ.get("IG_ENABLE_UPLOAD", "0") != "1":
-        print(
-            "[INSTAGRAM KORUMA MODU AKTİF] IG_ENABLE_UPLOAD=1 "
-            "olmadan Instagram API'sine hiçbir istek gönderilmez."
-        )
-        return ""
-
-    out_dir = Path(video_path).parent
-    meta_path = out_dir / "outfit_links.json"
-    ig_hist_path = out_dir / "instagram_uploaded_history.json"
-
-    # 1.5 Yayın Öncesi %100 İhlal Doğurmaz Raporu & Viral Müzik Denetimi Zorunluluğu
+    """
+    [KALICI OLARAK EMEKLİ EDİLDİ -> SIFIR-İHLAL MOTORUNA YÖNLENDİRİLDİ]
+    Resmi olmayan `instagrapi` kütüphanesi (sahte Samsung SM-S918B Android emülasyonu)
+    'otomatik davranış' ve 'farklı cihazdan giriş' uyarılarına yol açmaması için %100 kaldırılmıştır.
+    Tüm çağrılar `instagram_safe_publisher.publish_instagram_zero_violation` motoruna yönlendirilir.
+    """
     try:
-        from kombin_agent_swarm import run_prepublish_compliance_auditor, run_tiktok_viral_music_scout
-
-        music_rep = run_tiktok_viral_music_scout()
-        comp_cert = run_prepublish_compliance_auditor()
-        if not comp_cert.get("zero_violation_guaranteed", False):
-            print(
-                f"[İHLAL KORUMA ENGELİ] Yayın Öncesi Denetim Ajanı (TAN) onay vermedi: {comp_cert.get('verdict')} "
-                f"({comp_cert.get('passed_checks')}). Paylaşım durduruldu."
-            )
-            return ""
-        print(
-            f"🛡️ [YAYIN ÖNCESİ ONAY - TAN] {comp_cert.get('verdict')} ({comp_cert.get('passed_checks')}) | "
-            f"🎵 Müzik (CEM): {music_rep.get('selected_track_for_next_post', {}).get('track_name', '')}"
-        )
-    except Exception as ce:
-        print(f"[Uyumluluk Denetimi Uyarısı] {ce}")
-
-    # 2. En az 4 saatlik paylaşım aralığı (Rate-Limit / Cooldown Koruması + Bulut Senkronu)
-    _pull_remote_history_if_newer(ig_hist_path, "output/instagram_uploaded_history.json")
-    min_interval_sec = int(os.environ.get("IG_MIN_INTERVAL_SEC", str(4 * 3600)))
-    last_upload_ts = 0.0
-    if ig_hist_path.exists():
-        try:
-            hobj_check = json.loads(ig_hist_path.read_text(encoding="utf-8"))
-            last_upload_ts = float(hobj_check.get("last_upload_timestamp", 0.0))
-        except Exception:
-            pass
-    if last_upload_ts > 0 and (time.time() - last_upload_ts) < min_interval_sec:
-        rem_min = int((min_interval_sec - (time.time() - last_upload_ts)) // 60)
-        print(
-            f"[HIZ SINIRI KORUMASI] Son Instagram paylaşımından bu yana 4 saat geçmedi "
-            f"(Kalan süre: {rem_min} dk). Spam koruması gereği paylaşım ertelendi."
-        )
+        from instagram_safe_publisher import publish_instagram_zero_violation
+        return publish_instagram_zero_violation(video_path=video_path, caption=caption)
+    except Exception as exc:
+        print(f"[Sıfır-İhlal Instagram Motoru Bilgilendirmesi] {exc}")
         return ""
 
-    from instagrapi import Client
-
-    cl = Client()
-    cl.set_locale("tr_TR")
-    cl.set_country("TR")
-    cl.set_country_code(90)
-    cl.set_timezone_offset(3 * 3600)
-
-    # 3. Sabit Cihaz Kimliği (Samsung SM-S918B — her çalışmada rastgele cihaz üretilmesini %100 engeller)
-    device_profile_path = Path(r"C:\Users\zenci\.gemini\antigravity\scratch\ig_device_profile.json")
-    if device_profile_path.exists():
-        try:
-            saved_dev = json.loads(device_profile_path.read_text(encoding="utf-8"))
-            if "uuids" in saved_dev:
-                cl.set_uuids(saved_dev["uuids"])
-            if "device_settings" in saved_dev:
-                cl.set_device(saved_dev["device_settings"])
-        except Exception:
-            pass
-
-    clean_username = username.lstrip("@").strip()
-    session_file_path = Path(r"C:\Users\zenci\.gemini\antigravity\scratch\ig_session.json")
-
-    try:
-        logged_in = False
-        if not session_str and session_file_path.exists():
-            session_str = session_file_path.read_text(encoding="utf-8").strip()
-
-        if session_str and session_str.strip().startswith("{"):
-            settings = json.loads(session_str)
-            auth_header = settings.get("authorization_data", {})
-            if auth_header.get("sessionid") or settings.get("uuids"):
-                cl.set_settings(settings)
-                cl.init()
-                logged_in = True
-                print(
-                    f"[Instagram Güvenli Kilit] Şifresiz kayıtlı mobil Bearer IGT oturumu ve sabit Samsung SM-S918B cihaz profili ile @{clean_username} hazır."
-                )
-
-        if not logged_in:
-            print(
-                "[SIFIR-İHLAL GÜVENLİK KİLİDİ] Kayıtlı yerel Bearer oturumu (ig_session.json) bulunamadı. "
-                "Şifre sıfırlama/giriş uyarısı tetiklememek için parola ile giriş (cl.login) tamamen devre dışıdır."
-            )
-            return ""
-    except Exception as se:
-        print(
-            f"[GÜVENLİK DURDURMASI] Oturum okuma hatası ({type(se).__name__}: {se}). "
-            "Hesabın korunması için hiçbir şifre/giriş denemesi yapılmadı."
-        )
-        return ""
-
-    try:
-        cur_arch_id = ""
-        cur_model_frame = ""
-        if meta_path.exists():
-            try:
-                mdata = json.loads(meta_path.read_text(encoding="utf-8"))
-                cur_arch_id = mdata.get("archetype_id", "")
-                mframes = mdata.get("model_frames") or []
-                cur_model_frame = mframes[0] if mframes else ""
-            except Exception:
-                pass
-
-        published_archs = {
-            "telegram_curly_champagne_palazzo",
-            "curly_khaki_suede_palazzo",
-            "pajama_morning_vibe",
-            "chic_black_biker_denim",
-            "casual_denim_sherpa_grey",
-        }
-        published_models = {
-            "assets/telegram_curly_step1.jpg",
-            "assets/curly_model_step1.jpg",
-            "assets/outfit3_model_step1.jpg",
-            "assets/outfit2_model_step1.jpg",
-            "assets/trial1_model_street.jpg",
-        }
-        last_urls = {}
-        if ig_hist_path.exists():
-            try:
-                hobj = json.loads(ig_hist_path.read_text(encoding="utf-8"))
-                published_archs.update(hobj.get("published_archetypes", []))
-                published_models.update(hobj.get("published_models", []))
-                last_urls = hobj.get("reel_urls", {})
-            except Exception:
-                pass
-
-        if (cur_arch_id and cur_arch_id in published_archs) or (cur_model_frame and cur_model_frame in published_models):
-            existing_url = last_urls.get(cur_arch_id, "https://www.instagram.com/guzelaicom/reels/")
-            print(
-                f"[TEKRAR ENGELLEYİCİ] '{cur_arch_id}' ({cur_model_frame}) zaten Instagram'da yayınlanmış! "
-                f"Aynı kombin/manken tekrar yüklenmedi -> {existing_url}"
-            )
-            return existing_url
-
-        thumb_path = Path(video_path).with_suffix(".jpg")
-        hook_cover_candidate = Path(video_path).parent / "hook_cover.jpg"
-        collage_candidate = Path(video_path).parent / "kombin_collage.png"
-        street_candidate = Path(video_path).parent / "model_street.png"
-        if hook_cover_candidate.exists():
-            Image.open(hook_cover_candidate).convert("RGB").save(thumb_path, "JPEG", quality=98, subsampling=0)
-        elif collage_candidate.exists():
-            Image.open(collage_candidate).convert("RGB").save(thumb_path, "JPEG", quality=98, subsampling=0)
-        elif street_candidate.exists():
-            Image.open(street_candidate).convert("RGB").save(thumb_path, "JPEG", quality=98, subsampling=0)
-        else:
-            Image.new("RGB", (1440, 2560), (247, 245, 241)).save(thumb_path, "JPEG", quality=98, subsampling=0)
-
-        media = cl.clip_upload(video_path, caption=caption, thumbnail=thumb_path)
-        reel_url = f"https://www.instagram.com/reel/{media.code}/"
-        print(f"[BAŞARILI] Instagram Reels paylaşıldı! Media PK: {media.pk} | Code: {media.code} | Link: {reel_url}")
-
-        try:
-            if cur_arch_id:
-                published_archs.add(cur_arch_id)
-                last_urls[cur_arch_id] = reel_url
-            if cur_model_frame:
-                published_models.add(cur_model_frame)
-            ig_hist_path.write_text(
-                json.dumps(
-                    {
-                        "published_archetypes": sorted(published_archs),
-                        "published_models": sorted(published_models),
-                        "reel_urls": last_urls,
-                        "last_upload_timestamp": time.time(),
-                    },
-                    ensure_ascii=False,
-                    indent=2,
-                ),
-                encoding="utf-8",
-            )
-            _sync_history_file_to_github_repo(ig_hist_path, "output/instagram_uploaded_history.json")
-            _sync_history_file_to_github_repo(out_dir / "published_outfits_history.json", "output/published_outfits_history.json")
-            _sync_history_file_to_github_repo(out_dir / "last_used_music_profiles.json", "output/last_used_music_profiles.json")
-        except Exception as he:
-            print(f"[IG Geçmiş Kayıt Uyarısı] {he}")
-
-        # NOT: Instagram spam filtresini tetikleyen 0.5sn'lik otomatik ilk yorum (media_comment) tamamen kaldırıldı!
-        return reel_url
-    except Exception as e:
-        print(f"[Instagram Paylaşım Uyarısı] {type(e).__name__}: {e}")
-        return ""
 
 
 def dispatch_all_channels(video_path: str, reel_url: str = ""):
@@ -452,22 +263,18 @@ def main():
         return
 
     reel_url = ""
-    if os.environ.get("TELEGRAM_ONLY_MODE", "1") != "1" and os.environ.get("FORCE_DIRECT_IG_UPLOAD", "0") == "1":
-        with open(args.caption_file, "r", encoding="utf-8") as f:
-            caption = f.read().strip()
-        comment_file = os.path.join(os.path.dirname(args.caption_file) or ".", "comment_links.txt")
-        comment_text = ""
-        if os.path.exists(comment_file):
-            with open(comment_file, "r", encoding="utf-8") as f:
-                comment_text = f.read().strip()
-        username = os.environ.get("IG_USERNAME", "guzelaicom").strip()
-        password = os.environ.get("IG_PASSWORD", "").strip()
-        session_json = os.environ.get("IG_SESSION_JSON", "").strip()
-        reel_url = upload_via_instagrapi(args.video, caption, username, password, session_json, comment_text=comment_text) or ""
+    if os.environ.get("GITHUB_ACTIONS", "").lower() != "true" and os.environ.get("DISABLE_IG_SAFE_PUBLISHER", "0") != "1":
+        try:
+            with open(args.caption_file, "r", encoding="utf-8") as f:
+                caption = f.read().strip()
+            from instagram_safe_publisher import publish_instagram_zero_violation
+            reel_url = publish_instagram_zero_violation(args.video, caption) or ""
+        except Exception as ig_exc:
+            print(f"[Sıfır-İhlal Instagram Motoru Bilgilendirmesi] {ig_exc}")
     else:
         print(
-            "[TELEGRAM STOK MODU AKTİF] Instagram kısıtlama koruması devrede: "
-            "Instagram API'sine hiçbir istek gönderilmiyor, yalnızca Telegram (@guzelaibot) stok paketi iletiliyor."
+            "[BULUT / TELEGRAM KORUMA MODU AKTİF] Yabancı IP / Bot kısıtlama koruması devrede: "
+            "Instagram'a hiçbir dış IP isteği gönderilmiyor, yalnızca Telegram (@guzelaibot) ve vitrin güncelleniyor."
         )
 
     dispatch_all_channels(args.video, reel_url=reel_url)
