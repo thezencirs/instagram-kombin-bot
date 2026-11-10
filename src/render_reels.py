@@ -8,9 +8,10 @@ from outfit_generator import load_cutout_image
 from music_generator import generate_viral_fashion_audio
 
 
-# 2K QHD+ Dikey Çözünürlük (Samsung Dynamic AMOLED 2X / 1440x2560 9:16 Standardı)
-W, H = 1440, 2560
-SCALE = W / 1080.0  # 1.3333x Süper-Örnekleme Ölçeği
+# 1080p Full HD (1080x1920 @ 30fps) Varsayılan Standart (REEL_RES_MODE=2k ile 1440x2560 opsiyonel)
+REEL_RES_MODE = os.environ.get("REEL_RES_MODE", "1080p").strip().lower()
+W, H = (1440, 2560) if REEL_RES_MODE == "2k" else (1080, 1920)
+SCALE = W / 1080.0
 FPS = 30
 
 
@@ -475,6 +476,11 @@ def generate_hook_cover_photo(
 def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelaicom") -> dict:
     out_dir = os.path.dirname(output_mp4) or "."
     os.makedirs(out_dir, exist_ok=True)
+    try:
+        from guzelai_official_models import enforce_guzelai_official_model_lock
+        enforce_guzelai_official_model_lock(outfit)
+    except Exception as gm_err:
+        print(f"[GuzelAI.com Resmi Manken Kilidi Uyarısı] {gm_err}")
     bg_base = create_watermark_background(watermark)
 
     # 6 Kıyafet Parçasının 2K (1440x2560) Çakışmasız Graph Motion Yerleşim ve Zamanlama Tablosu
@@ -551,10 +557,32 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
         shadowed = add_drop_shadow(raw_img)
         prepared_items.append({**cfg, "data": item_data, "img": shadowed})
 
-    # Yürüyen model karelerini 2K OLED kalitesinde hazırla
+    # Yürüyen model karelerini 1080p OLED kalitesinde hazırla
     model_frames = fetch_or_generate_model_frames(outfit, out_dir)
 
-    # Dergi Kalitesinde 2K Viral Hook Kapak Fotoğrafını (output/hook_cover.jpg) üret
+    # Google Flow / 1080p Gerçekçi Manken Yürüyüş Videosunu (output/flow_walk.mp4) hazırla ve karelerini yükle
+    flow_walk_pil_frames = []
+    try:
+        import cv2
+        from google_flow_kombin_walker import ensure_realistic_flow_walk_video
+        walk_mp4_path = ensure_realistic_flow_walk_video(outfit, out_dir=out_dir)
+        if walk_mp4_path and os.path.exists(walk_mp4_path):
+            cap = cv2.VideoCapture(walk_mp4_path)
+            while True:
+                ret, bgr = cap.read()
+                if not ret or bgr is None:
+                    break
+                rgb_arr = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+                pil_f = Image.fromarray(rgb_arr, mode="RGB")
+                if pil_f.size != (W, H):
+                    pil_f = pil_f.resize((W, H), Image.Resampling.LANCZOS)
+                flow_walk_pil_frames.append(pil_f.convert("RGBA"))
+            cap.release()
+            print(f"🎬 [1080p Hibrit Reels Motoru] {len(flow_walk_pil_frames)} adet gerçekçi yürüyüş video karesi yüklendi ({walk_mp4_path}).")
+    except Exception as fw_err:
+        print(f"[Flow Yürüyüş Videosu Yükleme Uyarısı] {fw_err}")
+
+    # Dergi Kalitesinde Viral Hook Kapak Fotoğrafını (output/hook_cover.jpg) üret
     hook_cover_rgb = generate_hook_cover_photo(outfit, model_frames, prepared_items, out_dir)
     outfit["hook_cover_path"] = os.path.join(out_dir, "hook_cover.jpg")
 
@@ -664,12 +692,13 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
             canvas = bg_base.copy()
             draw = ImageDraw.Draw(canvas)
 
-            # Holding Reklam & Moda Ajansı Üst Altın İmza + Ana Başlık Kapsülü
+            # Holding Reklam & Moda Ajansı Üst Altın İmza + Resmi GuzelAI.com Manken Rozeti
+            model_crest_txt = f"GÜZELAI HOLDİNG • MANKEN: {_tr_upper(outfit.get('guzelai_model_badge') or 'GUZELAI.COM')}"
             _draw_auto_pill_badge(
                 draw=draw,
                 center_x=W // 2,
                 center_y=S(54),
-                text="GÜZELAI HOLDİNG • REKLAM & MODA PRODÜKSİYONU",
+                text=model_crest_txt[:56],
                 font=font_slot_num,
                 fill_rgba=(22, 18, 16, 228),
                 text_rgba=(236, 206, 148, 255),
@@ -839,71 +868,77 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
             if abs(t - 4.8) < (0.5 / FPS):
                 canvas.convert("RGB").save(os.path.join(out_dir, "kombin_collage.png"), compress_level=1)
 
-        # 2. BÖLÜM: Ajan 31 KUZEY & Ajan 32 ATLAS — 3 Eksenli Gimbal Kamera + Optik Cross-Blend Podyum Yürüyüşü (5.2sn - 11.0sn)
+        # 2. BÖLÜM: Google Flow 1080p Gerçekçi Manken Yürüyüş Videosu + Sinematik HUD (5.2sn - 11.0sn)
         if t >= collage_end_sec:
             walk_t = t - collage_end_sec
             walk_dur = total_duration - collage_end_sec  # 5.8s toplam (5.2s -> 11.0s)
 
-            def _sample_gimbal_step(step_idx: int, u_val: float) -> Image.Image:
-                m_im = model_frames[min(step_idx, len(model_frames) - 1)]
-                eu = ease_in_out_cubic(max(0.0, min(1.0, u_val)))
-                if step_idx == 0:
-                    # Ajan 41 BARAN: Çok Açılı Gimbal Pull-Back (Yakın Gala Hero Kadraj -> Tam Boy Podyum Yürüyüşü)
-                    zm = 1.135 - 0.115 * eu
-                    cw, ch = int(W / zm), int(H / zm)
-                    px = max(0, min(W - cw, int((W - cw) * (0.44 + 0.12 * eu))))
-                    py = int((H - ch) * (0.22 + 0.28 * eu))
-                elif step_idx == 1:
-                    zm = 1.02 + 0.055 * eu
-                    cw, ch = int(W / zm), int(H / zm)
-                    px = max(0, min(W - cw, int((W - cw) * (0.56 - 0.12 * eu))))
-                    py = int((H - ch) * (0.46 + 0.08 * eu))
-                else:
-                    zm = 1.07 - 0.055 * eu
-                    cw, ch = int(W / zm), int(H / zm)
-                    px = (W - cw) // 2
-                    py = int((H - ch) * (0.52 - 0.04 * eu))
-                return m_im.crop((px, py, px + cw, py + ch)).resize((W, H), Image.Resampling.LANCZOS).convert("RGBA")
-
-            if len(model_frames) >= 3:
-                if walk_t < 1.9:
-                    walk_frame = _sample_gimbal_step(0, walk_t / 1.9)
-                    if walk_t > 1.76:
-                        blend_a = ease_in_out_cubic((walk_t - 1.76) / 0.28)
-                        next_f = _sample_gimbal_step(1, 0.0)
-                        walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
-                elif walk_t < 3.8:
-                    walk_frame = _sample_gimbal_step(1, (walk_t - 1.9) / 1.9)
-                    if walk_t < 2.04:
-                        blend_a = ease_in_out_cubic((2.04 - walk_t) / 0.28)
-                        prev_f = _sample_gimbal_step(0, 1.0)
-                        walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
-                    elif walk_t > 3.66:
-                        blend_a = ease_in_out_cubic((walk_t - 3.66) / 0.28)
-                        next_f = _sample_gimbal_step(2, 0.0)
-                        walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
-                else:
-                    walk_frame = _sample_gimbal_step(2, (walk_t - 3.8) / 2.0)
-                    if walk_t < 3.94:
-                        blend_a = ease_in_out_cubic((3.94 - walk_t) / 0.28)
-                        prev_f = _sample_gimbal_step(1, 1.0)
-                        walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
-            elif len(model_frames) > 0:
-                idx_m = min(len(model_frames) - 1, int((walk_t / walk_dur) * len(model_frames)))
-                active_model = model_frames[idx_m]
-                local_u = (walk_t % 1.9) / 1.9
-                zoom = 1.01 + 0.045 * ease_in_out_cubic(local_u)
-                crop_w = int(W / zoom)
-                crop_h = int(H / zoom)
-                cx = (W - crop_w) // 2
-                cy = (H - crop_h) // 2
-                walk_frame = (
-                    active_model.crop((cx, cy, cx + crop_w, cy + crop_h))
-                    .resize((W, H), Image.Resampling.LANCZOS)
-                    .convert("RGBA")
+            if len(flow_walk_pil_frames) >= 15:
+                wf_idx = min(
+                    len(flow_walk_pil_frames) - 1,
+                    int(round((walk_t / max(0.01, walk_dur)) * (len(flow_walk_pil_frames) - 1))),
                 )
+                walk_frame = flow_walk_pil_frames[wf_idx].copy()
             else:
-                walk_frame = bg_base.copy()
+                def _sample_gimbal_step(step_idx: int, u_val: float) -> Image.Image:
+                    m_im = model_frames[min(step_idx, len(model_frames) - 1)]
+                    eu = ease_in_out_cubic(max(0.0, min(1.0, u_val)))
+                    if step_idx == 0:
+                        zm = 1.135 - 0.115 * eu
+                        cw, ch = int(W / zm), int(H / zm)
+                        px = max(0, min(W - cw, int((W - cw) * (0.44 + 0.12 * eu))))
+                        py = int((H - ch) * (0.22 + 0.28 * eu))
+                    elif step_idx == 1:
+                        zm = 1.02 + 0.055 * eu
+                        cw, ch = int(W / zm), int(H / zm)
+                        px = max(0, min(W - cw, int((W - cw) * (0.56 - 0.12 * eu))))
+                        py = int((H - ch) * (0.46 + 0.08 * eu))
+                    else:
+                        zm = 1.07 - 0.055 * eu
+                        cw, ch = int(W / zm), int(H / zm)
+                        px = (W - cw) // 2
+                        py = int((H - ch) * (0.52 - 0.04 * eu))
+                    return m_im.crop((px, py, px + cw, py + ch)).resize((W, H), Image.Resampling.LANCZOS).convert("RGBA")
+
+                if len(model_frames) >= 3:
+                    if walk_t < 1.9:
+                        walk_frame = _sample_gimbal_step(0, walk_t / 1.9)
+                        if walk_t > 1.76:
+                            blend_a = ease_in_out_cubic((walk_t - 1.76) / 0.28)
+                            next_f = _sample_gimbal_step(1, 0.0)
+                            walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
+                    elif walk_t < 3.8:
+                        walk_frame = _sample_gimbal_step(1, (walk_t - 1.9) / 1.9)
+                        if walk_t < 2.04:
+                            blend_a = ease_in_out_cubic((2.04 - walk_t) / 0.28)
+                            prev_f = _sample_gimbal_step(0, 1.0)
+                            walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
+                        elif walk_t > 3.66:
+                            blend_a = ease_in_out_cubic((walk_t - 3.66) / 0.28)
+                            next_f = _sample_gimbal_step(2, 0.0)
+                            walk_frame = Image.blend(walk_frame, next_f, min(0.5, blend_a))
+                    else:
+                        walk_frame = _sample_gimbal_step(2, (walk_t - 3.8) / 2.0)
+                        if walk_t < 3.94:
+                            blend_a = ease_in_out_cubic((3.94 - walk_t) / 0.28)
+                            prev_f = _sample_gimbal_step(1, 1.0)
+                            walk_frame = Image.blend(walk_frame, prev_f, min(0.5, blend_a))
+                elif len(model_frames) > 0:
+                    idx_m = min(len(model_frames) - 1, int((walk_t / walk_dur) * len(model_frames)))
+                    active_model = model_frames[idx_m]
+                    local_u = (walk_t % 1.9) / 1.9
+                    zoom = 1.01 + 0.045 * ease_in_out_cubic(local_u)
+                    crop_w = int(W / zoom)
+                    crop_h = int(H / zoom)
+                    cx = (W - crop_w) // 2
+                    cy = (H - crop_h) // 2
+                    walk_frame = (
+                        active_model.crop((cx, cy, cx + crop_w, cy + crop_h))
+                        .resize((W, H), Image.Resampling.LANCZOS)
+                        .convert("RGBA")
+                    )
+                else:
+                    walk_frame = bg_base.copy()
 
             # Ajan 40 SEDA: Kırmızı Halı Paparazzi Flaş Patlaması & Anamorfik Film Light-Leak (0.22s, 1.9s, 3.8s)
             cut_dist = min(abs(walk_t - 0.22), abs(walk_t - 1.9), abs(walk_t - 3.8))
