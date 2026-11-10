@@ -1,0 +1,33 @@
+{
+  "human_biometrics_and_algorithm_warmup_repos": [
+    {
+      "repo": "Xetera/ghost-cursor",
+      "url": "https://github.com/Xetera/ghost-cursor",
+      "stars": 1627,
+      "domain": "Biometric Cubic Bézier Mouse Physics & Fitts's Law Overshoot",
+      "integrated_in": "src/instagram_human_warmup.py (GhostCursorCDP)"
+    },
+    {
+      "repo": "riflosnake/HumanCursor",
+      "url": "https://github.com/riflosnake/HumanCursor",
+      "stars": 546,
+      "domain": "Human Hand Velocity Profiles, Gaussian Click Offset & Wheel Scroll Inertia",
+      "integrated_in": "src/instagram_human_warmup.py (GhostCursorCDP)"
+    },
+    {
+      "repo": "reaz1995/ghost-cursor-playwright",
+      "url": "https://github.com/reaz1995/ghost-cursor-playwright",
+      "stars": 101,
+      "domain": "Playwright/CDP Bézier Pathing & Auto-Scroll Humanization",
+      "integrated_in": "src/instagram_human_warmup.py"
+    },
+    {
+      "repo": "mcolella14/python_ghost_cursor",
+      "url": "https://github.com/mcolella14/python_ghost_cursor",
+      "stars": 81,
+      "domain": "Python 2D Bézier Curve Control Point Math",
+      "integrated_in": "src/instagram_human_warmup.py"
+    }
+  ],
+  "last_updated_iso": "2026-11-10T08:58:22"
+}
