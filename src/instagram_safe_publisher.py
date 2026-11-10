@@ -336,6 +336,21 @@ def upload_via_single_trusted_chrome_cdp(
                 "reason": "Şifre değişimi sonrası Instagram oturumu kapanmış. Otomatik giriş denemesi yapılmadı; tek seferlik manuel giriş gerekiyor.",
             }
 
+        # 4.5. Pre-Publish Human Browsing & Niche Algorithm Warm-Up (`guzelai-human-algorithm-warmup`)
+        warmup_summary: Dict[str, Any] = {}
+        if os.environ.get("DISABLE_IG_HUMAN_WARMUP", "0") != "1":
+            try:
+                from instagram_human_warmup import run_prepublish_human_warmup
+
+                warmup_summary = run_prepublish_human_warmup(
+                    cdp=cdp,
+                    max_reels_to_watch=5,
+                    max_likes=2,
+                    max_saves=1,
+                )
+            except Exception as w_exc:
+                warmup_summary = {"status": "warmup_skipped", "reason": str(w_exc)}
+
         # Click "Oluştur" / "Yeni gönderi" (+) button in sidebar
         create_clicked = cdp(
             "Runtime.evaluate",
