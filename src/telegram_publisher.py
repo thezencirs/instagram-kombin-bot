@@ -195,7 +195,8 @@ def build_telegram_html(outfit: Dict[str, Any], reel_url: str = "", threads_url:
             f"<i>{html.escape(str(sp.get('scenario_name', '')))}</i>"
         )
     if total_str:
-        lines.append(f"💰 <b>Toplam Kombin:</b> {total_str} (<i>{seg_badge} • 1:1 Doğrulanmış Linkler</i>)")
+        model_badge_str = html.escape(str(outfit.get("guzelai_model_badge") or outfit.get("guzelai_model_name") or "guzelai.com Resmi Manken"))
+        lines.append(f"💰 <b>Toplam Kombin:</b> {total_str} (<i>{seg_badge} • 👤 {model_badge_str}</i>)")
     lines.append("")
     lines.append("🛍️ <b>GÖRSELLİ KOMBİN PARÇALARI &amp; DOĞRUDAN LİNKLER:</b>")
 
