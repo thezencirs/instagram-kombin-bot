@@ -159,32 +159,71 @@ def verify_trusted_ig_session_readonly(port: int = IG_TRUSTED_CDP_PORT) -> Dict[
                 pass
 
 
-def open_trusted_chrome_for_manual_login(port: int = IG_TRUSTED_CDP_PORT) -> Dict[str, Any]:
+def ensure_trusted_ig_chrome(port: int = IG_TRUSTED_CDP_PORT, start_url: str = "https://www.instagram.com/") -> Optional[str]:
     """
-    Opens the single trusted Chrome profile (`ig_chrome_trusted`) as a normal visible desktop window
-    so the user can log in ONCE with their new password by hand — zero bot typing, zero password stored.
+    Launches or connects to the single persistent Chrome profile (`ig_chrome_trusted` on port 9230)
+    via WMI (`Win32_Process.Create`) so the window stays alive on the desktop and is never terminated
+    when a CLI command exits.
     """
     enforce_single_device_hygiene()
-    subprocess.Popen(
-        [
-            CHROME_EXE,
-            f"--remote-debugging-port={port}",
-            "--remote-allow-origins=*",
-            f"--user-data-dir={SINGLE_TRUSTED_IG_PROFILE}",
-            "--disable-blink-features=AutomationControlled",
-            "--lang=tr-TR",
-            "--start-maximized",
-            "https://www.instagram.com/",
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    list_url = f"http://127.0.0.1:{port}/json"
+    try:
+        tabs = json.loads(urllib.request.urlopen(list_url, timeout=2).read().decode("utf-8"))
+    except Exception:
+        chrome_cmd = (
+            f'"{CHROME_EXE}" '
+            f"--remote-debugging-port={port} "
+            f"--remote-allow-origins=* "
+            f'--user-data-dir="{SINGLE_TRUSTED_IG_PROFILE}" '
+            f"--no-first-run --no-default-browser-check "
+            f"--disable-blink-features=AutomationControlled "
+            f'--lang=tr-TR --window-size=1280,920 "{start_url}"'
+        )
+        subprocess.run(
+            [
+                "powershell",
+                "-NoProfile",
+                "-Command",
+                f"Invoke-WmiMethod -Class Win32_Process -Name Create -ArgumentList '{chrome_cmd}'",
+            ],
+            capture_output=True,
+        )
+        tabs = []
+        for _ in range(15):
+            time.sleep(1.0)
+            try:
+                tabs = json.loads(urllib.request.urlopen(list_url, timeout=2).read().decode("utf-8"))
+                if any(t.get("type") == "page" for t in tabs):
+                    break
+            except Exception:
+                pass
+    for t in tabs:
+        if t.get("type") == "page" and t.get("webSocketDebuggerUrl"):
+            return t["webSocketDebuggerUrl"]
+    return None
+
+
+def open_trusted_chrome_for_manual_login(port: int = IG_TRUSTED_CDP_PORT) -> Dict[str, Any]:
+    """
+    Opens the single trusted Chrome profile (`ig_chrome_trusted`) as a persistent visible desktop window
+    via WMI so the user can log in ONCE with their new password by hand — zero bot typing, zero password stored.
+    """
+    ws_url = ensure_trusted_ig_chrome(port=port, start_url="https://www.instagram.com/")
+    if ws_url:
+        try:
+            ws = websocket.create_connection(ws_url, timeout=10)
+            ws.send(json.dumps({"id": 1, "method": "Page.bringToFront", "params": {}}))
+            ws.recv()
+            ws.close()
+        except Exception:
+            pass
     return {
         "status": "opened_visible_chrome_for_manual_login",
+        "ws_ready": bool(ws_url),
         "profile_dir": str(SINGLE_TRUSTED_IG_PROFILE),
         "port": port,
         "instructions_tr": (
-            "Masaüstünüzde tekil güvenilir Chrome penceresi (`ig_chrome_trusted`) açıldı. "
+            "Masaüstünüzde tekil güvenilir Chrome penceresi (`ig_chrome_trusted`, Port 9230) kalıcı olarak açıldı. "
             "Yeni Instagram şifrenizle yalnızca 1 kez kendi elinizle giriş yapıp 'Giriş Bilgilerini Kaydet' "
             "seçeneğine tıklamanız yeterlidir. Bot hiçbir zaman şifre yazmaz veya farklı cihaz üretmez."
         ),
@@ -241,30 +280,10 @@ def upload_via_single_trusted_chrome_cdp(
             pass
 
     # 4. Launch / Connect to Single Trusted Local Chrome Profile
-    list_url = f"http://127.0.0.1:{port}/json/list"
-    proc = None
     try:
-        try:
-            tabs = json.loads(urllib.request.urlopen(list_url, timeout=2).read().decode("utf-8"))
-        except Exception:
-            proc = subprocess.Popen(
-                [
-                    CHROME_EXE,
-                    f"--remote-debugging-port={port}",
-                    "--remote-allow-origins=*",
-                    f"--user-data-dir={SINGLE_TRUSTED_IG_PROFILE}",
-                    "--disable-blink-features=AutomationControlled",
-                    "--lang=tr-TR",
-                    "--window-size=1280,920",
-                    "https://www.instagram.com/",
-                ],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-            time.sleep(4.5)
-            tabs = json.loads(urllib.request.urlopen(list_url, timeout=5).read().decode("utf-8"))
-
-        ws_url = tabs[0]["webSocketDebuggerUrl"]
+        ws_url = ensure_trusted_ig_chrome(port=port, start_url="https://www.instagram.com/")
+        if not ws_url:
+            return {"status": "error", "reel_url": "", "reason": "Trusted Chrome tab unavailable"}
         ws = websocket.create_connection(ws_url, timeout=30)
         msg_id = 0
 
@@ -465,6 +484,14 @@ def upload_via_single_trusted_chrome_cdp(
 
         ws.close()
         reel_url = "https://www.instagram.com/guzelaicom/reels/"
+        try:
+            hdata = {}
+            if ig_hist_path.exists():
+                hdata = json.loads(ig_hist_path.read_text(encoding="utf-8"))
+            hdata["last_upload_timestamp"] = time.time()
+            ig_hist_path.write_text(json.dumps(hdata, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception:
+            pass
         return {
             "status": "published_via_trusted_chrome",
             "reel_url": reel_url,
@@ -472,12 +499,6 @@ def upload_via_single_trusted_chrome_cdp(
         }
     except Exception as exc:
         return {"status": "error", "reel_url": "", "reason": str(exc)}
-    finally:
-        if proc:
-            try:
-                proc.terminate()
-            except Exception:
-                pass
 
 
 def publish_instagram_zero_violation(
