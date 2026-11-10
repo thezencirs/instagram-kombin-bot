@@ -45,7 +45,7 @@ def build_caption(outfit: dict) -> str:
     )
     # Başlıktaki dahili ajan parantezlerini temizle ki doğrudan kopyala-yapıştır metni %100 net olsun
     import re
-    clean_headline = re.sub(r"\s*\([^)]*(?:Tasarım|Ajan|Senaryo|Holding|Model)[^)]*\)", "", hook_title).strip()
+    clean_headline = re.sub(r"\s*\([^)]*(?:Tasarım|Ajan|Senaryo|Holding|Model|Manken)[^)]*\)", "", hook_title).strip()
 
     c_out = items["outerwear"].get("category_label", "Dış Giyim")
     c_cap = items["cap"].get("category_label", "Aksesuar")
@@ -53,6 +53,7 @@ def build_caption(outfit: dict) -> str:
     c_bot = items["bottom"].get("category_label", "Alt Giyim")
     c_bag = items["bag"].get("category_label", "Çanta")
     c_sho = items["shoes"].get("category_label", "Ayakkabı")
+    slot5_emoji = "⌚" if ("saat" in c_bag.lower() or "saat" in items["bag"]["name"].lower()) else "👜"
 
     u_out = items["outerwear"].get("guzelai_url") or items["outerwear"]["product_url"]
     u_cap = items["cap"].get("guzelai_url") or items["cap"]["product_url"]
@@ -87,7 +88,7 @@ def build_caption(outfit: dict) -> str:
         f"2️⃣ 🕶️ {c_cap}: {items['cap']['brand']} – {items['cap']['name']} ({items['cap']['price']} | Kod: {items['cap'].get('sku', '-')}) 👉 {u_cap}",
         f"3️⃣ 👚 {c_top}: {items['top']['brand']} – {items['top']['name']} ({items['top']['price']} | Kod: {items['top'].get('sku', '-')}) 👉 {u_top}",
         f"4️⃣ 👖 {c_bot}: {items['bottom']['brand']} – {items['bottom']['name']} ({items['bottom']['price']} | Kod: {items['bottom'].get('sku', '-')}) 👉 {u_bot}",
-        f"5️⃣ 👜 {c_bag}: {items['bag']['brand']} – {items['bag']['name']} ({items['bag']['price']} | Kod: {items['bag'].get('sku', '-')}) 👉 {u_bag}",
+        f"5️⃣ {slot5_emoji} {c_bag}: {items['bag']['brand']} – {items['bag']['name']} ({items['bag']['price']} | Kod: {items['bag'].get('sku', '-')}) 👉 {u_bag}",
         f"6️⃣ 👟 {c_sho}: {items['shoes']['brand']} – {items['shoes']['name']} ({items['shoes']['price']} | Kod: {items['shoes'].get('sku', '-')}) 👉 {u_sho}",
         "",
         f"💰 Toplam Kombin: {total_str} | 🌐 Tüm Linkler: https://guzelai.com/#kombinler",
