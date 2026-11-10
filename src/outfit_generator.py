@@ -125,7 +125,7 @@ def _make_atelier_archetype(
             "image_url": cut_web,
             "image_urls": [cut_web],
         }
-    return {
+    res_arch = {
         "id": arch_id,
         "gender_segment": gender_segment,
         "designer_agent": designer_name,
@@ -148,10 +148,56 @@ def _make_atelier_archetype(
             f"assets/{asset_prefix}_step3.jpg",
         ],
     }
+    try:
+        from guzelai_official_models import enforce_guzelai_official_model_lock
+        enforce_guzelai_official_model_lock(res_arch)
+    except Exception:
+        pass
+    return res_arch
 
 
 # Görsel Stil Arketipleri (Her arketip için temiz dekupe kıyafet yedekleri + sokakta yürüyen model kareleri)
 OUTFIT_ARCHETYPES = [
+    _make_atelier_archetype(
+        arch_id="kadin_guzelai_leyla_om01_camel_kasmir_cikolata",
+        gender_segment="kadin",
+        designer_name="GUZELAI.COM • LEYLA × FERİDE × DEFNE",
+        music_id="old_money_violin_orchestra_pov",
+        title="Nişantaşı Abdi İpekçi 'Old Money & Quiet Luxury' Kış Kapsülü: Devetüyü (Camel) Kuşaklı Kaşmir Kaban, Fildişi Saç Örgü Triko, Çikolata Yün Palazzo & Gold Tokalı Deri Çanta (Manken: guzelai.com • Leyla | 1080p Flow Hibrit Sinema) 🏛️🐎✨",
+        spoken_hook="Nişantaşı taş bulvarında guzelai.com resmi mankenimiz Leyla ile sessiz ve asil Old Money zarafeti: Devetüyü kaşmir kaban, fildişi saç örgü triko ve çikolata yün palazzo!",
+        viral_hook="🏛️ KADIN OLD MONEY & SESSİZ LÜKS (QUIET LUXURY) KIŞ KAPSÜLÜ (Resmi Manken: guzelai.com • Leyla | Tasarım Konseyi: FERİDE & DEFNE | 1080p Flow Yürüyüş & Kolaj): Sıcak devetüyü (Camel) kuşaklı uzun yün & kaşmir kaban, koyu tortoise & gold saplı oval gözlük, fildişi saç örgü yarım balıkçı saf kaşmir triko, koyu çikolata kahve yüksek bel pileli yün palazzo pantolon, konyak taba gold at nalı tokalı deri omuz çantası ve konyak deri kışlık bot! 💡 Sessiz Lüks Kuralı: Devetüyü, fildişi ve çikolata kahve üçlüsünü saç örgü kaşmir ve mat yün dokularla birleştirerek zamansız bir aristokrat silüet oluşturun. 💬 Favori parçanız 1 (Devetüyü Kaşmir Kaban) mı yoksa 5 (Konyak Gold Tokalı Old Money Çanta) mı? 👇🏛️🐎✨",
+        badge_walk="» MANKEN: GUZELAI.COM • LEYLA | OLD MONEY YÜRÜYÜŞÜ «",
+        asset_prefix="guzelai_leyla_om01",
+        sku_prefix="97010100",
+        specs={
+            "outerwear": ("Kaşmir/Yün Kaban", "İPEKYOL", "Kadın Sıcak Devetüyü (Camel) Kuşaklı Kruvaze Uzun Yün & Kaşmir Kaban", "4.890₺", 4890.0, "Devetüyü / Camel", "https://www.trendyol.com/kadin-kaban-x-g1-c55", ["camel", "devetüyü", "kuşaklı", "kaban"]),
+            "cap": ("Oval Old Money Gözlük", "CELINE EYEWEAR", "Kadın Koyu Tortoise & Gold Saplı Oval Old Money Güneş Gözlüğü", "4.750₺", 4750.0, "Tortoise / Gold", "https://www.trendyol.com/kadin-gunes-gozlugu-x-g1-c105", ["tortoise", "gold", "oval", "gözlük"]),
+            "top": ("Saç Örgü Kaşmir Triko", "MASSIMO DUTTI", "Kadın Fildişi (Ivory) Saç Örgü Yarım Balıkçı Yaka Saf Kaşmir Triko Kazak", "1.990₺", 1990.0, "Fildişi / Ekru", "https://www.trendyol.com/kadin-kazak-x-g1-c1092", ["fildişi", "saç örgü", "kaşmir", "triko"]),
+            "bottom": ("Çikolata Yün Palazzo", "YARGICI", "Kadın Koyu Çikolata Kahve Yüksek Bel Pileli Geniş Paça Yün Pantolon", "1.890₺", 1890.0, "Koyu Çikolata Kahve", "https://www.trendyol.com/kadin-pantolon-x-g1-c70", ["çikolata", "kahve", "pileli", "palazzo"]),
+            "bag": ("Old Money Deri Çanta", "VAKKO", "Kadın Konyak Taba Gold At Nalı Tokalı Hakiki Deri Old Money Omuz Çantası", "3.490₺", 3490.0, "Konyak Taba / Gold", "https://www.trendyol.com/kadin-omuz-cantasi-x-g1-c116", ["konyak", "taba", "gold", "çanta"]),
+            "shoes": ("Blok Topuk Deri Bot", "ZARA", "Kadın Konyak Taba Sivri Burunlu Blok Topuklu Deri Kışlık Bot", "2.990₺", 2990.0, "Konyak Taba", "https://www.trendyol.com/kadin-bot-x-g1-c102", ["konyak", "taba", "topuklu", "bot"]),
+        },
+    ),
+    _make_atelier_archetype(
+        arch_id="erkek_guzelai_kenzo_om01_camel_kase_kronograf",
+        gender_segment="erkek",
+        designer_name="GUZELAI.COM • KENZO TAKAHASHI × HALUK × KEREM",
+        music_id="old_money_violin_orchestra_pov",
+        title="Bebek & Nişantaşı 'Old Money & Italian Sprezzatura' Kış Miras Kreasyonu: Devetüyü (Camel) Kruvaze İtalyan Kaşe Kaban, Sıcak Ekru Saç Örgü Merinos, Antrasit Flanel & Otomatik Kronograf Saat (Manken: guzelai.com • Kenzo Takahashi | 1080p Flow Hibrit Sinema) 🏛️⌚✨",
+        spoken_hook="Bebek taş bulvarında guzelai.com resmi mankenimiz Kenzo Takahashi ile gerçek Old Money mirası: Devetüyü kruvaze İtalyan kaşe kaban, sıcak ekru saç örgü merinos ve bilekte otomatik kronograf saat!",
+        viral_hook="🏛️ ERKEK OLD MONEY MİRAS STİLİ & İTALYAN SPREZZATURA (Resmi Manken: guzelai.com • Kenzo Takahashi | Tasarım Konseyi: HALUK & KEREM | Cinsiyet/Kalite Denetimi: KADİR | 1080p Flow Yürüyüş & Kolaj): Devetüyü (Camel) kruvaze uzun İtalyan yün kaşe kaban, koyu Havanna kemik gözlük, sıcak ekru saç örgü (cable-knit) saf merinos boğazlı kazak, koyu antrasit çift pileli İtalyan yün flanel pantolon, koyu kahve kroko deri kayışlı otomatik kronograf kol saati ve koyu kahve süet Chelsea bot! 💡 Old Money Stil Denklemi (60-30-10): %60 Devetüyü & Antrasit yün dokuyu %30 sıcak ekru saç örgü trikoyla aydınlatıp, %10 kahve süet Chelsea bot ve deri kayışlı kronograf saatle tamamlayın. 💬 Bu Old Money kombininde favoriniz 1 (Devetüyü Kruvaze Kaşe Kaban) mı yoksa 5 (Otomatik Kronograf Saat) mi? 👇🏛️⌚🔥",
+        badge_walk="» MANKEN: GUZELAI.COM • KENZO TAKAHASHI | OLD MONEY YÜRÜYÜŞÜ «",
+        asset_prefix="guzelai_kenzo_om01",
+        sku_prefix="97020100",
+        specs={
+            "outerwear": ("Kruvaze Kaşe Kaban", "MASSIMO DUTTI", "Erkek Devetüyü (Camel) Kruvaze Uzun İtalyan Yün Kaşe Kaban", "5.290₺", 5290.0, "Devetüyü / Camel", "https://www.trendyol.com/erkek-kaban-x-g2-c55", ["camel", "devetüyü", "kruvaze", "kaban"]),
+            "cap": ("Havanna Old Money Gözlük", "PERSOL", "Erkek Koyu Havanna Kemik Klasik Old Money Güneş Gözlüğü", "4.890₺", 4890.0, "Koyu Havanna / Yeşil", "https://www.trendyol.com/erkek-gunes-gozlugu-x-g2-c105", ["havanna", "kemik", "old money", "gözlük"]),
+            "top": ("Saç Örgü Merinos Kazak", "BEYMEN CLUB", "Erkek Sıcak Ekru Saç Örgü (Cable-Knit) Boğazlı Saf Merinos Yün Kazak", "1.950₺", 1950.0, "Sıcak Ekru / Krem", "https://www.trendyol.com/erkek-kazak-x-g2-c1092", ["ekru", "saç örgü", "boğazlı", "merinos"]),
+            "bottom": ("İtalyan Flanel Pantolon", "NETWORK", "Erkek Koyu Antrasit Çift Pileli İtalyan Yün Flanel Kışlık Pantolon", "2.590₺", 2590.0, "Koyu Antrasit", "https://www.trendyol.com/erkek-pantolon-x-g2-c70", ["antrasit", "flanel", "pileli", "pantolon"]),
+            "bag": ("Kronograf Kol Saati", "SEIKO PRESAGE", "Erkek Koyu Kahve Deri Kayışlı Gold/Çelik Otomatik Kronograf Kol Saati", "6.490₺", 6490.0, "Koyu Kahve / Gold", "https://www.trendyol.com/erkek-saat-x-g2-c34", ["kahve", "deri", "kronograf", "saat"]),
+            "shoes": ("Süet Chelsea Bot", "TERGAN", "Erkek Koyu Kahve (Espresso) Hakiki Süet Deri Klasik Chelsea Kışlık Bot", "3.690₺", 3690.0, "Koyu Kahve Süet", "https://www.trendyol.com/erkek-bot-x-g2-c102", ["kahve", "süet", "chelsea", "bot"]),
+        },
+    ),
     _make_atelier_archetype(
         arch_id="erkek_oldmoney01_bebek_camel_kase_ekru_kronograf",
         gender_segment="erkek",
@@ -4535,6 +4581,11 @@ def select_daily_outfit(slot_name: str = "otomatik") -> dict:
         "total_price_str": total_price_str,
         "model_frames": model_frames,
     }
+    try:
+        from guzelai_official_models import enforce_guzelai_official_model_lock
+        result_outfit = enforce_guzelai_official_model_lock(result_outfit)
+    except Exception as gm_e:
+        print(f"[GuzelAI.com Resmi Manken Kilidi Uyarısı] {gm_e}")
     try:
         from fashion_agenda_engine import enrich_outfit_with_fashion_agenda
         result_outfit = enrich_outfit_with_fashion_agenda(result_outfit)
