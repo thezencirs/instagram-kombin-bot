@@ -14,6 +14,12 @@ Moda Tasarım Atölyesi (Yeni İşe Alınan Baş Moda Tasarımcıları):
 - Ajan 25: LEYLA (girls-winter-atelier-designer) -> Kız Çocuk Kış & Preppy Kolej Moda Tasarımcısı
 - Ajan 26: MERT (boys-urban-winter-atelier-designer) -> Erkek Çocuk Kış & Urban Kolej Moda Tasarımcısı
 """
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 import base64
 import hashlib
 import json
@@ -428,6 +434,9 @@ def cloud_fetch_ai_image(prompt: str, width: int, height: int, seed: int) -> Opt
     GitHub Actions (ubuntu-latest) üzerinde Argon / yerel sunucu olmadan
     çok katmanlı FLUX.1 bulut motorlarıyla AI görsel sentezler.
     """
+    if os.environ.get("LOCAL_ONLY", "0") == "1" or os.environ.get("DISABLE_REMOTE_AI", "0") == "1":
+        return None
+
     w = max(512, min(1024, (width // 64) * 64))
     h = max(512, min(1344, (height // 64) * 64))
     safe_seed = int(abs(seed) % 2147483000)
@@ -626,19 +635,25 @@ def synthesize_autonomous_winter_creation(
         "confident warm smile stepping closer towards camera, full body head to toe showing shoes",
     ]
     from fashion_agenda_engine import build_photorealistic_human_model_prompt
+    from guzelai_official_models import get_official_guzelai_model_for_segment
+
+    official_guzelai_model = get_official_guzelai_model_for_segment(seg, index_hint=variant_round)
+    official_hair_face = official_guzelai_model["face_prompt_en"]
+    if seg == "erkek":
+        official_hair_face += ", hands relaxed mid-stride with no bag"
 
     for s_idx, pose_txt in enumerate(step_poses, start=1):
         rel_frame = f"assets/{archetype_id}_step{s_idx}.jpg"
         abs_frame = BASE_DIR / rel_frame
         if abs_frame.exists() and abs_frame.stat().st_size > 10000:
             model_frames.append(rel_frame)
-            print(f"  ✓ [MEVCUT %100 Fotogerçekçi İnsan Manken Karesi {s_idx}/3] {rel_frame}")
+            print(f"  ✓ [MEVCUT %100 Fotogerçekçi İnsan Manken Karesi ({official_guzelai_model['badge']}) {s_idx}/3] {rel_frame}")
             continue
 
         prompt = build_photorealistic_human_model_prompt(
             segment=seg,
             district=chosen_bp["district"],
-            hair_face=chosen_bp["hair_face"],
+            hair_face=official_hair_face,
             outer_desc=outer_desc,
             top_desc=top_desc,
             bottom_desc=bottom_desc,
@@ -650,7 +665,8 @@ def synthesize_autonomous_winter_creation(
         img = cloud_fetch_ai_image(prompt, width=768, height=1344, seed=base_seed + s_idx * 17)
         if img is None:
             # Yedek fotogerçekçi kare kontrolü (SADECE aynı cinsiyet segmentinden! Çapraz cinsiyet kesin yasaktır)
-            fb_frames = sorted(list(BASE_DIR.glob(f"assets/*{seg}*_step{s_idx}.jpg")))
+            seg_pattern = "kid_boy" if seg == "erkek_cocuk" else ("kid_girl" if seg == "kiz_cocuk" else seg)
+            fb_frames = sorted(list(BASE_DIR.glob(f"assets/*{seg_pattern}*_step{s_idx}.jpg")))
             if fb_frames and fb_frames[0].exists():
                 img = Image.open(fb_frames[0])
             else:
@@ -750,8 +766,13 @@ def synthesize_autonomous_winter_creation(
         "id": archetype_id,
         "gender_segment": seg,
         "designer_agent": designer_name,
-        "title": f"{chosen_bp['district']} Kış Tasarım Kreasyonu: {chosen_bp['palette_tr']} ({seg_badge_map.get(seg, '')} • Tasarım: {designer_name}) ❄️✨",
-        "viral_hook": f"🛑 GuzelAI Moda Tasarım Atölyesi ({designer_name}) imzalı yepyeni kış kreasyonu! Mankenin üzerindeki 6 parçanın birebir mağaza linkleri aşağıda 👇",
+        "guzelai_model_id": official_guzelai_model["id"],
+        "guzelai_model_name": official_guzelai_model["name"],
+        "guzelai_model_badge": official_guzelai_model["badge"],
+        "guzelai_model_title": official_guzelai_model["title_tr"],
+        "guzelai_face_prompt_en": official_guzelai_model["face_prompt_en"],
+        "title": f"{chosen_bp['district']} Kış Tasarım Kreasyonu: {chosen_bp['palette_tr']} ({seg_badge_map.get(seg, '')} • Manken: {official_guzelai_model['badge']} • Tasarım: {designer_name}) ❄️✨",
+        "viral_hook": f"🛑 GuzelAI.com Resmi Mankeni {official_guzelai_model['name']} ({official_guzelai_model['badge']}) ve Moda Tasarım Atölyesi ({designer_name}) imzalı yepyeni kış kreasyonu! Mankenin üzerindeki 6 parçanın birebir mağaza linkleri aşağıda 👇",
         "model_frames": model_frames,
         "cutout_assets": cutout_assets,
         "fallback_cutout_assets": dict(cutout_assets),
