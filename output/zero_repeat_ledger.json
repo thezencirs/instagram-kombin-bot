@@ -78,7 +78,8 @@
     "atelier_kadin_bebek_koru_chocolate_ivory_kis_v5",
     "atelier_kadin_zorlu_crimson_noir_kis_v5",
     "atelier_kadin_nisantasi_abdi_kis_v5",
-    "atelier_kadin_arnavutkoy_sahil_kis_v5"
+    "atelier_kadin_arnavutkoy_sahil_kis_v5",
+    "atelier_kadin_cengelkoy_bogaz_kis_v5"
   ],
   "retired_model_frames": [
     "assets/kadin_gala01_step1.jpg",
@@ -154,7 +155,8 @@
     "assets/atelier_kadin_bebek_koru_chocolate_ivory_kis_v5_step1.jpg",
     "assets/atelier_kadin_zorlu_crimson_noir_kis_v5_step1.jpg",
     "assets/atelier_kadin_nisantasi_abdi_kis_v5_step1.jpg",
-    "assets/atelier_kadin_arnavutkoy_sahil_kis_v5_step1.jpg"
+    "assets/atelier_kadin_arnavutkoy_sahil_kis_v5_step1.jpg",
+    "assets/atelier_kadin_cengelkoy_bogaz_kis_v5_step1.jpg"
   ],
   "telegram_dispatched_ids": [
     "halloween_party_couple_vampiric_noir",
@@ -233,8 +235,9 @@
     "atelier_kadin_bebek_koru_chocolate_ivory_kis_v5",
     "atelier_kadin_zorlu_crimson_noir_kis_v5",
     "atelier_kadin_nisantasi_abdi_kis_v5",
-    "atelier_kadin_arnavutkoy_sahil_kis_v5"
+    "atelier_kadin_arnavutkoy_sahil_kis_v5",
+    "atelier_kadin_cengelkoy_bogaz_kis_v5"
   ],
-  "last_telegram_dispatch_ts": 1794504842.2324197,
-  "updated_at": "2026-11-12T17:34:02.232464Z"
+  "last_telegram_dispatch_ts": 1794523753.4885437,
+  "updated_at": "2026-11-12T22:49:13.488579Z"
 }
