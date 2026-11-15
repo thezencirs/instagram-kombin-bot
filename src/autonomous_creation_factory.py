@@ -273,7 +273,9 @@ def save_zero_repeat_ledger(data: dict, sync_github: bool = False) -> None:
 def is_creation_or_model_used(archetype: dict, ledger: dict | None = None) -> bool:
     """
     Ajan 22 VERA & Ajan 19 ARDA Sıfır-Tekrar Kilidi:
-    Hem kombin ID'si hem de manken görseli (model_frames[0]) daha önce HİÇ kullanılmamış olmalıdır.
+    Kombin ID'si (arch_id) daha önce HİÇ kullanılmamış olmalıdır.
+    Resmi guzelai.com mankenleri ('guzelai_' kadrosu) farklı yeni kombinlerde görev alabilir;
+    eski emekli manken kareleri ise kesin olarak engellenir.
     """
     if ledger is None:
         ledger = load_zero_repeat_ledger()
@@ -281,7 +283,7 @@ def is_creation_or_model_used(archetype: dict, ledger: dict | None = None) -> bo
     model_frame = (archetype.get("model_frames") or [""])[0].replace("\\", "/")
     if arch_id in ledger.get("retired_archetypes", []):
         return True
-    if model_frame in ledger.get("retired_model_frames", []):
+    if "guzelai_" not in model_frame and model_frame in ledger.get("retired_model_frames", []):
         return True
     return False
 
@@ -664,13 +666,13 @@ def synthesize_autonomous_winter_creation(
         )
         img = cloud_fetch_ai_image(prompt, width=768, height=1344, seed=base_seed + s_idx * 17)
         if img is None:
-            # Yedek fotogerçekçi kare kontrolü (SADECE aynı cinsiyet segmentinden! Çapraz cinsiyet kesin yasaktır)
-            seg_pattern = "kid_boy" if seg == "erkek_cocuk" else ("kid_girl" if seg == "kiz_cocuk" else seg)
-            fb_frames = sorted(list(BASE_DIR.glob(f"assets/*{seg_pattern}*_step{s_idx}.jpg")))
-            if fb_frames and fb_frames[0].exists():
-                img = Image.open(fb_frames[0])
+            # SADECE resmi guzelai.com mankeninin doğrulanmış lookbook karelerini kullan!
+            lb_frames = official_guzelai_model.get("lookbook_frames") or []
+            cand_lb = BASE_DIR / (lb_frames[min(s_idx - 1, len(lb_frames) - 1)] if lb_frames else "assets/guzelai_leyla_om01_step1.jpg")
+            if cand_lb.exists():
+                img = Image.open(cand_lb)
             else:
-                raise RuntimeError(f"Bulut FLUX motoru manken karesi üretemedi: {rel_frame}")
+                raise RuntimeError(f"Resmi guzelai.com manken karesi bulunamadı: {cand_lb}")
         img_hd = img.resize((1080, 1920), Image.Resampling.LANCZOS)
         img_hd.save(abs_frame, format="JPEG", quality=93)
         model_frames.append(rel_frame)
