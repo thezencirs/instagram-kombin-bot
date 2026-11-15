@@ -261,23 +261,39 @@ def upload_via_single_trusted_chrome_cdp(
             "session_check": session_check,
         }
 
-    # 3. Minimum 6-Hour Human Cadence Cooldown Check
+    # 3. Ultra-Sensitive Daily 1-Post Rule (Max 1 Post / Calendar Day + 22-Hour Human Cooldown)
     out_dir = Path(video_path).parent
     ig_hist_path = out_dir / "instagram_uploaded_history.json"
-    min_interval_sec = int(os.environ.get("IG_MIN_INTERVAL_SEC", str(6 * 3600)))
+    min_interval_sec = int(os.environ.get("IG_MIN_INTERVAL_SEC", str(22 * 3600)))
+    today_str = time.strftime("%Y-%m-%d")
     if ig_hist_path.exists():
         try:
             hobj = json.loads(ig_hist_path.read_text(encoding="utf-8"))
+            last_date = str(hobj.get("last_upload_date", "") or "")
+            daily_count = int(hobj.get("daily_upload_count", 0) or 0)
+            if last_date == today_str and daily_count >= 1:
+                return {
+                    "status": "daily_limit_reached",
+                    "reel_url": "",
+                    "reason": f"Ultra-hassas Instagram koruması (Günde 1 Paylaşım Kuralı): {today_str} tarihinde zaten 1 Reel paylaşıldı.",
+                }
             last_ts = float(hobj.get("last_upload_timestamp", 0.0) or 0.0)
             if last_ts > 0 and (time.time() - last_ts) < min_interval_sec:
                 rem_min = int((min_interval_sec - (time.time() - last_ts)) // 60)
                 return {
                     "status": "cooldown_active",
                     "reel_url": "",
-                    "reason": f"İnsan ritmi koruması (6 saat kuralı): Son paylaşımdan bu yana kalan süre {rem_min} dk.",
+                    "reason": f"Ultra-hassas insan ritmi koruması (22 saat kuralı): Son paylaşımdan bu yana kalan süre {rem_min} dk.",
                 }
         except Exception:
             pass
+
+    # 3b. Pre-Publish Human Browsing & GhostCursor Warm-Up (watches 3-4 Reels, max 1-2 likes, max 1 save)
+    try:
+        from instagram_human_warmup import run_pre_publish_human_warmup
+        run_pre_publish_human_warmup(port=port, max_reels=4, max_likes=1, max_saves=1)
+    except Exception as warmup_exc:
+        print(f"[Instagram Human Warm-Up Bilgi] {warmup_exc}")
 
     # 4. Launch / Connect to Single Trusted Local Chrome Profile
     try:
@@ -504,6 +520,9 @@ def upload_via_single_trusted_chrome_cdp(
             if ig_hist_path.exists():
                 hdata = json.loads(ig_hist_path.read_text(encoding="utf-8"))
             hdata["last_upload_timestamp"] = time.time()
+            hdata["last_upload_date"] = time.strftime("%Y-%m-%d")
+            hdata["daily_upload_count"] = 1
+            hdata["last_video_path"] = str(video_path)
             ig_hist_path.write_text(json.dumps(hdata, ensure_ascii=False, indent=2), encoding="utf-8")
         except Exception:
             pass
