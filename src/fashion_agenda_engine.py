@@ -281,18 +281,29 @@ def enrich_outfit_with_fashion_agenda(outfit: Dict[str, Any]) -> Dict[str, Any]:
     except Exception:
         gala_info = {}
 
-    is_oldmoney = "oldmoney" in arch_id.lower() or "old money" in str(outfit.get("archetype_title", "")).lower()
+    is_oldmoney = (
+        "oldmoney" in arch_id.lower()
+        or "old money" in str(outfit.get("archetype_title", "")).lower()
+        or "quiet luxury" in str(outfit.get("archetype_title", "")).lower()
+        or "sprezzatura" in str(outfit.get("archetype_title", "")).lower()
+        or "preppy" in str(outfit.get("archetype_title", "")).lower()
+    )
     if is_oldmoney:
         if seg == "erkek":
             chosen["agenda_title"] = "2026/27 Old Money Miras & İtalyan Sprezzatura Erkek Kış Kürasyonu (Loro Piana × Ralph Lauren Ekolü)"
-            chosen["hud_badge"] = "» OLD MONEY MİRAS STİLİ: CAMEL KAŞE, EKRU MERİNOS & KRONOGRAF «"
-            chosen["hud_styling_tip"] = "OLD MONEY KURALI: Camel Kruvaze Kaşe + Ekru Saç Örgü + Kronograf Saat"
-            chosen["color_rule_tip"] = "60-30-10 Old Money Oranı: %60 Devetüyü & Antrasit Flanel, %30 Sıcak Ekru Merinos, %10 Kahve Süet Bot & Kronograf Saat"
+            chosen["hud_badge"] = "» OLD MONEY & SPREZZATURA: KRUVAZE KAŞE, MERİNOS & KRONOGRAF «"
+            chosen["hud_styling_tip"] = "OLD MONEY KURALI: Kruvaze Kaşe Kaban + Saç Örgü Merinos + Kronograf Saat"
+            chosen["color_rule_tip"] = "60-30-10 Old Money Oranı: %60 Kruvaze Kaşe & Flanel, %30 Saç Örgü Merinos, %10 Deri Chelsea Bot & Kronograf Saat"
+        elif seg in ("kiz_cocuk", "erkek_cocuk"):
+            chosen["agenda_title"] = "2026/27 Preppy Kolej & Old Money Junior Çocuk Kış Kürasyonu"
+            chosen["hud_badge"] = "» PREPPY KOLEJ & OLD MONEY JUNIOR KIŞ KAPSÜLÜ «"
+            chosen["hud_styling_tip"] = "KOLEJ KURALI: Kruvaze Kaşe Kaban + Saç Örgü Triko + Kolej Uyum"
+            chosen["color_rule_tip"] = "60-30-10 Kids Kolej Oranı: %60 Sıcak Kaşe & Ekose/Chino, %30 Yumuşak Saç Örgü Triko, %10 Bere & Kışlık Bot"
         else:
             chosen["agenda_title"] = "2026/27 Old Money & Sessiz Lüks (Quiet Luxury) Kadın Kış Kürasyonu (The Row × Loro Piana Ekolü)"
-            chosen["hud_badge"] = "» OLD MONEY & SESSİZ LÜKS: CAMEL KAŞMİR & ÇİKOLATA YÜN PALAZZO «"
-            chosen["hud_styling_tip"] = "OLD MONEY KURALI: Camel Kaşmir Kaban + Fildişi Triko + Gold Tokalı Deri"
-            chosen["color_rule_tip"] = "60-30-10 Sessiz Lüks Oranı: %60 Devetüyü & Çikolata Kahve Yün, %30 Fildişi Saç Örgü Kaşmir, %10 Konyak Deri Çanta & Bot"
+            chosen["hud_badge"] = "» OLD MONEY & SESSİZ LÜKS: KAŞMİR KABAN & YÜN PALAZZO «"
+            chosen["hud_styling_tip"] = "SESSİZ LÜKS KURALI: Kaşmir Kaban + Saç Örgü Triko + Gold Tokalı Deri"
+            chosen["color_rule_tip"] = "60-30-10 Sessiz Lüks Oranı: %60 Kaşmir Kaban & Yün Palazzo, %30 Saç Örgü Kaşmir Triko, %10 Deri Çanta & Bot"
     elif gala_info:
         chosen["agenda_title"] = f"{gala_info['event_title']} | İlhâm: {gala_info['celebrity_inspiration']}"
         chosen["hud_badge"] = gala_info.get("hud_badge") or chosen.get("hud_badge")
