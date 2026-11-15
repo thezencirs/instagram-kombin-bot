@@ -195,18 +195,14 @@ class FlowCDPClient:
 
 
 def build_flow_walking_prompt(outfit: Dict[str, Any]) -> str:
-    """Builds a 1080p 9:16 realistic walking prompt for Google Flow preserving the exact guzelai.com model & outfit."""
+    """Builds a 9:16 realistic walking prompt for Google Flow preserving the exact guzelai.com model & outfit (never mention 1080p so the Flow Agent generates immediately without asking resolution questions)."""
     seg = (outfit.get("gender_segment") or "kadin").strip().lower()
     model_name = outfit.get("guzelai_model_name") or "Leyla"
-    items = outfit.get("items") or {}
-    outer_name = (items.get("outerwear") or {}).get("name", "tailored winter coat")
-    top_name = (items.get("top") or {}).get("name", "knit sweater")
-    bottom_name = (items.get("bottom") or {}).get("name", "tailored trousers")
-    shoes_name = (items.get("shoes") or {}).get("name", "luxury boots")
 
     if seg == "erkek":
         return (
-            f"Vertical 9:16 photorealistic 1080p full-body luxury menswear fashion commercial video of the exact "
+            f"Generate a vertical 9:16 video immediately without asking questions: "
+            f"Photorealistic full-body luxury menswear fashion commercial video of the exact "
             f"guzelai.com male model ({model_name}) from the reference image walking naturally and confidently "
             f"forward towards the camera along a sunlit luxury stone boulevard in smooth steady gimbal tracking motion. "
             f"Keep the exact same face, hairstyle, coat, sweater, trousers, shoes, and hands relaxed with no women's bag. "
@@ -214,13 +210,15 @@ def build_flow_walking_prompt(outfit: Dict[str, Any]) -> str:
         )
     if seg in ("kiz_cocuk", "erkek_cocuk"):
         return (
-            f"Vertical 9:16 photorealistic 1080p full-body kids fashion catalog video of the exact guzelai.com junior "
+            f"Generate a vertical 9:16 video immediately without asking questions: "
+            f"Photorealistic full-body kids fashion catalog video of the exact guzelai.com junior "
             f"model ({model_name}) from the reference image walking cheerfully and naturally forward along a sunlit "
             f"park walkway towards the camera in smooth gimbal tracking motion. Keep the exact same child face, hair, "
-            f"winter jacket, sweater, trousers, and sneakers. 100% realistic human movement, zero cartoon/3D effect."
+            f"winter coat, knitwear, bottom, and shoes. 100% realistic human movement, zero cartoon/3D effect."
         )
     return (
-        f"Vertical 9:16 photorealistic 1080p full-body luxury fashion commercial video of the exact guzelai.com "
+        f"Generate a vertical 9:16 video immediately without asking questions: "
+        f"Photorealistic full-body luxury fashion commercial video of the exact guzelai.com "
         f"female supermodel ({model_name}) from the reference image walking naturally and gracefully forward "
         f"towards the camera along Nişantaşı luxury stone boulevard in smooth gimbal tracking motion. "
         f"Keep the exact same face, hairstyle, winter coat, knitwear, trousers, handbag, and footwear. "
@@ -309,16 +307,23 @@ def generate_flow_walk_via_cdp(
         prep_res = client.eval_js(
             f"""(async () => {{
                 document.dispatchEvent(new KeyboardEvent('keydown', {{key: 'Escape', bubbles: true}}));
-                const closeIcons = Array.from(document.querySelectorAll('flow-base-prompt-box flow-image-ingredient-chip .chip-close-icon, flow-base-prompt-box .hover-icon-overlay'));
-                for (const ic of closeIcons) {{
-                    ic.click();
-                    await new Promise(r => setTimeout(r, 250));
+                await new Promise(r => setTimeout(r, 200));
+                const closeBtns = Array.from(document.querySelectorAll(
+                    'flow-base-prompt-box flow-image-ingredient-chip button[aria-label*="Sil"], ' +
+                    'flow-base-prompt-box flow-image-ingredient-chip button[aria-label*="Kaldır"], ' +
+                    'flow-base-prompt-box flow-image-ingredient-chip .chip-close-icon, ' +
+                    'flow-base-prompt-box .hover-icon-overlay'
+                ));
+                for (const b of closeBtns) {{
+                    b.click();
+                    await new Promise(r => setTimeout(r, 200));
                 }}
                 const ed = document.querySelector('flow-base-prompt-box .ProseMirror') || document.querySelector('.ProseMirror');
                 if (!ed) return 'NO_EDITOR';
                 ed.focus();
                 document.execCommand('selectAll', false, null);
                 document.execCommand('delete', false, null);
+                await new Promise(r => setTimeout(r, 200));
 
                 const b64 = "{b64_img}";
                 const bin = atob(b64);
@@ -335,9 +340,9 @@ def generate_flow_walk_via_cdp(
         if prep_res != "PASTED":
             return {"ok": False, "reason": f"paste_failed:{prep_res}"}
 
-        # Wait up to 30s for the ingredient chip INSIDE flow-base-prompt-box to appear and have aria-busy === "false"
+        # Wait up to 35s for the ingredient chip INSIDE flow-base-prompt-box to appear and have aria-busy === "false"
         chip_ready = False
-        for _ in range(30):
+        for _ in range(35):
             time.sleep(1.0)
             ready = client.eval_js(
                 r"""(() => {
@@ -352,37 +357,25 @@ def generate_flow_walk_via_cdp(
         if not chip_ready:
             return {"ok": False, "reason": "ingredient_chip_timeout_in_prompt_box"}
 
-        # Click .ProseMirror physically via CDP, clear ONLY text inside .ProseMirror, and insert prompt
-        ed_box = client.eval_js(
-            r"""(() => {
-                const ed = document.querySelector('flow-base-prompt-box .ProseMirror') || document.querySelector('.ProseMirror');
-                if (!ed) return null;
-                const r = ed.getBoundingClientRect();
-                return {x: Math.round(r.left + 40), y: Math.round(r.top + r.height/2)};
-            })()"""
-        )
-        if ed_box:
-            ex, ey = ed_box["x"], ed_box["y"]
-            client.send("Input.dispatchMouseEvent", {"type": "mousePressed", "x": ex, "y": ey, "button": "left", "clickCount": 1})
-            time.sleep(0.05)
-            client.send("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": ex, "y": ey, "button": "left", "clickCount": 1})
-            time.sleep(0.15)
-
+        # Focus .ProseMirror and move caret to the end WITHOUT selecting/deleting the ingredient chip NodeView!
         client.eval_js(
             r"""(() => {
                 const ed = document.querySelector('flow-base-prompt-box .ProseMirror') || document.querySelector('.ProseMirror');
-                if (ed) {
-                    ed.focus();
-                    document.execCommand('selectAll', false, null);
-                    document.execCommand('delete', false, null);
+                if (!ed) return 'NO_ED';
+                ed.focus();
+                const sel = window.getSelection();
+                if (sel) {
+                    sel.selectAllChildren(ed);
+                    sel.collapseToEnd();
                 }
+                return 'FOCUSED_END';
             })()"""
         )
-        time.sleep(0.2)
-        client.send("Input.insertText", {"text": prompt_text})
-        time.sleep(1.2)
+        time.sleep(0.3)
+        client.send("Input.insertText", {"text": " " + prompt_text})
+        time.sleep(1.5)
 
-        # Wait up to 10s for "Oluşturmaya başla" button to become enabled, then click it via Input.dispatchMouseEvent
+        # Wait up to 10s for "Oluşturmaya başla" button to become enabled, then click it
         btn_info = None
         for _ in range(10):
             btn_info = client.eval_js(
