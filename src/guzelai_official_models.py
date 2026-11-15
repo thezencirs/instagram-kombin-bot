@@ -184,4 +184,26 @@ def enforce_guzelai_official_model_lock(outfit: Dict[str, Any], index_hint: int 
     outfit["guzelai_face_prompt_en"] = selected["face_prompt_en"]
     outfit["is_3d_avatar"] = False
     outfit["ai_model_verified"] = True
+
+    # Ensure model_frames strictly belong to an official guzelai.com model ("guzelai_" prefix)
+    cur_frames = outfit.get("model_frames") or []
+    first_frame = (cur_frames[0] if cur_frames else "").replace("\\", "/")
+    if "guzelai_" not in first_frame:
+        default_prefix_map = {
+            "valentina-cruz": "guzelai_valentina_ql01",
+            "guzelai-leyla-001": "guzelai_leyla_om01",
+            "mateo-silva": "guzelai_mateo_sp01",
+            "kenzo-takahashi": "guzelai_kenzo_om01",
+            "guzelai-ada-junior": "guzelai_ada_jr01",
+            "guzelai-atlas-junior": "guzelai_ada_jr01",
+        }
+        pref = default_prefix_map.get(
+            selected["id"],
+            "guzelai_mateo_sp01" if seg == "erkek" else ("guzelai_ada_jr01" if "cocuk" in seg else "guzelai_valentina_ql01"),
+        )
+        outfit["model_frames"] = [
+            f"assets/{pref}_step1.jpg",
+            f"assets/{pref}_step2.jpg",
+            f"assets/{pref}_step3.jpg",
+        ]
     return outfit
