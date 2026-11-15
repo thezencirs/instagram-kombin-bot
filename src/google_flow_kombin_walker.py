@@ -170,7 +170,11 @@ class FlowCDPClient:
     def list_completed_asb_urls(self) -> List[str]:
         js = r"""
         (() => {
-            const tiles = Array.from(document.querySelectorAll('flow-video-tile'));
+            const scrollers = Array.from(document.querySelectorAll('*')).filter(el => el.scrollHeight > el.clientHeight + 100);
+            for (const s of scrollers) {
+                if (!s.closest('flow-agent-panel')) s.scrollTop = 0;
+            }
+            const tiles = Array.from(document.querySelectorAll('flow-video-tile')).slice(0, 4);
             const urls = [];
             for (const tile of tiles) {
                 const v = tile.querySelector('video');
