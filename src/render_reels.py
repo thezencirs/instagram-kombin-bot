@@ -198,6 +198,21 @@ def fetch_or_generate_model_frames(outfit: dict, output_dir: str) -> list:
     return loaded
 
 
+def _fit_font_to_width(draw: ImageDraw.ImageDraw, text: str, base_font: ImageFont.FreeTypeFont, max_width: int, bold: bool = True):
+    """Metin genişliği max_width sınırını aşarsa font boyutunu otomatik küçülterek taşmayı %100 önler."""
+    try:
+        bbox = draw.textbbox((0, 0), text, font=base_font)
+        tw = bbox[2] - bbox[0]
+        if tw <= max_width or tw <= 0:
+            return base_font
+        cur_px = getattr(base_font, "size", S(24))
+        ratio = max_width / float(tw)
+        new_px_1080 = max(11, int((cur_px * ratio * 0.96) / max(0.5, SCALE)))
+        return get_font(new_px_1080, bold=bold)
+    except Exception:
+        return base_font
+
+
 def _draw_auto_pill_badge(
     draw: ImageDraw.ImageDraw,
     center_x: int,
@@ -213,14 +228,16 @@ def _draw_auto_pill_badge(
     outline_width: int = 0,
 ):
     """Metin genişliğini ölçerek kutunun dışına taşmayan otomatik boyutlu kapsül rozet çizer."""
+    max_text_w = W - S(48) - (pad_x * 2)
+    fitted_font = _fit_font_to_width(draw, text, font, max_text_w, bold=True)
     try:
-        bbox = draw.textbbox((0, 0), text, font=font)
+        bbox = draw.textbbox((0, 0), text, font=fitted_font)
         tw = bbox[2] - bbox[0]
         th = bbox[3] - bbox[1]
     except Exception:
-        tw = int(len(text) * S(18))
-        th = S(32)
-    half_w = min((W - S(40)) // 2, (tw // 2) + pad_x)
+        tw = int(len(text) * S(16))
+        th = S(28)
+    half_w = min((W - S(28)) // 2, (tw // 2) + pad_x)
     half_h = (th // 2) + pad_y
     rect = (center_x - half_w, center_y - half_h, center_x + half_w, center_y + half_h)
     draw.rounded_rectangle(
@@ -230,7 +247,7 @@ def _draw_auto_pill_badge(
         outline=outline_rgba,
         width=outline_width,
     )
-    draw.text((center_x, center_y), text, fill=text_rgba, font=font, anchor="mm")
+    draw.text((center_x, center_y), text, fill=text_rgba, font=fitted_font, anchor="mm")
 
 
 def _tr_upper(s: str) -> str:
@@ -1024,11 +1041,12 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 outline=(214, 178, 114, 255),
                 width=S(3),
             )
+            fitted_walk_sum_font = _fit_font_to_width(mini_draw, walk_summary_line, font_price, W - S(128), bold=True)
             mini_draw.text(
                 (W // 2, S(1632)),
                 walk_summary_line,
                 fill=(12, 12, 16, 255),
-                font=font_price,
+                font=fitted_walk_sum_font,
                 anchor="mm",
             )
             mini_draw.text(
