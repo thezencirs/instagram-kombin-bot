@@ -51,10 +51,14 @@ def prepare_all_social_channel_packages(outfit_data: Dict[str, Any], out_dir: st
     ch_dir.mkdir(parents=True, exist_ok=True)
     title = outfit_data.get("title", "GüzelAI Kombin")
     model_name = outfit_data.get("guzelai_model_name", "guzelai.com Model")
-    items = outfit_data.get("items", [])
-    links_txt = "\n".join(
-        [f"{it.get('emoji', '🔹')} {it.get('slot', '')}: {it.get('url', 'https://guzelai.com/#kombinler')}" for it in items]
-    )
+    items = outfit_data.get("pieces") or outfit_data.get("items") or []
+    link_lines = []
+    for it in items:
+        if isinstance(it, dict):
+            link_lines.append(f"{it.get('emoji', '🔹')} {it.get('slot', '')}: {it.get('url', 'https://guzelai.com/#kombinler')}")
+        elif isinstance(it, str):
+            link_lines.append(f"🔹 {it}")
+    links_txt = "\n".join(link_lines) or "https://guzelai.com/#kombinler"
     platforms = {
         "youtube_shorts": f"{title} | {model_name} #shorts #kombin #oldmoney #guzelai\n\n{links_txt}",
         "tiktok": f"{title} ✨ {model_name} kombin detayları profilde ve guzelai.com'da! #kombin #guzelai #oldmoney",
