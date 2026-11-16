@@ -54,7 +54,7 @@ from gender_style_guardrail import (
 )
 from google_flow_kombin_walker import ensure_realistic_flow_walk_video
 from guzelai_official_models import enforce_guzelai_official_model_lock
-from instagram_safe_publisher import publish_instagram_zero_violation
+from instagram_safe_publisher import upload_via_single_trusted_chrome_cdp
 from main import build_caption, build_links_comment
 from outfit_generator import OUTFIT_ARCHETYPES, _format_price_tr
 from pinterest_publisher import publish_to_pinterest_cdp, save_pinterest_outputs
@@ -70,20 +70,30 @@ SEGMENT_ROTATION = ["kadin", "erkek", "kiz_cocuk", "erkek_cocuk"]
 def pick_or_synthesize_next_outfit(preferred_segment: Optional[str] = None) -> Dict[str, Any]:
     """
     Ajan 1 (Moda Tasarım Konseyi):
-    1. Checks unshared archetypes in `OUTFIT_ARCHETYPES` first.
-    2. If all static archetypes are already in `zero_repeat_ledger.json`, calls
+    1. Checks unshared archetypes in `OUTFIT_ARCHETYPES` first (checking both `zero_repeat_ledger.json`
+       and `output/telegram_sent_history.json`).
+    2. If all static archetypes are already used, calls
        `synthesize_autonomous_winter_creation` to create a brand-new official `guzelai.com`
        model outfit & 6 studio cutouts.
     """
     ledger = load_zero_repeat_ledger()
+    tg_hist_path = BASE_DIR / "output" / "telegram_sent_history.json"
+    tg_sent_ids = set(ledger.get("telegram_dispatched_ids", []))
+    if tg_hist_path.exists():
+        try:
+            tg_obj = json.loads(tg_hist_path.read_text(encoding="utf-8"))
+            tg_sent_ids.update(tg_obj.get("sent_archetypes", []))
+        except Exception:
+            pass
+
     for arch in OUTFIT_ARCHETYPES:
         if preferred_segment and arch.get("gender_segment") != preferred_segment:
             continue
-        if not is_creation_or_model_used(arch, ledger):
+        if arch["id"] not in tg_sent_ids and not is_creation_or_model_used(arch, ledger):
             return build_outfit_from_arch_id(arch["id"])
 
     for arch in OUTFIT_ARCHETYPES:
-        if not is_creation_or_model_used(arch, ledger):
+        if arch["id"] not in tg_sent_ids and not is_creation_or_model_used(arch, ledger):
             return build_outfit_from_arch_id(arch["id"])
 
     seg = preferred_segment or SEGMENT_ROTATION[int(time.time() // 3600) % len(SEGMENT_ROTATION)]
@@ -148,10 +158,9 @@ def run_single_multi_agent_flow_hybrid_cycle(
     ig_res = {"status": "skipped"}
     if try_instagram:
         try:
-            ig_res = publish_instagram_zero_violation(
+            ig_res = upload_via_single_trusted_chrome_cdp(
                 video_path=mp4_path,
-                caption_text=caption,
-                archetype_id=active_id,
+                caption=caption,
             )
         except Exception as ig_e:
             ig_res = {"status": "error", "reason": str(ig_e)}
@@ -170,10 +179,11 @@ def run_single_multi_agent_flow_hybrid_cycle(
         "flow_walk_video": walk_mp4,
         "flow_walk_engine": outfit.get("flow_walk_engine", "google_flow_ultra_1080p"),
         "merged_hybrid_reel": mp4_path,
-        "telegram": tg_res.get("status"),
-        "website": web_res.get("status"),
-        "pinterest": pin_res.get("status"),
+        "telegram": tg_res.get("status") if isinstance(tg_res, dict) else ("published" if tg_res else "failed"),
+        "website": web_res.get("status") if isinstance(web_res, dict) else ("published" if web_res else "failed"),
+        "pinterest": pin_res.get("status") if isinstance(pin_res, dict) else ("published" if pin_res else "failed"),
         "instagram": ig_res.get("status"),
+        "instagram_detail": ig_res,
     }
 
     try:
