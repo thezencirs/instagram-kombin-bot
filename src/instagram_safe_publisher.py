@@ -177,6 +177,11 @@ def ensure_trusted_ig_chrome(port: int = IG_TRUSTED_CDP_PORT, start_url: str = "
             f'--user-data-dir="{SINGLE_TRUSTED_IG_PROFILE}" '
             f"--no-first-run --no-default-browser-check "
             f"--disable-blink-features=AutomationControlled "
+            f"--disable-background-media-suspend "
+            f"--disable-backgrounding-occluded-windows "
+            f"--disable-renderer-backgrounding "
+            f"--disable-features=CalculateNativeWinOcclusion,MediaFoundationVideoCapture "
+            f"--autoplay-policy=no-user-gesture-required "
             f'--lang=tr-TR --window-size=1280,920 "{start_url}"'
         )
         subprocess.run(
@@ -288,13 +293,6 @@ def upload_via_single_trusted_chrome_cdp(
         except Exception:
             pass
 
-    # 3b. Pre-Publish Human Browsing & GhostCursor Warm-Up (watches 3-4 Reels, max 1-2 likes, max 1 save)
-    try:
-        from instagram_human_warmup import run_pre_publish_human_warmup
-        run_pre_publish_human_warmup(port=port, max_reels=4, max_likes=1, max_saves=1)
-    except Exception as warmup_exc:
-        print(f"[Instagram Human Warm-Up Bilgi] {warmup_exc}")
-
     # 4. Launch / Connect to Single Trusted Local Chrome Profile
     try:
         ws_url = ensure_trusted_ig_chrome(port=port, start_url="https://www.instagram.com/")
@@ -394,27 +392,34 @@ def upload_via_single_trusted_chrome_cdp(
 
         human_pause(2.5, 4.0)
 
-        # If a submenu ("Gönderi" / "Post") appears, click it
+        # If a submenu ("Gönderi" / "Post") appears, click its parent link/menuitem
         cdp(
             "Runtime.evaluate",
             {
                 "expression": """(() => {
                     const items = Array.from(document.querySelectorAll('span, a, div[role="button"], div[role="menuitem"]'));
                     const postItem = items.find(el => /^(Gönderi|Post)$/i.test((el.innerText || '').trim()));
-                    if (postItem) postItem.click();
+                    if (postItem) {
+                        const clickable = postItem.closest('a, div[role="button"], div[role="menuitem"]') || postItem;
+                        clickable.click();
+                        return true;
+                    }
+                    return false;
                 })()""",
                 "returnByValue": True,
             },
         )
-        human_pause(1.8, 3.0)
+        human_pause(2.2, 3.5)
 
-        # Attach video file via input[type="file"]
+        # Attach video file via input[type="file"] inside dialog
         file_obj = cdp(
             "Runtime.evaluate",
             {
                 "expression": """(() => {
+                    const dlgInput = document.querySelector('div[role="dialog"] input[type="file"]');
+                    if (dlgInput) return dlgInput;
                     const inputs = Array.from(document.querySelectorAll('input[type="file"]'));
-                    return inputs[inputs.length - 1] || null;
+                    return inputs[0] || null;
                 })()""",
                 "returnByValue": False,
             },
@@ -425,7 +430,7 @@ def upload_via_single_trusted_chrome_cdp(
             return {"status": "file_input_not_found", "reel_url": ""}
 
         cdp("DOM.setFileInputFiles", {"objectId": obj_id, "files": [str(Path(video_path).resolve())]})
-        human_pause(5.0, 7.5)
+        human_pause(6.0, 8.5)
 
         # Dismiss any "Video gönderileri artık Reels olarak paylaşılıyor" / "Tamam" info modal
         cdp(
@@ -505,7 +510,7 @@ def upload_via_single_trusted_chrome_cdp(
                 {
                     "expression": """(() => {
                         const txt = document.body ? document.body.innerText : '';
-                        return /Gönderin paylaşıldı|Reels videon paylaşıldı|Your reel has been shared|Your post has been shared/i.test(txt);
+                        return /Gönderin paylaşıldı|Reels? videon paylaşıldı|Paylaşılan Reels videosu|Your reel has been shared|Your post has been shared/i.test(txt);
                     })()""",
                     "returnByValue": True,
                 },
