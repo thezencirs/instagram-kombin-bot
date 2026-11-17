@@ -272,18 +272,19 @@ def save_zero_repeat_ledger(data: dict, sync_github: bool = False) -> None:
 
 def is_creation_or_model_used(archetype: dict, ledger: dict | None = None) -> bool:
     """
-    Ajan 22 VERA & Ajan 19 ARDA Sıfır-Tekrar Kilidi:
-    Kombin ID'si (arch_id) daha önce HİÇ kullanılmamış olmalıdır.
-    Resmi guzelai.com mankenleri ('guzelai_' kadrosu) farklı yeni kombinlerde görev alabilir;
-    eski emekli manken kareleri ise kesin olarak engellenir.
+    Ajan 22 VERA & Ajan 19 ARDA Sıfır-Tekrar & Özgünlük Kilidi:
+    1) Kombin ID'si (arch_id) daha önce HİÇ kullanılmamış olmalıdır.
+    2) Manken yürüyüş fotoğraf dosyası (model_frame / step1.jpg) daha önce HİÇ kullanılmamış olmalıdır
+       (Aynı fotoğraf karesi asla ikinci bir kombinde tekrar kullanılmaz; tekrar eden tek şey
+       4-7 çeşit resmi guzelai.com mankeninin kimliği/yüzü olabilir, her kombinde yeni çekim ve yeni kıyafet giyer).
     """
     if ledger is None:
         ledger = load_zero_repeat_ledger()
     arch_id = archetype.get("id", "")
     model_frame = (archetype.get("model_frames") or [""])[0].replace("\\", "/")
-    if arch_id in ledger.get("retired_archetypes", []):
+    if arch_id in ledger.get("retired_archetypes", []) or arch_id in ledger.get("telegram_dispatched_ids", []):
         return True
-    if "guzelai_" not in model_frame and model_frame in ledger.get("retired_model_frames", []):
+    if model_frame and model_frame in ledger.get("retired_model_frames", []):
         return True
     return False
 
@@ -639,7 +640,9 @@ def synthesize_autonomous_winter_creation(
     from fashion_agenda_engine import build_photorealistic_human_model_prompt
     from guzelai_official_models import get_official_guzelai_model_for_segment
 
-    official_guzelai_model = get_official_guzelai_model_for_segment(seg, index_hint=variant_round)
+    official_guzelai_model = get_official_guzelai_model_for_segment(
+        seg, index_hint=len(dynamic_catalog) + variant_round + sum(ord(c) for c in archetype_id)
+    )
     official_hair_face = official_guzelai_model["face_prompt_en"]
     if seg == "erkek":
         official_hair_face += ", hands relaxed mid-stride with no bag"
@@ -673,7 +676,8 @@ def synthesize_autonomous_winter_creation(
                 img = Image.open(cand_lb)
             else:
                 raise RuntimeError(f"Resmi guzelai.com manken karesi bulunamadı: {cand_lb}")
-        img_hd = img.resize((1080, 1920), Image.Resampling.LANCZOS)
+        from vertical_media_guard import fit_pil_to_vertical_9x16
+        img_hd = fit_pil_to_vertical_9x16(img, target_w=1080, target_h=1920)
         img_hd.save(abs_frame, format="JPEG", quality=93)
         model_frames.append(rel_frame)
         print(f"  ✓ [MAYA %100 Fotogerçekçi İnsan Manken Karesi {s_idx}/3] {rel_frame}")
