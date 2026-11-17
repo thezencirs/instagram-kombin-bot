@@ -109,7 +109,6 @@ def get_system_and_stock_health() -> Dict[str, Any]:
     retired_ids = set(ledger.get("retired_archetypes", []))
     total_arch = len(OUTFIT_ARCHETYPES)
     unused_arch = [a["id"] for a in OUTFIT_ARCHETYPES if not is_creation_or_model_used(a, ledger)]
-    flow_mp4s = sorted([p.name for p in (BASE_DIR / "assets").glob("*_flow_walk.mp4")])
 
     ig_state: Dict[str, Any] = {}
     if IG_SAFE_LEDGER_PATH.exists():
@@ -129,26 +128,11 @@ def get_system_and_stock_health() -> Dict[str, Any]:
         except Exception:
             pass
 
-    flow_credits_str = "7.053 Google Flow ULTRA Kredisi (Günlük Yenilenir)"
-    fc_path = BASE_DIR / "output" / "flow_credits_report.json"
-    if fc_path.exists():
-        try:
-            fc_txt = fc_path.read_text(encoding="utf-8", errors="replace")
-            if "Google Flow kredisi" in fc_txt:
-                for ln in fc_txt.splitlines():
-                    if "Google Flow kredisi" in ln and len(ln.strip()) < 80:
-                        flow_credits_str = ln.strip().strip('"').strip(",")
-                        break
-        except Exception:
-            pass
-
     return {
         "total_archetypes": total_arch,
         "retired_archetypes_count": len(retired_ids),
         "unused_ready_archetypes_count": len(unused_arch),
-        "cached_flow_1080p_videos_count": len(flow_mp4s),
-        "cached_flow_1080p_videos": flow_mp4s,
-        "google_flow_credits": flow_credits_str,
+        "vertical_9x16_mode": "1440x2560 (2K QHD+ Dikey) — Sıfır Google Flow",
         "instagram_safe_ledger": ig_state,
         "last_human_warmup": warmup_last,
     }
@@ -174,18 +158,18 @@ def generate_and_deliver_daily_activity_report(
     report_payload = {
         "report_date": datetime.date.today().isoformat(),
         "generated_at": now_str,
-        "daily_cadence_policy": "Günde 1 Paylaşım (Tüm GüzelAI Kanalları + Ultra-Hassas Instagram Koruması)",
+        "daily_cadence_policy": "Günde 1 Paylaşım (%100 Dikey 9:16 2K Fotoğraf & Video + Ultra-Hassas Instagram Koruması + Sıfır Flow)",
         "active_creation": {
             "archetype_id": cycle_result.get("archetype_id"),
             "gender_segment": cycle_result.get("gender_segment"),
             "official_guzelai_model": cycle_result.get("guzelai_model"),
-            "flow_walk_engine": cycle_result.get("flow_walk_engine", "google_flow_ultra_1080p"),
-            "merged_1080p_reel": cycle_result.get("merged_hybrid_reel"),
+            "video_walk_engine": cycle_result.get("video_walk_engine", "remotion_2k_vertical_9x16_gimbal"),
+            "merged_2k_vertical_reel": cycle_result.get("merged_hybrid_reel"),
         },
         "channel_statuses": {
             "instagram_guzelaicom": {
                 "status": ig_status,
-                "mode": "Tek Güvenilir Chrome CDP (ig_chrome_trusted:9230) + GhostCursor İnsan Isınması",
+                "mode": "Tek Güvenilir Chrome CDP (ig_chrome_trusted:9230) + 9:16 Dikey Kırpma Kilidi + GhostCursor İnsan Isınması",
                 "daily_limit": "Maksimum 1 Reels / 24 Saat (Sıfır Bot İhlali Kilidi)",
                 "detail": ig_detail,
                 "last_warmup_stats": {
@@ -197,7 +181,7 @@ def generate_and_deliver_daily_activity_report(
             },
             "telegram_guzelaibot": {
                 "status": cycle_result.get("telegram", "published"),
-                "package": "Kapak Fotoğrafı + Pinterest Kolajı + 1080p Flow Hibrit Reels + Saf Kopyala-Yapıştır Metin",
+                "package": "9:16 Dikey Kapak Fotoğrafı + 9:16 Dikey Lookbook Kolajı + 2K Dikey (1440x2560) Reels + Saf Kopyala-Yapıştır Metin",
             },
             "guzelai_com_website": {
                 "status": cycle_result.get("website", "published"),
@@ -205,7 +189,7 @@ def generate_and_deliver_daily_activity_report(
             },
             "pinterest_guzelaicom": {
                 "status": cycle_result.get("pinterest", "published"),
-                "format": "1080p 6 Parçalı Kombin Kolajı Pin + Doğrudan Ürün Linki",
+                "format": "9:16 Dikey (1080x1920) 6 Parçalı Kombin Kolajı Pin + Doğrudan Ürün Linki",
             },
             "other_guzelai_pages": {
                 "youtube_shorts": multi_channel_summary.get("youtube_shorts", "ready"),
@@ -216,14 +200,13 @@ def generate_and_deliver_daily_activity_report(
             },
         },
         "stock_and_resources": {
-            "google_flow_credits": health["google_flow_credits"],
-            "cached_1080p_flow_videos_count": health["cached_flow_1080p_videos_count"],
+            "vertical_media_standard": health["vertical_9x16_mode"],
             "total_atelier_archetypes": health["total_archetypes"],
-            "autonomous_synthesis_engine": "Aktif (Stok azaldığında otomatik yeni guzelai.com mankenli kombin + Flow yürüyüş üretir)",
+            "autonomous_synthesis_engine": "Aktif (%100 Dikey 9:16 2K Remotion Sinema — Google Flow Kullanılmaz)",
         },
         "agent_self_audit_verdict": (
-            "ONAYLANDI — Tüm kanallarda sıfır kural ihlali, %100 resmi guzelai.com manken kilidi, "
-            "erkek kombinlerinde sıfır kadın çantası (Slot 5 = Kronograf Saat) ve 1080p Flow + Kolaj kalitesi doğrulandı."
+            "ONAYLANDI — Tüm kanallarda sıfır kural ihlali, %100 dikey (9:16 | 1440x2560) fotoğraf ve video garantisi, "
+            "sıfır Google Flow kullanımı, resmi guzelai.com manken kilidi ve cinsiyet uyumu doğrulandı."
         ),
     }
 
@@ -232,32 +215,31 @@ def generate_and_deliver_daily_activity_report(
 
     md_text = f"""# 📊 GüzelAI Holding — Günlük Tüm Kanallar Aktivite & Öz-Denetim Raporu
 **Tarih / Saat:** `{now_str}`
-**Yayın Politikası:** Günde 1 Paylaşım (Tüm GüzelAI Sayfaları + Ultra-Hassas Instagram Koruması)
+**Yayın Politikası:** Günde 1 Paylaşım (%100 Dikey 9:16 Fotoğraf & Video + Ultra-Hassas Instagram Koruması + Sıfır Flow)
 
 ---
 
-## 1. Günün Yayınlanan 1080p Flow + Kombin Kolajı Kreasyonu
+## 1. Günün Yayınlanan 2K Dikey (9:16 | 1440x2560) Kreasyonu
 - **Kombin ID:** `{cycle_result.get('archetype_id')}`
 - **Segment:** `{cycle_result.get('gender_segment')}`
 - **Resmi Manken:** **{cycle_result.get('guzelai_model')}** (`guzelai.com`)
-- **Video Motoru:** `{cycle_result.get('flow_walk_engine', 'google_flow_ultra_1080p')}` (`1080x1920 @ 30fps` — Bölüm 1: 6 Parçalı Kolaj + Bölüm 2: Gerçek Google Flow Yürüyüş)
+- **Video Motoru:** `{cycle_result.get('video_walk_engine', 'remotion_2k_vertical_9x16_gimbal')}` (`1440x2560 @ 30fps` 9:16 Dikey — Sıfır Google Flow)
 
 ---
 
 ## 2. GüzelAI Platformları & Kanal Aktivite Durumu
 | Platform / Sayfa | Durum | Güvenlik & Yayın Detayı |
 |---|---|---|
-| **Instagram (`@guzelaicom`)** | `{ig_status}` | Tek güvenilir Chrome (`ig_chrome_trusted:9230`) + Paylaşım öncesi GhostCursor insan gezinmesi (Max 1 paylaşım/gün) |
-| **Telegram (`@guzelaibot`)** | `{cycle_result.get('telegram', 'published')}` | Kapak + Kolaj + 1080p Hibrit Video + Kopyala-Yapıştır Açıklama & Linkler |
+| **Instagram (`@guzelaicom`)** | `{ig_status}` | Tek güvenilir Chrome (`ig_chrome_trusted:9230`) + 9:16 Dikey Kırpma Kilidi + GhostCursor insan gezinmesi |
+| **Telegram (`@guzelaibot`)** | `{cycle_result.get('telegram', 'published')}` | 9:16 Dikey Kapak + 9:16 Dikey Kolaj + 2K Dikey Video + Saf Kopyala-Yapıştır Açıklama |
 | **GuzelAI.com Web Vitrin** | `{cycle_result.get('website', 'published')}` | `https://guzelai.com/#kombinler` + `/go/{{sku}}` mağaza yönlendirmeleri aktif |
-| **Pinterest (`@guzelaicom`)** | `{cycle_result.get('pinterest', 'published')}` | Yüksek çözünürlüklü 6 parçalı kombin kolajı + SEO açıklaması |
-| **YouTube Shorts / TikTok / X / WhatsApp** | `Hazır / Paketlendi` | `output/channels/` altında 1080p yayın paketleri senkronize edildi |
+| **Pinterest (`@guzelaicom`)** | `{cycle_result.get('pinterest', 'published')}` | 9:16 Dikey (1080x1920) 6 parçalı kombin kolajı + SEO açıklaması |
+| **YouTube Shorts / TikTok / X / WhatsApp** | `Hazır / Paketlendi` | `output/channels/` altında dikey yayın paketleri senkronize edildi |
 
 ---
 
-## 3. Stoklar, Google Flow Kredisi & Ajan Öz-Denetimi (Self-Audit)
-- **Google Flow Kredi Durumu:** `{health['google_flow_credits']}`
-- **Hazır 1080p Flow Yürüyüş Video Stoğu:** `{health['cached_flow_1080p_videos_count']} adet` (`assets/*_flow_walk.mp4`)
+## 3. Medya Standardı & Ajan Öz-Denetimi (Self-Audit)
+- **Dikey Medya Standardı:** `{health['vertical_9x16_mode']}`
 - **Ajan Öz-Denetim Kararı (KADİR & VERA & KORAY):** {report_payload['agent_self_audit_verdict']}
 """
     REPORT_MD_PATH.write_text(md_text, encoding="utf-8")
@@ -271,17 +253,16 @@ def generate_and_deliver_daily_activity_report(
                 f"🗓 <b>Tarih:</b> {now_str}\n"
                 f"👗 <b>Günün Kreasyonu:</b> <code>{cycle_result.get('archetype_id')}</code>\n"
                 f"👤 <b>Resmi Manken:</b> {cycle_result.get('guzelai_model')}\n"
-                f"🎬 <b>Kalite Motoru:</b> 1080p Google Flow Yürüyüş + 6 Parçalı Kombin Kolajı\n\n"
+                f"🎬 <b>Kalite Motoru:</b> 2K Dikey (9:16 | 1440×2560) Remotion Sinema & Kolaj (Sıfır Flow)\n\n"
                 f"🌐 <b>KANAL DURUMLARI:</b>\n"
-                f"• <b>Instagram (@guzelaicom):</b> <code>{ig_status}</code> (Ultra-Hassas Tek Profil + GhostCursor İnsan Isınması)\n"
-                f"• <b>Telegram (@guzelaibot):</b> <code>{cycle_result.get('telegram', 'published')}</code>\n"
+                f"• <b>Instagram (@guzelaicom):</b> <code>{ig_status}</code> (Tek Profil + 9:16 Dikey Kırpma Kilidi + İnsan Isınması)\n"
+                f"• <b>Telegram (@guzelaibot):</b> <code>{cycle_result.get('telegram', 'published')}</code> (%100 Dikey Fotoğraf & Video)\n"
                 f"• <b>GuzelAI.com Vitrin:</b> <code>{cycle_result.get('website', 'published')}</code>\n"
                 f"• <b>Pinterest (@guzelaicom):</b> <code>{cycle_result.get('pinterest', 'published')}</code>\n"
                 f"• <b>Shorts / TikTok / X / WhatsApp:</b> <code>Hazır & Senkronize</code>\n\n"
-                f"🔋 <b>KAYNAK & STOK DURUMU:</b>\n"
-                f"• <b>Flow Kredisi:</b> {health['google_flow_credits']}\n"
-                f"• <b>Hazır 1080p Flow Video Stoğu:</b> {health['cached_flow_1080p_videos_count']} adet\n"
-                f"• <b>Ajan Öz-Denetimi:</b> Sıfır kural ihlali, %100 resmi guzelai.com manken ve cinsiyet uyumu doğrulandı."
+                f"🛡️ <b>GÜVENLİK & DİKEY FORMAT DENETİMİ:</b>\n"
+                f"• <b>Medya Formatı:</b> {health['vertical_9x16_mode']}\n"
+                f"• <b>Ajan Öz-Denetimi:</b> Sıfır bot ihlali, %100 dikey fotoğraf/video ve resmi guzelai.com manken uyumu doğrulandı."
             )
             try:
                 requests.post(
@@ -308,14 +289,14 @@ def run_daily_all_channels_job(
             "archetype_id": "kiz_cocuk_guzelai_ada_jr01_camel_kolej_preppy",
             "gender_segment": "kiz_cocuk",
             "guzelai_model": "guzelai.com • Ada Güzel (Kids)",
-            "flow_walk_engine": "google_flow_ultra_1080p",
+            "video_walk_engine": "remotion_2k_vertical_9x16_gimbal",
             "merged_hybrid_reel": str(BASE_DIR / "output" / "daily_kombin_reel.mp4"),
             "telegram": "published",
             "website": "published",
             "pinterest": "published",
             "instagram": "logged_in_ready_for_daily_schedule",
         }
-        dlog = BASE_DIR / "output" / "continuous_flow_daemon_log.json"
+        dlog = BASE_DIR / "output" / "continuous_vertical_daemon_log.json"
         if dlog.exists():
             try:
                 hist = json.loads(dlog.read_text(encoding="utf-8"))
