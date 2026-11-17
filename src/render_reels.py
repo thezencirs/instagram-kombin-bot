@@ -2,15 +2,17 @@ import os
 import math
 import subprocess
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance, ImageOps
 
 from outfit_generator import load_cutout_image
 from music_generator import generate_viral_fashion_audio
+from vertical_media_guard import fit_pil_to_vertical_9x16
 
 
-# 1080p Full HD (1080x1920 @ 30fps) Varsayılan Standart (REEL_RES_MODE=2k ile 1440x2560 opsiyonel)
-REEL_RES_MODE = os.environ.get("REEL_RES_MODE", "1080p").strip().lower()
-W, H = (1440, 2560) if REEL_RES_MODE == "2k" else (1080, 1920)
+# %100 Dikey 9:16 2K QHD+ (1440x2560 @ 30fps) Varsayılan Standart (REEL_RES_MODE=1080p ile 1080x1920 dikey)
+REEL_RES_MODE = os.environ.get("REEL_RES_MODE", "2k").strip().lower()
+W, H = (1080, 1920) if REEL_RES_MODE == "1080p" else (1440, 2560)
+assert H > W and abs((W / float(H)) - (9.0 / 16.0)) < 0.01, f"Zorunlu 9:16 dikey çözünürlük ihlali: {W}x{H}"
 SCALE = W / 1080.0
 FPS = 30
 
@@ -167,34 +169,68 @@ def add_drop_shadow(img: Image.Image, offset=(13, 22), blur_radius=20, shadow_al
     return canvas
 
 
+def _resolve_bot_path(rel_p: str) -> str:
+    if not rel_p:
+        return ""
+    if os.path.exists(rel_p):
+        return rel_p
+    bot_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    cand = os.path.join(bot_root, str(rel_p).lstrip("/\\"))
+    if os.path.exists(cand):
+        return cand
+    return ""
+
+
 def fetch_or_generate_model_frames(outfit: dict, output_dir: str) -> list:
-    """Seçilen kombin arketipine ait yürüyüş karelerini 2K (1440x2560) Samsung OLED kalitesinde yükler."""
+    """Seçilen kombin arketipine ait yürüyüş karelerini deformasyonsuz %100 dikey 9:16 (1440x2560) OLED kalitesinde yükler."""
     candidate_frames = outfit.get("model_frames") or [
-        "assets/outfit3_model_step1.jpg",
-        "assets/outfit3_model_step2.jpg",
-        "assets/outfit3_model_step3.jpg",
+        "assets/guzelai_leyla_om01_step1.jpg",
+        "assets/guzelai_leyla_om01_step2.jpg",
+        "assets/guzelai_leyla_om01_step3.jpg",
     ]
     loaded = []
     for p in candidate_frames:
-        if os.path.exists(p):
-            im = Image.open(p).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
+        rp = _resolve_bot_path(p)
+        if rp and os.path.exists(rp):
+            raw_im = Image.open(rp)
+            im = fit_pil_to_vertical_9x16(raw_im, target_w=W, target_h=H)
             im = enhance_for_samsung_oled(im, is_cutout=False)
             loaded.append(im)
 
     if len(loaded) < 2:
-        fallback_frames = [
-            "assets/trial1_model_street.jpg",
-            "assets/trial1_model_step2.jpg",
-            "assets/trial1_model_step3.jpg",
-        ]
+        seg = outfit.get("gender_segment", "kadin")
+        if seg == "erkek":
+            fallback_frames = [
+                "assets/guzelai_mateo_sp01_step1.jpg",
+                "assets/guzelai_mateo_sp01_step2.jpg",
+                "assets/guzelai_mateo_sp01_step3.jpg",
+            ]
+        elif seg == "kiz_cocuk":
+            fallback_frames = [
+                "assets/guzelai_ada_jr01_step1.jpg",
+                "assets/guzelai_ada_jr01_step2.jpg",
+                "assets/guzelai_ada_jr01_step3.jpg",
+            ]
+        else:
+            fallback_frames = [
+                "assets/guzelai_leyla_om01_step1.jpg",
+                "assets/guzelai_leyla_om01_step2.jpg",
+                "assets/guzelai_leyla_om01_step3.jpg",
+                "assets/guzelai_valentina_ql01_step1.jpg",
+                "assets/guzelai_valentina_ql01_step2.jpg",
+                "assets/guzelai_valentina_ql01_step3.jpg",
+            ]
         for p in fallback_frames:
-            if os.path.exists(p):
-                im = Image.open(p).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
+            rp = _resolve_bot_path(p)
+            if rp and os.path.exists(rp) and len(loaded) < 3:
+                raw_im = Image.open(rp)
+                im = fit_pil_to_vertical_9x16(raw_im, target_w=W, target_h=H)
                 im = enhance_for_samsung_oled(im, is_cutout=False)
                 loaded.append(im)
 
     if loaded:
         loaded[0].save(os.path.join(output_dir, "model_street.png"), compress_level=1)
+        loaded[0].save(os.path.join(output_dir, "vertical_model_photo.jpg"), "JPEG", quality=98, subsampling=0)
     return loaded
 
 
@@ -574,34 +610,104 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
         shadowed = add_drop_shadow(raw_img)
         prepared_items.append({**cfg, "data": item_data, "img": shadowed})
 
-    # Yürüyen model karelerini 1080p OLED kalitesinde hazırla
+    # Yürüyen model karelerini %100 dikey 9:16 (1440x2560 / 1080x1920) OLED kalitesinde hazırla (Sıfır Google Flow!)
     model_frames = fetch_or_generate_model_frames(outfit, out_dir)
+    outfit["video_walk_engine"] = "remotion_2k_vertical_9x16_gimbal"
 
-    # Google Flow / 1080p Gerçekçi Manken Yürüyüş Videosunu (output/flow_walk.mp4) hazırla ve karelerini yükle
-    flow_walk_pil_frames = []
-    try:
-        import cv2
-        from google_flow_kombin_walker import ensure_realistic_flow_walk_video
-        walk_mp4_path = ensure_realistic_flow_walk_video(outfit, out_dir=out_dir)
-        if walk_mp4_path and os.path.exists(walk_mp4_path):
-            cap = cv2.VideoCapture(walk_mp4_path)
-            while True:
-                ret, bgr = cap.read()
-                if not ret or bgr is None:
-                    break
-                rgb_arr = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
-                pil_f = Image.fromarray(rgb_arr, mode="RGB")
-                if pil_f.size != (W, H):
-                    pil_f = pil_f.resize((W, H), Image.Resampling.LANCZOS)
-                flow_walk_pil_frames.append(pil_f.convert("RGBA"))
-            cap.release()
-            print(f"🎬 [1080p Hibrit Reels Motoru] {len(flow_walk_pil_frames)} adet gerçekçi yürüyüş video karesi yüklendi ({walk_mp4_path}).")
-    except Exception as fw_err:
-        print(f"[Flow Yürüyüş Videosu Yükleme Uyarısı] {fw_err}")
-
-    # Dergi Kalitesinde Viral Hook Kapak Fotoğrafını (output/hook_cover.jpg) üret
+    # Dergi Kalitesinde %100 Dikey 9:16 Viral Hook Kapak Fotoğrafını (output/hook_cover.jpg) üret
     hook_cover_rgb = generate_hook_cover_photo(outfit, model_frames, prepared_items, out_dir)
     outfit["hook_cover_path"] = os.path.join(out_dir, "hook_cover.jpg")
+
+    # Senkronize %100 Dikey 9:16 Pinterest / Telegram Lookbook Kolajını (output/pinterest_fashion_collage.jpg) üret
+    try:
+        pin_canvas = Image.new("RGB", (W, H), (247, 243, 237))
+        pin_draw = ImageDraw.Draw(pin_canvas)
+        pin_draw.rounded_rectangle([S(28), S(28), W - S(28), S(190)], radius=S(24), fill=(20, 18, 24))
+        model_badge_str = outfit.get("guzelai_model_badge") or "guzelai.com • Resmi Manken"
+        pin_draw.text(
+            (S(56), S(48)),
+            f"GUZELAI.COM • {model_badge_str.upper()} • LOOKBOOK KOLAJI",
+            fill=(212, 175, 55),
+            font=get_font(20, bold=True),
+        )
+        pin_title_str = (outfit.get("hook_title") or outfit.get("archetype_title") or "GüzelAI Kombin")[:48]
+        pin_draw.text((S(56), S(88)), pin_title_str, fill=(255, 255, 255), font=get_font(26, bold=True))
+        pin_total_str = outfit.get("total_price_str", "")
+        pin_draw.text(
+            (S(56), S(138)),
+            f"Resmi Manken: {model_badge_str}  |  6 Parça Toplam: {pin_total_str}",
+            fill=(215, 205, 195),
+            font=get_font(19, bold=False),
+        )
+
+        # Sol Sütun: Tam Boy Dikey 9:16 Resmi guzelai.com Mankeni
+        left_box = (S(28), S(214), S(518), S(1690))
+        pin_draw.rounded_rectangle(left_box, radius=S(26), fill=(30, 26, 34))
+        if model_frames:
+            m_fit = ImageOps.fit(
+                model_frames[0].convert("RGB"),
+                (S(482), S(1468)),
+                method=Image.Resampling.LANCZOS,
+                centering=(0.5, 0.25),
+            )
+            pin_canvas.paste(m_fit, (S(32), S(218)))
+        pin_draw.rounded_rectangle([S(44), S(1595), S(502), S(1672)], radius=S(16), fill=(18, 16, 22))
+        pin_draw.text((S(62), S(1608)), f"★ {model_badge_str}", fill=(212, 175, 55), font=get_font(18, bold=True))
+        pin_draw.text((S(62), S(1638)), "Doğrulanmış Linkler: guzelai.com/#kombinler", fill=(255, 255, 255), font=get_font(16, bold=False))
+
+        # Sağ Sütun: 6 Parça İzole Ürün Kartları (2x3 Izgara — Aktif Kombinle %100 Senkronize)
+        card_w, card_h = S(254), S(474)
+        start_x, start_y = S(536), S(214)
+        gap_x, gap_y = S(14), S(24)
+        for idx_p, p_item in enumerate(prepared_items[:6]):
+            col_p = idx_p % 2
+            row_p = idx_p // 2
+            cx0 = start_x + col_p * (card_w + gap_x)
+            cy0 = start_y + row_p * (card_h + gap_y)
+            cx1 = cx0 + card_w
+            cy1 = cy0 + card_h
+            pin_draw.rounded_rectangle([cx0, cy0, cx1, cy1], radius=S(22), fill=(255, 255, 255), outline=(226, 218, 208), width=S(2))
+            p_thumb = p_item["img"].copy()
+            p_thumb.thumbnail((S(210), S(280)), Image.Resampling.LANCZOS)
+            px_t = cx0 + (card_w - p_thumb.width) // 2
+            py_t = cy0 + S(18) + (S(280) - p_thumb.height) // 2
+            pin_canvas.paste(p_thumb.convert("RGB"), (px_t, py_t), p_thumb)
+            it_d = p_item["data"]
+            b_txt = str(it_d.get("brand") or "GUZELAI")[:16].upper()
+            n_txt = str(it_d.get("name") or "")[:22]
+            pr_txt = str(it_d.get("price") or "")
+            sk_txt = str(it_d.get("sku") or "")
+            pin_draw.text((cx0 + S(16), cy0 + S(316)), f"#{idx_p + 1} {b_txt}", fill=(140, 28, 36), font=get_font(17, bold=True))
+            pin_draw.text((cx0 + S(16), cy0 + S(346)), n_txt, fill=(40, 36, 42), font=get_font(15, bold=False))
+            pin_draw.rounded_rectangle([cx0 + S(14), cy0 + S(384), cx1 - S(14), cy0 + S(454)], radius=S(14), fill=(20, 18, 24))
+            pin_draw.text((cx0 + S(26), cy0 + S(394)), pr_txt, fill=(212, 175, 55), font=get_font(20, bold=True))
+            pin_draw.text((cx0 + S(26), cy0 + S(424)), f"Kod: {sk_txt}", fill=(195, 190, 185), font=get_font(14, bold=False))
+
+        # Alt Bilgi Barı
+        pin_draw.rounded_rectangle([S(28), S(1716), W - S(28), S(1892)], radius=S(24), fill=(20, 18, 24))
+        pin_draw.text(
+            (S(56), S(1748)),
+            f"★ %100 SENKRONİZE KOMBİN • RESMİ MANKEN: {model_badge_str.upper()}",
+            fill=(212, 175, 55),
+            font=get_font(20, bold=True),
+        )
+        pin_draw.text(
+            (S(56), S(1796)),
+            "Tüm Parçaların Doğrulanmış Mağaza Linkleri: https://guzelai.com/#kombinler",
+            fill=(255, 255, 255),
+            font=get_font(18, bold=False),
+        )
+        pin_draw.text(
+            (S(56), S(1840)),
+            "Yasal Uyarı: Reklam/iş birliği içermez; kombin önerisidir (zorunlu #reklam #işbirliğideğil)",
+            fill=(185, 180, 175),
+            font=get_font(15, bold=False),
+        )
+        pin_out_p = os.path.join(out_dir, "pinterest_fashion_collage.jpg")
+        pin_canvas.save(pin_out_p, "JPEG", quality=98, subsampling=0)
+        print(f"🖼️ [Senkronize Dikey 9:16 Lookbook Kolajı]: {pin_out_p} ({W}x{H}) üretildi.")
+    except Exception as pin_err:
+        print(f"[Pinterest Lookbook Kolajı Uyarısı]: {pin_err}")
 
     # Tesla + Cadılar Bayramı Eğimli Pist (Sky-Ramp) arka planı ve şeffaf tam boy model dekupe görseli
     ramp_bg_img = None
@@ -609,7 +715,7 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
     ramp_bg_path = outfit.get("ramp_empty_bg")
     ramp_cutout_path = outfit.get("ramp_model_cutout")
     if ramp_bg_path and os.path.exists(ramp_bg_path):
-        ramp_bg_img = Image.open(ramp_bg_path).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
+        ramp_bg_img = fit_pil_to_vertical_9x16(Image.open(ramp_bg_path), target_w=W, target_h=H)
         ramp_bg_img = enhance_for_samsung_oled(ramp_bg_img, is_cutout=False)
     if ramp_cutout_path and os.path.exists(ramp_cutout_path):
         ramp_cutout_img = Image.open(ramp_cutout_path).convert("RGBA")
@@ -626,25 +732,26 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
     font_sub = get_font(23, bold=True)
     font_legal = get_font(18, bold=False)
 
-    # Her bir ürün için görselli ürün link kartı (output/item_card_{key}.jpg) üret
+    # Her bir ürün için %100 Dikey 9:16 (1080x1920) görselli ürün link kartı (output/item_card_{key}.jpg) üret
     for p in prepared_items:
         try:
-            cw, ch = 800, 1000
+            cw, ch = 1080, 1920
             card_bg = Image.new("RGBA", (cw, ch), (249, 247, 243, 255))
             cdraw = ImageDraw.Draw(card_bg)
-            cdraw.rounded_rectangle((30, 30, cw - 30, 95), radius=24, fill=(14, 14, 18, 255))
-            cdraw.text((cw // 2, 62), f"{p['data'].get('brand', 'MAĞAZA')} • DOĞRULANMIŞ ÜRÜN", fill=(255, 255, 255, 255), font=font_price, anchor="mm")
+            cdraw.rounded_rectangle((28, 28, cw - 28, ch - 28), radius=34, outline=(204, 173, 120, 215), width=3)
+            cdraw.rounded_rectangle((56, 90, cw - 56, 185), radius=28, fill=(14, 14, 18, 255))
+            cdraw.text((cw // 2, 137), f"{p['data'].get('brand', 'MAĞAZA')} • DOĞRULANMIŞ ÜRÜN", fill=(255, 255, 255, 255), font=get_font(26, bold=True), anchor="mm")
             p_img = p["img"].copy()
-            p_img.thumbnail((580, 580), Image.Resampling.LANCZOS)
-            card_bg.paste(p_img, ((cw - p_img.width) // 2, 130 + (580 - p_img.height) // 2), p_img)
-            cdraw.rounded_rectangle((35, 735, cw - 35, 965), radius=28, fill=(14, 14, 18, 248))
-            p_name = str(p["data"].get("name", ""))[:38]
-            cdraw.text((cw // 2, 780), p_name, fill=(255, 255, 255, 255), font=font_sub, anchor="mm")
-            cdraw.text((cw // 2, 835), f"FİYAT: {p['data'].get('price', '')}  |  KOD: {p['data'].get('sku', '-')}", fill=(242, 218, 178, 255), font=font_price, anchor="mm")
-            cdraw.text((cw // 2, 890), "» Görselli Link: guzelai.com/#kombinler «", fill=(210, 210, 220, 255), font=font_sub, anchor="mm")
-            cdraw.text((cw // 2, 935), "Reklam/iş birliği içermez • Kombin önerisidir (zorunlu #reklam)", fill=(165, 165, 175, 255), font=font_legal, anchor="mm")
+            p_img.thumbnail((820, 1060), Image.Resampling.LANCZOS)
+            card_bg.paste(p_img, ((cw - p_img.width) // 2, 240 + (1060 - p_img.height) // 2), p_img)
+            cdraw.rounded_rectangle((56, 1380, cw - 56, 1810), radius=34, fill=(14, 14, 18, 248))
+            p_name = str(p["data"].get("name", ""))[:40]
+            cdraw.text((cw // 2, 1465), p_name, fill=(255, 255, 255, 255), font=get_font(26, bold=True), anchor="mm")
+            cdraw.text((cw // 2, 1555), f"FİYAT: {p['data'].get('price', '')}  |  KOD: {p['data'].get('sku', '-')}", fill=(242, 218, 178, 255), font=get_font(27, bold=True), anchor="mm")
+            cdraw.text((cw // 2, 1650), "» Görselli Link: guzelai.com/#kombinler «", fill=(210, 210, 220, 255), font=get_font(24, bold=True), anchor="mm")
+            cdraw.text((cw // 2, 1735), "Reklam/iş birliği içermez • Kombin önerisidir (zorunlu #reklam)", fill=(165, 165, 175, 255), font=get_font(18, bold=False), anchor="mm")
             card_path = os.path.join(out_dir, f"item_card_{p['key']}.jpg")
-            card_bg.convert("RGB").save(card_path, quality=94)
+            card_bg.convert("RGB").save(card_path, quality=95, subsampling=0)
             p["data"]["visual_card_path"] = card_path
         except Exception as ce:
             print(f"[Görsel Ürün Kartı Uyarısı] {p['key']}: {ce}")
@@ -883,20 +990,16 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
                 )
 
             if abs(t - 4.8) < (0.5 / FPS):
-                canvas.convert("RGB").save(os.path.join(out_dir, "kombin_collage.png"), compress_level=1)
+                rgb_collage = canvas.convert("RGB")
+                rgb_collage.save(os.path.join(out_dir, "kombin_collage.png"), compress_level=1)
+                rgb_collage.save(os.path.join(out_dir, "kombin_collage.jpg"), "JPEG", quality=98, subsampling=0)
 
-        # 2. BÖLÜM: Google Flow 1080p Gerçekçi Manken Yürüyüş Videosu + Sinematik HUD (5.2sn - 11.0sn)
+        # 2. BÖLÜM: %100 Dikey 9:16 (2K QHD+) Gerçek İnsan Manken Gimbal Yürüyüşü + Sinematik HUD (5.2sn - 11.0sn, Sıfır Flow!)
         if t >= collage_end_sec:
             walk_t = t - collage_end_sec
             walk_dur = total_duration - collage_end_sec  # 5.8s toplam (5.2s -> 11.0s)
 
-            if len(flow_walk_pil_frames) >= 15:
-                wf_idx = min(
-                    len(flow_walk_pil_frames) - 1,
-                    int(round((walk_t / max(0.01, walk_dur)) * (len(flow_walk_pil_frames) - 1))),
-                )
-                walk_frame = flow_walk_pil_frames[wf_idx].copy()
-            else:
+            if True:
                 def _sample_gimbal_step(step_idx: int, u_val: float) -> Image.Image:
                     m_im = model_frames[min(step_idx, len(model_frames) - 1)]
                     eu = ease_in_out_cubic(max(0.0, min(1.0, u_val)))
@@ -1126,7 +1229,8 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
         "-i", os.path.join(frames_dir, "frame_%04d.jpg"),
         "-i", wav_path,
         "-t", str(total_duration),
-        "-vf", "unsharp=5:5:0.75:3:3:0.0",
+        "-vf", "setsar=1:1,unsharp=5:5:0.75:3:3:0.0",
+        "-aspect", "9:16",
         "-map", "0:v", "-map", "1:a",
         "-c:v", "libx264",
         "-preset", "slow",
@@ -1149,14 +1253,15 @@ def render_kombin_reel(outfit: dict, output_mp4: str, watermark: str = "@guzelai
         output_mp4,
     ]
     subprocess.run(cmd, check=True)
-    print(f"[BAŞARILI] Graph-Motion Master Reels videosu üretildi: {output_mp4}")
+    print(f"[BAŞARILI] %100 Dikey 9:16 ({W}x{H}) Graph-Motion Master Reels videosu üretildi: {output_mp4}")
 
-    # WhatsApp Kanalı, GuzelAI.com Web Vitrini, Facebook ve X için yüksek netlikli Evrensel Graph-Motion Video (720x1280)
+    # WhatsApp Kanalı, GuzelAI.com Web Vitrini, Facebook ve X için yüksek netlikli %100 Dikey 9:16 Video (720x1280)
     gm_short_mp4 = os.path.join(out_dir, "graphmotion_short.mp4")
     cmd_short = [
         ffmpeg_bin, "-y",
         "-i", output_mp4,
-        "-vf", "scale=720:1280:flags=lanczos",
+        "-vf", "scale=720:1280:flags=lanczos,setsar=1:1",
+        "-aspect", "9:16",
         "-c:v", "libx264",
         "-preset", "fast",
         "-profile:v", "high",
