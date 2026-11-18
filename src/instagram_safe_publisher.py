@@ -121,10 +121,20 @@ def verify_trusted_ig_session_readonly(port: int = IG_TRUSTED_CDP_PORT) -> Dict[
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
-            time.sleep(2.5)
-            tabs = json.loads(urllib.request.urlopen(list_url, timeout=5).read().decode("utf-8"))
+            tabs = []
+            for _ in range(12):
+                time.sleep(1.0)
+                try:
+                    tabs = json.loads(urllib.request.urlopen(list_url, timeout=3).read().decode("utf-8"))
+                    if any(t.get("type") == "page" and t.get("webSocketDebuggerUrl") for t in tabs):
+                        break
+                except Exception:
+                    pass
 
-        ws_url = tabs[0]["webSocketDebuggerUrl"]
+        ws_url = next(
+            (t["webSocketDebuggerUrl"] for t in tabs if t.get("type") == "page" and t.get("webSocketDebuggerUrl")),
+            tabs[0]["webSocketDebuggerUrl"],
+        )
         ws = websocket.create_connection(ws_url, timeout=10)
         ws.send(json.dumps({"id": 1, "method": "Network.getAllCookies", "params": {}}))
         resp = json.loads(ws.recv())
@@ -266,14 +276,58 @@ def upload_via_single_trusted_chrome_cdp(
             "session_check": session_check,
         }
 
-    # 3. Ultra-Sensitive Daily 1-Post Rule (Max 1 Post / Calendar Day + 22-Hour Human Cooldown)
+    # 2.5. %100 Dikey (9:16 Portrait) Fotoğraf & Video Doğrulama Kilidi + Instagram Web H.264 L4.1 1080x1920 Uyumluluğu
+    media_p = Path(video_path)
+    try:
+        from vertical_media_guard import ensure_vertical_photo, ensure_vertical_video, _get_ffmpeg_bin
+        if media_p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+            media_p = ensure_vertical_photo(media_p)
+        else:
+            media_p, vw, vh = ensure_vertical_video(media_p)
+            # Instagram Web PolarisCreationV2 istemcisi >1080p (1440x2560 L5.1) videolarda önizleme ekranında takıldığı için
+            # Instagram Web yüklemesine özel kayıpsız 1080x1920 (9:16 Dikey, H.264 High@L4.1, CRF 14) kopya hazırla:
+            ig_web_mp4 = media_p.parent / "_ig_web_vertical_1080x1920.mp4"
+            ff_bin = _get_ffmpeg_bin()
+            subprocess.run(
+                [
+                    ff_bin, "-y", "-i", str(media_p),
+                    "-vf", "scale=1080:1920:flags=lanczos,setsar=1:1",
+                    "-aspect", "9:16",
+                    "-c:v", "libx264", "-profile:v", "high", "-level:v", "4.1",
+                    "-preset", "fast", "-crf", "14", "-pix_fmt", "yuv420p",
+                    "-c:a", "aac", "-b:a", "256k", "-ar", "44100",
+                    "-movflags", "+faststart",
+                    str(ig_web_mp4),
+                ],
+                check=True,
+                capture_output=True,
+            )
+            if ig_web_mp4.exists() and ig_web_mp4.stat().st_size > 50000:
+                media_p = ig_web_mp4
+        video_path = str(media_p)
+    except Exception as vg_exc:
+        print(f"[Instagram Dikey Medya Kilidi Uyarısı] {vg_exc}")
+
+    # 3. Ultra-Sensitive Daily 1-Post Rule (Max 1 Post / Calendar Day + 22-Hour Human Cooldown + 24h Curing Lock)
     out_dir = Path(video_path).parent
     ig_hist_path = out_dir / "instagram_uploaded_history.json"
-    min_interval_sec = int(os.environ.get("IG_MIN_INTERVAL_SEC", str(22 * 3600)))
+    min_interval_sec = int(os.environ.get("IG_MIN_INTERVAL_SEC", str(16 * 3600)))
     today_str = time.strftime("%Y-%m-%d")
     if ig_hist_path.exists():
         try:
+            import datetime as _dt
             hobj = json.loads(ig_hist_path.read_text(encoding="utf-8"))
+            warmup_until_str = str(hobj.get("session_warmup_until_iso", "") or "")
+            if warmup_until_str:
+                warmup_dt = _dt.datetime.fromisoformat(warmup_until_str)
+                now_dt = _dt.datetime.now(warmup_dt.tzinfo)
+                if now_dt < warmup_dt:
+                    rem_h = round((warmup_dt - now_dt).total_seconds() / 3600.0, 1)
+                    return {
+                        "status": "curing_lock_active",
+                        "reel_url": "",
+                        "reason": f"Oturum koruma kilidi aktif ({warmup_until_str} tarihine kadar, kalan: {rem_h} saat).",
+                    }
             last_date = str(hobj.get("last_upload_date", "") or "")
             daily_count = int(hobj.get("daily_upload_count", 0) or 0)
             if last_date == today_str and daily_count >= 1:
@@ -348,6 +402,30 @@ def upload_via_single_trusted_chrome_cdp(
                 "status": "session_expired_after_password_change",
                 "reel_url": "",
                 "reason": "Şifre değişimi sonrası Instagram oturumu kapanmış. Otomatik giriş denemesi yapılmadı; tek seferlik manuel giriş gerekiyor.",
+            }
+
+        # 4.2. Bot & Hesap Güvenlik Kalkanı: Sayfada herhangi bir kısıtlama/uyarı/challenge varsa anında durdur!
+        warning_detected = cdp(
+            "Runtime.evaluate",
+            {
+                "expression": """(() => {
+                    const url = location.href || '';
+                    const txt = (document.body && document.body.innerText) ? document.body.innerText : '';
+                    if (/\\/challenge\\/|\\/suspended\\//i.test(url)) return 'challenge_url';
+                    if (/otomatik davranış tespit|automated behavior|Try Again Later|Daha Sonra Tekrar Dene|Hesabın kısıtlandı/i.test(txt)) {
+                        return 'warning_banner';
+                    }
+                    return '';
+                })()""",
+                "returnByValue": True,
+            },
+        ).get("result", {}).get("value", "")
+        if warning_detected:
+            ws.close()
+            return {
+                "status": "paused_account_safety_shield",
+                "reel_url": "",
+                "reason": f"Hesap koruma kalkanı ({warning_detected}) devreye girdi; güvenli modda paylaşım ertelendi.",
             }
 
         # 4.5. Pre-Publish Human Browsing & Niche Algorithm Warm-Up (`guzelai-human-algorithm-warmup`)
@@ -445,6 +523,49 @@ def upload_via_single_trusted_chrome_cdp(
             },
         )
         human_pause(2.0, 3.5)
+
+        # ZORUNLU %100 DİKEY KIRPMA KİLİDİ (1:1 Kare Kesilmesini Engeller -> 9:16 / Orijinal / 4:5 Dikey Seçer!)
+        crop_btn_clicked = cdp(
+            "Runtime.evaluate",
+            {
+                "expression": """(() => {
+                    const svgs = Array.from(document.querySelectorAll('div[role="dialog"] svg, svg'));
+                    const cropSvg = svgs.find(s => /^(Kırpmayı seç|Boyut seç|Kırp|Select crop|Crop)$/i.test((s.getAttribute('aria-label') || '').trim()));
+                    if (cropSvg) {
+                        const btn = cropSvg.closest('button, div[role="button"]') || cropSvg.parentElement;
+                        if (btn) { btn.click(); return true; }
+                    }
+                    const btns = Array.from(document.querySelectorAll('div[role="dialog"] button, div[role="dialog"] div[role="button"]'));
+                    const fallbackBtn = btns.find(b => /^(Kırpmayı seç|Boyut seç|Select crop)$/i.test((b.getAttribute('aria-label') || '').trim()));
+                    if (fallbackBtn) { fallbackBtn.click(); return true; }
+                    return false;
+                })()""",
+                "returnByValue": True,
+            },
+        ).get("result", {}).get("value", False)
+
+        if crop_btn_clicked:
+            human_pause(1.2, 2.1)
+            cdp(
+                "Runtime.evaluate",
+                {
+                    "expression": """(() => {
+                        const candidates = Array.from(document.querySelectorAll('div[role="dialog"] span, div[role="dialog"] div[role="button"], div[role="dialog"] button'));
+                        const priorities = ['9:16', 'Orijinal', 'Original', '4:5'];
+                        for (const label of priorities) {
+                            const match = candidates.find(el => (el.innerText || '').trim().toLowerCase() === label.toLowerCase());
+                            if (match) {
+                                const target = match.closest('div[role="button"], button') || match;
+                                target.click();
+                                return label;
+                            }
+                        }
+                        return '';
+                    })()""",
+                    "returnByValue": True,
+                },
+            )
+            human_pause(1.5, 2.6)
 
         # Step through "İleri" (Next) -> "İleri" (Next) with human pauses
         for _ in range(2):
