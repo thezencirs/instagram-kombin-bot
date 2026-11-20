@@ -278,9 +278,10 @@ def generate_and_deliver_daily_activity_report(
 
 def run_daily_all_channels_job(
     arch_id: Optional[str] = None,
-    try_instagram: bool = True,
+    try_instagram: bool = False,
     report_only: bool = False,
 ) -> Dict[str, Any]:
+    try_instagram = False  # Kullanıcı talimatıyla @guzelaicom Instagram paylaşımı tamamen kapalıdır.
     _load_env_vars()
     today_iso = datetime.date.today().isoformat()
 
