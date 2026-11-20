@@ -87,12 +87,22 @@ def enforce_single_device_hygiene() -> Dict[str, Any]:
     }
 
 
+# Kullanıcı Talimatı (2026-11-20): "@guzelaicom instagram hesabına paylaşım yapma sayfa kitlenmiş"
+# Instagram erişimi, oturum kontrolü, ısınma gezinmesi ve paylaşımı %100 KALICI OLARAK KAPATILDI.
+INSTAGRAM_HARD_DISABLED = os.environ.get("ENABLE_INSTAGRAM_PUBLISHING", "0").strip() != "1"
+
+
 def verify_trusted_ig_session_readonly(port: int = IG_TRUSTED_CDP_PORT) -> Dict[str, Any]:
     """
     Strictly read-only check of the single trusted Chrome profile (`ig_chrome_trusted`).
-    Opens `about:blank` (NEVER hits instagram.com if logged out, NEVER submits any login form)
-    and inspects `Network.getAllCookies` for an active `sessionid` + `ds_user_id`.
+    When INSTAGRAM_HARD_DISABLED is True, immediately returns without spawning Chrome or touching port 9230.
     """
+    if INSTAGRAM_HARD_DISABLED:
+        return {
+            "status": "disabled_by_user_account_lock",
+            "logged_in": False,
+            "reason": "Kullanıcı talimatıyla @guzelaicom Instagram paylaşımı ve tarayıcı erişimi tamamen kapatıldı (Sayfa koruma kilidi).",
+        }
     if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
         return {
             "status": "blocked_cloud_ip",
@@ -175,6 +185,8 @@ def ensure_trusted_ig_chrome(port: int = IG_TRUSTED_CDP_PORT, start_url: str = "
     via WMI (`Win32_Process.Create`) so the window stays alive on the desktop and is never terminated
     when a CLI command exits.
     """
+    if INSTAGRAM_HARD_DISABLED:
+        return None
     enforce_single_device_hygiene()
     list_url = f"http://127.0.0.1:{port}/json"
     try:
@@ -254,6 +266,12 @@ def upload_via_single_trusted_chrome_cdp(
     Publishes a Reel using ONLY the already-authenticated single local Chrome profile (`ig_chrome_trusted`)
     with natural human cadence pauses. Never attempts login if `sessionid` is missing.
     """
+    if os.environ.get("IG_UNLOCK_OVERRIDE", "0") != "1":
+        return {
+            "status": "hard_disabled_by_user_account_locked",
+            "reel_url": "",
+            "reason": "Kullanıcı talimatıyla @guzelaicom Instagram hesabına paylaşım tamamen kapatıldı (Sayfa kilitli).",
+        }
     # 1. Hard Cloud IP Firewall
     if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
         return {
