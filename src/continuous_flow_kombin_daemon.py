@@ -99,7 +99,7 @@ def pick_or_synthesize_next_outfit(preferred_segment: Optional[str] = None) -> D
 def run_single_multi_agent_flow_hybrid_cycle(
     arch_id: Optional[str] = None,
     preferred_segment: Optional[str] = None,
-    try_instagram: bool = True,
+    try_instagram: bool = False,
 ) -> Dict[str, Any]:
     out_dir = str(BASE_DIR / "output")
     os.makedirs(out_dir, exist_ok=True)
